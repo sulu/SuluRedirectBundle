@@ -1,0 +1,4 @@
+# Doctrine Configuration
+doctrine:
+    dbal:
+        dbname: "su_redirect_test"
