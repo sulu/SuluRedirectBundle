@@ -11,6 +11,7 @@
 
 namespace Sulu\Bundle\RedirectBundle\DependencyInjection;
 
+use Sulu\Component\HttpKernel\SuluKernel;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -31,5 +32,9 @@ class SuluRedirectExtension extends Extension
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
         $loader->load('services.xml');
+
+        if ($container->getParameter('sulu.context') === SuluKernel::CONTEXT_WEBSITE) {
+            $loader->load('routing.xml');
+        }
     }
 }

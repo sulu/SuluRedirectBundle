@@ -5,7 +5,8 @@
     "license": "MIT",
     "require": {
         "php": "^5.5 || ^7.0",
-        "sulu/sulu": "^1.5 || dev-develop"
+        "sulu/sulu": "^1.5 || dev-develop",
+        "ramsey/uuid": "^3.5"
     },
     "require-dev": {
         "zendframework/zend-stdlib": "2.3.1 as 2.0.0rc5",
