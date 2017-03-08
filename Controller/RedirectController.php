@@ -29,7 +29,7 @@ class RedirectController
      *
      * @return RedirectResponse
      */
-    public function redirect(Request $request, RedirectRouteInterface $redirectRoute, $resourceLocatorPrefix)
+    public function redirect(Request $request, RedirectRouteInterface $redirectRoute, $resourceLocatorPrefix = '')
     {
         $queryString = http_build_query($request->query->all());
         $url = [
