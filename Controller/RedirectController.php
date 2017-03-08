@@ -31,11 +31,15 @@ class RedirectController
      */
     public function redirect(Request $request, RedirectRouteInterface $redirectRoute, $resourceLocatorPrefix)
     {
-        // TODO query parameter
+        $queryString = http_build_query($request->query->all());
+        $url = [
+            $request->getSchemeAndHttpHost(),
+            $resourceLocatorPrefix,
+            $redirectRoute->getTarget(),
+            (!empty($queryString) ? '?' : ''),
+            $queryString,
+        ];
 
-        return new RedirectResponse(
-            $request->getSchemeAndHttpHost() . $resourceLocatorPrefix . $redirectRoute->getTarget(),
-            $redirectRoute->getStatusCode()
-        );
+        return new RedirectResponse(implode($url), $redirectRoute->getStatusCode());
     }
 }
