@@ -11,6 +11,9 @@
 
 namespace Sulu\Bundle\RedirectBundle;
 
+use Sulu\Bundle\PersistenceBundle\PersistenceBundleTrait;
+use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
@@ -18,4 +21,18 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  */
 class SuluRedirectBundle extends Bundle
 {
+    use PersistenceBundleTrait;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        $this->buildPersistence(
+            [
+               RedirectRoute::class => 'sulu.model.redirect_route.class',
+            ],
+            $container
+        );
+    }
 }

@@ -11,9 +11,9 @@
 
 namespace Sulu\Bundle\RedirectBundle\Entity;
 
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
+use Sulu\Component\Persistence\Repository\ORM\EntityRepository;
 
 /**
  * Basic implementation of redirect-route repository.

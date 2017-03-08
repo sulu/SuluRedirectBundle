@@ -11,10 +11,12 @@
 
 namespace Sulu\Bundle\RedirectBundle\Model;
 
+use Sulu\Component\Persistence\Repository\RepositoryInterface;
+
 /**
  * Provides queries for redirect-route.
  */
-interface RedirectRouteRepositoryInterface
+interface RedirectRouteRepositoryInterface extends RepositoryInterface
 {
     /**
      * Find enabled redirect-routes for given source.

@@ -10,11 +10,5 @@
             <tag name="sulu.admin"/>
             <tag name="sulu.context" context="admin"/>
         </service>
-
-        <service id="sulu.repository.redirect_route" class="Sulu\Bundle\RedirectBundle\Entity\RedirectRouteRepository">
-            <factory service="doctrine.orm.entity_manager" method="getRepository"/>
-
-            <argument type="string">SuluRedirectBundle:RedirectRoute</argument>
-        </service>
     </services>
 </container>
