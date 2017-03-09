@@ -76,23 +76,6 @@ class RedirectControllerTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($statusCode, $response->getStatusCode());
     }
 
-    public function testRedirectWithPrefix()
-    {
-        $target = '/test';
-        $statusCode = 301;
-
-        $this->queryBag->all()->willReturn([]);
-
-        $this->redirectRoute->getTarget()->willReturn($target);
-        $this->redirectRoute->getStatusCode()->willReturn($statusCode);
-
-        $response = $this->controller->redirect($this->request->reveal(), $this->redirectRoute->reveal(), '/de');
-
-        $this->assertInstanceOf(RedirectResponse::class, $response);
-        $this->assertEquals($this->schemeAndHost . '/de' . $target, $response->getTargetUrl());
-        $this->assertEquals($statusCode, $response->getStatusCode());
-    }
-
     public function testRedirectWithQuery()
     {
         $target = '/test';
@@ -104,11 +87,11 @@ class RedirectControllerTest extends \PHPUnit_Framework_TestCase
         $this->redirectRoute->getTarget()->willReturn($target);
         $this->redirectRoute->getStatusCode()->willReturn($statusCode);
 
-        $response = $this->controller->redirect($this->request->reveal(), $this->redirectRoute->reveal(), '/de');
+        $response = $this->controller->redirect($this->request->reveal(), $this->redirectRoute->reveal());
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(
-            $this->schemeAndHost . '/de' . $target . '?' . http_build_query($query),
+            $this->schemeAndHost . $target . '?' . http_build_query($query),
             $response->getTargetUrl()
         );
         $this->assertEquals($statusCode, $response->getStatusCode());

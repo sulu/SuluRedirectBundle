@@ -21,7 +21,7 @@ interface RedirectRouteInterface
      *
      * @return string
      */
-    public function getUuid();
+    public function getId();
 
     /**
      * Returns enabled.

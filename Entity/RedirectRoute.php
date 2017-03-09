@@ -22,7 +22,7 @@ class RedirectRoute implements RedirectRouteInterface
     /**
      * @var string
      */
-    protected $uuid;
+    protected $id;
 
     /**
      * @var bool
@@ -46,15 +46,15 @@ class RedirectRoute implements RedirectRouteInterface
 
     public function __construct()
     {
-        $this->uuid = Uuid::uuid4()->toString();
+        $this->id = Uuid::uuid4()->toString();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getUuid()
+    public function getId()
     {
-        return $this->uuid;
+        return $this->id;
     }
 
     /**

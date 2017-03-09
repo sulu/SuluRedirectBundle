@@ -12,7 +12,6 @@
 namespace Sulu\Bundle\RedirectBundle\Routing;
 
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
-use Sulu\Component\Webspace\Analyzer\Attributes\RequestAttributes;
 use Symfony\Cmf\Component\Routing\RouteProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Route;
@@ -41,12 +40,8 @@ class RedirectRouteProvider implements RouteProviderInterface
      */
     public function getRouteCollectionForRequest(Request $request)
     {
-        /** @var RequestAttributes $requestAttributes */
-        $requestAttributes = $request->attributes->get('_sulu', new RequestAttributes());
-        $resourceLocator = $requestAttributes->getAttribute('resourceLocator', $request->getPathInfo());
-
         $routeCollection = new RouteCollection();
-        if (!$redirectRoute = $this->redirectRouteRepository->findEnabledBySource($resourceLocator)) {
+        if (!$redirectRoute = $this->redirectRouteRepository->findEnabledBySource($request->getPathInfo())) {
             return $routeCollection;
         }
 
@@ -55,10 +50,9 @@ class RedirectRouteProvider implements RouteProviderInterface
             [
                 '_controller' => 'sulu_redirect.controller.redirect:redirect',
                 'redirectRoute' => $redirectRoute,
-                'resourceLocatorPrefix' => $requestAttributes->getAttribute('resourceLocatorPrefix', ''),
             ]
         );
-        $routeCollection->add(sprintf('sulu_redirect.%s', $redirectRoute->getUuid()), $route);
+        $routeCollection->add(sprintf('sulu_redirect.%s', $redirectRoute->getId()), $route);
 
         return $routeCollection;
     }
