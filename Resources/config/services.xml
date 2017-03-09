@@ -10,5 +10,31 @@
             <tag name="sulu.admin"/>
             <tag name="sulu.context" context="admin"/>
         </service>
+
+        <!-- content navigation -->
+        <service id="sulu_redirect.content_navigation"
+                 class="Sulu\Bundle\RedirectBundle\Admin\RedirectRoutesNavigationProvider">
+            <tag name="sulu_admin.content_navigation" alias="redirect-routes"/>
+            <tag name="sulu.context" context="admin"/>
+        </service>
+
+        <!-- redirect-route -->
+        <service id="sulu_redirect.redirect_route_manager"
+                 class="Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager">
+            <argument type="service" id="sulu.repository.redirect_route"/>
+        </service>
+
+        <!-- FIXME hack to enable doctrine object constructor -->
+        <!--
+          could be fixed in serializer by changing JMS\SerializerBundle\DependencyInjection\Compiler\DoctrinePass:49
+          from "->replaceArgument(0, new Reference($previousId[$service]))"
+          to   "->replaceArgument(1, new Reference($previousId[$service]))"
+        -->
+        <service id="jms_serializer.object_constructor" alias="sulu_redirect.object_constructor" public="false"/>
+        <service id="sulu_redirect.object_constructor" class="JMS\Serializer\Construction\DoctrineObjectConstructor"
+                 public="false">
+            <argument type="service" id="doctrine"/>
+            <argument type="service" id="jms_serializer.unserialize_object_constructor"/>
+        </service>
     </services>
 </container>

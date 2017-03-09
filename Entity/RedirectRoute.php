@@ -11,14 +11,17 @@
 
 namespace Sulu\Bundle\RedirectBundle\Entity;
 
-use Ramsey\Uuid\Uuid;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
+use Sulu\Component\Persistence\Model\AuditableInterface;
+use Sulu\Component\Persistence\Model\AuditableTrait;
 
 /**
  * Basic implementation of redirect-route.
  */
-class RedirectRoute implements RedirectRouteInterface
+class RedirectRoute implements RedirectRouteInterface, AuditableInterface
 {
+    use AuditableTrait;
+
     /**
      * @var string
      */
@@ -44,17 +47,26 @@ class RedirectRoute implements RedirectRouteInterface
      */
     protected $target;
 
-    public function __construct()
-    {
-        $this->id = Uuid::uuid4()->toString();
-    }
-
     /**
      * {@inheritdoc}
      */
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set id.
+     *
+     * @param string $id
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     /**

@@ -11,7 +11,7 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Controller;
 
-use Sulu\Bundle\RedirectBundle\Controller\RedirectController;
+use Sulu\Bundle\RedirectBundle\Controller\WebsiteRedirectController;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 class RedirectControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var RedirectController
+     * @var WebsiteRedirectController
      */
     private $controller;
 
@@ -49,7 +49,7 @@ class RedirectControllerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->controller = new RedirectController();
+        $this->controller = new WebsiteRedirectController();
 
         $this->request = $this->prophesize(Request::class);
         $this->queryBag = $this->prophesize(ParameterBag::class);

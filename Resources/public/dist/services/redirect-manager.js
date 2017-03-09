@@ -1,0 +1,1 @@
+define(["services/husky/util"],function(a){"use strict";var b="/admin/api/redirect-routes";return{load:function(c){return a.load(b+"/"+c)},save:function(c){return a.save(b+(c.id?"/"+c.id:""),c.id?"PUT":"POST",c)},"delete":function(c){return a.save(b+"/"+c,"DELETE")}}});

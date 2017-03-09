@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="Sulu\Bundle\RedirectBundle\Entity\RedirectRoute">
+        <property name="id" type="string"/>
+        <property name="enabled" type="boolean"/>
+        <property name="statusCode" type="integer"/>
+        <property name="source" type="string"/>
+        <property name="target" type="string"/>
+
+        <property name="creator" exclude="true"/>
+        <property name="created" type="DateTime"/>
+        <property name="changer" exclude="true"/>
+        <property name="changed" type="DateTime"/>
+    </class>
+</serializer>
