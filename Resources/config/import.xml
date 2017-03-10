@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sulu_redirect.import.aggregate_reader"
+                 class="Sulu\Bundle\RedirectBundle\Import\Reader\ChainReader">
+            <argument type="collection"/>
+        </service>
+
+        <service id="sulu_redirect.import.csv_reader" class="Sulu\Bundle\RedirectBundle\Import\Reader\CsvReader">
+            <tag name="sulu_redirect.import.reader"/>
+        </service>
+
+        <service id="sulu_redirect.import.aggregate_converter"
+                 class="Sulu\Bundle\RedirectBundle\Import\Converter\ChainConverter">
+            <argument type="collection"/>
+        </service>
+
+        <service id="sulu_redirect.import.converter" class="Sulu\Bundle\RedirectBundle\Import\Converter\Converter">
+            <argument type="service" id="sulu.repository.redirect_route"/>
+
+            <tag name="sulu_redirect.import.converter"/>
+        </service>
+
+        <service id="sulu_redirect.import.writer" class="Sulu\Bundle\RedirectBundle\Import\Writer\Writer">
+            <argument type="service" id="sulu_redirect.redirect_route_manager"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <service id="sulu_redirect.import" class="Sulu\Bundle\RedirectBundle\Import\FileImport">
+            <argument type="service" id="sulu_redirect.import.aggregate_reader"/>
+            <argument type="service" id="sulu_redirect.import.aggregate_converter"/>
+            <argument type="service" id="sulu_redirect.import.writer"/>
+        </service>
+    </services>
+</container>

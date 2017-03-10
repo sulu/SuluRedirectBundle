@@ -1,0 +1,107 @@
+<?php
+
+/*
+ * This file is part of Sulu.
+ *
+ * (c) MASSIVE ART WebServices GmbH
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
+namespace Sulu\Bundle\RedirectBundle\Import\Writer;
+
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\ORMException;
+use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
+use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
+
+/**
+ * Write redirect-route entity to database by using the entity-manager.
+ */
+class Writer implements WriterInterface
+{
+    /**
+     * @var RedirectRouteManagerInterface
+     */
+    private $manager;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $entityManager;
+
+    /**
+     * @var array
+     */
+    private $sources = [];
+
+    /**
+     * @var int
+     */
+    private $batchSize = 100;
+
+    /**
+     * @param RedirectRouteManagerInterface $manager
+     * @param EntityManagerInterface $entityManager
+     */
+    public function __construct(RedirectRouteManagerInterface $manager, EntityManagerInterface $entityManager)
+    {
+        $this->manager = $manager;
+        $this->entityManager = $entityManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function write(RedirectRouteInterface $entity)
+    {
+        if (in_array($entity->getSource(), $this->sources)) {
+            throw new DuplicatedSourceException($entity);
+        }
+
+        $this->sources[] = $entity->getSource();
+
+        try {
+            $this->save($entity);
+        } catch (ORMException $exception) {
+            throw new WriterException($exception->getMessage(), 0, $exception);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function finalize()
+    {
+        $this->entityManager->flush();
+    }
+
+    /**
+     * Set batch-size.
+     *
+     * @param int $batchSize
+     *
+     * @return $this
+     */
+    public function setBatchSize($batchSize)
+    {
+        $this->batchSize = $batchSize;
+
+        return $this;
+    }
+
+    /**
+     * Save entity by using manager.
+     *
+     * @param RedirectRouteInterface $entity
+     */
+    private function save(RedirectRouteInterface $entity)
+    {
+        $this->manager->save($entity);
+
+        if (count($this->sources) % $this->batchSize === 0) {
+            $this->entityManager->flush();
+        }
+    }
+}

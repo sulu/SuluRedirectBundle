@@ -24,6 +24,15 @@ interface RedirectRouteInterface
     public function getId();
 
     /**
+     * Set id.
+     *
+     * @param string $id
+     *
+     * @return $this
+     */
+    public function setId($id);
+
+    /**
      * Returns enabled.
      *
      * @return bool

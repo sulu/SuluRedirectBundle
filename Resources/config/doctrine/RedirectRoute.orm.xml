@@ -3,7 +3,7 @@
                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
     <mapped-superclass name="Sulu\Bundle\RedirectBundle\Entity\RedirectRoute"
-            repository-class="Sulu\Bundle\RedirectBundle\Entity\RedirectRouteRepository" table="re_routes">
+            repository-class="Sulu\Bundle\RedirectBundle\Entity\RedirectRouteRepository" table="re_redirect_routes">
         <unique-constraints>
             <unique-constraint columns="source"/>
         </unique-constraints>
