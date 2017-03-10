@@ -28,10 +28,9 @@ define([
         },
 
         translations: {
-            headline: 'sulu_redirect.headline'
+            headline: 'sulu_redirect.title'
         }
     };
-
 
     return {
 

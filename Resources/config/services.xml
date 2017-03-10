@@ -5,6 +5,7 @@
     <services>
         <!-- sulu-admin -->
         <service id="sulu_redirect.admin" class="Sulu\Bundle\RedirectBundle\Admin\RedirectAdmin" public="false">
+            <argument type="service" id="sulu_security.security_checker"/>
             <argument>%sulu_admin.name%</argument>
 
             <tag name="sulu.admin"/>

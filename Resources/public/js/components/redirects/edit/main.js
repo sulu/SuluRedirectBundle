@@ -19,10 +19,12 @@ define([
 
         defaults: {
             translations: {
-                headline: 'sulu_redirect.headline',
+                headline: 'sulu_redirect.title',
                 enabled: 'sulu_redirect.enabled',
-                status301: 'sulu_redirect.status.301',
-                status302: 'sulu_redirect.status.302'
+                enable: 'sulu_redirect.enable',
+                disable: 'sulu_redirect.disable',
+                status301: 'sulu_redirect.status-code.301',
+                status302: 'sulu_redirect.status-code.302'
             }
         },
 
@@ -55,7 +57,7 @@ define([
                         enabled: {
                             parent: !!this.data.enabled ? 'toggler-on' : 'toggler',
                             options: {
-                                title: this.translations.enabled
+                                title: !!this.data.enabled ? this.translations.disable : this.translations.enable
                             }
                         },
                         statusCode: {
@@ -109,6 +111,12 @@ define([
         },
 
         changeEnabled: function(enabled) {
+            this.sandbox.emit(
+                'sulu.header.toolbar.button.set',
+                'enabled',
+                {title: !!enabled ? this.translations.disable : this.translations.enable}
+            );
+
             this.data.enabled = enabled;
             this.enableSave();
         },
