@@ -26,4 +26,11 @@ interface RedirectRouteRepositoryInterface extends RepositoryInterface
      * @return RedirectRouteInterface
      */
     public function findEnabledBySource($source);
+
+    /**
+     * Persist given entity.
+     *
+     * @param RedirectRouteInterface $entity
+     */
+    public function persist(RedirectRouteInterface $entity);
 }

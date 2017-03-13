@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * Handles redirects.
  */
-class RedirectController
+class WebsiteRedirectController
 {
     /**
      * Handles redirect for given redirect-route.

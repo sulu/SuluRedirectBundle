@@ -12,6 +12,7 @@
 namespace Sulu\Bundle\RedirectBundle\Entity;
 
 use Doctrine\ORM\NoResultException;
+use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 use Sulu\Component\Persistence\Repository\ORM\EntityRepository;
 
@@ -36,5 +37,13 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
         } catch (NoResultException $exception) {
             return;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function persist(RedirectRouteInterface $entity)
+    {
+        $this->_em->persist($entity);
     }
 }

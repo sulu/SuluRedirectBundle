@@ -1,0 +1,1 @@
+define(["services/husky/mediator"],function(a){"use strict";var b={defaultContent:"details",baseRoute:"redirects"},c=function(c){c=c||"",a.emit("sulu.router.navigate",b.baseRoute+(c.length>0?"/":"")+c)};return{toEdit:function(a,d){c("edit:"+a+"/"+(d||b.defaultContent))},toAdd:function(a){c("add/"+(a||b.defaultContent))},toList:function(){c()}}});

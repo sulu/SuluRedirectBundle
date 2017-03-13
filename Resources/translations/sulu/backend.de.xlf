@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+    <file source-language="de" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>sulu_redirect.title</source>
+                <target>Umleitungen</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>sulu_redirect.enabled</source>
+                <target>Aktiviert</target>
+            </trans-unit>
+            <trans-unit id="2a">
+                <source>sulu_redirect.enable</source>
+                <target>Aktivieren</target>
+            </trans-unit>
+            <trans-unit id="2b">
+                <source>sulu_redirect.disable</source>
+                <target>Deaktivieren</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>sulu_redirect.source</source>
+                <target>Quelle</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>sulu_redirect.target</source>
+                <target>Ziel</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>sulu_redirect.status-code</source>
+                <target>Status-Code</target>
+            </trans-unit>
+            <trans-unit id="5a">
+                <source>sulu_redirect.status-code.301</source>
+                <target>301: Moved Permanently</target>
+            </trans-unit>
+            <trans-unit id="5b">
+                <source>sulu_redirect.status-code.302</source>
+                <target>302: Moved Temporarily</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
