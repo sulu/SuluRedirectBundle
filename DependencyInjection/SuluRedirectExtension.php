@@ -12,6 +12,8 @@
 namespace Sulu\Bundle\RedirectBundle\DependencyInjection;
 
 use Sulu\Bundle\PersistenceBundle\DependencyInjection\PersistenceExtensionTrait;
+use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterNotFoundException;
+use Sulu\Bundle\RedirectBundle\Import\Reader\ReaderNotFoundException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -55,6 +57,7 @@ class SuluRedirectExtension extends Extension implements PrependExtensionInterfa
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('sulu_redirect.imports.path', $config['imports']['path']);
         $this->configurePersistence($config['objects'], $container);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));

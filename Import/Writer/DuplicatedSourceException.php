@@ -16,7 +16,7 @@ use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 /**
  * Raised when in a import process the same source should be created twice.
  */
-class DuplicatedSourceException extends WriterException
+class DuplicatedSourceException extends WriterException implements \JsonSerializable
 {
     /**
      * @var RedirectRouteInterface
@@ -31,5 +31,16 @@ class DuplicatedSourceException extends WriterException
         parent::__construct(sprintf('Source "%s" was imported twice.', $entity->getSource()));
 
         $this->entity = $entity;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    function jsonSerialize()
+    {
+        return [
+            'translationKey' => 'sulu_redirect.exceptions.duplicated',
+            'source' => $this->entity->getSource(),
+        ];
     }
 }

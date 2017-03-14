@@ -9,9 +9,10 @@
 
 define([
     'underscore',
+    'config',
     'services/suluredirect/redirect-manager',
     'services/suluredirect/redirect-router'
-], function(_, manager, router) {
+], function(_, Config, manager, router) {
 
     'use strict';
 
@@ -20,6 +21,7 @@ define([
 
         templates: {
             list: [
+                '<div class="dropzone-container"/>',
                 '<div class="list-toolbar-container"></div>',
                 '<div class="list-info"></div>',
                 '<div class="datagrid-container"></div>',
@@ -36,21 +38,32 @@ define([
 
         defaults: defaults,
 
-        header: {
-            noBack: true,
+        header: function() {
+            return {
+                noBack: true,
 
-            toolbar: {
-                buttons: {
-                    add: {
-                        options: {
-                            callback: function() {
-                                router.toAdd();
+                toolbar: {
+                    buttons: {
+                        add: {
+                            options: {
+                                callback: function() {
+                                    router.toAdd();
+                                }
+                            }
+                        },
+                        deleteSelected: {},
+                        import: {
+                            options: {
+                                icon: 'cloud-upload',
+                                title: 'sulu_redirect.import',
+                                callback: function() {
+                                    this.sandbox.emit('husky.dropzone.redirects.show-popup');
+                                }.bind(this)
                             }
                         }
-                    },
-                    deleteSelected: {}
+                    }
                 }
-            }
+            };
         },
 
         layout: {
@@ -61,6 +74,8 @@ define([
 
         initialize: function() {
             this.render();
+
+            this.bindCustomEvents();
         },
 
         render: function() {
@@ -101,6 +116,25 @@ define([
                     }
                 }
             );
+
+            this.sandbox.start([{
+                name: 'dropzone@husky',
+                options: {
+                    el: this.sandbox.dom.find('.dropzone-container'),
+                    url: '/admin/redirects/import',
+                    method: 'POST',
+                    paramName: 'redirectRoutes',
+                    instanceName: 'redirects'
+                }
+            }]);
+        },
+
+        bindCustomEvents: function() {
+            this.sandbox.on('husky.dropzone.redirects.files-added', this.filesAddedHandler.bind(this))
+        },
+
+        filesAddedHandler: function(files) {
+            this.sandbox.emit('husky.datagrid.redirect-routes.update');
         }
     };
 });
