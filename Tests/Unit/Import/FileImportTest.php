@@ -65,8 +65,8 @@ class FileImportTest extends \PHPUnit_Framework_TestCase
     public function testImport()
     {
         $items = [
-            new ReaderItem(1, [Converter::SOURCE => '/source-1', Converter::TARGET => '/target-1']),
-            new ReaderItem(2, [Converter::SOURCE => '/source-2', Converter::TARGET => '/target-2']),
+            new ReaderItem(1, '', [Converter::SOURCE => '/source-1', Converter::TARGET => '/target-1']),
+            new ReaderItem(2, '', [Converter::SOURCE => '/source-2', Converter::TARGET => '/target-2']),
         ];
         $entities = [
             $this->prophesize(RedirectRouteInterface::class),
@@ -109,7 +109,7 @@ class FileImportTest extends \PHPUnit_Framework_TestCase
         $this->reader->supports($this->fileName)->willReturn(true);
         $this->reader->read($this->fileName)->willReturn(
             [
-                new ReaderItem(1, null, $this->prophesize(ImportException::class)->reveal()),
+                new ReaderItem(1, '', null, $this->prophesize(ImportException::class)->reveal()),
             ]
         );
 
@@ -122,7 +122,7 @@ class FileImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImportNoSupportedConverter()
     {
-        $item = new ReaderItem(1, [Converter::SOURCE => '/source-1', Converter::TARGET => '/target-1']);
+        $item = new ReaderItem(1, '', [Converter::SOURCE => '/source-1', Converter::TARGET => '/target-1']);
 
         $this->reader->supports($this->fileName)->willReturn(true);
         $this->reader->read($this->fileName)->willReturn([$item]);

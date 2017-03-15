@@ -22,6 +22,11 @@ class ReaderItem
     private $lineNumber;
 
     /**
+     * @var string
+     */
+    private $content;
+
+    /**
      * @var array
      */
     private $data;
@@ -33,14 +38,16 @@ class ReaderItem
 
     /**
      * @param int $lineNumber
+     * @param string $lineContent
      * @param array $item
      * @param \Exception $exception
      */
-    public function __construct($lineNumber, array $item = null, \Exception $exception = null)
+    public function __construct($lineNumber, $lineContent, array $item = null, \Exception $exception = null)
     {
         $this->lineNumber = $lineNumber;
         $this->data = $item;
         $this->exception = $exception;
+        $this->lineContent = $lineContent;
     }
 
     /**
@@ -51,6 +58,16 @@ class ReaderItem
     public function getLineNumber()
     {
         return $this->lineNumber;
+    }
+
+    /**
+     * Returns content.
+     *
+     * @return string
+     */
+    public function getLineContent()
+    {
+        return $this->lineContent;
     }
 
     /**

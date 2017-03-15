@@ -46,6 +46,7 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $request->reveal()->files = $fileBag->reveal();
 
         $file = $this->prophesize(File::class);
+        $file->getFilename()->willReturn($this->fileName);
         $file->getRealPath()->willReturn($importFile);
 
         $uploadedFile = $this->getMockBuilder(UploadedFile::class)
@@ -56,9 +57,9 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $fileBag->get('redirectRoutes')->willReturn($uploadedFile);
 
         $items = [
-            new Item(1, $this->prophesize(RedirectRouteInterface::class)->reveal()),
-            new Item(2, null, $this->prophesize(ImportException::class)->reveal()),
-            new Item(3, $this->prophesize(RedirectRouteInterface::class)->reveal()),
+            new Item(1, '', $this->prophesize(RedirectRouteInterface::class)->reveal()),
+            new Item(2, '', null, $this->prophesize(ImportException::class)->reveal()),
+            new Item(3, '', $this->prophesize(RedirectRouteInterface::class)->reveal()),
         ];
 
         $import = $this->prophesize(FileImportInterface::class);
@@ -88,6 +89,7 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $request->reveal()->files = $fileBag->reveal();
 
         $file = $this->prophesize(File::class);
+        $file->getFilename()->willReturn($this->fileName);
         $file->getRealPath()->willReturn($importFile);
 
         $uploadedFile = $this->getMockBuilder(UploadedFile::class)
@@ -117,6 +119,7 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $request->reveal()->files = $fileBag->reveal();
 
         $file = $this->prophesize(File::class);
+        $file->getFilename()->willReturn($this->fileName);
         $file->getRealPath()->willReturn($importFile);
 
         $uploadedFile = $this->getMockBuilder(UploadedFile::class)

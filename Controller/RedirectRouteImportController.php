@@ -15,7 +15,6 @@ use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterNotFoundException;
 use Sulu\Bundle\RedirectBundle\Import\FileImportInterface;
 use Sulu\Bundle\RedirectBundle\Import\Item;
 use Sulu\Bundle\RedirectBundle\Import\Reader\ReaderNotFoundException;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -80,13 +79,14 @@ class RedirectRouteImportController
     private function importFile(File $file)
     {
         $response = [
+            'fileName' => $file->getFilename(),
             'total' => 0,
             'exceptions' => [],
         ];
 
         /** @var Item $item */
         foreach ($this->import->import($file->getRealPath()) as $item) {
-            $response['total']++;
+            ++$response['total'];
 
             if (!$item->getException()) {
                 continue;
@@ -95,6 +95,7 @@ class RedirectRouteImportController
             $response['exceptions'][] = [
                 'exception' => $item->getException(),
                 'lineNumber' => $item->getLineNumber(),
+                'lineContent' => $item->getLineContent(),
             ];
         }
 

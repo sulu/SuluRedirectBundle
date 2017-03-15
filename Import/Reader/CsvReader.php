@@ -39,7 +39,7 @@ class CsvReader implements ReaderInterface
                 continue;
             }
 
-            yield new ReaderItem($lineNumber, $this->interpret($line, $header));
+            yield new ReaderItem($lineNumber, '"' . implode('","', $line) . '"', $this->interpret($line, $header));
         }
     }
 

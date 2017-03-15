@@ -36,7 +36,7 @@ class DuplicatedSourceException extends WriterException implements \JsonSerializ
     /**
      * {@inheritdoc}
      */
-    function jsonSerialize()
+    public function jsonSerialize()
     {
         return [
             'translationKey' => 'sulu_redirect.exceptions.duplicated',
