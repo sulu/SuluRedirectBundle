@@ -47,12 +47,18 @@ class RedirectRouteImportController
     }
 
     /**
+     * Import file which was uploaded.
+     *
      * @param Request $request
      *
      * @return Response
      */
     public function importAction(Request $request)
     {
+        if (!$request->files->has('redirectRoutes')) {
+            return new JsonResponse(null, Response::HTTP_BAD_REQUEST);
+        }
+
         /** @var UploadedFile $uploadedFile */
         $uploadedFile = $request->files->get('redirectRoutes');
         $file = $uploadedFile->move(
@@ -63,9 +69,9 @@ class RedirectRouteImportController
         try {
             return new JsonResponse($this->importFile($file));
         } catch (ReaderNotFoundException $exception) {
-            return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
+            return new JsonResponse(null, Response::HTTP_BAD_REQUEST);
         } catch (ConverterNotFoundException $exception) {
-            return new JsonResponse(null, Response::HTTP_NOT_ACCEPTABLE);
+            return new JsonResponse(null, Response::HTTP_BAD_REQUEST);
         }
     }
 

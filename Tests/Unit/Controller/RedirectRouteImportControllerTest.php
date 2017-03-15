@@ -11,6 +11,7 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Controller;
 
+use Prophecy\Argument;
 use Sulu\Bundle\RedirectBundle\Controller\RedirectRouteImportController;
 use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterNotFoundException;
 use Sulu\Bundle\RedirectBundle\Import\FileImportInterface;
@@ -54,6 +55,7 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
         $uploadedFile->method('getClientOriginalName')->willReturn($this->fileName);
         $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file->reveal());
+        $fileBag->has('redirectRoutes')->willReturn(true);
         $fileBag->get('redirectRoutes')->willReturn($uploadedFile);
 
         $items = [
@@ -98,6 +100,7 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
 
         $uploadedFile->method('getClientOriginalName')->willReturn($this->fileName);
         $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file->reveal());
+        $fileBag->has('redirectRoutes')->willReturn(true);
         $fileBag->get('redirectRoutes')->willReturn($uploadedFile);
 
         $import = $this->prophesize(FileImportInterface::class);
@@ -107,7 +110,7 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $response = $controller->importAction($request->reveal(), $this->importPath);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertEquals(406, $response->getStatusCode());
+        $this->assertEquals(400, $response->getStatusCode());
     }
 
     public function testImportActionConverterNotFound()
@@ -127,6 +130,7 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
             ->getMock();
         $uploadedFile->method('getClientOriginalName')->willReturn($this->fileName);
         $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file->reveal());
+        $fileBag->has('redirectRoutes')->willReturn(true);
         $fileBag->get('redirectRoutes')->willReturn($uploadedFile);
 
         $import = $this->prophesize(FileImportInterface::class);
@@ -136,6 +140,25 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $response = $controller->importAction($request->reveal(), $this->importPath);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
-        $this->assertEquals(406, $response->getStatusCode());
+        $this->assertEquals(400, $response->getStatusCode());
+    }
+
+    public function testImportActionNoFile()
+    {
+        $request = $this->prophesize(Request::class);
+
+        $fileBag = $this->prophesize(FileBag::class);
+        $request->reveal()->files = $fileBag->reveal();
+
+        $fileBag->has('redirectRoutes')->willReturn(false);
+
+        $import = $this->prophesize(FileImportInterface::class);
+        $import->import(Argument::any())->shouldNotBeCalled();
+
+        $controller = new RedirectRouteImportController($import->reveal(), $this->importPath);
+        $response = $controller->importAction($request->reveal(), $this->importPath);
+
+        $this->assertInstanceOf(JsonResponse::class, $response);
+        $this->assertEquals(400, $response->getStatusCode());
     }
 }
