@@ -25,9 +25,29 @@ sulu_redirect:
     prefix: /admin/redirects
 ```
 
+## Initialize bundle
+
+Create assets:
+
+```bash
+php bin/console assets:install
+```
+
+Create translations:
+
+```
+php bin/console sulu:translate:export
+```
+
+Create tables
+
+```bash
+php bin/console doctrine:schema:update
+```
+
 ## Available Configuration
 
-``yml
+```yml
 sulu_redirect:
     imports:
         path:                 '%kernel.root_dir%/../var/uploads/redirects'
@@ -36,3 +56,4 @@ sulu_redirect:
             model:                Sulu\Bundle\RedirectBundle\Entity\RedirectRoute
             repository:           Sulu\Bundle\RedirectBundle\Entity\RedirectRouteRepository
 ```
+
