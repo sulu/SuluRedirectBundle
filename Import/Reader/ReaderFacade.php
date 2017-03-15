@@ -14,7 +14,7 @@ namespace Sulu\Bundle\RedirectBundle\Import\Reader;
 /**
  * Aggregates multiple readers.
  */
-class ChainReader implements ReaderInterface
+class ReaderFacade implements ReaderInterface
 {
     /**
      * @var ReaderInterface[]

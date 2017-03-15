@@ -12,11 +12,11 @@
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Converter;
 
 use Prophecy\Prophecy\ObjectProphecy;
-use Sulu\Bundle\RedirectBundle\Import\Converter\ChainConverter;
+use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterFacade;
 use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 
-class ChainConverterTest extends \PHPUnit_Framework_TestCase
+class ConverterFacadeTest extends \PHPUnit_Framework_TestCase
 {
     public function testSupports()
     {
@@ -30,7 +30,7 @@ class ChainConverterTest extends \PHPUnit_Framework_TestCase
         $converters[0]->supports($data)->willReturn(false);
         $converters[1]->supports($data)->willReturn(true);
 
-        $chainConverter = new ChainConverter(
+        $converterFacade = new ConverterFacade(
             array_map(
                 function (ObjectProphecy $converter) {
                     return $converter->reveal();
@@ -39,7 +39,7 @@ class ChainConverterTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertTrue($chainConverter->supports($data));
+        $this->assertTrue($converterFacade->supports($data));
     }
 
     public function testSupportsNoSupportedConverter()
@@ -54,7 +54,7 @@ class ChainConverterTest extends \PHPUnit_Framework_TestCase
         $converters[0]->supports($data)->willReturn(false);
         $converters[1]->supports($data)->willReturn(false);
 
-        $chainConverter = new ChainConverter(
+        $converterFacade = new ConverterFacade(
             array_map(
                 function (ObjectProphecy $converter) {
                     return $converter->reveal();
@@ -63,16 +63,16 @@ class ChainConverterTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertFalse($chainConverter->supports($data));
+        $this->assertFalse($converterFacade->supports($data));
     }
 
     public function testSupportsNoConverter()
     {
         $data = ['title' => 'Test-Title'];
 
-        $chainConverter = new ChainConverter();
+        $converterFacade = new ConverterFacade();
 
-        $this->assertFalse($chainConverter->supports($data));
+        $this->assertFalse($converterFacade->supports($data));
     }
 
     public function testConvert()
@@ -91,7 +91,7 @@ class ChainConverterTest extends \PHPUnit_Framework_TestCase
             ->willReturn($this->prophesize(RedirectRouteInterface::class)->reveal())
             ->shouldBeCalled();
 
-        $chainConverter = new ChainConverter(
+        $converterFacade = new ConverterFacade(
             array_map(
                 function (ObjectProphecy $converter) {
                     return $converter->reveal();
@@ -100,7 +100,7 @@ class ChainConverterTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertInstanceOf(RedirectRouteInterface::class, $chainConverter->convert($data));
+        $this->assertInstanceOf(RedirectRouteInterface::class, $converterFacade->convert($data));
     }
 
     public function testConvertNotSupported()
@@ -117,7 +117,7 @@ class ChainConverterTest extends \PHPUnit_Framework_TestCase
         $converters[1]->supports($data)->willReturn(false);
         $converters[1]->convert($data)->shouldNotBeCalled();
 
-        $chainConverter = new ChainConverter(
+        $converterFacade = new ConverterFacade(
             array_map(
                 function (ObjectProphecy $converter) {
                     return $converter->reveal();
@@ -126,15 +126,15 @@ class ChainConverterTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertNull($chainConverter->convert($data));
+        $this->assertNull($converterFacade->convert($data));
     }
 
     public function testConvertNoConverter()
     {
         $data = ['title' => 'Test-Title'];
 
-        $chainConverter = new ChainConverter();
+        $converterFacade = new ConverterFacade();
 
-        $this->assertNull($chainConverter->convert($data));
+        $this->assertNull($converterFacade->convert($data));
     }
 }

@@ -13,10 +13,10 @@ namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Reader;
 
 use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\RedirectBundle\Import\Converter\Converter;
-use Sulu\Bundle\RedirectBundle\Import\Reader\ChainReader;
+use Sulu\Bundle\RedirectBundle\Import\Reader\ReaderFacade;
 use Sulu\Bundle\RedirectBundle\Import\Reader\ReaderInterface;
 
-class ChainReaderTest extends \PHPUnit_Framework_TestCase
+class ReaderFacadeTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var string
@@ -41,7 +41,7 @@ class ChainReaderTest extends \PHPUnit_Framework_TestCase
         $converters[0]->supports($this->fileName)->willReturn(false);
         $converters[1]->supports($this->fileName)->willReturn(true);
 
-        $chainConverter = new ChainReader(
+        $readerFacade = new ReaderFacade(
             array_map(
                 function (ObjectProphecy $converter) {
                     return $converter->reveal();
@@ -50,7 +50,7 @@ class ChainReaderTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertTrue($chainConverter->supports($this->fileName));
+        $this->assertTrue($readerFacade->supports($this->fileName));
     }
 
     public function testSupportsNoSupportedConverter()
@@ -63,7 +63,7 @@ class ChainReaderTest extends \PHPUnit_Framework_TestCase
         $converters[0]->supports($this->fileName)->willReturn(false);
         $converters[1]->supports($this->fileName)->willReturn(false);
 
-        $chainConverter = new ChainReader(
+        $readerFacade = new ReaderFacade(
             array_map(
                 function (ObjectProphecy $converter) {
                     return $converter->reveal();
@@ -72,16 +72,16 @@ class ChainReaderTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertFalse($chainConverter->supports($this->fileName));
+        $this->assertFalse($readerFacade->supports($this->fileName));
     }
 
     public function testSupportsNoConverter()
     {
         $data = ['title' => 'Test-Title'];
 
-        $chainConverter = new ChainReader();
+        $readerFacade = new ReaderFacade();
 
-        $this->assertFalse($chainConverter->supports($data));
+        $this->assertFalse($readerFacade->supports($data));
     }
 
     public function testRead()
@@ -98,7 +98,7 @@ class ChainReaderTest extends \PHPUnit_Framework_TestCase
         $converters[1]->supports($this->fileName)->willReturn(true);
         $converters[1]->read($this->fileName)->willReturn($data)->shouldBeCalled();
 
-        $chainReader = new ChainReader(
+        $readerFacade = new ReaderFacade(
             array_map(
                 function (ObjectProphecy $converter) {
                     return $converter->reveal();
@@ -107,7 +107,7 @@ class ChainReaderTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertEquals($data, $chainReader->read($this->fileName));
+        $this->assertEquals($data, $readerFacade->read($this->fileName));
     }
 
     public function testConvertNotSupported()
@@ -124,7 +124,7 @@ class ChainReaderTest extends \PHPUnit_Framework_TestCase
         $converters[1]->supports($data)->willReturn(false);
         $converters[1]->read($data)->shouldNotBeCalled();
 
-        $chainConverter = new ChainReader(
+        $readerFacade = new ReaderFacade(
             array_map(
                 function (ObjectProphecy $converter) {
                     return $converter->reveal();
@@ -133,15 +133,15 @@ class ChainReaderTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        $this->assertNull($chainConverter->read($data));
+        $this->assertNull($readerFacade->read($data));
     }
 
     public function testConvertNoConverter()
     {
         $data = ['title' => 'Test-Title'];
 
-        $chainConverter = new ChainReader();
+        $readerFacade = new ReaderFacade();
 
-        $this->assertNull($chainConverter->read($data));
+        $this->assertNull($readerFacade->read($data));
     }
 }

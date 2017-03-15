@@ -12,9 +12,9 @@
 namespace Sulu\Bundle\RedirectBundle\Import\Converter;
 
 /**
- * Combines multiple converters.
+ * Aggregates multiple converters.
  */
-class ChainConverter implements ConverterInterface
+class ConverterFacade implements ConverterInterface
 {
     /**
      * @var ConverterInterface[]

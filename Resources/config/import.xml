@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sulu_redirect.import.aggregate_reader"
-                 class="Sulu\Bundle\RedirectBundle\Import\Reader\ChainReader">
+                 class="Sulu\Bundle\RedirectBundle\Import\Reader\ReaderFacade">
             <argument type="collection"/>
         </service>
 
@@ -13,7 +13,7 @@
         </service>
 
         <service id="sulu_redirect.import.aggregate_converter"
-                 class="Sulu\Bundle\RedirectBundle\Import\Converter\ChainConverter">
+                 class="Sulu\Bundle\RedirectBundle\Import\Converter\ConverterFacade">
             <argument type="collection"/>
         </service>
 
