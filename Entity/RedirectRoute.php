@@ -30,12 +30,12 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
     /**
      * @var bool
      */
-    protected $enabled;
+    protected $enabled = true;
 
     /**
      * @var int
      */
-    protected $statusCode;
+    protected $statusCode = 301;
 
     /**
      * @var string
@@ -56,11 +56,7 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
     }
 
     /**
-     * Set id.
-     *
-     * @param string $id
-     *
-     * @return $this
+     * {@inheritdoc}
      */
     public function setId($id)
     {
