@@ -40,6 +40,8 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
         $entity->setId(Argument::type('string'))->shouldBeCalled();
         $entity->setSource('/source')->shouldBeCalled();
         $entity->setTarget('/target')->shouldBeCalled();
+        $entity->setStatusCode(Argument::any())->shouldNotBeCalled();
+        $entity->setEnabled(Argument::any())->shouldNotBeCalled();
 
         $result = $converter->convert([Converter::SOURCE => '/source', Converter::TARGET => '/target']);
         $this->assertInstanceOf(RedirectRouteInterface::class, $result);
@@ -59,8 +61,31 @@ class ConverterTest extends \PHPUnit_Framework_TestCase
         $entity->setId(Argument::type('string'))->shouldNotBeCalled();
         $entity->setSource('/source')->shouldBeCalled();
         $entity->setTarget('/target')->shouldBeCalled();
+        $entity->setStatusCode(Argument::any())->shouldNotBeCalled();
+        $entity->setEnabled(Argument::any())->shouldNotBeCalled();
 
         $result = $converter->convert([Converter::SOURCE => '/source', Converter::TARGET => '/target']);
+        $this->assertInstanceOf(RedirectRouteInterface::class, $result);
+        $this->assertEquals($entity->reveal(), $result);
+    }
+
+    public function testConvertNullValues()
+    {
+        $entity = $this->prophesize(RedirectRouteInterface::class);
+
+        $repository = $this->prophesize(RedirectRouteRepositoryInterface::class);
+        $repository->findBySource('/source')->willReturn(null);
+        $repository->createNew()->willReturn($entity->reveal());
+
+        $converter = new Converter($repository->reveal());
+
+        $entity->setId(Argument::type('string'))->shouldBeCalled();
+        $entity->setSource('/source')->shouldBeCalled();
+        $entity->setTarget('/target')->shouldBeCalled();
+        $entity->setStatusCode(302)->shouldBeCalled();
+        $entity->setEnabled(Argument::any())->shouldNotBeCalled();
+
+        $result = $converter->convert(['source' => '/source', 'target' => '/target', 'statusCode' => 302, 'enabled' => null]);
         $this->assertInstanceOf(RedirectRouteInterface::class, $result);
         $this->assertEquals($entity->reveal(), $result);
     }

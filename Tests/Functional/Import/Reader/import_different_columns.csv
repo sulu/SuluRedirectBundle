@@ -1,0 +1,4 @@
+source,target,statusCode,enabled
+/source-1,/target-1,302,1
+/source-2,/target-2,302
+/source-3,/target-3
