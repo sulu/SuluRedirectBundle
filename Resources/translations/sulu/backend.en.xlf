@@ -38,6 +38,30 @@
                 <source>sulu_redirect.status-code.302</source>
                 <target>302: Moved Temporarily</target>
             </trans-unit>
+            <trans-unit id="6">
+                <source>sulu_redirect.import</source>
+                <target>Import</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>sulu_redirect.import.title</source>
+                <target>Import finished</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>sulu_redirect.import.total</source>
+                <target>Total</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>sulu_redirect.import.exceptions</source>
+                <target>Failing</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>sulu_redirect.exceptions.duplicated</source>
+                <target>Line %(lineNumber)s in File "%(fileName)s" contains already imported Source "%(exception.source)s".</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>sulu_redirect.import.success</source>
+                <target>%(total)s Redirects successfully imported.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

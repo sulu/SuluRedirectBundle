@@ -17,7 +17,7 @@ require.config({
     }
 });
 
-define(function() {
+define(['css!suluredirectcss/main'], function() {
 
     'use strict';
 

@@ -61,15 +61,15 @@ class FileImport implements FileImportInterface
 
         foreach ($this->reader->read($fileName) as $item) {
             if ($item->getException()) {
-                yield new Item($item->getLineNumber(), null, $item->getException());
+                yield new Item($item->getLineNumber(), $item->getLineContent(), null, $item->getException());
 
                 continue;
             }
 
             try {
-                yield new Item($item->getLineNumber(), $this->importItem($item->getData()));
+                yield new Item($item->getLineNumber(), $item->getLineContent(), $this->importItem($item->getData()));
             } catch (ImportException $exception) {
-                yield new Item($item->getLineNumber(), null, $exception);
+                yield new Item($item->getLineNumber(), $item->getLineContent(), null, $exception);
             }
         }
 

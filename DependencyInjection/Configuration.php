@@ -29,6 +29,12 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $treeBuilder->root('sulu_redirect')
             ->children()
+                ->arrayNode('imports')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('path')->defaultValue('%kernel.root_dir%/../var/uploads/redirects')->end()
+                    ->end()
+                ->end()
                 ->arrayNode('objects')
                     ->addDefaultsIfNotSet()
                     ->children()

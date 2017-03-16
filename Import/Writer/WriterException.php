@@ -16,6 +16,6 @@ use Sulu\Bundle\RedirectBundle\Import\ImportException;
 /**
  * Base exception for writer exceptions.
  */
-class WriterException extends ImportException
+abstract class WriterException extends ImportException
 {
 }

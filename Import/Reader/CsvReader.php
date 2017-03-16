@@ -39,7 +39,7 @@ class CsvReader implements ReaderInterface
                 continue;
             }
 
-            yield new ReaderItem($lineNumber, $this->interpret($line, $header));
+            yield new ReaderItem($lineNumber, '"' . implode('","', $line) . '"', $this->interpret($line, $header));
         }
     }
 
@@ -63,7 +63,7 @@ class CsvReader implements ReaderInterface
     {
         $item = [];
         foreach ($header as $index => $key) {
-            $item[$key] = $line[$index];
+            $item[$key] = array_key_exists($index, $line) ? $line[$index] : null;
         }
 
         return $item;

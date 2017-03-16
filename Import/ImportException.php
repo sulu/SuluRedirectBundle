@@ -14,6 +14,6 @@ namespace Sulu\Bundle\RedirectBundle\Import;
 /**
  * Base Exception for all import exceptions.
  */
-class ImportException extends \Exception
+abstract class ImportException extends \Exception
 {
 }

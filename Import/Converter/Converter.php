@@ -52,7 +52,7 @@ class Converter implements ConverterInterface
         }
 
         foreach ([self::SOURCE, self::TARGET, self::STATUS_CODE, self::ENABLED] as $field) {
-            if (!array_key_exists($field, $item)) {
+            if (!array_key_exists($field, $item) || null === $item[$field]) {
                 continue;
             }
 

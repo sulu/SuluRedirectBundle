@@ -55,6 +55,7 @@ class SuluRedirectExtension extends Extension implements PrependExtensionInterfa
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('sulu_redirect.imports.path', $config['imports']['path']);
         $this->configurePersistence($config['objects'], $container);
 
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));

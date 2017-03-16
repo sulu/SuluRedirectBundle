@@ -9,48 +9,77 @@
 
 define([
     'underscore',
+    'config',
     'services/suluredirect/redirect-manager',
     'services/suluredirect/redirect-router'
-], function(_, manager, router) {
+], function(_, Config, manager, router) {
 
     'use strict';
 
     var defaults = {
-        options: {},
+            options: {},
 
-        templates: {
-            list: [
-                '<div class="list-toolbar-container"></div>',
-                '<div class="list-info"></div>',
-                '<div class="datagrid-container"></div>',
-                '<div class="dialog"></div>'
-            ].join('')
+            templates: {
+                list: [
+                    '<div class="dropzone-container"/>',
+                    '<div class="list-toolbar-container"></div>',
+                    '<div class="list-info"></div>',
+                    '<div class="datagrid-container"></div>',
+                    '<div class="dialog"></div>'
+                ].join('')
+            },
+
+            translations: {
+                headline: 'sulu_redirect.title',
+                success: 'sulu_redirect.import.success'
+            }
         },
 
-        translations: {
-            headline: 'sulu_redirect.title'
-        }
-    };
+        parseFiles = function(files) {
+            var result = {total: 0, exceptions: []};
+
+            for (var i in files) {
+                for (var j in files[i].exceptions) {
+                    files[i].exceptions[j].fileName = files[i].fileName;
+                }
+
+                result.total += files[i].total;
+                result.exceptions = result.exceptions.concat(files[i].exceptions)
+            }
+
+            return result;
+        };
 
     return {
 
         defaults: defaults,
 
-        header: {
-            noBack: true,
+        header: function() {
+            return {
+                noBack: true,
 
-            toolbar: {
-                buttons: {
-                    add: {
-                        options: {
-                            callback: function() {
-                                router.toAdd();
+                toolbar: {
+                    buttons: {
+                        add: {
+                            options: {
+                                callback: function() {
+                                    router.toAdd();
+                                }
+                            }
+                        },
+                        deleteSelected: {},
+                        import: {
+                            options: {
+                                icon: 'cloud-upload',
+                                title: 'sulu_redirect.import',
+                                callback: function() {
+                                    this.sandbox.emit('husky.dropzone.redirects.show-popup');
+                                }.bind(this)
                             }
                         }
-                    },
-                    deleteSelected: {}
+                    }
                 }
-            }
+            };
         },
 
         layout: {
@@ -61,6 +90,8 @@ define([
 
         initialize: function() {
             this.render();
+
+            this.bindCustomEvents();
         },
 
         render: function() {
@@ -101,6 +132,43 @@ define([
                     }
                 }
             );
+
+            this.sandbox.start([{
+                name: 'dropzone@husky',
+                options: {
+                    el: this.sandbox.dom.find('.dropzone-container'),
+                    url: '/admin/redirects/import',
+                    method: 'POST',
+                    paramName: 'redirectRoutes',
+                    instanceName: 'redirects'
+                }
+            }]);
+        },
+
+        bindCustomEvents: function() {
+            this.sandbox.on('husky.dropzone.redirects.files-added', this.filesAddedHandler.bind(this))
+        },
+
+        filesAddedHandler: function(files) {
+            this.sandbox.emit('husky.datagrid.redirect-routes.update');
+
+            var result = parseFiles(files);
+            if (0 === result.exceptions.length) {
+                return this.sandbox.emit(
+                    'sulu.labels.success.show',
+                    this.sandbox.util.sprintf(this.translations.success, result)
+                );
+            }
+
+            var $container = $('<div/>');
+            this.$el.append($container);
+            this.sandbox.start([{
+                name: 'redirects/list/import-overlay@suluredirect',
+                options: {
+                    el: $container,
+                    result: result
+                }
+            }]);
         }
     };
 });
