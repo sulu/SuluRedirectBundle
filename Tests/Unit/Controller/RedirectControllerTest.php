@@ -40,11 +40,6 @@ class RedirectControllerTest extends \PHPUnit_Framework_TestCase
     private $redirectRoute;
 
     /**
-     * @var string
-     */
-    protected $schemeAndHost = 'http://sulu.io';
-
-    /**
      * {@inheritdoc}
      */
     protected function setUp()
@@ -55,7 +50,6 @@ class RedirectControllerTest extends \PHPUnit_Framework_TestCase
         $this->queryBag = $this->prophesize(ParameterBag::class);
         $this->redirectRoute = $this->prophesize(RedirectRouteInterface::class);
 
-        $this->request->getSchemeAndHttpHost()->willReturn($this->schemeAndHost);
         $this->request->reveal()->query = $this->queryBag->reveal();
     }
 
@@ -72,7 +66,7 @@ class RedirectControllerTest extends \PHPUnit_Framework_TestCase
         $response = $this->controller->redirect($this->request->reveal(), $this->redirectRoute->reveal());
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
-        $this->assertEquals($this->schemeAndHost . $target, $response->getTargetUrl());
+        $this->assertEquals($target, $response->getTargetUrl());
         $this->assertEquals($statusCode, $response->getStatusCode());
     }
 
@@ -91,7 +85,48 @@ class RedirectControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(
-            $this->schemeAndHost . $target . '?' . http_build_query($query),
+            $target . '?' . http_build_query($query),
+            $response->getTargetUrl()
+        );
+        $this->assertEquals($statusCode, $response->getStatusCode());
+    }
+
+    public function testRedirectExternal()
+    {
+        $target = 'http://captain-sulu.io/test';
+        $statusCode = 301;
+
+        $this->queryBag->all()->willReturn([]);
+
+        $this->redirectRoute->getTarget()->willReturn($target);
+        $this->redirectRoute->getStatusCode()->willReturn($statusCode);
+
+        $response = $this->controller->redirect($this->request->reveal(), $this->redirectRoute->reveal());
+
+        $this->assertInstanceOf(RedirectResponse::class, $response);
+        $this->assertEquals(
+            $target,
+            $response->getTargetUrl()
+        );
+        $this->assertEquals($statusCode, $response->getStatusCode());
+    }
+
+    public function testRedirectExternalWithQuery()
+    {
+        $target = 'http://captain-sulu.io/test?hello=true';
+        $statusCode = 301;
+        $query = ['test' => 1, 'my-parameter' => 'awesome sulu'];
+
+        $this->queryBag->all()->willReturn($query);
+
+        $this->redirectRoute->getTarget()->willReturn($target);
+        $this->redirectRoute->getStatusCode()->willReturn($statusCode);
+
+        $response = $this->controller->redirect($this->request->reveal(), $this->redirectRoute->reveal());
+
+        $this->assertInstanceOf(RedirectResponse::class, $response);
+        $this->assertEquals(
+            $target . '&' . http_build_query($query),
             $response->getTargetUrl()
         );
         $this->assertEquals($statusCode, $response->getStatusCode());

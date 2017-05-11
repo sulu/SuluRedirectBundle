@@ -31,13 +31,15 @@ class WebsiteRedirectController
     public function redirect(Request $request, RedirectRouteInterface $redirectRoute)
     {
         $queryString = http_build_query($request->query->all());
+
         $url = [
-            $request->getSchemeAndHttpHost(),
             $redirectRoute->getTarget(),
-            (!empty($queryString) ? '?' : ''),
+            strpos($redirectRoute->getTarget(), '?') === false ? '?' : '&',
             $queryString,
         ];
 
-        return new RedirectResponse(implode($url), $redirectRoute->getStatusCode());
+        $url = trim(implode($url), '&? ');
+
+        return new RedirectResponse($url, $redirectRoute->getStatusCode());
     }
 }
