@@ -37,6 +37,12 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
      */
     public function save(RedirectRouteInterface $redirectRoute)
     {
+        if ($this->redirectRouteRepository->findBySource($redirectRoute->getSource())) {
+            throw new RedirectRouteNotUniqueException($redirectRoute->getSource());
+        }
+
         $this->redirectRouteRepository->persist($redirectRoute);
+
+        return $redirectRoute;
     }
 }

@@ -13,6 +13,7 @@ namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Manager;
 
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
+use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 
@@ -38,9 +39,27 @@ class RedirectRouteManagerTest extends \PHPUnit_Framework_TestCase
     public function testSave()
     {
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
+        $redirectRoute->getSource()->willReturn('/test');
+
+        $this->repository->findBySource('/test')->willReturn(null);
+        $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
+
+        $this->manager->save($redirectRoute->reveal());
+    }
+
+    public function testSaveAlreadyExists()
+    {
+        $this->setExpectedException(RedirectRouteNotUniqueException::class);
+
+        $otherRoute = $this->prophesize(RedirectRouteInterface::class);
+
+        $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
+        $redirectRoute->getSource()->willReturn('/test');
+
+        $this->repository->findBySource('/test')->willReturn($otherRoute->reveal());
 
         $this->manager->save($redirectRoute->reveal());
 
-        $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
+        $this->repository->persist($redirectRoute->reveal())->shouldNotBeCalled();
     }
 }

@@ -22,6 +22,10 @@ interface RedirectRouteManagerInterface
      * Save given redirect-route.
      *
      * @param RedirectRouteInterface $redirectRoute
+     *
+     * @return RedirectRouteInterface
+     *
+     * @throws RedirectRouteNotUniqueException
      */
     public function save(RedirectRouteInterface $redirectRoute);
 }

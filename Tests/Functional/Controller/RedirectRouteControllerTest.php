@@ -43,6 +43,15 @@ class RedirectRouteControllerTest extends SuluTestCase
         }
     }
 
+    public function testPostAlreadyExists()
+    {
+        $response = $this->post($this->defaultData);
+        $this->assertHttpStatusCode(200, $response);
+
+        $response = $this->post($this->defaultData);
+        $this->assertHttpStatusCode(409, $response);
+    }
+
     public function testGet()
     {
         $response = $this->post($this->defaultData);
@@ -56,6 +65,16 @@ class RedirectRouteControllerTest extends SuluTestCase
         foreach ($this->defaultData as $key => $value) {
             $this->assertEquals($value, $result[$key]);
         }
+    }
+
+    public function testPutAlreadyExists()
+    {
+        $response = $this->post($this->defaultData);
+        $data = json_decode($response->getContent(), true);
+        $this->assertHttpStatusCode(200, $response);
+
+        $response = $this->put($data['id'], $this->defaultData);
+        $this->assertHttpStatusCode(409, $response);
     }
 
     public function testPut()
