@@ -26,7 +26,8 @@ define([
             },
             translations: {
                 source: 'sulu_redirect.source',
-                target: 'sulu_redirect.target'
+                target: 'sulu_redirect.target',
+                conflict: 'sulu_redirect.errors.conflict',
             }
         },
 
@@ -73,6 +74,19 @@ define([
 
             return manager.save(newData).then(function(response) {
                 this.sandbox.emit('sulu.tab.saved', response);
+            }.bind(this)).fail(function(jqXHR) {
+                switch (jqXHR.status) {
+                    case 409:
+                        this.sandbox.emit('sulu.labels.error.show', this.translations.conflict);
+
+                        break;
+                    default:
+                        this.sandbox.emit('sulu.labels.error.show');
+
+                        break;
+                }
+
+                this.sandbox.emit('sulu.tab.dirty');
             }.bind(this));
         },
 
