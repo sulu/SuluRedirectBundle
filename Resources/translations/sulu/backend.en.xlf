@@ -62,6 +62,10 @@
                 <source>sulu_redirect.import.success</source>
                 <target>%(total)s Redirects successfully imported.</target>
             </trans-unit>
+            <trans-unit id="12">
+                <source>sulu_redirect.errors.conflict</source>
+                <target>The specified source has already been used.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

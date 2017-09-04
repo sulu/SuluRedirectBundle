@@ -12,6 +12,7 @@
 namespace Sulu\Bundle\RedirectBundle\DependencyInjection;
 
 use Sulu\Bundle\PersistenceBundle\DependencyInjection\PersistenceExtensionTrait;
+use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
@@ -40,6 +41,19 @@ class SuluRedirectExtension extends Extension implements PrependExtensionInterfa
                                 'path' => __DIR__ . '/../Resources/config/serializer',
                                 'namespace_prefix' => 'Sulu\Bundle\RedirectBundle\Entity',
                             ],
+                        ],
+                    ],
+                ]
+            );
+        }
+
+        if ($container->hasExtension('fos_rest')) {
+            $container->prependExtensionConfig(
+                'fos_rest',
+                [
+                    'exception' => [
+                        'codes' => [
+                            RedirectRouteNotUniqueException::class => 409,
                         ],
                     ],
                 ]
