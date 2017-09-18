@@ -12,8 +12,8 @@
 namespace Sulu\Bundle\RedirectBundle\Import\Writer;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
+use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 
 /**
@@ -56,16 +56,13 @@ class Writer implements WriterInterface
      */
     public function write(RedirectRouteInterface $entity)
     {
-        if (in_array($entity->getSource(), $this->sources)) {
-            throw new DuplicatedSourceException($entity);
-        }
-
+        $this->validate($entity);
         $this->sources[] = $entity->getSource();
 
         try {
             $this->save($entity);
-        } catch (ORMException $exception) {
-            throw new WriterException($exception->getMessage(), 0, $exception);
+        } catch (RedirectRouteNotUniqueException $exception) {
+            throw new DuplicatedSourceException($entity);
         }
     }
 
@@ -102,6 +99,25 @@ class Writer implements WriterInterface
 
         if (count($this->sources) % $this->batchSize === 0) {
             $this->entityManager->flush();
+        }
+    }
+
+    /**
+     * Validate given redirect-route.
+     *
+     * @param RedirectRouteInterface $entity
+     *
+     * @throws DuplicatedSourceException
+     * @throws TargetIsEmptyException
+     */
+    private function validate(RedirectRouteInterface $entity)
+    {
+        if ($entity->getTarget() === '') {
+            throw new TargetIsEmptyException($entity);
+        }
+
+        if (in_array($entity->getSource(), $this->sources)) {
+            throw new DuplicatedSourceException($entity);
         }
     }
 }
