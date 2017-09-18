@@ -19,6 +19,15 @@ use Sulu\Component\Persistence\Repository\RepositoryInterface;
 interface RedirectRouteRepositoryInterface extends RepositoryInterface
 {
     /**
+     * Find redirect-routes for given id.
+     *
+     * @param string $id
+     *
+     * @return RedirectRouteInterface
+     */
+    public function findById($id);
+
+    /**
      * Find enabled redirect-routes for given source.
      *
      * @param string $source
@@ -42,4 +51,11 @@ interface RedirectRouteRepositoryInterface extends RepositoryInterface
      * @param RedirectRouteInterface $entity
      */
     public function persist(RedirectRouteInterface $entity);
+
+    /**
+     * Remove given entity.
+     *
+     * @param RedirectRouteInterface $entity
+     */
+    public function remove(RedirectRouteInterface $entity);
 }

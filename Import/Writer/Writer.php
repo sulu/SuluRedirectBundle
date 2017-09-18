@@ -12,8 +12,8 @@
 namespace Sulu\Bundle\RedirectBundle\Import\Writer;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\ORMException;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
+use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 
 /**
@@ -64,8 +64,8 @@ class Writer implements WriterInterface
 
         try {
             $this->save($entity);
-        } catch (ORMException $exception) {
-            throw new WriterException($exception->getMessage(), 0, $exception);
+        } catch (RedirectRouteNotUniqueException $exception) {
+            throw new DuplicatedSourceException($entity);
         }
     }
 

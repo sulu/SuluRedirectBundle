@@ -119,7 +119,7 @@ class RedirectRouteController extends RestController implements ClassResourceInt
     /**
      * Create a new redirect-route.
      *
-     * @param $id
+     * @param string $id
      * @param Request $request
      *
      * @return Response
@@ -140,6 +140,55 @@ class RedirectRouteController extends RestController implements ClassResourceInt
         $this->get('doctrine.orm.entity_manager')->flush();
 
         return $this->handleView($this->view($redirectRoute));
+    }
+
+    /**
+     * Delete a redirect-route identified by id.
+     *
+     * @param string $id
+     *
+     * @return Response
+     *
+     * @throws EntityNotFoundException
+     */
+    public function deleteAction($id)
+    {
+        $redirectRoute = $this->getRedirectRouteRepository()->find($id);
+        if (!$redirectRoute) {
+            throw new EntityNotFoundException($this->getParameter('sulu.model.redirect_route.class'), $id);
+        }
+
+        $this->getRedirectRouteManager()->delete($redirectRoute);
+        $this->get('doctrine.orm.entity_manager')->flush();
+
+        return $this->handleView($this->view());
+    }
+
+    /**
+     * Delete a list of redirect-route identified by id.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function cdeleteAction(Request $request)
+    {
+        $repository = $this->getRedirectRouteRepository();
+        $manager = $this->getRedirectRouteManager();
+
+        $ids = array_filter(explode(',', $request->query->get('ids', '')));
+        foreach ($ids as $id) {
+            $redirectRoute = $repository->find($id);
+            if (!$redirectRoute) {
+                continue;
+            }
+
+            $manager->delete($redirectRoute);
+        }
+
+        $this->get('doctrine.orm.entity_manager')->flush();
+
+        return $this->handleView($this->view());
     }
 
     /**

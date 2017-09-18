@@ -28,4 +28,11 @@ interface RedirectRouteManagerInterface
      * @throws RedirectRouteNotUniqueException
      */
     public function save(RedirectRouteInterface $redirectRoute);
+
+    /**
+     * Delete given redirect-route.
+     *
+     * @param RedirectRouteInterface $redirectRoute
+     */
+    public function delete(RedirectRouteInterface $redirectRoute);
 }

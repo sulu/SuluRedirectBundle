@@ -146,7 +146,16 @@ define([
         },
 
         bindCustomEvents: function() {
-            this.sandbox.on('husky.dropzone.redirects.files-added', this.filesAddedHandler.bind(this))
+            this.sandbox.on('husky.dropzone.redirects.files-added', this.filesAddedHandler.bind(this));
+
+            this.sandbox.on('husky.datagrid.redirect-routes.number.selections', function(number) {
+                var postfix = number > 0 ? 'enable' : 'disable';
+                this.sandbox.emit('sulu.header.toolbar.item.' + postfix, 'deleteSelected', false);
+            }.bind(this));
+
+            this.sandbox.on('sulu.toolbar.delete', function() {
+                this.sandbox.emit('husky.datagrid.redirect-routes.items.get-selected', this.deleteItems.bind(this));
+            }.bind(this));
         },
 
         filesAddedHandler: function(files) {
@@ -169,6 +178,17 @@ define([
                     result: result
                 }
             }]);
+        },
+
+        deleteItems: function(ids) {
+            this.sandbox.emit('sulu.header.toolbar.item.loading', 'deleteSelected');
+            manager.deleteMultiple(ids).then(function() {
+                _.each(ids, function(id) {
+                    this.sandbox.emit('husky.datagrid.redirect-routes.record.remove', id);
+                }.bind(this));
+
+                this.sandbox.emit('sulu.header.toolbar.item.enabled', 'deleteSelected');
+            }.bind(this));
         }
     };
 });
