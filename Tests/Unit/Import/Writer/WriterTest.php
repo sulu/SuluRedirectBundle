@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sulu\Bundle\RedirectBundle\Import\Writer\DuplicatedSourceException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\Writer;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
+use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 
 class WriterTest extends \PHPUnit_Framework_TestCase
@@ -55,6 +56,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
 
         for ($i = 0; $i < count($entities); ++$i) {
             $entities[$i]->getSource()->willReturn('/source-' . $i);
+            $entities[$i]->getTarget()->willReturn('/target-' . $i);
         }
 
         $this->writer->write($entities[0]->reveal());
@@ -80,6 +82,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
 
         for ($i = 0; $i < count($entities); ++$i) {
             $entities[$i]->getSource()->willReturn('/source-' . $i);
+            $entities[$i]->getTarget()->willReturn('/target-' . $i);
         }
 
         $this->writer->write($entities[0]->reveal());
@@ -104,6 +107,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
 
         for ($i = 0; $i < count($entities); ++$i) {
             $entities[$i]->getSource()->willReturn('/source');
+            $entities[$i]->getTarget()->willReturn('/target');
         }
 
         $this->writer->write($entities[0]->reveal());
@@ -111,6 +115,21 @@ class WriterTest extends \PHPUnit_Framework_TestCase
 
         $this->redirectRouteManager->save($entities[0]->reveal())->shouldBeCalled();
         $this->redirectRouteManager->save($entities[1]->reveal())->shouldNotBeCalled();
+    }
+
+    public function testWriteAlreadyExisting()
+    {
+        $this->setExpectedException(DuplicatedSourceException::class);
+
+        $entity = $this->prophesize(RedirectRouteInterface::class);
+        $entity->getSource()->willReturn('/source');
+        $entity->getTarget()->willReturn('/target');
+
+        $this->redirectRouteManager->save($entity->reveal())
+            ->shouldBeCalled()
+            ->willThrow($this->prophesize(RedirectRouteNotUniqueException::class)->reveal());
+
+        $this->writer->write($entity->reveal());
     }
 
     public function testFinalize()

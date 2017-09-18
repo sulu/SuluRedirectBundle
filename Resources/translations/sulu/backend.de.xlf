@@ -66,6 +66,10 @@
                 <source>sulu_redirect.errors.conflict</source>
                 <target>Die angegebene Quelle wurde bereits verwendet.</target>
             </trans-unit>
+            <trans-unit id="13">
+                <source>sulu_redirect.exceptions.target_empty</source>
+                <target>Zeile %(lineNumber)s in Datei "%(fileName)s" enthielt ein leeres Ziel für die Quelle"%(exception.source)s".</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

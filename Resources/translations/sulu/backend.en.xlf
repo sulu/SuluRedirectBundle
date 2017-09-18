@@ -66,6 +66,10 @@
                 <source>sulu_redirect.errors.conflict</source>
                 <target>The specified source has already been used.</target>
             </trans-unit>
+            <trans-unit id="13">
+                <source>sulu_redirect.exceptions.target_empty</source>
+                <target>Line %(lineNumber)s in File "%(fileName)s" contains an empt Target for Source "%(exception.source)s".</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
