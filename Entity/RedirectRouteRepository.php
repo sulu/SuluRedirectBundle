@@ -24,6 +24,14 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
     /**
      * {@inheritdoc}
      */
+    public function findById($id)
+    {
+        return $this->find($id);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findEnabledBySource($source)
     {
         $query = $this->createQueryBuilder('redirect_route')
@@ -62,5 +70,13 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
     public function persist(RedirectRouteInterface $entity)
     {
         $this->_em->persist($entity);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function remove(RedirectRouteInterface $entity)
+    {
+        $this->_em->remove($entity);
     }
 }

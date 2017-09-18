@@ -52,8 +52,10 @@ class RedirectRouteManagerTest extends \PHPUnit_Framework_TestCase
         $this->setExpectedException(RedirectRouteNotUniqueException::class);
 
         $otherRoute = $this->prophesize(RedirectRouteInterface::class);
+        $otherRoute->getId()->willReturn('123-123-123');
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
+        $redirectRoute->getId()->willReturn('321-321-321');
         $redirectRoute->getSource()->willReturn('/test');
 
         $this->repository->findBySource('/test')->willReturn($otherRoute->reveal());
@@ -61,5 +63,29 @@ class RedirectRouteManagerTest extends \PHPUnit_Framework_TestCase
         $this->manager->save($redirectRoute->reveal());
 
         $this->repository->persist($redirectRoute->reveal())->shouldNotBeCalled();
+    }
+
+    public function testSaveSameEntity()
+    {
+        $otherRoute = $this->prophesize(RedirectRouteInterface::class);
+        $otherRoute->getId()->willReturn('123-123-123');
+
+        $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
+        $redirectRoute->getId()->willReturn('123-123-123');
+        $redirectRoute->getSource()->willReturn('/test');
+
+        $this->repository->findBySource('/test')->willReturn($otherRoute->reveal());
+        $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
+
+        $this->manager->save($redirectRoute->reveal());
+    }
+
+    public function testDelete()
+    {
+        $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
+
+        $this->manager->delete($redirectRoute->reveal());
+
+        $this->repository->remove($redirectRoute->reveal())->shouldBeCalled();
     }
 }

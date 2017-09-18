@@ -67,13 +67,22 @@ class RedirectRouteControllerTest extends SuluTestCase
         }
     }
 
-    public function testPutAlreadyExists()
+    public function testPutSameData()
     {
         $response = $this->post($this->defaultData);
         $data = json_decode($response->getContent(), true);
         $this->assertHttpStatusCode(200, $response);
 
         $response = $this->put($data['id'], $this->defaultData);
+        $this->assertHttpStatusCode(200, $response);
+    }
+
+    public function testPutAlreadyExists()
+    {
+        $response = $this->post($this->defaultData);
+        $this->assertHttpStatusCode(200, $response);
+
+        $response = $this->post($this->defaultData);
         $this->assertHttpStatusCode(409, $response);
     }
 
@@ -107,6 +116,36 @@ class RedirectRouteControllerTest extends SuluTestCase
 
         $this->assertCount(1, $result['_embedded']['redirect-routes']);
         $this->assertEquals($data['id'], $result['_embedded']['redirect-routes'][0]['id']);
+    }
+
+    public function testDelete()
+    {
+        $response = $this->post($this->defaultData);
+        $data = json_decode($response->getContent(), true);
+
+        $client = $this->createAuthenticatedClient();
+        $client->request('DELETE', self::BASE_URL . '/' . $data['id']);
+        $this->assertHttpStatusCode(204, $client->getResponse());
+    }
+
+    public function testDeleteNotExisting()
+    {
+        $client = $this->createAuthenticatedClient();
+        $client->request('DELETE', self::BASE_URL . '/123-123-123');
+        $this->assertHttpStatusCode(404, $client->getResponse());
+    }
+
+    public function testCDelete()
+    {
+        $response = $this->post($this->defaultData);
+        $data1 = json_decode($response->getContent(), true);
+
+        $response = $this->post(['source' => '/test2', 'target' => '/test3', 'enabled' => true, 'statusCode' => 301]);
+        $data2 = json_decode($response->getContent(), true);
+
+        $client = $this->createAuthenticatedClient();
+        $client->request('DELETE', self::BASE_URL . '?ids=' . $data1['id'] . ',' . $data2['id']);
+        $this->assertHttpStatusCode(204, $client->getResponse());
     }
 
     private function post($data)

@@ -24,6 +24,10 @@ define(['services/husky/util'], function(Util) {
 
         delete: function(id) {
             return Util.save(baseUrl + '/' + id, 'DELETE');
+        },
+
+        deleteMultiple: function(ids) {
+            return Util.save(baseUrl + '?ids=' + ids.join(','), 'DELETE');
         }
     }
 });

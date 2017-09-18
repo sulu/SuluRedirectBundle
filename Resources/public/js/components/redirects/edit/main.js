@@ -49,10 +49,7 @@ define([
                 toolbar: {
                     buttons: {
                         save: {
-                            parent: 'saveWithOptions',
-                            options: {
-                                callback: this.save.bind(this)
-                            }
+                            parent: 'saveWithOptions'
                         },
                         enabled: {
                             parent: !!this.data.enabled ? 'toggler-on' : 'toggler',
@@ -81,6 +78,18 @@ define([
                                     }.bind(this)
                                 }
                             }
+                        },
+                        edit: {
+                            options: {
+                                dropdownItems: {
+                                    delete: {
+                                        options: {
+                                            disabled: !this.options.id,
+                                            callback: this.delete.bind(this)
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -93,6 +102,7 @@ define([
 
         bindCustomEvents: function() {
             this.sandbox.on('sulu.header.back', router.toList);
+            this.sandbox.on('sulu.toolbar.save', this.save.bind(this));
             this.sandbox.on('sulu.tab.dirty', this.enableSave.bind(this));
             this.sandbox.on('sulu.tab.data-changed', this.setData.bind(this));
             this.sandbox.on('husky.toggler.sulu-toolbar.changed', this.changeEnabled.bind(this));
@@ -159,6 +169,14 @@ define([
             } else if (!this.options.id) {
                 router.toEdit(data.id);
             }
+        },
+
+        delete: function() {
+            this.sandbox.sulu.showDeleteDialog(function(wasConfirmed) {
+                if (wasConfirmed) {
+                    manager.delete(this.options.id).then(router.toList);
+                }
+            }.bind(this));
         },
 
         loadComponentData: function() {
