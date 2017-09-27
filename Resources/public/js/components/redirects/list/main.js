@@ -118,6 +118,7 @@ define([
                 {
                     el: this.sandbox.dom.find('.datagrid-container'),
                     url: '/admin/api/redirect-routes?sortBy=created&sortOrder=desc',
+                    storageName: 'redirect-routes',
                     searchInstanceName: 'redirect-routes',
                     searchFields: ['source', 'target'],
                     resultKey: 'redirect-routes',
