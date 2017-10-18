@@ -40,13 +40,17 @@ class RedirectRouteProvider implements RouteProviderInterface
      */
     public function getRouteCollectionForRequest(Request $request)
     {
+        // server encodes the url and symfony does not encode it
+        // symfony decodes this data here https://github.com/symfony/symfony/blob/3.3/src/Symfony/Component/Routing/Matcher/UrlMatcher.php#L91
+        $pathInfo = rawurldecode($request->getPathInfo());
+
         $routeCollection = new RouteCollection();
-        if (!$redirectRoute = $this->redirectRouteRepository->findEnabledBySource($request->getPathInfo())) {
+        if (!$redirectRoute = $this->redirectRouteRepository->findEnabledBySource($pathInfo)) {
             return $routeCollection;
         }
 
         $route = new Route(
-            $request->getPathInfo(),
+            $redirectRoute->getSource(),
             [
                 '_controller' => 'sulu_redirect.controller.redirect:redirect',
                 'redirectRoute' => $redirectRoute,
