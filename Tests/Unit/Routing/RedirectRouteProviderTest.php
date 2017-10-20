@@ -52,6 +52,31 @@ class RedirectRouteProviderTest extends \PHPUnit_Framework_TestCase
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getId()->willReturn($uuid);
+        $redirectRoute->getSource()->willReturn($pathInfo);
+        $this->repository->findEnabledBySource($pathInfo)->willReturn($redirectRoute->reveal());
+
+        $result = $this->routeProvider->getRouteCollectionForRequest($this->request->reveal());
+        $this->assertCount(1, $result);
+
+        $this->assertEquals(
+            [
+                '_controller' => 'sulu_redirect.controller.redirect:redirect',
+                'redirectRoute' => $redirectRoute->reveal(),
+            ],
+            $result->get('sulu_redirect.' . $uuid)->getDefaults()
+        );
+    }
+
+    public function testGetRouteCollectionForRequestEncodedPathInfo()
+    {
+        $pathInfo = '/käße';
+        $uuid = '123-123-123';
+
+        $this->request->getPathInfo()->willReturn(rawurlencode($pathInfo));
+
+        $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
+        $redirectRoute->getId()->willReturn($uuid);
+        $redirectRoute->getSource()->willReturn($pathInfo);
         $this->repository->findEnabledBySource($pathInfo)->willReturn($redirectRoute->reveal());
 
         $result = $this->routeProvider->getRouteCollectionForRequest($this->request->reveal());
