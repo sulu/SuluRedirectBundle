@@ -117,6 +117,28 @@ class WriterTest extends \PHPUnit_Framework_TestCase
         $this->redirectRouteManager->save($entities[1]->reveal())->shouldNotBeCalled();
     }
 
+    public function testWriteDuplicatedCaseInSensitive()
+    {
+        $this->setExpectedException(DuplicatedSourceException::class);
+
+        $entities = [
+            $this->prophesize(RedirectRouteInterface::class),
+            $this->prophesize(RedirectRouteInterface::class),
+        ];
+
+        $entities[0]->getSource()->willReturn('/source');
+        $entities[0]->getTarget()->willReturn('/target');
+
+        $entities[1]->getSource()->willReturn('/Source');
+        $entities[1]->getTarget()->willReturn('/target');
+
+        $this->writer->write($entities[0]->reveal());
+        $this->writer->write($entities[1]->reveal());
+
+        $this->redirectRouteManager->save($entities[0]->reveal())->shouldBeCalled();
+        $this->redirectRouteManager->save($entities[1]->reveal())->shouldNotBeCalled();
+    }
+
     public function testWriteAlreadyExisting()
     {
         $this->setExpectedException(DuplicatedSourceException::class);

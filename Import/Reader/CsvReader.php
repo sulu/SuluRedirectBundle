@@ -23,6 +23,8 @@ class CsvReader implements ReaderInterface
      */
     public function read($fileName)
     {
+        ini_set('auto_detect_line_endings', true); // For mac's office excel csv
+
         $csv = new SplFileObject($fileName);
         $csv->setCsvControl();
         $csv->setFlags(SplFileObject::READ_CSV);
