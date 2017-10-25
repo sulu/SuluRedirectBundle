@@ -57,7 +57,7 @@ class Writer implements WriterInterface
     public function write(RedirectRouteInterface $entity)
     {
         $this->validate($entity);
-        $this->sources[] = $entity->getSource();
+        $this->sources[] = strtolower($entity->getSource());
 
         try {
             $this->save($entity);
@@ -116,7 +116,7 @@ class Writer implements WriterInterface
             throw new TargetIsEmptyException($entity);
         }
 
-        if (in_array($entity->getSource(), $this->sources)) {
+        if (in_array(strtolower($entity->getSource()), $this->sources)) {
             throw new DuplicatedSourceException($entity);
         }
     }
