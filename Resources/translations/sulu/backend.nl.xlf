@@ -60,7 +60,7 @@
             </trans-unit>
             <trans-unit id="11">
                 <source>sulu_redirect.import.success</source>
-                <target>%(total)s Redirects succesvol geimporteerd imported.</target>
+                <target>%(total)s Redirects succesvol geimporteerd.</target>
             </trans-unit>
             <trans-unit id="12">
                 <source>sulu_redirect.errors.conflict</source>
