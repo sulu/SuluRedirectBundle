@@ -31,11 +31,11 @@ class CsvReader implements ReaderInterface
 
         $header = null;
         foreach ($csv as $lineNumber => $line) {
-            if (count($line) === 1 && trim($line[0]) === '') {
+            if (1 === count($line) && '' === trim($line[0])) {
                 continue;
             }
 
-            if ($lineNumber == 0) {
+            if (0 == $lineNumber) {
                 $header = $line;
 
                 continue;
@@ -50,7 +50,7 @@ class CsvReader implements ReaderInterface
      */
     public function supports($fileName)
     {
-        return pathinfo($fileName, PATHINFO_EXTENSION) === 'csv';
+        return 'csv' === pathinfo($fileName, PATHINFO_EXTENSION);
     }
 
     /**
