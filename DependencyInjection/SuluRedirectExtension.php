@@ -39,6 +39,7 @@ class SuluRedirectExtension extends Extension implements PrependExtensionInterfa
                     'metadata' => [
                         'directories' => [
                             [
+                                'name' => 'sulu_redirect',
                                 'path' => __DIR__ . '/../Resources/config/serializer',
                                 'namespace_prefix' => 'Sulu\Bundle\RedirectBundle\Entity',
                             ],
