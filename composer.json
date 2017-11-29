@@ -14,6 +14,7 @@
         "doctrine/doctrine-bundle": "^1.4",
         "jackalope/jackalope-doctrine-dbal": "^1.2.5",
         "phpunit/phpunit": "^4.8 || ^5.0",
+        "jms/serializer-bundle": "^1.1 || ^2.0",
 
         "sulu/document-manager": "@dev",
         "massive/search-bundle": "@dev"
