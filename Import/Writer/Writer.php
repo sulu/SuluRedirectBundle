@@ -97,7 +97,7 @@ class Writer implements WriterInterface
     {
         $this->manager->save($entity);
 
-        if (count($this->sources) % $this->batchSize === 0) {
+        if (0 === count($this->sources) % $this->batchSize) {
             $this->entityManager->flush();
         }
     }
@@ -112,7 +112,7 @@ class Writer implements WriterInterface
      */
     private function validate(RedirectRouteInterface $entity)
     {
-        if ($entity->getTarget() === '') {
+        if ('' === $entity->getTarget()) {
             throw new TargetIsEmptyException($entity);
         }
 
