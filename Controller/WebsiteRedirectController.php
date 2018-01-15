@@ -39,7 +39,7 @@ class WebsiteRedirectController
 
         $url = [
             $redirectRoute->getTarget(),
-            false === strpos($redirectRoute->getTarget(), '?') ? '?' : '&',
+            strpos($redirectRoute->getTarget(), '?') === false ? '?' : '&',
             $queryString,
         ];
 
