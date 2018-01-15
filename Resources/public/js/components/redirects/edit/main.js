@@ -24,7 +24,8 @@ define([
                 enable: 'sulu_redirect.enable',
                 disable: 'sulu_redirect.disable',
                 status301: 'sulu_redirect.status-code.301',
-                status302: 'sulu_redirect.status-code.302'
+                status302: 'sulu_redirect.status-code.302',
+                status410: 'sulu_redirect.status-code.410'
             }
         },
 
@@ -70,6 +71,10 @@ define([
                                     {
                                         id: 302,
                                         title: this.translations.status302
+                                    },
+                                    {
+                                        id: 410,
+                                        title: this.translations.status410
                                     }
                                 ],
                                 dropdownOptions: {
@@ -134,6 +139,11 @@ define([
         changeStatusCode: function(statusCode) {
             this.data.statusCode = statusCode;
             this.enableSave();
+
+            this.sandbox.emit(
+                'sulu_redirect.statusCode.changed',
+                this.data
+            );
         },
 
         saveTab: function() {

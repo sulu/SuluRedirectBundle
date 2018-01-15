@@ -14,6 +14,7 @@ namespace Sulu\Bundle\RedirectBundle\Controller;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Handles redirects.
@@ -30,11 +31,15 @@ class WebsiteRedirectController
      */
     public function redirect(Request $request, RedirectRouteInterface $redirectRoute)
     {
+        if (410 === $redirectRoute->getStatusCode()) {
+            throw new HttpException(410);
+        }
+
         $queryString = http_build_query($request->query->all());
 
         $url = [
             $redirectRoute->getTarget(),
-            false === strpos($redirectRoute->getTarget(), '?') ? '?' : '&',
+            strpos($redirectRoute->getTarget(), '?') === false ? '?' : '&',
             $queryString,
         ];
 

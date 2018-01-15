@@ -47,7 +47,7 @@ define([
         },
 
         render: function() {
-            this.$el.html(this.templates.form({translations: this.translations}));
+            this.$el.html(this.templates.form({translations: this.translations, data: this.data}));
 
             this.form = this.sandbox.form.create(constants.formSelector);
             this.form.initialized.then(function() {
@@ -63,6 +63,7 @@ define([
 
         bindCustomEvents: function() {
             this.sandbox.on('sulu.tab.save', this.save.bind(this));
+            this.sandbox.on('sulu_redirect.statusCode.changed', this.statusCodeChanged.bind(this));
         },
 
         save: function(data) {
@@ -88,6 +89,11 @@ define([
 
                 this.sandbox.emit('sulu.tab.dirty');
             }.bind(this));
+        },
+
+        statusCodeChanged: function(data) {
+            this.data = this.sandbox.util.extend(false, {}, data, this.sandbox.form.getData(constants.formSelector));
+            this.render();
         },
 
         loadComponentData: function() {

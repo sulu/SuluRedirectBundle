@@ -38,6 +38,10 @@
                 <source>sulu_redirect.status-code.302</source>
                 <target>302: Moved Temporarily</target>
             </trans-unit>
+            <trans-unit id="5c">
+                <source>sulu_redirect.status-code.410</source>
+                <target>410: Gone</target>
+            </trans-unit>
             <trans-unit id="6">
                 <source>sulu_redirect.import</source>
                 <target>Import</target>
