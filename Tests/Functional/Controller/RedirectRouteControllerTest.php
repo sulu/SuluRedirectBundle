@@ -22,6 +22,11 @@ class RedirectRouteControllerTest extends SuluTestCase
      */
     private $defaultData;
 
+    /**
+     * @var array
+     */
+    private $status410Data;
+
     protected function setUp()
     {
         parent::setUp();
@@ -29,6 +34,7 @@ class RedirectRouteControllerTest extends SuluTestCase
         $this->purgeDatabase();
 
         $this->defaultData = ['source' => '/test1', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301];
+        $this->status410Data = ['source' => '/test410', 'enabled' => true, 'statusCode' => 410];
     }
 
     public function testPost()
@@ -39,6 +45,18 @@ class RedirectRouteControllerTest extends SuluTestCase
         $result = json_decode($response->getContent(), true);
 
         foreach ($this->defaultData as $key => $value) {
+            $this->assertEquals($value, $result[$key]);
+        }
+    }
+
+    public function testPost410()
+    {
+        $response = $this->post($this->status410Data);
+
+        $this->assertHttpStatusCode(200, $response);
+        $result = json_decode($response->getContent(), true);
+
+        foreach ($this->status410Data as $key => $value) {
             $this->assertEquals($value, $result[$key]);
         }
     }

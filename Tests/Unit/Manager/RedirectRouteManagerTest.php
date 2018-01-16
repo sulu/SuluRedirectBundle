@@ -40,8 +40,22 @@ class RedirectRouteManagerTest extends \PHPUnit_Framework_TestCase
     {
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getSource()->willReturn('/test');
+        $redirectRoute->getStatusCode()->willReturn(301);
 
         $this->repository->findBySource('/test')->willReturn(null);
+        $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
+
+        $this->manager->save($redirectRoute->reveal());
+    }
+
+    public function testSave410()
+    {
+        $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
+        $redirectRoute->getSource()->willReturn('/test410');
+        $redirectRoute->getStatusCode()->willReturn(410);
+        $redirectRoute->setTarget('')->shouldBeCalled();
+
+        $this->repository->findBySource('/test410')->willReturn(null);
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
         $this->manager->save($redirectRoute->reveal());
@@ -73,6 +87,7 @@ class RedirectRouteManagerTest extends \PHPUnit_Framework_TestCase
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getId()->willReturn('123-123-123');
         $redirectRoute->getSource()->willReturn('/test');
+        $redirectRoute->getStatusCode()->willReturn(301);
 
         $this->repository->findBySource('/test')->willReturn($otherRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
