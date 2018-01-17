@@ -42,6 +42,10 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
             throw new RedirectRouteNotUniqueException($redirectRoute->getSource());
         }
 
+        if (410 === $redirectRoute->getStatusCode()) {
+            $redirectRoute->setTarget('');
+        }
+
         $this->redirectRouteRepository->persist($redirectRoute);
 
         return $redirectRoute;

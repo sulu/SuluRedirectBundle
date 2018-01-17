@@ -21,8 +21,11 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 class Converter implements ConverterInterface
 {
     const SOURCE = 'source';
+
     const TARGET = 'target';
+
     const STATUS_CODE = 'statusCode';
+
     const ENABLED = 'enabled';
 
     /**
