@@ -30,14 +30,6 @@ class GoneEntitySubscriber implements EventSubscriber, ContainerAwareInterface
     use ContainerAwareTrait;
 
     /**
-     * @return RedirectRouteManager
-     */
-    public function getRedirectRouteManager()
-    {
-        return $this->container->get('sulu_redirect.redirect_route_manager');
-    }
-
-    /**
      * @return RouteRepositoryInterface
      */
     public function getRouteRepository()
@@ -73,5 +65,13 @@ class GoneEntitySubscriber implements EventSubscriber, ContainerAwareInterface
         } catch (RedirectRouteNotUniqueException $exception) {
             // do nothing when there already exists a redirect route
         }
+    }
+
+    /**
+     * @return RedirectRouteManager
+     */
+    private function getRedirectRouteManager()
+    {
+        return $this->container->get('sulu_redirect.redirect_route_manager');
     }
 }

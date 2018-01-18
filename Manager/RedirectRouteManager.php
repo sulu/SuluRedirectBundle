@@ -40,7 +40,7 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
     {
         $otherRoute = $this->redirectRouteRepository->findBySource($redirectRoute->getSource());
 
-        if (!$redirectRoute) {
+        if (!$redirectRoute->getId()) {
             $redirectRoute->setId(Uuid::uuid4()->toString());
         }
 

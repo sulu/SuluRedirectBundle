@@ -128,7 +128,13 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
         $webspaceKey = $this->documentInspector->getWebspace($document);
         $resourceLocatorStrategy = $this->resourceLocatorStrategyPool->getStrategyByWebspaceKey($webspaceKey);
 
-        foreach ($this->webspaceManager->findWebspaceByKey($webspaceKey)->getAllLocalizations() as $localization) {
+        $webspace = $this->webspaceManager->findWebspaceByKey($webspaceKey);
+
+        if (!$webspace) {
+            return $urls;
+        }
+
+        foreach ($webspace->getAllLocalizations() as $localization) {
             $urls = array_merge(
                 $this->webspaceManager->findUrlsByResourceLocator(
                     $document->getResourceSegment(),

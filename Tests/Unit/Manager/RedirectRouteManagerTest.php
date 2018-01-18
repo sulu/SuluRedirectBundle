@@ -11,6 +11,7 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Manager;
 
+use Prophecy\Argument;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
@@ -41,6 +42,8 @@ class RedirectRouteManagerTest extends \PHPUnit_Framework_TestCase
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getSource()->willReturn('/test');
         $redirectRoute->getStatusCode()->willReturn(301);
+        $redirectRoute->getId()->willReturn(null);
+        $redirectRoute->setId(Argument::any())->shouldBeCalled();
 
         $this->repository->findBySource('/test')->willReturn(null);
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
@@ -54,6 +57,8 @@ class RedirectRouteManagerTest extends \PHPUnit_Framework_TestCase
         $redirectRoute->getSource()->willReturn('/test410');
         $redirectRoute->getStatusCode()->willReturn(410);
         $redirectRoute->setTarget('')->shouldBeCalled();
+        $redirectRoute->getId()->willReturn(null);
+        $redirectRoute->setId(Argument::any())->shouldBeCalled();
 
         $this->repository->findBySource('/test410')->willReturn(null);
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
