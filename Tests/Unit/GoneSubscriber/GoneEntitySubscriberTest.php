@@ -11,24 +11,12 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\GoneSubscriber;
 
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Prophecy\Argument;
-use Sulu\Bundle\ContentBundle\Document\BasePageDocument;
-use Sulu\Bundle\DocumentManagerBundle\Bridge\DocumentInspector;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
-use Sulu\Bundle\RedirectBundle\GoneSubscriber\GoneDocumentSubscriber;
 use Sulu\Bundle\RedirectBundle\GoneSubscriber\GoneEntitySubscriber;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
 use Sulu\Bundle\RouteBundle\Model\RouteInterface;
-use Sulu\Component\Content\Types\ResourceLocator\ResourceLocatorInformation;
-use Sulu\Component\Content\Types\ResourceLocator\Strategy\ResourceLocatorStrategyInterface;
-use Sulu\Component\Content\Types\ResourceLocator\Strategy\ResourceLocatorStrategyPool;
-use Sulu\Component\DocumentManager\Event\RemoveEvent;
-use Sulu\Component\Localization\Localization;
-use Sulu\Component\Webspace\Manager\WebspaceManager;
-use Sulu\Component\Webspace\Webspace;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class GoneEntitySubscriberTest extends \PHPUnit_Framework_TestCase
