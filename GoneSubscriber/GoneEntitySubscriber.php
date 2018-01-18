@@ -51,7 +51,7 @@ class GoneEntitySubscriber implements EventSubscriber, ContainerAwareInterface
     public function getSubscribedEvents()
     {
         return [
-            Events::preRemove
+            Events::preRemove,
         ];
     }
 

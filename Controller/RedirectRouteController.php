@@ -13,7 +13,6 @@ namespace Sulu\Bundle\RedirectBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Routing\ClassResourceInterface;
-use Ramsey\Uuid\Uuid;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;

@@ -74,7 +74,8 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
         WebspaceManagerInterface $webspaceManager,
         ResourceLocatorStrategyPoolInterface $resourceLocatorStrategyPool,
         $environment
-    ) {
+    )
+    {
         $this->entityManager = $entityManager;
         $this->redirectRouteManager = $redirectRouteManager;
         $this->documentInspector = $documentInspector;
@@ -118,7 +119,7 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param BasePageDocument $docum   ent
+     * @param BasePageDocument $docum ent
      *
      * @return array
      */
@@ -169,7 +170,8 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
         $uuid,
         $webspaceKey,
         $locale
-    ) {
+    )
+    {
         $historyUrls = [];
         foreach ($resourceLocatorStrategy->loadHistoryByContentUuid($uuid, $webspaceKey, $locale) as $history) {
             $historyUrls = array_merge(
