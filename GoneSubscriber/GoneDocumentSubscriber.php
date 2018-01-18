@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Sulu\Bundle\RedirectBundle\Subscriber;
+namespace Sulu\Bundle\RedirectBundle\GoneSubscriber;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Ramsey\Uuid\Uuid;
@@ -25,7 +25,10 @@ use Sulu\Component\DocumentManager\Events;
 use Sulu\Component\Webspace\Manager\WebspaceManagerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class DocumentSubscriber implements EventSubscriberInterface
+/**
+ * This gone subscriber listens for removed pages.
+ */
+class GoneDocumentSubscriber implements EventSubscriberInterface
 {
     /**
      * @var EntityManagerInterface
@@ -55,22 +58,30 @@ class DocumentSubscriber implements EventSubscriberInterface
     /**
      * @var string
      */
-    protected $env;
+    protected $environment;
 
+    /**
+     * @param EntityManagerInterface $entityManager
+     * @param RedirectRouteManager $redirectRouteManager
+     * @param DocumentInspector $documentInspector
+     * @param WebspaceManagerInterface $webspaceManager
+     * @param ResourceLocatorStrategyPoolInterface $resourceLocatorStrategyPool
+     * @param string $environment
+     */
     public function __construct(
         EntityManagerInterface $entityManager,
         RedirectRouteManager $redirectRouteManager,
         DocumentInspector $documentInspector,
         WebspaceManagerInterface $webspaceManager,
         ResourceLocatorStrategyPoolInterface $resourceLocatorStrategyPool,
-        $env
+        $environment
     ) {
         $this->entityManager = $entityManager;
         $this->redirectRouteManager = $redirectRouteManager;
         $this->documentInspector = $documentInspector;
         $this->webspaceManager = $webspaceManager;
         $this->resourceLocatorStrategyPool = $resourceLocatorStrategyPool;
-        $this->env = $env;
+        $this->environment = $environment;
     }
 
     /**
@@ -80,13 +91,9 @@ class DocumentSubscriber implements EventSubscriberInterface
     {
         return [
             Events::REMOVE => ['createRedirects', 2048],
-
         ];
     }
 
-    /**
-     * @param RemoveEvent $event
-     */
     public function createRedirects(RemoveEvent $event)
     {
         $document = $event->getDocument();
@@ -113,7 +120,7 @@ class DocumentSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param BasePageDocument $document
+     * @param BasePageDocument $docum   ent
      *
      * @return array
      */
@@ -127,7 +134,7 @@ class DocumentSubscriber implements EventSubscriberInterface
             $urls = array_merge(
                 $this->webspaceManager->findUrlsByResourceLocator(
                     $document->getResourceSegment(),
-                    $this->env,
+                    $this->environment,
                     $localization->getLocale()
                 ),
                 $urls
@@ -170,7 +177,7 @@ class DocumentSubscriber implements EventSubscriberInterface
             $historyUrls = array_merge(
                 $this->webspaceManager->findUrlsByResourceLocator(
                     $history->getResourceLocator(),
-                    $this->env,
+                    $this->environment,
                     $locale
                 ),
                 $historyUrls

@@ -9,10 +9,9 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Sulu\Bundle\RedirectBundle\Subscriber;
+namespace Sulu\Bundle\RedirectBundle\GoneSubscriber;
 
 use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
 use Ramsey\Uuid\Uuid;
@@ -24,7 +23,10 @@ use Sulu\Bundle\RouteBundle\Model\RouteInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
-class EntitySubscriber implements EventSubscriber, ContainerAwareInterface
+/**
+ * This gone subscriber listens for removed route entities.
+ */
+class GoneEntitySubscriber implements EventSubscriber, ContainerAwareInterface
 {
     use ContainerAwareTrait;
 
@@ -45,14 +47,6 @@ class EntitySubscriber implements EventSubscriber, ContainerAwareInterface
     }
 
     /**
-     * @return EntityManagerInterface
-     */
-    public function getEntityManager()
-    {
-        return $this->container->get('doctrine.orm.entity_manager');
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getSubscribedEvents()
@@ -62,9 +56,6 @@ class EntitySubscriber implements EventSubscriber, ContainerAwareInterface
         ];
     }
 
-    /**
-     * @param LifecycleEventArgs $event
-     */
     public function preRemove(LifecycleEventArgs $event)
     {
         $route = $event->getObject();
@@ -84,7 +75,5 @@ class EntitySubscriber implements EventSubscriber, ContainerAwareInterface
         } catch (RedirectRouteNotUniqueException $exception) {
             // do nothing when there already exists a redirect route
         }
-
-        $this->getEntityManager()->flush();
     }
 }

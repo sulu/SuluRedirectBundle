@@ -78,6 +78,6 @@ class SuluRedirectExtension extends Extension implements PrependExtensionInterfa
         $loader->load('services.xml');
         $loader->load('router.xml');
         $loader->load('import.xml');
-        $loader->load('subscriber.xml');
+        $loader->load('gone_subscriber.xml');
     }
 }
