@@ -12,7 +12,6 @@
 namespace Sulu\Bundle\RedirectBundle\GoneSubscriber;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Ramsey\Uuid\Uuid;
 use Sulu\Bundle\ContentBundle\Document\BasePageDocument;
 use Sulu\Bundle\DocumentManagerBundle\Bridge\DocumentInspector;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
@@ -104,7 +103,6 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
 
         foreach ($this->getUrls($document) as $url) {
             $redirectRoute = new RedirectRoute();
-            $redirectRoute->setId(Uuid::uuid4()->toString());
             $redirectRoute->setEnabled(true);
             $redirectRoute->setStatusCode(410);
             $redirectRoute->setSource($url);

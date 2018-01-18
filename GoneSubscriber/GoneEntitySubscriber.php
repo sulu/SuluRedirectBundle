@@ -14,7 +14,6 @@ namespace Sulu\Bundle\RedirectBundle\GoneSubscriber;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
-use Ramsey\Uuid\Uuid;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
@@ -65,7 +64,6 @@ class GoneEntitySubscriber implements EventSubscriber, ContainerAwareInterface
         }
 
         $redirectRoute = new RedirectRoute();
-        $redirectRoute->setId(Uuid::uuid4()->toString());
         $redirectRoute->setEnabled(true);
         $redirectRoute->setStatusCode(410);
         $redirectRoute->setSource($route->getPath());

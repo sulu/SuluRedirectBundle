@@ -89,7 +89,6 @@ class RedirectRouteController extends RestController implements ClassResourceInt
             $this->getParameter('sulu.model.redirect_route.class'),
             'json'
         );
-        $redirectRoute->setId(Uuid::uuid4()->toString());
 
         $this->getRedirectRouteManager()->save($redirectRoute);
         $this->get('doctrine.orm.entity_manager')->flush();
