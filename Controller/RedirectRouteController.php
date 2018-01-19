@@ -13,7 +13,6 @@ namespace Sulu\Bundle\RedirectBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Routing\ClassResourceInterface;
-use Ramsey\Uuid\Uuid;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
@@ -89,7 +88,6 @@ class RedirectRouteController extends RestController implements ClassResourceInt
             $this->getParameter('sulu.model.redirect_route.class'),
             'json'
         );
-        $redirectRoute->setId(Uuid::uuid4()->toString());
 
         $this->getRedirectRouteManager()->save($redirectRoute);
         $this->get('doctrine.orm.entity_manager')->flush();

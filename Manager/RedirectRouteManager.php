@@ -11,6 +11,7 @@
 
 namespace Sulu\Bundle\RedirectBundle\Manager;
 
+use Ramsey\Uuid\Uuid;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 
@@ -38,6 +39,11 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
     public function save(RedirectRouteInterface $redirectRoute)
     {
         $otherRoute = $this->redirectRouteRepository->findBySource($redirectRoute->getSource());
+
+        if (!$redirectRoute->getId()) {
+            $redirectRoute->setId(Uuid::uuid4()->toString());
+        }
+
         if ($otherRoute && $otherRoute->getId() !== $redirectRoute->getId()) {
             throw new RedirectRouteNotUniqueException($redirectRoute->getSource());
         }
