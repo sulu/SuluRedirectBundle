@@ -82,14 +82,15 @@ class GoneDocumentSubscriberTest extends \PHPUnit_Framework_TestCase
     {
         $this->document = $this->prophesize(BasePageDocument::class);
         $this->document->getUuid()->willReturn('123-123-123');
-        $this->document->getResourceSegment()->willReturn('/abc');
 
         $this->entityManager = $this->prophesize(EntityManager::class);
 
         $this->redirectRouteManager = $this->prophesize(RedirectRouteManager::class);
 
         $this->documentInspector = $this->prophesize(DocumentInspector::class);
-        $this->documentInspector->getWebspace($this->document)->willReturn('example');
+        $this->documentInspector->getWebspace($this->document->reveal())->willReturn('example');
+
+        $this->documentInspector->getLocalizedUrlsForPage($this->document->reveal())->willReturn(['de' => '/artikel', 'en' => '/article']);
 
         $this->webspace = $this->prophesize(Webspace::class);
         $this->webspace->getAllLocalizations()->willReturn([
@@ -99,25 +100,21 @@ class GoneDocumentSubscriberTest extends \PHPUnit_Framework_TestCase
 
         $this->webspaceManager = $this->prophesize(WebspaceManager::class);
         $this->webspaceManager->findWebspaceByKey('example')->willReturn($this->webspace->reveal());
-        $this->webspaceManager->findUrlsByResourceLocator('/abc', 'test', 'en')
-            ->willReturn(['http://{host}/en/abc']);
-        $this->webspaceManager->findUrlsByResourceLocator('/abc1', 'test', 'en')
-            ->willReturn(['http://{host}/en/abc1']);
-        $this->webspaceManager->findUrlsByResourceLocator('/abc2', 'test', 'en')
-            ->willReturn(['http://{host}/en/abc2']);
-        $this->webspaceManager->findUrlsByResourceLocator('/abc', 'test', 'de')
-            ->willReturn(['http://{host}/en/abc']);
-        $this->webspaceManager->findUrlsByResourceLocator('/abc1', 'test', 'de')
-            ->willReturn(['http://{host}/en/abc1']);
-        $this->webspaceManager->findUrlsByResourceLocator('/abc2', 'test', 'de')
-            ->willReturn(['http://{host}/en/abc2']);
+        $this->webspaceManager->findUrlsByResourceLocator('/article', 'test', 'en')
+            ->willReturn(['http://{host}/en/article']);
+        $this->webspaceManager->findUrlsByResourceLocator('/article1', 'test', 'en')
+            ->willReturn(['http://{host}/en/article1']);
+        $this->webspaceManager->findUrlsByResourceLocator('/article2', 'test', 'en')
+            ->willReturn(['http://{host}/en/article2']);
+        $this->webspaceManager->findUrlsByResourceLocator('/artikel', 'test', 'de')
+            ->willReturn(['http://{host}/de/artikel']);
 
         $this->resourceLocatorStrategy = $this->prophesize(ResourceLocatorStrategyInterface::class);
         $this->resourceLocatorStrategy->loadHistoryByContentUuid('123-123-123', 'example', 'en')
             ->willReturn(
                 [
-                    new ResourceLocatorInformation('/abc1', new \DateTime(), '1'),
-                    new ResourceLocatorInformation('/abc2', new \DateTime(), '1'),
+                    new ResourceLocatorInformation('/article1', new \DateTime(), '1'),
+                    new ResourceLocatorInformation('/article2', new \DateTime(), '1'),
                 ]
             );
         $this->resourceLocatorStrategy->loadHistoryByContentUuid('123-123-123', 'example', 'de')
