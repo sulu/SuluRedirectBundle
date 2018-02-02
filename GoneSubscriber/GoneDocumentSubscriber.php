@@ -134,10 +134,16 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
             return $urls;
         }
 
+        $localizedUrls = $this->documentInspector->getLocalizedUrlsForPage($document);
+
         foreach ($webspace->getAllLocalizations() as $localization) {
+            if (!array_key_exists($localization->getLocale(), $localizedUrls)) {
+                continue;
+            }
+
             $urls = array_merge(
                 $this->webspaceManager->findUrlsByResourceLocator(
-                    $document->getResourceSegment(),
+                    $localizedUrls[$localization->getLocale()],
                     $this->environment,
                     $localization->getLocale()
                 ),
