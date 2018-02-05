@@ -118,8 +118,6 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param BasePageDocument $docum ent
-     *
      * @return array
      */
     protected function getUrls(BasePageDocument $document)
@@ -165,7 +163,7 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
             $url = parse_url($url, PHP_URL_PATH);
         }
 
-        return $urls;
+        return array_unique($urls);
     }
 
     /**

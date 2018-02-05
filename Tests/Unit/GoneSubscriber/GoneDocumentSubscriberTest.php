@@ -101,7 +101,7 @@ class GoneDocumentSubscriberTest extends \PHPUnit_Framework_TestCase
         $this->webspaceManager = $this->prophesize(WebspaceManager::class);
         $this->webspaceManager->findWebspaceByKey('example')->willReturn($this->webspace->reveal());
         $this->webspaceManager->findUrlsByResourceLocator('/article', 'test', 'en')
-            ->willReturn(['http://{host}/en/article']);
+            ->willReturn(['http://{host}/en/article', 'http://sulu.io/en/article']);
         $this->webspaceManager->findUrlsByResourceLocator('/article1', 'test', 'en')
             ->willReturn(['http://{host}/en/article1']);
         $this->webspaceManager->findUrlsByResourceLocator('/article2', 'test', 'en')
