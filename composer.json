@@ -4,20 +4,17 @@
     "type": "sulu-bundle",
     "license": "MIT",
     "require": {
-        "php": "^5.5 || ^7.0",
-        "sulu/sulu": "^1.5",
+        "php": "^7.1",
+        "sulu/sulu": "^2.0",
         "ramsey/uuid": "^3.5"
     },
     "require-dev": {
-        "zendframework/zendsearch": "2.*@dev",
-        "symfony/monolog-bundle": "^2.8.7 || ^3.0",
-        "doctrine/doctrine-bundle": "^1.4",
-        "jackalope/jackalope-doctrine-dbal": "^1.2.5",
-        "phpunit/phpunit": "^4.8 || ^5.0",
-        "jms/serializer-bundle": "^1.1 || ^2.0",
-
-        "sulu/document-manager": "@dev",
-        "massive/search-bundle": "@dev"
+        "phpunit/phpunit": "~6.5",
+        "symfony/stopwatch": "^3.4",
+        "symfony/browser-kit": "^3.4",
+        "symfony/monolog-bundle": "^3.1",
+        "jackalope/jackalope-doctrine-dbal": "~1.2",
+        "zendframework/zendsearch": "2.*@RC"
     },
     "keywords": [
         "redirects"
@@ -32,6 +29,12 @@
     "autoload": {
         "psr-4": {
             "Sulu\\Bundle\\RedirectBundle\\": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "2.0-dev"
         }
     }
 }
