@@ -113,7 +113,7 @@ class Writer implements WriterInterface
      */
     private function validate(RedirectRouteInterface $entity)
     {
-        if ('' === $entity->getTarget() && Response::HTTP_GONE !== $entity->getStatusCode()) {
+        if ('' === $entity->getTarget() && Response::HTTP_GONE !== (int)$entity->getStatusCode()) {
             throw new TargetIsEmptyException($entity);
         }
 
