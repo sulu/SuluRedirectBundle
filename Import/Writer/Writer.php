@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Write redirect-route entity to database by using the entity-manager.
@@ -112,7 +113,7 @@ class Writer implements WriterInterface
      */
     private function validate(RedirectRouteInterface $entity)
     {
-        if ('' === $entity->getTarget()) {
+        if ('' === $entity->getTarget() && Response::HTTP_GONE !== $entity->getStatusCode()) {
             throw new TargetIsEmptyException($entity);
         }
 
