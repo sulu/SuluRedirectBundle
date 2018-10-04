@@ -49,6 +49,10 @@ php bin/console doctrine:schema:update
 
 ```yml
 sulu_redirect:
+
+    # When enabled, this feature automatically creates redirects with http status code 410 when a document with route or an route entity is removed.
+    gone_on_remove:
+        enabled:              true
     imports:
         path:                 '%kernel.root_dir%/../var/uploads/redirects'
     objects:
