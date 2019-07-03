@@ -30,7 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class RedirectRouteController extends RestController implements ClassResourceInterface
 {
-    const RESULT_KEY = 'redirect-routes';
+    const RESULT_KEY = 'redirect_routes';
 
     /**
      * Returns columns for list.
@@ -54,8 +54,14 @@ class RedirectRouteController extends RestController implements ClassResourceInt
         $restHelper = $this->get('sulu_core.doctrine_rest_helper');
         $factory = $this->get('sulu_core.doctrine_list_builder_factory');
 
-        $listBuilder = $factory->create(RedirectRoute::class);
-        $restHelper->initializeListBuilder($listBuilder, $this->getFieldDescriptors());
+        $tagEntityName = $this->getParameter('sulu.model.redirect_route.class');
+
+
+        $fieldDescriptors = $this->get('sulu_core.list_builder.field_descriptor_factory')
+            ->getFieldDescriptors('redirect_routes');
+        $listBuilder = $factory->create($tagEntityName);
+
+        $restHelper->initializeListBuilder($listBuilder, $fieldDescriptors);
         $results = $listBuilder->execute();
 
         $list = new ListRepresentation(
@@ -207,15 +213,5 @@ class RedirectRouteController extends RestController implements ClassResourceInt
     protected function getRedirectRouteRepository()
     {
         return $this->get('sulu.repository.redirect_route');
-    }
-
-    /**
-     * @return FieldDescriptorInterface[]
-     */
-    private function getFieldDescriptors()
-    {
-        $factory = $this->get('sulu_core.list_builder.field_descriptor_factory');
-
-        return $factory->getFieldDescriptorForClass(RedirectRoute::class);
     }
 }

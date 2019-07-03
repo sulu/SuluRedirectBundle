@@ -5,8 +5,8 @@
     <services>
         <!-- sulu-admin -->
         <service id="sulu_redirect.admin" class="Sulu\Bundle\RedirectBundle\Admin\RedirectAdmin" public="false">
+            <argument type="service" id="Sulu\Bundle\AdminBundle\Admin\Routing\RouteBuilderFactoryInterface"/>
             <argument type="service" id="sulu_security.security_checker"/>
-            <argument>%sulu_admin.name%</argument>
 
             <tag name="sulu.admin"/>
             <tag name="sulu.context" context="admin"/>
@@ -21,7 +21,7 @@
 
         <!-- redirect-route -->
         <service id="sulu_redirect.redirect_route_manager"
-                 class="Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager">
+                 class="Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager" public="true">
             <argument type="service" id="sulu.repository.redirect_route"/>
         </service>
 

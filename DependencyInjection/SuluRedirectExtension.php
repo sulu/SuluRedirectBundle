@@ -61,6 +61,32 @@ class SuluRedirectExtension extends Extension implements PrependExtensionInterfa
                 ]
             );
         }
+
+        if ($container->hasExtension('sulu_admin')) {
+            $container->prependExtensionConfig(
+                'sulu_admin',
+                [
+                    'lists' => [
+                        'directories' => [
+                            __DIR__ . '/../Resources/config/lists',
+                        ],
+                    ],
+                    'forms' => [
+                        'directories' => [
+                            __DIR__ . '/../Resources/config/forms',
+                        ],
+                    ],
+                    'resources' => [
+                        'redirect_routes' => [
+                            'routes' => [
+                                'list' => 'get_redirect-routes',
+                                'detail' => 'get_redirect-route',
+                            ],
+                        ],
+                    ]
+                ]
+            );
+        }
     }
 
     /**
