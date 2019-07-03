@@ -36,4 +36,15 @@ interface RedirectRouteManagerInterface
      * @param RedirectRouteInterface $redirectRoute
      */
     public function delete(RedirectRouteInterface $redirectRoute);
+
+    /**
+     * Save given redirect-route.
+     *
+     * @param RedirectRouteInterface $redirectRoute
+     *
+     * @return RedirectRouteInterface
+     *
+     * @throws RedirectRouteNotUniqueException
+     */
+    public function saveEntity(RedirectRouteInterface $redirectRoute);
 }

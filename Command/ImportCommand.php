@@ -11,7 +11,8 @@
 
 namespace Sulu\Bundle\RedirectBundle\Command;
 
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Sulu\Bundle\RedirectBundle\Import\FileImport;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,15 +21,27 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * Import an existing redirect file.
  */
-class ImportCommand extends ContainerAwareCommand
+class ImportCommand extends Command
 {
+    /** @var FileImport */
+    private $import;
+
+    /**
+     * ImportCommand constructor.
+     * @param FileImport $import
+     */
+    public function __construct(FileImport $import)
+    {
+        parent::__construct('sulu:redirects:import');
+        $this->import = $import;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function configure()
     {
-        $this->setName('sulu.redirects.import')
-            ->addArgument('fileName', InputArgument::REQUIRED)
+        $this->addArgument('fileName', InputArgument::REQUIRED)
             ->setDescription('Read a file and import content to redirect-system.')
             ->setHelp(
                 <<<'EOT'
@@ -47,10 +60,9 @@ EOT
 
         $output->writeln(sprintf('Import of file "%s" will be started:', basename($input->getArgument('fileName'))));
 
-        $import = $this->getContainer()->get('sulu_redirect.import');
 
         $errors = [];
-        foreach ($import->import($input->getArgument('fileName')) as $item) {
+        foreach ($this->import->import($input->getArgument('fileName')) as $item) {
             $progressBar->advance();
 
             if ($item->getException()) {

@@ -95,7 +95,7 @@ class Writer implements WriterInterface
      */
     private function save(RedirectRouteInterface $entity)
     {
-        $this->manager->save($entity);
+        $this->manager->saveEntity($entity);
 
         if (0 === count($this->sources) % $this->batchSize) {
             $this->entityManager->flush();
