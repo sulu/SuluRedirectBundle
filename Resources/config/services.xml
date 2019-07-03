@@ -12,13 +12,6 @@
             <tag name="sulu.context" context="admin"/>
         </service>
 
-        <!-- content navigation -->
-        <service id="sulu_redirect.content_navigation"
-                 class="Sulu\Bundle\RedirectBundle\Admin\RedirectRoutesNavigationProvider">
-            <tag name="sulu_admin.content_navigation" alias="redirect-routes"/>
-            <tag name="sulu.context" context="admin"/>
-        </service>
-
         <!-- redirect-route -->
         <service id="sulu_redirect.redirect_route_manager"
                  class="Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager" public="true">

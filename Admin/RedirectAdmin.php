@@ -94,7 +94,7 @@ class RedirectAdmin extends Admin
         ];
 
         return [
-            $this->routeBuilderFactory->createListRouteBuilder(static::LIST_ROUTE, '/redirects')
+            $this->routeBuilderFactory->createListRouteBuilder(static::LIST_ROUTE, '/redirect_routes')
                 ->setResourceKey('redirect_routes')
                 ->setListKey('redirect_routes')
                 ->setTitle('sulu_redirect.redirects')
@@ -103,6 +103,30 @@ class RedirectAdmin extends Admin
                 ->setEditRoute(static::EDIT_FORM_ROUTE)
                 ->enableSearching()
                 ->addToolbarActions($listToolbarActions)
+                ->getRoute(),
+            $this->routeBuilderFactory->createResourceTabRouteBuilder(static::ADD_FORM_ROUTE, '/redirect_routes/add')
+                ->setResourceKey('redirect_routes')
+                ->setBackRoute(static::LIST_ROUTE)
+                ->getRoute(),
+            $this->routeBuilderFactory->createFormRouteBuilder('sulu_redirects.add_form.details', '/details')
+                ->setResourceKey('redirect_routes')
+                ->setFormKey('redirect_route_details')
+                ->setTabTitle('sulu_admin.details')
+                ->setEditRoute(static::EDIT_FORM_ROUTE)
+                ->addToolbarActions($formToolbarActions)
+                ->setParent(static::ADD_FORM_ROUTE)
+                ->getRoute(),
+            $this->routeBuilderFactory->createResourceTabRouteBuilder(static::EDIT_FORM_ROUTE, '/redirect_routes/:id')
+                ->setResourceKey('redirect_routes')
+                ->setBackRoute(static::LIST_ROUTE)
+                ->setTitleProperty('name')
+                ->getRoute(),
+            $this->routeBuilderFactory->createFormRouteBuilder('sulu_redirects.edit_form.details', '/details')
+                ->setResourceKey('redirect_routes')
+                ->setFormKey('redirect_route_details')
+                ->setTabTitle('sulu_admin.details')
+                ->addToolbarActions($formToolbarActions)
+                ->setParent(static::EDIT_FORM_ROUTE)
                 ->getRoute(),
         ];
     }
