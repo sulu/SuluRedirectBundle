@@ -11,6 +11,7 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Controller;
 
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Sulu\Bundle\RedirectBundle\Controller\RedirectRouteImportController;
 use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterNotFoundException;
@@ -25,7 +26,7 @@ use Symfony\Component\HttpFoundation\FileBag;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
+class RedirectRouteImportControllerTest extends TestCase
 {
     /**
      * @var string
@@ -46,15 +47,13 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $fileBag = $this->prophesize(FileBag::class);
         $request->reveal()->files = $fileBag->reveal();
 
-        $file = $this->prophesize(File::class);
-        $file->getFilename()->willReturn($this->fileName);
-        $file->getRealPath()->willReturn($importFile);
+        $file = new File($fileName = __DIR__ . '/import.csv');
 
         $uploadedFile = $this->getMockBuilder(UploadedFile::class)
             ->setConstructorArgs([$importFile, $this->fileName, null, null, UPLOAD_ERR_NO_FILE])
             ->getMock();
         $uploadedFile->method('getClientOriginalName')->willReturn($this->fileName);
-        $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file->reveal());
+        $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file);
         $fileBag->has('redirectRoutes')->willReturn(true);
         $fileBag->get('redirectRoutes')->willReturn($uploadedFile);
 
@@ -65,7 +64,7 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         ];
 
         $import = $this->prophesize(FileImportInterface::class);
-        $import->import($importFile)->willReturn($items);
+        $import->import($file->getRealPath())->willReturn($items);
 
         $controller = new RedirectRouteImportController($import->reveal(), $this->importPath);
         $response = $controller->importAction($request->reveal(), $this->importPath);
@@ -90,21 +89,19 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $fileBag = $this->prophesize(FileBag::class);
         $request->reveal()->files = $fileBag->reveal();
 
-        $file = $this->prophesize(File::class);
-        $file->getFilename()->willReturn($this->fileName);
-        $file->getRealPath()->willReturn($importFile);
+        $file = new File($fileName = __DIR__ . '/import.csv');
 
         $uploadedFile = $this->getMockBuilder(UploadedFile::class)
             ->setConstructorArgs([$importFile, $this->fileName, null, null, UPLOAD_ERR_NO_FILE])
             ->getMock();
 
         $uploadedFile->method('getClientOriginalName')->willReturn($this->fileName);
-        $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file->reveal());
+        $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file);
         $fileBag->has('redirectRoutes')->willReturn(true);
         $fileBag->get('redirectRoutes')->willReturn($uploadedFile);
 
         $import = $this->prophesize(FileImportInterface::class);
-        $import->import($importFile)->willThrow(ReaderNotFoundException::class);
+        $import->import($file->getRealPath())->willThrow(ReaderNotFoundException::class);
 
         $controller = new RedirectRouteImportController($import->reveal(), $this->importPath);
         $response = $controller->importAction($request->reveal(), $this->importPath);
@@ -121,20 +118,18 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $fileBag = $this->prophesize(FileBag::class);
         $request->reveal()->files = $fileBag->reveal();
 
-        $file = $this->prophesize(File::class);
-        $file->getFilename()->willReturn($this->fileName);
-        $file->getRealPath()->willReturn($importFile);
+        $file = new File($fileName = __DIR__ . '/import.csv');
 
         $uploadedFile = $this->getMockBuilder(UploadedFile::class)
             ->setConstructorArgs([$importFile, $this->fileName, null, null, UPLOAD_ERR_NO_FILE])
             ->getMock();
         $uploadedFile->method('getClientOriginalName')->willReturn($this->fileName);
-        $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file->reveal());
+        $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file);
         $fileBag->has('redirectRoutes')->willReturn(true);
         $fileBag->get('redirectRoutes')->willReturn($uploadedFile);
 
         $import = $this->prophesize(FileImportInterface::class);
-        $import->import($importFile)->willThrow(ConverterNotFoundException::class);
+        $import->import($file->getRealPath())->willThrow(ConverterNotFoundException::class);
 
         $controller = new RedirectRouteImportController($import->reveal(), $this->importPath);
         $response = $controller->importAction($request->reveal(), $this->importPath);

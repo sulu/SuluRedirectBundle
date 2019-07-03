@@ -9,6 +9,8 @@
  * with this source code in the file LICENSE.
  */
 
+namespace Sulu\Bundle\RedirectBundle\Tests\Application;
+
 use Sulu\Bundle\RedirectBundle\SuluRedirectBundle;
 use Sulu\Bundle\TestBundle\Kernel\SuluTestKernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
@@ -16,7 +18,7 @@ use Symfony\Component\Config\Loader\LoaderInterface;
 /**
  * AppKernel for functional tests.
  */
-class AppKernel extends SuluTestKernel
+class Kernel extends SuluTestKernel
 {
     /**
      * {@inheritdoc}

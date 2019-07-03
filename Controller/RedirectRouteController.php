@@ -88,14 +88,7 @@ class RedirectRouteController extends RestController implements ClassResourceInt
     {
         $data = $request->request->all();
 
-        $serializer = $this->get('serializer');
-        $redirectRoute = $serializer->deserialize(
-            json_encode($data),
-            $this->getParameter('sulu.model.redirect_route.class'),
-            'json'
-        );
-
-        $this->getRedirectRouteManager()->save($redirectRoute);
+        $redirectRoute= $this->getRedirectRouteManager()->save($data);
         $this->get('doctrine.orm.entity_manager')->flush();
 
         return $this->handleView($this->view($redirectRoute));
@@ -131,16 +124,8 @@ class RedirectRouteController extends RestController implements ClassResourceInt
     public function putAction($id, Request $request)
     {
         $data = $request->request->all();
-        $data['id'] = $id;
 
-        $serializer = $this->get('serializer');
-        $redirectRoute = $serializer->deserialize(
-            json_encode($data),
-            $this->getParameter('sulu.model.redirect_route.class'),
-            'json'
-        );
-
-        $this->getRedirectRouteManager()->save($redirectRoute);
+        $redirectRoute = $this->getRedirectRouteManager()->save($data, $id);
         $this->get('doctrine.orm.entity_manager')->flush();
 
         return $this->handleView($this->view($redirectRoute));

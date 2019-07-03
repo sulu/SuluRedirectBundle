@@ -24,7 +24,7 @@
             </params>
         </property>
 
-        <property name="enabled" type="checkbox"  mandatory="true">
+        <property name="enabled" type="checkbox">
             <meta>
                 <title>sulu_redirect.enabled</title>
             </meta>

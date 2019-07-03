@@ -11,13 +11,14 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Controller;
 
+use PHPUnit\Framework\TestCase;
 use Sulu\Bundle\RedirectBundle\Controller\WebsiteRedirectController;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-class RedirectControllerTest extends \PHPUnit_Framework_TestCase
+class RedirectControllerTest extends TestCase
 {
     /**
      * @var WebsiteRedirectController

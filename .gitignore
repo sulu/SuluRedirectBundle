@@ -30,3 +30,6 @@ npm-debug.log
 Tests/app/cache
 Tests/app/logs
 Tests/app/data
+Tests/Application/cache
+Tests/Application/logs
+Tests/Application/data

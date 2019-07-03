@@ -12,11 +12,11 @@
 namespace Sulu\Bundle\RedirectBundle\GoneSubscriber;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sulu\Bundle\ContentBundle\Document\BasePageDocument;
+use Sulu\Bundle\PageBundle\Document\BasePageDocument;
 use Sulu\Bundle\DocumentManagerBundle\Bridge\DocumentInspector;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
-use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
+use Sulu\Bundle\RedirectBundle\Manager\Exception\RedirectRouteNotUniqueException;
 use Sulu\Component\Content\Types\ResourceLocator\Strategy\ResourceLocatorStrategyInterface;
 use Sulu\Component\Content\Types\ResourceLocator\Strategy\ResourceLocatorStrategyPoolInterface;
 use Sulu\Component\DocumentManager\Event\RemoveEvent;
@@ -102,13 +102,8 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
         }
 
         foreach ($this->getUrls($document) as $url) {
-            $redirectRoute = new RedirectRoute();
-            $redirectRoute->setEnabled(true);
-            $redirectRoute->setStatusCode(410);
-            $redirectRoute->setSource($url);
-
             try {
-                $this->redirectRouteManager->save($redirectRoute);
+                $this->redirectRouteManager->save(['source' => $url, 'statusCode' => 410, 'enabled' => true, 'target' => '']);
             } catch (RedirectRouteNotUniqueException $exception) {
                 // do nothing when there already exists a redirect route
             }

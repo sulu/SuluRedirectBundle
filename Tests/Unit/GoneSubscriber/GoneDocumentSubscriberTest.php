@@ -12,8 +12,9 @@
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\GoneSubscriber;
 
 use Doctrine\ORM\EntityManager;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
-use Sulu\Bundle\ContentBundle\Document\BasePageDocument;
+use Sulu\Bundle\PageBundle\Document\BasePageDocument;
 use Sulu\Bundle\DocumentManagerBundle\Bridge\DocumentInspector;
 use Sulu\Bundle\RedirectBundle\GoneSubscriber\GoneDocumentSubscriber;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
@@ -26,7 +27,7 @@ use Sulu\Component\Localization\Localization;
 use Sulu\Component\Webspace\Manager\WebspaceManager;
 use Sulu\Component\Webspace\Webspace;
 
-class GoneDocumentSubscriberTest extends \PHPUnit_Framework_TestCase
+class GoneDocumentSubscriberTest extends TestCase
 {
     /**
      * @var GoneDocumentSubscriber

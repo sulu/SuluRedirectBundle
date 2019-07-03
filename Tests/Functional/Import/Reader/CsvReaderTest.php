@@ -11,9 +11,10 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Functional\Import\Reader;
 
+use PHPUnit\Framework\TestCase;
 use Sulu\Bundle\RedirectBundle\Import\Reader\CsvReader;
 
-class CsvReaderTest extends \PHPUnit_Framework_TestCase
+class CsvReaderTest extends TestCase
 {
     public function testSupports()
     {

@@ -11,10 +11,10 @@ cache:
 
 matrix:
   include:
-    - php: 5.5
+    - php: 7.1
       env:
         - COMPOSER_FLAGS="--prefer-lowest --prefer-dist --no-interaction"
-    - php: 7.0
+    - php: 7.3
       env:
         - COMPOSER_FLAGS="--prefer-dist --no-interaction"
         - CODE_COVERAGE="--coverage-clover=coverage.clover"
@@ -27,8 +27,8 @@ install:
   - phpenv config-add Tests/travis.php.ini
   - travis_retry composer update $COMPOSER_FLAGS
   - composer info -i
-  - ./Tests/app/console doctrine:database:create
-  - ./Tests/app/console doctrine:schema:create
+  - ./Tests/Application/console doctrine:database:create
+  - ./Tests/Application/console doctrine:schema:create
 
 script:
   - ./vendor/bin/phpunit $CODE_COVERAGE

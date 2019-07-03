@@ -21,13 +21,14 @@ interface RedirectRouteManagerInterface
     /**
      * Save given redirect-route.
      *
-     * @param RedirectRouteInterface $redirectRoute
+     * @param array $data The data of the tag to save
+     * @param number|null $id The id for saving the tag (optional)
      *
      * @return RedirectRouteInterface
      *
      * @throws RedirectRouteNotUniqueException
      */
-    public function save(RedirectRouteInterface $redirectRoute);
+    public function save($data, $id = null);
 
     /**
      * Delete given redirect-route.
