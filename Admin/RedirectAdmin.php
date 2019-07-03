@@ -96,7 +96,7 @@ class RedirectAdmin extends Admin
             $this->routeBuilderFactory->createListRouteBuilder(static::LIST_ROUTE, '/redirect_routes')
                 ->setResourceKey('redirect_routes')
                 ->setListKey('redirect_routes')
-                ->setTitle('sulu_redirect.redirects')
+                ->setTitle('sulu_redirect.title')
                 ->addListAdapters(['table'])
                 ->setAddRoute(static::ADD_FORM_ROUTE)
                 ->setEditRoute(static::EDIT_FORM_ROUTE)
