@@ -18,6 +18,7 @@ matrix:
       env:
         - COMPOSER_FLAGS="--prefer-dist --no-interaction"
         - CODE_COVERAGE="--coverage-clover=coverage.clover"
+        - PHPSTAN=true
 
 before_install:
   - if [[ -z $CODE_COVERAGE ]]; then phpenv config-rm xdebug.ini ; fi
@@ -31,6 +32,7 @@ install:
   - ./Tests/Application/console doctrine:schema:create
 
 script:
+  - if [[ $PHPSTAN = true ]]; then ./vendor/bin/phpstan analyze .; fi
   - ./vendor/bin/phpunit $CODE_COVERAGE
 
 after_script:

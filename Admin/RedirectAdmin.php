@@ -55,7 +55,6 @@ class RedirectAdmin extends Admin
 
     public function getNavigation(): Navigation
     {
-
         $rootNavigationItem = $this->getNavigationItemRoot();
 
         $settings = Admin::getNavigationItemSettings();

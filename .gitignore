@@ -33,3 +33,5 @@ Tests/app/data
 Tests/Application/cache
 Tests/Application/logs
 Tests/Application/data
+
+\.php_cs\.cache
