@@ -1,0 +1,20 @@
+{
+  "sulu_redirect.title": "Redirects",
+  "sulu_redirect.enabled": "Enabled",
+  "sulu_redirect.enable": "Enable",
+  "sulu_redirect.disable": "Disable",
+  "sulu_redirect.source": "Source",
+  "sulu_redirect.target": "Target",
+  "sulu_redirect.status-code": "Status-Code",
+  "sulu_redirect.status-code.301": "301: Moved Permanently<",
+  "sulu_redirect.status-code.302": "302: Moved Temporarily",
+  "sulu_redirect.status-code.410": "410: Gone",
+  "sulu_redirect.import": "Import",
+  "sulu_redirect.import.title": "Import finished",
+  "sulu_redirect.import.total": "Total",
+  "sulu_redirect.import.exceptions": "Failing",
+  "sulu_redirect.exceptions.duplicated": "Line {lineNumber} in File \"{fileName}\" contains already imported Source \"{exception.source}\".",
+  "sulu_redirect.import.success": "{total} Redirects successfully imported.",
+  "sulu_redirect.errors.conflict": "The specified source has already been used.",
+  "sulu_redirect.exceptions.target_empty": "Line {lineNumber} in File \"{fileName}\" contains an empt Target for Source \"{exception.source}\"."
+}
