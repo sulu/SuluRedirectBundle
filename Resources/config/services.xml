@@ -5,7 +5,7 @@
     <services>
         <!-- sulu-admin -->
         <service id="sulu_redirect.admin" class="Sulu\Bundle\RedirectBundle\Admin\RedirectAdmin" public="false">
-            <argument type="service" id="Sulu\Bundle\AdminBundle\Admin\Routing\RouteBuilderFactoryInterface"/>
+            <argument type="service" id="sulu_admin.route_factory"/>
             <argument type="service" id="sulu_security.security_checker"/>
 
             <tag name="sulu.admin"/>
@@ -39,7 +39,6 @@
             <argument type="service" id="doctrine"/>
             <argument type="service" id="jms_serializer.unserialize_object_constructor"/>
         </service>
-
 
         <service id="sulu_article.reindex_command" class="Sulu\Bundle\RedirectBundle\Command\ImportCommand">
             <argument type="service" id="sulu_redirect.import" />

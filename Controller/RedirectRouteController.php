@@ -56,8 +56,7 @@ class RedirectRouteController extends RestController implements ClassResourceInt
         $factory = $this->get('sulu_core.doctrine_list_builder_factory');
 
         $tagEntityName = $this->getParameter('sulu.model.redirect_route.class');
-
-
+        
         $fieldDescriptors = $this->get('sulu_core.list_builder.field_descriptor_factory')
             ->getFieldDescriptors('redirect_routes');
         $listBuilder = $factory->create($tagEntityName);
