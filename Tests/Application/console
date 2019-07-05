@@ -10,6 +10,7 @@ set_time_limit(0);
 require_once __DIR__ . '/../bootstrap.php';
 require_once __DIR__ . '/Kernel.php';
 
+use Sulu\Bundle\RedirectBundle\Tests\Application\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Debug\Debug;
@@ -22,12 +23,7 @@ if ($debug) {
     Debug::enable();
 }
 
-$kernel = new AppKernel($env, $debug);
+$kernel = new Kernel($env, $debug);
 $application = new Application($kernel);
 $application->run($input);
 
-// register all commands available by our bundles
-$adminPool = $kernel->getContainer()->get('sulu_admin.admin_pool');
-foreach ($adminPool->getCommands() as $command) {
-    $application->add($command);
-}

@@ -1,8 +1,5 @@
 # Doctrine Configuration
 doctrine:
-    dbal:
-        host: 127.0.0.1
-        dbname: "su_redirect_test"
     orm:
         mappings:
             gedmo_tree:
