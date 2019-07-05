@@ -13,8 +13,8 @@
   "sulu_redirect.import.title": "Import afgerond",
   "sulu_redirect.import.total": "Totaal",
   "sulu_redirect.import.exceptions": "Gefaald",
-  "sulu_redirect.exceptions.duplicated": "Regel {lineNumber} in bestand \"{fileName}\" bevat al \"{exception.source}\".",
+  "sulu_redirect.exceptions.duplicated": "Regel {lineNumber} in bestand \"{fileName}\" bevat al \"{source}\".",
   "sulu_redirect.import.success": "{total} Redirects succesvol geimporteerd.",
   "sulu_redirect.errors.conflict": "De opgegeven bron is al is in gebruik.",
-  "sulu_redirect.exceptions.target_empty": "Regel {lineNumber} in bestand \"{fileName}\" bevat een leeg doel bij bron \"{exception.source}\"."
+  "sulu_redirect.exceptions.target_empty": "Regel {lineNumber} in bestand \"{fileName}\" bevat een leeg doel bij bron \"{source}\"."
 }
