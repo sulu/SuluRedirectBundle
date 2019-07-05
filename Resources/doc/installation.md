@@ -17,7 +17,7 @@ Add routing files to `app/config/admin/routing.yml`:
 ```yml
 sulu_redirect_api:
     type: rest
-    resource: "@SuluRedirectBundle/Resources/config/routing_api.xml"
+    resource: "@SuluRedirectBundle/Resources/config/routing_api.yml"
     prefix: /admin/api
 
 sulu_redirect:

@@ -81,8 +81,8 @@ class SuluRedirectExtension extends Extension implements PrependExtensionInterfa
                     'resources' => [
                         'redirect_routes' => [
                             'routes' => [
-                                'list' => 'get_redirect-routes',
-                                'detail' => 'get_redirect-route',
+                                'list' => 'sulu_redirect.get_redirect-routes',
+                                'detail' => 'sulu_redirect.get_redirect-route',
                             ],
                         ],
                     ]
