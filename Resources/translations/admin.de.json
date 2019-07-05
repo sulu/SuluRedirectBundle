@@ -13,8 +13,8 @@
   "sulu_redirect.import.title": "Import abgeschlossen",
   "sulu_redirect.import.total": "Gesamt",
   "sulu_redirect.import.exceptions": "Fehlerhaft",
-  "sulu_redirect.exceptions.duplicated": "Zeile {lineNumber} in Datei \"{fileName}\" enthielt eine bereits importierte Quelle \"{exception.source}\".",
+  "sulu_redirect.exceptions.duplicated": "Zeile {lineNumber} in Datei \"{fileName}\" enthielt eine bereits importierte Quelle \"{source}\".",
   "sulu_redirect.import.success": "{total} Umleitungen erfolgreich importiert.",
   "sulu_redirect.errors.conflict": "TDie angegebene Quelle wurde bereits verwendet.",
-  "sulu_redirect.exceptions.target_empty": "Zeile {lineNumber} in Datei \"{fileName}\" enthielt ein leeres Ziel für die Quelle \"{exception.source}\"."
+  "sulu_redirect.exceptions.target_empty": "Zeile {lineNumber} in Datei \"{fileName}\" enthielt ein leeres Ziel für die Quelle \"{source}\"."
 }

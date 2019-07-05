@@ -13,8 +13,8 @@
   "sulu_redirect.import.title": "Import finished",
   "sulu_redirect.import.total": "Total",
   "sulu_redirect.import.exceptions": "Failing",
-  "sulu_redirect.exceptions.duplicated": "Line {lineNumber} in File \"{fileName}\" contains already imported Source \"{exception.source}\".",
+  "sulu_redirect.exceptions.duplicated": "Line {lineNumber} in File \"{fileName}\" contains already imported Source \"{source}\".",
   "sulu_redirect.import.success": "{total} Redirects successfully imported.",
   "sulu_redirect.errors.conflict": "The specified source has already been used.",
-  "sulu_redirect.exceptions.target_empty": "Line {lineNumber} in File \"{fileName}\" contains an empt Target for Source \"{exception.source}\"."
+  "sulu_redirect.exceptions.target_empty": "Line {lineNumber} in File \"{fileName}\" contains an empt Target for Source \"{source}\"."
 }
