@@ -6,18 +6,18 @@ Install bundle over composer:
 composer require sulu/redirect-bundle
 ```
 
-Add bundle to AbstractKernel:
+Add bundle to config/bundles.php:
 
 ```php
 new Sulu\Bundle\RedirectBundle\SuluRedirectBundle(),
 ```
 
-Add routing files to `app/config/admin/routing.yml`:
+Add routing files to `config/routes/sulu_redirect_admin.yaml`:
 
 ```yml
 sulu_redirect_api:
     type: rest
-    resource: "@SuluRedirectBundle/Resources/config/routing_api.yml"
+    resource: "@SuluRedirectBundle/Resources/config/routing_api.yaml"
     prefix: /admin/api
 
 sulu_redirect:
