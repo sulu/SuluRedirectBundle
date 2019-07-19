@@ -28,7 +28,7 @@ interface RedirectRouteManagerInterface
      *
      * @throws RedirectRouteNotUniqueException
      */
-    public function save($data, $id = null);
+    public function saveByData($data);
 
     /**
      * Delete given redirect-route.
@@ -46,5 +46,5 @@ interface RedirectRouteManagerInterface
      *
      * @throws RedirectRouteNotUniqueException
      */
-    public function saveEntity(RedirectRouteInterface $redirectRoute);
+    public function save(RedirectRouteInterface $redirectRoute);
 }

@@ -103,7 +103,7 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
 
         foreach ($this->getUrls($document) as $url) {
             try {
-                $this->redirectRouteManager->save(['source' => $url, 'statusCode' => 410, 'enabled' => true, 'target' => '']);
+                $this->redirectRouteManager->saveByData(['source' => $url, 'statusCode' => 410, 'enabled' => true, 'target' => '']);
             } catch (RedirectRouteNotUniqueException $exception) {
                 // do nothing when there already exists a redirect route
             }

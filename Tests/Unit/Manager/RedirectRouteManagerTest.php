@@ -52,7 +52,7 @@ class RedirectRouteManagerTest extends TestCase
         $this->repository->createNew()->willReturn($redirectRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
-        $this->manager->save(['source' => '/test', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301]);
+        $this->manager->saveByData(['source' => '/test', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301]);
     }
 
     public function testSave410()
@@ -69,7 +69,7 @@ class RedirectRouteManagerTest extends TestCase
         $this->repository->createNew()->willReturn($redirectRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
-        $this->manager->save(['source' => '/test410', 'target' => '', 'enabled' => true, 'statusCode' => 410]);
+        $this->manager->saveByData(['source' => '/test410', 'target' => '', 'enabled' => true, 'statusCode' => 410]);
     }
 
     public function testSaveAlreadyExists()
@@ -84,7 +84,7 @@ class RedirectRouteManagerTest extends TestCase
         $this->repository->findBySource('/test')->willReturn($otherRoute->reveal());
         $this->repository->createNew()->willReturn($redirectRoute->reveal());
 
-        $this->manager->save(['source' => '/test', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301]);
+        $this->manager->saveByData(['source' => '/test', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301]);
 
         $this->repository->persist($redirectRoute->reveal())->shouldNotBeCalled();
     }
@@ -107,7 +107,7 @@ class RedirectRouteManagerTest extends TestCase
         $this->repository->findBySource('/test')->willReturn($otherRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
-        $this->manager->save(['source' => '/test', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301], '123-123-123');
+        $this->manager->saveByData(['source' => '/test', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301, 'id' => '123-123-123']);
     }
 
     public function testDelete()

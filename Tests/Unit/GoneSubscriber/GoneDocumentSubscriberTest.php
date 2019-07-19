@@ -143,7 +143,7 @@ class GoneDocumentSubscriberTest extends TestCase
         $wrongDocument = $this->prophesize(SnippetDocument::class);
         $this->removeEvent->getDocument()->willReturn($wrongDocument->reveal());
 
-        $this->redirectRouteManager->save()->shouldNotBeCalled();
+        $this->redirectRouteManager->saveByData()->shouldNotBeCalled();
         $this->entityManager->flush()->shouldNotBeCalled();
 
         $this->goneDocumentSubscriber->createRedirects($this->removeEvent->reveal());
@@ -151,7 +151,7 @@ class GoneDocumentSubscriberTest extends TestCase
 
     public function testCreateRedirects()
     {
-        $this->redirectRouteManager->save(Argument::any())->shouldBeCalledTimes(4);
+        $this->redirectRouteManager->saveByData(Argument::any())->shouldBeCalledTimes(4);
         $this->entityManager->flush()->shouldBeCalled();
 
         $this->goneDocumentSubscriber->createRedirects($this->removeEvent->reveal());

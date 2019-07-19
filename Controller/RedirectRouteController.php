@@ -14,7 +14,7 @@ namespace Sulu\Bundle\RedirectBundle\Controller;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
-use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
+use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 use Sulu\Component\Rest\Exception\EntityNotFoundException;
 use Sulu\Component\Rest\ListBuilder\FieldDescriptorInterface;
@@ -88,7 +88,7 @@ class RedirectRouteController extends RestController implements ClassResourceInt
     {
         $data = $request->request->all();
 
-        $redirectRoute= $this->getRedirectRouteManager()->save($data);
+        $redirectRoute= $this->getRedirectRouteManager()->saveByData($data);
         $this->get('doctrine.orm.entity_manager')->flush();
 
         return $this->handleView($this->view($redirectRoute));
@@ -124,8 +124,9 @@ class RedirectRouteController extends RestController implements ClassResourceInt
     public function putAction($id, Request $request)
     {
         $data = $request->request->all();
+        $data['id'] = $id;
 
-        $redirectRoute = $this->getRedirectRouteManager()->save($data, $id);
+        $redirectRoute = $this->getRedirectRouteManager()->saveByData($data);
         $this->get('doctrine.orm.entity_manager')->flush();
 
         return $this->handleView($this->view($redirectRoute));
@@ -183,7 +184,7 @@ class RedirectRouteController extends RestController implements ClassResourceInt
     /**
      * Returns redirect-route manager.
      *
-     * @return RedirectRouteManager
+     * @return RedirectRouteManagerInterface
      */
     protected function getRedirectRouteManager()
     {

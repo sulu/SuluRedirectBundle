@@ -38,9 +38,10 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function save($data, $id = null)
+    public function saveByData($data)
     {
         $source = $data['source'];
+        $id = $data['id'] ?? null;
 
         $otherRoute = $this->redirectRouteRepository->findBySource($source);
 
@@ -78,7 +79,7 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function saveEntity(RedirectRouteInterface $redirectRoute)
+    public function save(RedirectRouteInterface $redirectRoute)
     {
         $otherRoute = $this->redirectRouteRepository->findBySource($redirectRoute->getSource());
 

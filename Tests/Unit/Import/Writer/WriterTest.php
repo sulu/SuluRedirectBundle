@@ -64,9 +64,9 @@ class WriterTest extends TestCase
         $this->writer->write($entities[1]->reveal());
         $this->writer->write($entities[2]->reveal());
 
-        $this->redirectRouteManager->saveEntity($entities[0]->reveal())->shouldBeCalled();
-        $this->redirectRouteManager->saveEntity($entities[1]->reveal())->shouldBeCalled();
-        $this->redirectRouteManager->saveEntity($entities[2]->reveal())->shouldBeCalled();
+        $this->redirectRouteManager->save($entities[0]->reveal())->shouldBeCalled();
+        $this->redirectRouteManager->save($entities[1]->reveal())->shouldBeCalled();
+        $this->redirectRouteManager->save($entities[2]->reveal())->shouldBeCalled();
 
         $this->entityManager->flush()->shouldNotBeCalled();
     }
@@ -90,9 +90,9 @@ class WriterTest extends TestCase
         $this->writer->write($entities[1]->reveal());
         $this->writer->write($entities[2]->reveal());
 
-        $this->redirectRouteManager->saveEntity($entities[0]->reveal())->shouldBeCalled();
-        $this->redirectRouteManager->saveEntity($entities[1]->reveal())->shouldBeCalled();
-        $this->redirectRouteManager->saveEntity($entities[2]->reveal())->shouldBeCalled();
+        $this->redirectRouteManager->save($entities[0]->reveal())->shouldBeCalled();
+        $this->redirectRouteManager->save($entities[1]->reveal())->shouldBeCalled();
+        $this->redirectRouteManager->save($entities[2]->reveal())->shouldBeCalled();
 
         $this->entityManager->flush()->shouldBeCalledTimes(1);
     }
@@ -114,8 +114,8 @@ class WriterTest extends TestCase
         $this->writer->write($entities[0]->reveal());
         $this->writer->write($entities[1]->reveal());
 
-        $this->redirectRouteManager->saveEntity($entities[0]->reveal())->shouldBeCalled();
-        $this->redirectRouteManager->saveEntity($entities[1]->reveal())->shouldNotBeCalled();
+        $this->redirectRouteManager->save($entities[0]->reveal())->shouldBeCalled();
+        $this->redirectRouteManager->save($entities[1]->reveal())->shouldNotBeCalled();
     }
 
     public function testWriteDuplicatedCaseInSensitive()
@@ -136,8 +136,8 @@ class WriterTest extends TestCase
         $this->writer->write($entities[0]->reveal());
         $this->writer->write($entities[1]->reveal());
 
-        $this->redirectRouteManager->saveEntity($entities[0]->reveal())->shouldBeCalled();
-        $this->redirectRouteManager->saveEntity($entities[1]->reveal())->shouldNotBeCalled();
+        $this->redirectRouteManager->save($entities[0]->reveal())->shouldBeCalled();
+        $this->redirectRouteManager->save($entities[1]->reveal())->shouldNotBeCalled();
     }
 
     public function testWriteAlreadyExisting()
@@ -148,7 +148,7 @@ class WriterTest extends TestCase
         $entity->getSource()->willReturn('/source');
         $entity->getTarget()->willReturn('/target');
 
-        $this->redirectRouteManager->saveEntity($entity->reveal())
+        $this->redirectRouteManager->save($entity->reveal())
             ->shouldBeCalled()
             ->willThrow($this->prophesize(RedirectRouteNotUniqueException::class)->reveal());
 
