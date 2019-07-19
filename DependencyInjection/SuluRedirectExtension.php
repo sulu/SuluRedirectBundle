@@ -12,8 +12,8 @@
 namespace Sulu\Bundle\RedirectBundle\DependencyInjection;
 
 use Sulu\Bundle\PersistenceBundle\DependencyInjection\PersistenceExtensionTrait;
-use Sulu\Bundle\RedirectBundle\Manager\Exception\RedirectRouteNotFoundException;
-use Sulu\Bundle\RedirectBundle\Manager\Exception\RedirectRouteNotUniqueException;
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotFoundException;
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Component\Rest\Exception\EntityNotFoundException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

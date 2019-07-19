@@ -13,10 +13,10 @@ namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Writer;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\DuplicatedSourceException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\Writer;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
-use Sulu\Bundle\RedirectBundle\Manager\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 
 class WriterTest extends TestCase

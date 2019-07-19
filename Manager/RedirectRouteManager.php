@@ -12,8 +12,8 @@
 namespace Sulu\Bundle\RedirectBundle\Manager;
 
 use Ramsey\Uuid\Uuid;
-use Sulu\Bundle\RedirectBundle\Manager\Exception\RedirectRouteNotFoundException;
-use Sulu\Bundle\RedirectBundle\Manager\Exception\RedirectRouteNotUniqueException;
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotFoundException;
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 

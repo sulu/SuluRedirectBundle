@@ -11,6 +11,7 @@
 
 namespace Sulu\Bundle\RedirectBundle\Manager;
 
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 
 /**

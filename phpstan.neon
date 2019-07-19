@@ -1,7 +1,7 @@
 includes:
     - vendor/phpstan/phpstan-symfony/extension.neon
 parameters:
-    level: 1
+    level: 7
     excludes_analyse:
         - %currentWorkingDirectory%/vendor/*
         - %currentWorkingDirectory%/Tests/*

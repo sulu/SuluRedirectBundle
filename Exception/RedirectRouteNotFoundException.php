@@ -1,6 +1,6 @@
 <?php
 
-namespace Sulu\Bundle\RedirectBundle\Manager\Exception;
+namespace Sulu\Bundle\RedirectBundle\Exception;
 
 use Exception;
 

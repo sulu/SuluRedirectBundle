@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Sulu\Bundle\RedirectBundle\Manager\Exception;
+namespace Sulu\Bundle\RedirectBundle\Exception;
 
 /**
  * Redirect-route for given source already exists.
