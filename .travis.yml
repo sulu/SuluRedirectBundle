@@ -1,9 +1,11 @@
 sudo: false
+dist: trusty
 
 language: php
 
 services:
   - elasticsearch
+  - mysql
 
 cache:
   directories:
