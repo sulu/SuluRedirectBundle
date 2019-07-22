@@ -73,7 +73,7 @@ EOT
         $progressBar->finish();
 
         if (0 === count($errors)) {
-            return;
+            return null;
         }
 
         $output->writeln('');

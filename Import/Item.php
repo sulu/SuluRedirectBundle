@@ -34,7 +34,7 @@ class Item
     private $data;
 
     /**
-     * @var ImportException
+     * @var ImportException|null
      */
     private $exception;
 
@@ -42,7 +42,7 @@ class Item
      * @param int $lineNumber
      * @param string $lineContent
      * @param RedirectRouteInterface $data
-     * @param ImportException $exception
+     * @param ImportException|null $exception
      */
     public function __construct($lineNumber, $lineContent, RedirectRouteInterface $data = null, ImportException $exception = null)
     {
@@ -85,7 +85,7 @@ class Item
     /**
      * Returns exception.
      *
-     * @return ImportException
+     * @return ImportException|null
      */
     public function getException()
     {
