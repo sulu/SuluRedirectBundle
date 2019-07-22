@@ -6,5 +6,4 @@
     <route id="sulu_redirect.import" path="/import" methods="POST">
         <default key="_controller">sulu_redirect.controller.import:importAction</default>
     </route>
-
 </routes>
