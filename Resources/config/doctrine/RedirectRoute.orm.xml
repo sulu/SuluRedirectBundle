@@ -8,7 +8,7 @@
             <unique-constraint columns="source"/>
         </unique-constraints>
 
-        <id name="id" type="string">
+        <id name="id" type="string" length="36">
             <generator strategy="NONE"/>
         </id>
 
