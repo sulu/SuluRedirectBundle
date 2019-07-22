@@ -21,8 +21,6 @@
 
 
 # tests
-Tests/Application/var/cache
-Tests/Application/var/logs
-Tests/Application/var/data
+Tests/Application/var/
 
 \.php_cs\.cache

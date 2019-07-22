@@ -34,7 +34,7 @@ class RedirectRouteControllerTest extends SuluTestCase
         $this->purgeDatabase();
 
         $this->defaultData = ['source' => '/test1', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301];
-        $this->status410Data = ['source' => '/test410', 'enabled' => true, 'statusCode' => 410];
+        $this->status410Data = ['source' => '/test410', 'enabled' => true, 'statusCode' => 410, 'target' => null];
     }
 
     public function testPost()
@@ -132,8 +132,8 @@ class RedirectRouteControllerTest extends SuluTestCase
         $this->assertHttpStatusCode(200, $response);
         $result = json_decode($response->getContent(), true);
 
-        $this->assertCount(1, $result['_embedded']['redirect-routes']);
-        $this->assertEquals($data['id'], $result['_embedded']['redirect-routes'][0]['id']);
+        $this->assertCount(1, $result['_embedded']['redirect_routes']);
+        $this->assertEquals($data['id'], $result['_embedded']['redirect_routes'][0]['id']);
     }
 
     public function testDelete()

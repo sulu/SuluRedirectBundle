@@ -33,17 +33,6 @@ class RedirectRouteController extends RestController implements ClassResourceInt
     const RESULT_KEY = 'redirect_routes';
 
     /**
-     * Returns columns for list.
-     *
-     * @return Response
-     */
-    public function fieldsAction()
-    {
-        return $this->handleView($this->view(array_values($this->get('sulu_core.list_builder.field_descriptor_factory')
-            ->getFieldDescriptors('redirect_routes')), 200));
-    }
-
-    /**
      * Returns redirect-routes.
      *
      * @param Request $request

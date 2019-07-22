@@ -93,7 +93,7 @@ class RedirectAdmin extends Admin
         ];
 
         return [
-            $this->routeBuilderFactory->createListRouteBuilder(static::LIST_ROUTE, '/redirect_routes')
+            $this->routeBuilderFactory->createListRouteBuilder(static::LIST_ROUTE, '/redirect-routes')
                 ->setResourceKey('redirect_routes')
                 ->setListKey('redirect_routes')
                 ->setTitle('sulu_redirect.title')
@@ -103,7 +103,7 @@ class RedirectAdmin extends Admin
                 ->enableSearching()
                 ->addToolbarActions($listToolbarActions)
                 ->getRoute(),
-            $this->routeBuilderFactory->createResourceTabRouteBuilder(static::ADD_FORM_ROUTE, '/redirect_routes/add')
+            $this->routeBuilderFactory->createResourceTabRouteBuilder(static::ADD_FORM_ROUTE, '/redirect-routes/add')
                 ->setResourceKey('redirect_routes')
                 ->setBackRoute(static::LIST_ROUTE)
                 ->getRoute(),
@@ -115,7 +115,7 @@ class RedirectAdmin extends Admin
                 ->addToolbarActions($formToolbarActions)
                 ->setParent(static::ADD_FORM_ROUTE)
                 ->getRoute(),
-            $this->routeBuilderFactory->createResourceTabRouteBuilder(static::EDIT_FORM_ROUTE, '/redirect_routes/:id')
+            $this->routeBuilderFactory->createResourceTabRouteBuilder(static::EDIT_FORM_ROUTE, '/redirect-routes/:id')
                 ->setResourceKey('redirect_routes')
                 ->setBackRoute(static::LIST_ROUTE)
                 ->setTitleProperty('name')
