@@ -32,16 +32,25 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
     /**
      * {@inheritdoc}
      */
-    public function findEnabledBySource($source)
+    public function findEnabledBySource($source, $schemaAndHost = null)
     {
-        $query = $this->createQueryBuilder('redirect_route')
-            ->andWhere('redirect_route.source = :source')
-            ->andWhere('redirect_route.enabled = true')
-            ->setParameter('source', $source)
-            ->getQuery();
+        $sourceWithHost = null;
+
+        if ($schemaAndHost) {
+            $sourceWithHost = $schemaAndHost . $source;
+        }
+
+        $queryBuilder = $this->createQueryBuilder('redirect_route')
+            ->andWhere('redirect_route.enabled = true');
+
+        $queryBuilder->andWhere($queryBuilder->expr()->orX(
+                $queryBuilder->expr()->eq('redirect_route.source', ':source'),
+                $expr
+            )
+        )->setParameter('source', $source);
 
         try {
-            return $query->getSingleResult();
+            return $queryBuilder->getQuery()->getSingleResult();
         } catch (NoResultException $exception) {
             return;
         }
