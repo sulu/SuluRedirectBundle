@@ -23,7 +23,6 @@ interface RedirectRouteManagerInterface
      * Save given redirect-route.
      *
      * @param array $data The data of the tag to save
-     * @param number|null $id The id for saving the tag (optional)
      *
      * @return RedirectRouteInterface
      *

@@ -60,7 +60,6 @@ EOT
 
         $output->writeln(sprintf('Import of file "%s" will be started:', basename($input->getArgument('fileName'))));
 
-
         $errors = [];
         foreach ($this->import->import($input->getArgument('fileName')) as $item) {
             $progressBar->advance();
@@ -81,11 +80,13 @@ EOT
         $output->writeln('Following lines failed:');
 
         foreach ($errors as $error) {
+            $exception = $error->getException();
+
             $output->writeln(
                 sprintf(
                     ' * Line %s: "%s"',
                     $error->getLineNumber(),
-                    $error->getException()->getMessage()
+                    $exception ? $exception->getMessage() : ''
                 )
             );
         }

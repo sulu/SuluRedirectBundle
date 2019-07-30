@@ -29,7 +29,7 @@ class Item
     private $lineContent;
 
     /**
-     * @var RedirectRouteInterface
+     * @var RedirectRouteInterface|null
      */
     private $data;
 
@@ -41,7 +41,7 @@ class Item
     /**
      * @param int $lineNumber
      * @param string $lineContent
-     * @param RedirectRouteInterface $data
+     * @param RedirectRouteInterface|null $data
      * @param ImportException|null $exception
      */
     public function __construct($lineNumber, $lineContent, RedirectRouteInterface $data = null, ImportException $exception = null)
@@ -75,7 +75,7 @@ class Item
     /**
      * Returns data.
      *
-     * @return RedirectRouteInterface
+     * @return RedirectRouteInterface|null
      */
     public function getData()
     {

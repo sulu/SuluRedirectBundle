@@ -11,6 +11,8 @@
 
 namespace Sulu\Bundle\RedirectBundle\Import\Reader;
 
+use Sulu\Bundle\RedirectBundle\Import\ImportException;
+
 /**
  * Container for reader result.
  */
@@ -32,11 +34,11 @@ class ReaderItem
     private $data;
 
     /**
-     * @var \Exception
+     * @var ImportException|null
      */
     private $exception;
 
-    public function __construct($lineNumber, $lineContent, array $data = null, \Exception $exception = null)
+    public function __construct($lineNumber, $lineContent, array $data, ImportException $exception = null)
     {
         $this->lineNumber = $lineNumber;
         $this->lineContent = $lineContent;
@@ -77,7 +79,7 @@ class ReaderItem
     /**
      * Returns exception.
      *
-     * @return \Exception
+     * @return ImportException|null
      */
     public function getException()
     {

@@ -90,8 +90,14 @@ class RedirectRouteImportController
             'exceptions' => [],
         ];
 
+        $filePath = $file->getRealPath();
+
+        if (!$filePath) {
+            throw new \RuntimeException('Redirect import file does not exist.');
+        }
+
         /** @var Item $item */
-        foreach ($this->import->import($file->getRealPath()) as $item) {
+        foreach ($this->import->import($filePath) as $item) {
             ++$response['total'];
 
             if (!$item->getException()) {

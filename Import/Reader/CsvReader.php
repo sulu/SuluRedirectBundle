@@ -29,7 +29,8 @@ class CsvReader implements ReaderInterface
         $csv->setCsvControl();
         $csv->setFlags(SplFileObject::READ_CSV);
 
-        $header = null;
+        $header = [];
+        /** @var string[] $line */
         foreach ($csv as $lineNumber => $line) {
             if (1 === count($line) && '' === trim($line[0])) {
                 continue;

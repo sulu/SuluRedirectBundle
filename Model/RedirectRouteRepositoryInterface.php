@@ -23,7 +23,7 @@ interface RedirectRouteRepositoryInterface extends RepositoryInterface
      *
      * @param string $id
      *
-     * @return RedirectRouteInterface
+     * @return RedirectRouteInterface|null
      */
     public function findById($id);
 
@@ -32,7 +32,7 @@ interface RedirectRouteRepositoryInterface extends RepositoryInterface
      *
      * @param string $source
      *
-     * @return RedirectRouteInterface
+     * @return RedirectRouteInterface|null
      */
     public function findEnabledBySource($source);
 
@@ -41,7 +41,7 @@ interface RedirectRouteRepositoryInterface extends RepositoryInterface
      *
      * @param string $source
      *
-     * @return RedirectRouteInterface
+     * @return RedirectRouteInterface|null
      */
     public function findBySource($source);
 

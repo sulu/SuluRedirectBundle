@@ -14,6 +14,7 @@ namespace Sulu\Bundle\RedirectBundle\Routing;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 use Symfony\Cmf\Component\Routing\RouteProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Exception\RouteNotFoundException;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
 
@@ -66,7 +67,7 @@ class RedirectRouteProvider implements RouteProviderInterface
      */
     public function getRouteByName($name)
     {
-        return;
+        throw new RouteNotFoundException('RedirectRouteProvider does not support getRouteByName.');
     }
 
     /**

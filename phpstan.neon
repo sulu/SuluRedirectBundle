@@ -12,9 +12,14 @@ parameters:
     level: max
     excludes_analyse:
         - %currentWorkingDirectory%/vendor/*
+        - %currentWorkingDirectory%/vendor/*
         - %currentWorkingDirectory%/Tests/*
     symfony:
         container_xml_path: %rootDir%/../../../Tests/Application/var/cache/admin/dev/adminAdminDevDebugProjectContainer.xml
         console_application_loader: Tests/phpstan/console-application.php
     doctrine:
         objectManagerLoader: Tests/phpstan/object-manager.php
+    ignoreErrors:
+        -
+            message: '#Call to an undefined method [a-zA-Z0-9\\_]+::children\(\)#'
+            path: %currentWorkingDirectory%/DependencyInjection/Configuration.php
