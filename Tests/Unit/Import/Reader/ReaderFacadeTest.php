@@ -11,12 +11,13 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Reader;
 
+use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\RedirectBundle\Import\Converter\Converter;
 use Sulu\Bundle\RedirectBundle\Import\Reader\ReaderFacade;
 use Sulu\Bundle\RedirectBundle\Import\Reader\ReaderInterface;
 
-class ReaderFacadeTest extends \PHPUnit_Framework_TestCase
+class ReaderFacadeTest extends TestCase
 {
     /**
      * @var string

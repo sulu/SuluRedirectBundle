@@ -43,7 +43,7 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
         try {
             return $query->getSingleResult();
         } catch (NoResultException $exception) {
-            return;
+            return null;
         }
     }
 
@@ -60,7 +60,7 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
         try {
             return $query->getSingleResult();
         } catch (NoResultException $exception) {
-            return;
+            return null;
         }
     }
 

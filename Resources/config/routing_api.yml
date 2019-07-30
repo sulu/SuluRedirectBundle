@@ -1,0 +1,6 @@
+sulu_redirect.redirect_route:
+    type: rest
+    name_prefix: sulu_redirect.
+    resource: Sulu\Bundle\RedirectBundle\Controller\RedirectRouteController
+    options:
+        expose: true

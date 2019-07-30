@@ -12,6 +12,8 @@
 namespace Sulu\Bundle\RedirectBundle\Manager;
 
 use Ramsey\Uuid\Uuid;
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotFoundException;
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 
@@ -31,6 +33,47 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
     public function __construct(RedirectRouteRepositoryInterface $redirectRouteRepository)
     {
         $this->redirectRouteRepository = $redirectRouteRepository;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function saveByData($data)
+    {
+        $source = $data['source'];
+        $id = $data['id'] ?? null;
+
+        $otherRoute = $this->redirectRouteRepository->findBySource($source);
+
+        // load existing tag if id is given and create a new one otherwise
+        if ($id) {
+            $redirectRoute = $this->redirectRouteRepository->findById($id);
+            if (!$redirectRoute) {
+                throw new RedirectRouteNotFoundException($id);
+            }
+        } else {
+            $redirectRoute = $this->redirectRouteRepository->createNew();
+            $redirectRoute->setId(Uuid::uuid4()->toString());
+        }
+
+        if ($otherRoute && $otherRoute->getId() !== $redirectRoute->getId()) {
+            throw new RedirectRouteNotUniqueException($source);
+        }
+
+        // update data
+        $redirectRoute->setSource($data['source']);
+        $redirectRoute->setTarget($data['target']);
+        $redirectRoute->setEnabled($data['enabled']);
+        $redirectRoute->setStatusCode($data['statusCode']);
+
+        if (410 === $redirectRoute->getStatusCode()) {
+            $redirectRoute->setTarget('');
+        }
+
+        $this->redirectRouteRepository->persist($redirectRoute);
+
+
+        return $redirectRoute;
     }
 
     /**

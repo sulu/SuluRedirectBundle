@@ -1,0 +1,20 @@
+{
+  "sulu_redirect.title": "Umleitungen",
+  "sulu_redirect.enabled": "Aktiviert",
+  "sulu_redirect.enable": "Aktivieren",
+  "sulu_redirect.disable": "Deaktivieren",
+  "sulu_redirect.source": "Quelle",
+  "sulu_redirect.target": "Ziel",
+  "sulu_redirect.status-code": "Status-Code",
+  "sulu_redirect.status-code.301": "301: Moved Permanently",
+  "sulu_redirect.status-code.302": "302: Moved Temporarily",
+  "sulu_redirect.status-code.410": "410: Gone",
+  "sulu_redirect.import": "Import",
+  "sulu_redirect.import.title": "Import abgeschlossen",
+  "sulu_redirect.import.total": "Gesamt",
+  "sulu_redirect.import.exceptions": "Fehlerhaft",
+  "sulu_redirect.exceptions.duplicated": "Zeile {lineNumber} in Datei \"{fileName}\" enthielt eine bereits importierte Quelle \"{source}\".",
+  "sulu_redirect.import.success": "{total} Umleitungen erfolgreich importiert.",
+  "sulu_redirect.errors.conflict": "TDie angegebene Quelle wurde bereits verwendet.",
+  "sulu_redirect.exceptions.target_empty": "Zeile {lineNumber} in Datei \"{fileName}\" enthielt ein leeres Ziel für die Quelle \"{source}\"."
+}

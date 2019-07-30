@@ -12,13 +12,14 @@
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Writer;
 
 use Doctrine\ORM\EntityManagerInterface;
+use PHPUnit\Framework\TestCase;
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\DuplicatedSourceException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\Writer;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
-use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 
-class WriterTest extends \PHPUnit_Framework_TestCase
+class WriterTest extends TestCase
 {
     /**
      * @var RedirectRouteManagerInterface
@@ -98,7 +99,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
 
     public function testWriteDuplicated()
     {
-        $this->setExpectedException(DuplicatedSourceException::class);
+        $this->expectException(DuplicatedSourceException::class);
 
         $entities = [
             $this->prophesize(RedirectRouteInterface::class),
@@ -119,7 +120,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
 
     public function testWriteDuplicatedCaseInSensitive()
     {
-        $this->setExpectedException(DuplicatedSourceException::class);
+        $this->expectException(DuplicatedSourceException::class);
 
         $entities = [
             $this->prophesize(RedirectRouteInterface::class),
@@ -141,7 +142,7 @@ class WriterTest extends \PHPUnit_Framework_TestCase
 
     public function testWriteAlreadyExisting()
     {
-        $this->setExpectedException(DuplicatedSourceException::class);
+        $this->expectException(DuplicatedSourceException::class);
 
         $entity = $this->prophesize(RedirectRouteInterface::class);
         $entity->getSource()->willReturn('/source');

@@ -4,20 +4,22 @@
     "type": "sulu-bundle",
     "license": "MIT",
     "require": {
-        "php": "^5.5 || ^7.0",
-        "sulu/sulu": "^1.5",
+        "php": "^7.1",
+        "sulu/sulu": "^2.0 || dev-develop",
         "ramsey/uuid": "^3.5"
     },
     "require-dev": {
-        "zendframework/zendsearch": "2.*@dev",
-        "symfony/monolog-bundle": "^2.8.7 || ^3.0",
-        "doctrine/doctrine-bundle": "^1.4",
+        "jangregor/phpstan-prophecy": "^0.4.1",
+        "phpstan/phpstan": "^0.11.5",
+        "phpstan/phpstan-doctrine": "^0.11.5",
+        "phpstan/phpstan-phpunit": "^0.11.2",
+        "phpstan/phpstan-symfony": "^0.11.6",
+        "phpunit/phpunit": "^7.0",
+        "symfony/stopwatch": "^3.4 ||  ^4.0",
+        "symfony/browser-kit": "^3.4 ||  ^4.0",
+        "symfony/monolog-bundle": "^3.1",
         "jackalope/jackalope-doctrine-dbal": "^1.2.5",
-        "phpunit/phpunit": "^4.8 || ^5.0",
-        "jms/serializer-bundle": "^1.1 || ^2.0",
-
-        "sulu/document-manager": "@dev",
-        "massive/search-bundle": "@dev"
+        "zendframework/zendsearch": "@dev"
     },
     "keywords": [
         "redirects"
@@ -32,6 +34,17 @@
     "autoload": {
         "psr-4": {
             "Sulu\\Bundle\\RedirectBundle\\": ""
+        }
+    },
+    "scripts": {
+        "phpstan": [
+            "Tests/Application/console cache:warmup --env dev",
+            "vendor/bin/phpstan analyze"
+        ]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-develop": "2.0-dev"
         }
     }
 }

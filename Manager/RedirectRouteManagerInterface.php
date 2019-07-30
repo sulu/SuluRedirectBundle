@@ -11,6 +11,7 @@
 
 namespace Sulu\Bundle\RedirectBundle\Manager;
 
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 
 /**
@@ -21,13 +22,13 @@ interface RedirectRouteManagerInterface
     /**
      * Save given redirect-route.
      *
-     * @param RedirectRouteInterface $redirectRoute
+     * @param array $data The data of the tag to save
      *
      * @return RedirectRouteInterface
      *
      * @throws RedirectRouteNotUniqueException
      */
-    public function save(RedirectRouteInterface $redirectRoute);
+    public function saveByData($data);
 
     /**
      * Delete given redirect-route.
@@ -35,4 +36,15 @@ interface RedirectRouteManagerInterface
      * @param RedirectRouteInterface $redirectRoute
      */
     public function delete(RedirectRouteInterface $redirectRoute);
+
+    /**
+     * Save given redirect-route.
+     *
+     * @param RedirectRouteInterface $redirectRoute
+     *
+     * @return RedirectRouteInterface
+     *
+     * @throws RedirectRouteNotUniqueException
+     */
+    public function save(RedirectRouteInterface $redirectRoute);
 }

@@ -14,7 +14,7 @@ namespace Sulu\Bundle\RedirectBundle\Controller;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Routing\ClassResourceInterface;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
-use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
+use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 use Sulu\Component\Rest\Exception\EntityNotFoundException;
 use Sulu\Component\Rest\ListBuilder\FieldDescriptorInterface;
@@ -30,17 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class RedirectRouteController extends RestController implements ClassResourceInterface
 {
-    const RESULT_KEY = 'redirect-routes';
-
-    /**
-     * Returns columns for list.
-     *
-     * @return Response
-     */
-    public function fieldsAction()
-    {
-        return $this->handleView($this->view(array_values($this->getFieldDescriptors()), 200));
-    }
+    const RESULT_KEY = 'redirect_routes';
 
     /**
      * Returns redirect-routes.
@@ -54,8 +44,14 @@ class RedirectRouteController extends RestController implements ClassResourceInt
         $restHelper = $this->get('sulu_core.doctrine_rest_helper');
         $factory = $this->get('sulu_core.doctrine_list_builder_factory');
 
-        $listBuilder = $factory->create(RedirectRoute::class);
-        $restHelper->initializeListBuilder($listBuilder, $this->getFieldDescriptors());
+        $tagEntityName = $this->getParameter('sulu.model.redirect_route.class');
+
+        /** @var FieldDescriptorInterface[] $fieldDescriptors */
+        $fieldDescriptors = $this->get('sulu_core.list_builder.field_descriptor_factory')
+            ->getFieldDescriptors('redirect_routes');
+        $listBuilder = $factory->create($tagEntityName);
+
+        $restHelper->initializeListBuilder($listBuilder, $fieldDescriptors);
         $results = $listBuilder->execute();
 
         $list = new ListRepresentation(
@@ -82,14 +78,7 @@ class RedirectRouteController extends RestController implements ClassResourceInt
     {
         $data = $request->request->all();
 
-        $serializer = $this->get('serializer');
-        $redirectRoute = $serializer->deserialize(
-            json_encode($data),
-            $this->getParameter('sulu.model.redirect_route.class'),
-            'json'
-        );
-
-        $this->getRedirectRouteManager()->save($redirectRoute);
+        $redirectRoute= $this->getRedirectRouteManager()->saveByData($data);
         $this->get('doctrine.orm.entity_manager')->flush();
 
         return $this->handleView($this->view($redirectRoute));
@@ -127,14 +116,7 @@ class RedirectRouteController extends RestController implements ClassResourceInt
         $data = $request->request->all();
         $data['id'] = $id;
 
-        $serializer = $this->get('serializer');
-        $redirectRoute = $serializer->deserialize(
-            json_encode($data),
-            $this->getParameter('sulu.model.redirect_route.class'),
-            'json'
-        );
-
-        $this->getRedirectRouteManager()->save($redirectRoute);
+        $redirectRoute = $this->getRedirectRouteManager()->saveByData($data);
         $this->get('doctrine.orm.entity_manager')->flush();
 
         return $this->handleView($this->view($redirectRoute));
@@ -192,7 +174,7 @@ class RedirectRouteController extends RestController implements ClassResourceInt
     /**
      * Returns redirect-route manager.
      *
-     * @return RedirectRouteManager
+     * @return RedirectRouteManagerInterface
      */
     protected function getRedirectRouteManager()
     {
@@ -207,15 +189,5 @@ class RedirectRouteController extends RestController implements ClassResourceInt
     protected function getRedirectRouteRepository()
     {
         return $this->get('sulu.repository.redirect_route');
-    }
-
-    /**
-     * @return FieldDescriptorInterface[]
-     */
-    private function getFieldDescriptors()
-    {
-        $factory = $this->get('sulu_core.list_builder.field_descriptor_factory');
-
-        return $factory->getFieldDescriptorForClass(RedirectRoute::class);
     }
 }

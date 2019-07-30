@@ -11,14 +11,15 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Manager;
 
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
-use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 
-class RedirectRouteManagerTest extends \PHPUnit_Framework_TestCase
+class RedirectRouteManagerTest extends TestCase
 {
     /**
      * @var RedirectRouteRepositoryInterface
@@ -40,46 +41,50 @@ class RedirectRouteManagerTest extends \PHPUnit_Framework_TestCase
     public function testSave()
     {
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
-        $redirectRoute->getSource()->willReturn('/test');
-        $redirectRoute->getStatusCode()->willReturn(301);
-        $redirectRoute->getId()->willReturn(null);
         $redirectRoute->setId(Argument::any())->shouldBeCalled();
+        $redirectRoute->setSource('/test')->shouldBeCalled();
+        $redirectRoute->setEnabled(true)->shouldBeCalled();
+        $redirectRoute->setTarget('/test2')->shouldBeCalled();
+        $redirectRoute->setStatusCode(301)->shouldBeCalled();
+        $redirectRoute->getStatusCode()->willReturn(301);
 
         $this->repository->findBySource('/test')->willReturn(null);
+        $this->repository->createNew()->willReturn($redirectRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
-        $this->manager->save($redirectRoute->reveal());
+        $this->manager->saveByData(['source' => '/test', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301]);
     }
 
     public function testSave410()
     {
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
-        $redirectRoute->getSource()->willReturn('/test410');
-        $redirectRoute->getStatusCode()->willReturn(410);
         $redirectRoute->setTarget('')->shouldBeCalled();
-        $redirectRoute->getId()->willReturn(null);
+        $redirectRoute->setSource('/test410')->shouldBeCalled();
         $redirectRoute->setId(Argument::any())->shouldBeCalled();
+        $redirectRoute->setEnabled(true)->shouldBeCalled();
+        $redirectRoute->setStatusCode(410)->shouldBeCalled();
+        $redirectRoute->getStatusCode()->willReturn(410);
 
         $this->repository->findBySource('/test410')->willReturn(null);
+        $this->repository->createNew()->willReturn($redirectRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
-        $this->manager->save($redirectRoute->reveal());
+        $this->manager->saveByData(['source' => '/test410', 'target' => '', 'enabled' => true, 'statusCode' => 410]);
     }
 
     public function testSaveAlreadyExists()
     {
-        $this->setExpectedException(RedirectRouteNotUniqueException::class);
+        $this->expectException(RedirectRouteNotUniqueException::class);
 
         $otherRoute = $this->prophesize(RedirectRouteInterface::class);
         $otherRoute->getId()->willReturn('123-123-123');
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
-        $redirectRoute->getId()->willReturn('321-321-321');
-        $redirectRoute->getSource()->willReturn('/test');
 
         $this->repository->findBySource('/test')->willReturn($otherRoute->reveal());
+        $this->repository->createNew()->willReturn($redirectRoute->reveal());
 
-        $this->manager->save($redirectRoute->reveal());
+        $this->manager->saveByData(['source' => '/test', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301]);
 
         $this->repository->persist($redirectRoute->reveal())->shouldNotBeCalled();
     }
@@ -91,13 +96,18 @@ class RedirectRouteManagerTest extends \PHPUnit_Framework_TestCase
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getId()->willReturn('123-123-123');
-        $redirectRoute->getSource()->willReturn('/test');
+        $redirectRoute->setSource('/test')->shouldBeCalled();
+        $redirectRoute->setEnabled(true)->shouldBeCalled();
+        $redirectRoute->setTarget('/test2')->shouldBeCalled();
+        $redirectRoute->setStatusCode(301)->shouldBeCalled();
         $redirectRoute->getStatusCode()->willReturn(301);
 
+
+        $this->repository->findById('123-123-123')->willReturn($redirectRoute->reveal());
         $this->repository->findBySource('/test')->willReturn($otherRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
-        $this->manager->save($redirectRoute->reveal());
+        $this->manager->saveByData(['source' => '/test', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301, 'id' => '123-123-123']);
     }
 
     public function testDelete()

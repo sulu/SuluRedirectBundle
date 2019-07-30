@@ -6,18 +6,18 @@ Install bundle over composer:
 composer require sulu/redirect-bundle
 ```
 
-Add bundle to AbstractKernel:
+Add bundle to config/bundles.php:
 
 ```php
-new Sulu\Bundle\RedirectBundle\SuluRedirectBundle(),
+    Sulu\Bundle\RedirectBundle\SuluRedirectBundle::class => ['all' => true],
 ```
 
-Add routing files to `app/config/admin/routing.yml`:
+Add routing files to `config/routes/sulu_redirect_admin.yaml`:
 
 ```yml
 sulu_redirect_api:
     type: rest
-    resource: "@SuluRedirectBundle/Resources/config/routing_api.xml"
+    resource: "@SuluRedirectBundle/Resources/config/routing_api.yml"
     prefix: /admin/api
 
 sulu_redirect:
@@ -26,18 +26,6 @@ sulu_redirect:
 ```
 
 ## Initialize bundle
-
-Create assets:
-
-```bash
-php bin/console assets:install
-```
-
-Create translations:
-
-```
-php bin/console sulu:translate:export
-```
 
 Create tables
 
@@ -50,7 +38,7 @@ php bin/console doctrine:schema:update
 ```yml
 sulu_redirect:
     imports:
-        path:                 '%kernel.root_dir%/../var/uploads/redirects'
+        path:                     '%kernel.root_dir%/../var/uploads/redirects'
     objects:
         redirect_route:
             model:                Sulu\Bundle\RedirectBundle\Entity\RedirectRoute

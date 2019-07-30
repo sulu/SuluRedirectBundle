@@ -12,6 +12,7 @@
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\GoneSubscriber;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Bundle\RedirectBundle\GoneSubscriber\GoneEntitySubscriber;
@@ -19,7 +20,7 @@ use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
 use Sulu\Bundle\RouteBundle\Model\RouteInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class GoneEntitySubscriberTest extends \PHPUnit_Framework_TestCase
+class GoneEntitySubscriberTest extends TestCase
 {
     /**
      * @var GoneEntitySubscriber
@@ -55,7 +56,7 @@ class GoneEntitySubscriberTest extends \PHPUnit_Framework_TestCase
         $this->event->getObject()->willReturn($this->object->reveal());
 
         $this->redirectRouteManager = $this->prophesize(RedirectRouteManager::class);
-        $this->redirectRouteManager->save(Argument::that(function($object) {
+        $this->redirectRouteManager->save(Argument::that(function ($object) {
             $this->assertEquals($object->getSource(), '/test/123');
 
             return true;

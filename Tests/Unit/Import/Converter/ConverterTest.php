@@ -11,12 +11,13 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Converter;
 
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Sulu\Bundle\RedirectBundle\Import\Converter\Converter;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 
-class ConverterTest extends \PHPUnit_Framework_TestCase
+class ConverterTest extends TestCase
 {
     public function testSupports()
     {

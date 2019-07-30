@@ -11,13 +11,14 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Routing;
 
+use PHPUnit\Framework\TestCase;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 use Sulu\Bundle\RedirectBundle\Routing\RedirectRouteProvider;
 use Symfony\Cmf\Component\Routing\RouteProviderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class RedirectRouteProviderTest extends \PHPUnit_Framework_TestCase
+class RedirectRouteProviderTest extends TestCase
 {
     /**
      * @var RedirectRouteRepositoryInterface

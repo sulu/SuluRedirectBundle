@@ -12,7 +12,8 @@
 namespace Sulu\Bundle\RedirectBundle\DependencyInjection;
 
 use Sulu\Bundle\PersistenceBundle\DependencyInjection\PersistenceExtensionTrait;
-use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotFoundException;
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Component\Rest\Exception\EntityNotFoundException;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -55,9 +56,36 @@ class SuluRedirectExtension extends Extension implements PrependExtensionInterfa
                     'exception' => [
                         'codes' => [
                             RedirectRouteNotUniqueException::class => 409,
+                            RedirectRouteNotFoundException::class => 404,
                             EntityNotFoundException::class => 404,
                         ],
                     ],
+                ]
+            );
+        }
+
+        if ($container->hasExtension('sulu_admin')) {
+            $container->prependExtensionConfig(
+                'sulu_admin',
+                [
+                    'lists' => [
+                        'directories' => [
+                            __DIR__ . '/../Resources/config/lists',
+                        ],
+                    ],
+                    'forms' => [
+                        'directories' => [
+                            __DIR__ . '/../Resources/config/forms',
+                        ],
+                    ],
+                    'resources' => [
+                        'redirect_routes' => [
+                            'routes' => [
+                                'list' => 'sulu_redirect.get_redirect-routes',
+                                'detail' => 'sulu_redirect.get_redirect-route',
+                            ],
+                        ],
+                    ]
                 ]
             );
         }

@@ -1,9 +1,11 @@
 sudo: false
+dist: trusty
 
 language: php
 
 services:
   - elasticsearch
+  - mysql
 
 cache:
   directories:
@@ -11,13 +13,14 @@ cache:
 
 matrix:
   include:
-    - php: 5.5
+    - php: 7.1
       env:
         - COMPOSER_FLAGS="--prefer-lowest --prefer-dist --no-interaction"
-    - php: 7.0
+    - php: 7.3
       env:
         - COMPOSER_FLAGS="--prefer-dist --no-interaction"
         - CODE_COVERAGE="--coverage-clover=coverage.clover"
+        - PHPSTAN=true
 
 before_install:
   - if [[ -z $CODE_COVERAGE ]]; then phpenv config-rm xdebug.ini ; fi
@@ -27,10 +30,11 @@ install:
   - phpenv config-add Tests/travis.php.ini
   - travis_retry composer update $COMPOSER_FLAGS
   - composer info -i
-  - ./Tests/app/console doctrine:database:create
-  - ./Tests/app/console doctrine:schema:create
+  - ./Tests/Application/console doctrine:database:create
+  - ./Tests/Application/console doctrine:schema:create
 
 script:
+  - if [[ $PHPSTAN = true ]]; then ./vendor/bin/phpstan analyze .; fi
   - ./vendor/bin/phpunit $CODE_COVERAGE
 
 after_script:

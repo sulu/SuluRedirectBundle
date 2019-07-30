@@ -19,14 +19,8 @@
 # System files
 .DS_Store
 
-# Frontend Caches
-bower_components/
-.tmp/
-.sass-cache/
-node_modules/
-npm-debug.log
 
 # tests
-Tests/app/cache
-Tests/app/logs
-Tests/app/data
+Tests/Application/var/
+
+\.php_cs\.cache

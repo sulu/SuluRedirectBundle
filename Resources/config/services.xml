@@ -5,23 +5,16 @@
     <services>
         <!-- sulu-admin -->
         <service id="sulu_redirect.admin" class="Sulu\Bundle\RedirectBundle\Admin\RedirectAdmin" public="false">
+            <argument type="service" id="sulu_admin.route_factory"/>
             <argument type="service" id="sulu_security.security_checker"/>
-            <argument>%sulu_admin.name%</argument>
 
             <tag name="sulu.admin"/>
             <tag name="sulu.context" context="admin"/>
         </service>
 
-        <!-- content navigation -->
-        <service id="sulu_redirect.content_navigation"
-                 class="Sulu\Bundle\RedirectBundle\Admin\RedirectRoutesNavigationProvider">
-            <tag name="sulu_admin.content_navigation" alias="redirect-routes"/>
-            <tag name="sulu.context" context="admin"/>
-        </service>
-
         <!-- redirect-route -->
         <service id="sulu_redirect.redirect_route_manager"
-                 class="Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager">
+                 class="Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager" public="true">
             <argument type="service" id="sulu.repository.redirect_route"/>
         </service>
 
@@ -45,6 +38,11 @@
                  public="false">
             <argument type="service" id="doctrine"/>
             <argument type="service" id="jms_serializer.unserialize_object_constructor"/>
+        </service>
+
+        <service id="sulu_article.reindex_command" class="Sulu\Bundle\RedirectBundle\Command\ImportCommand">
+            <argument type="service" id="sulu_redirect.import" />
+            <tag name="console.command" />
         </service>
     </services>
 </container>

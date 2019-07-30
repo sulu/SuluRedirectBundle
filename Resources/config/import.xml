@@ -28,7 +28,7 @@
             <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
 
-        <service id="sulu_redirect.import" class="Sulu\Bundle\RedirectBundle\Import\FileImport">
+        <service id="sulu_redirect.import" class="Sulu\Bundle\RedirectBundle\Import\FileImport" public="true">
             <argument type="service" id="sulu_redirect.import.aggregate_reader"/>
             <argument type="service" id="sulu_redirect.import.aggregate_converter"/>
             <argument type="service" id="sulu_redirect.import.writer"/>

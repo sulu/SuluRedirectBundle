@@ -12,8 +12,8 @@
 namespace Sulu\Bundle\RedirectBundle\Import\Writer;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
-use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 
 /**

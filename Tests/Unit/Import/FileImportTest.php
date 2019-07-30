@@ -11,6 +11,7 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import;
 
+use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Sulu\Bundle\RedirectBundle\Import\Converter\Converter;
 use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterInterface;
@@ -24,7 +25,7 @@ use Sulu\Bundle\RedirectBundle\Import\Reader\ReaderNotFoundException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\WriterInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 
-class FileImportTest extends \PHPUnit_Framework_TestCase
+class FileImportTest extends TestCase
 {
     /**
      * @var ReaderInterface
@@ -95,7 +96,7 @@ class FileImportTest extends \PHPUnit_Framework_TestCase
 
     public function testImportNoReaderSupports()
     {
-        $this->setExpectedException(ReaderNotFoundException::class);
+        $this->expectException(ReaderNotFoundException::class);
 
         $this->reader->supports($this->fileName)->willReturn(false);
 
@@ -109,7 +110,7 @@ class FileImportTest extends \PHPUnit_Framework_TestCase
         $this->reader->supports($this->fileName)->willReturn(true);
         $this->reader->read($this->fileName)->willReturn(
             [
-                new ReaderItem(1, '', null, $this->prophesize(ImportException::class)->reveal()),
+                new ReaderItem(1, '', [], $this->prophesize(ImportException::class)->reveal()),
             ]
         );
 

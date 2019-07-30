@@ -45,7 +45,7 @@
         </service>
 
         <service id="sulu_redirect.controller.redirect"
-                 class="Sulu\Bundle\RedirectBundle\Controller\WebsiteRedirectController">
+                 class="Sulu\Bundle\RedirectBundle\Controller\WebsiteRedirectController" public="true">
             <tag name="sulu.context" context="website"/>
         </service>
     </services>

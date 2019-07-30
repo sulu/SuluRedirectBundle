@@ -12,6 +12,7 @@
 namespace Sulu\Bundle\RedirectBundle\Admin;
 
 use Sulu\Bundle\AdminBundle\Admin\Admin;
+use Sulu\Bundle\AdminBundle\Admin\Routing\RouteBuilderFactoryInterface;
 use Sulu\Bundle\AdminBundle\Navigation\Navigation;
 use Sulu\Bundle\AdminBundle\Navigation\NavigationItem;
 use Sulu\Component\Security\Authorization\PermissionTypes;
@@ -24,29 +25,51 @@ class RedirectAdmin extends Admin
 {
     const SECURITY_CONTEXT = 'sulu.modules.redirects';
 
+    const LIST_ROUTE = 'sulu_redirect.list';
+
+    const ADD_FORM_ROUTE = 'sulu_redirect.add_form';
+
+    const EDIT_FORM_ROUTE = 'sulu_redirect.edit_form';
+
     /**
-     * @param SecurityCheckerInterface $securityChecker
-     * @param string $title
+     * @var RouteBuilderFactoryInterface
      */
-    public function __construct(SecurityCheckerInterface $securityChecker, $title)
+    private $routeBuilderFactory;
+
+    /**
+     * @var SecurityCheckerInterface
+     */
+    protected $securityChecker;
+
+    /**
+     * RedirectAdmin constructor.
+     * @param RouteBuilderFactoryInterface $routeBuilderFactory
+     * @param SecurityCheckerInterface $securityChecker
+     */
+    public function __construct(RouteBuilderFactoryInterface $routeBuilderFactory, SecurityCheckerInterface $securityChecker)
     {
-        $rootNavigationItem = new NavigationItem($title);
-        $section = new NavigationItem('navigation.modules');
-        $section->setPosition(20);
+        $this->routeBuilderFactory = $routeBuilderFactory;
+        $this->securityChecker = $securityChecker;
+    }
 
-        if ($securityChecker->hasPermission(self::SECURITY_CONTEXT, PermissionTypes::VIEW)) {
-            $settings = new NavigationItem('navigation.settings', $section);
 
+    public function getNavigation(): Navigation
+    {
+        $rootNavigationItem = $this->getNavigationItemRoot();
+
+        $settings = Admin::getNavigationItemSettings();
+
+        if ($this->securityChecker->hasPermission(self::SECURITY_CONTEXT, PermissionTypes::VIEW)) {
             $redirect = new NavigationItem('sulu_redirect.title', $settings);
             $redirect->setPosition(51);
-            $redirect->setAction('redirects');
+            $redirect->setMainRoute(static::LIST_ROUTE);
         }
 
-        if ($section->hasChildren()) {
-            $rootNavigationItem->addChild($section);
+        if ($settings->hasChildren()) {
+            $rootNavigationItem->addChild($settings);
         }
 
-        $this->setNavigation(new Navigation($rootNavigationItem));
+        return new Navigation($rootNavigationItem);
     }
 
     /**
@@ -57,6 +80,56 @@ class RedirectAdmin extends Admin
         return 'suluredirect';
     }
 
+    public function getRoutes(): array
+    {
+        $formToolbarActions = [
+            'sulu_admin.save',
+            'sulu_admin.delete',
+        ];
+
+        $listToolbarActions = [
+            'sulu_admin.add',
+            'sulu_admin.delete'
+        ];
+
+        return [
+            $this->routeBuilderFactory->createListRouteBuilder(static::LIST_ROUTE, '/redirect-routes')
+                ->setResourceKey('redirect_routes')
+                ->setListKey('redirect_routes')
+                ->setTitle('sulu_redirect.title')
+                ->addListAdapters(['table'])
+                ->setAddRoute(static::ADD_FORM_ROUTE)
+                ->setEditRoute(static::EDIT_FORM_ROUTE)
+                ->enableSearching()
+                ->addToolbarActions($listToolbarActions)
+                ->getRoute(),
+            $this->routeBuilderFactory->createResourceTabRouteBuilder(static::ADD_FORM_ROUTE, '/redirect-routes/add')
+                ->setResourceKey('redirect_routes')
+                ->setBackRoute(static::LIST_ROUTE)
+                ->getRoute(),
+            $this->routeBuilderFactory->createFormRouteBuilder('sulu_redirects.add_form.details', '/details')
+                ->setResourceKey('redirect_routes')
+                ->setFormKey('redirect_route_details')
+                ->setTabTitle('sulu_admin.details')
+                ->setEditRoute(static::EDIT_FORM_ROUTE)
+                ->addToolbarActions($formToolbarActions)
+                ->setParent(static::ADD_FORM_ROUTE)
+                ->getRoute(),
+            $this->routeBuilderFactory->createResourceTabRouteBuilder(static::EDIT_FORM_ROUTE, '/redirect-routes/:id')
+                ->setResourceKey('redirect_routes')
+                ->setBackRoute(static::LIST_ROUTE)
+                ->setTitleProperty('name')
+                ->getRoute(),
+            $this->routeBuilderFactory->createFormRouteBuilder('sulu_redirects.edit_form.details', '/details')
+                ->setResourceKey('redirect_routes')
+                ->setFormKey('redirect_route_details')
+                ->setTabTitle('sulu_admin.details')
+                ->addToolbarActions($formToolbarActions)
+                ->setParent(static::EDIT_FORM_ROUTE)
+                ->getRoute(),
+        ];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -64,7 +137,7 @@ class RedirectAdmin extends Admin
     {
         return [
             'Sulu' => [
-                'Global' => [
+                'Settings' => [
                     self::SECURITY_CONTEXT => [
                         PermissionTypes::VIEW,
                     ],
