@@ -110,7 +110,7 @@ class FileImportTest extends TestCase
         $this->reader->supports($this->fileName)->willReturn(true);
         $this->reader->read($this->fileName)->willReturn(
             [
-                new ReaderItem(1, '', null, $this->prophesize(ImportException::class)->reveal()),
+                new ReaderItem(1, '', [], $this->prophesize(ImportException::class)->reveal()),
             ]
         );
 
