@@ -58,6 +58,7 @@
             </meta>
             <params>
                 <param name="type" value="toggler"/>
+                <param name="default_value" value="true"/>
             </params>
         </property>
     </properties>
