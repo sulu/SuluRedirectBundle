@@ -12,9 +12,10 @@
 namespace Sulu\Bundle\RedirectBundle\Admin;
 
 use Sulu\Bundle\AdminBundle\Admin\Admin;
+use Sulu\Bundle\AdminBundle\Admin\Navigation\NavigationItemCollection;
 use Sulu\Bundle\AdminBundle\Admin\Routing\RouteBuilderFactoryInterface;
-use Sulu\Bundle\AdminBundle\Navigation\Navigation;
-use Sulu\Bundle\AdminBundle\Navigation\NavigationItem;
+use Sulu\Bundle\AdminBundle\Admin\Navigation\NavigationItem;
+use Sulu\Bundle\AdminBundle\Admin\Routing\RouteCollection;
 use Sulu\Component\Security\Authorization\PermissionTypes;
 use Sulu\Component\Security\Authorization\SecurityCheckerInterface;
 
@@ -52,24 +53,15 @@ class RedirectAdmin extends Admin
         $this->securityChecker = $securityChecker;
     }
 
-
-    public function getNavigation(): Navigation
+    public function configureNavigationItems(NavigationItemCollection $navigationItemCollection): void
     {
-        $rootNavigationItem = $this->getNavigationItemRoot();
-
-        $settings = Admin::getNavigationItemSettings();
-
         if ($this->securityChecker->hasPermission(self::SECURITY_CONTEXT, PermissionTypes::VIEW)) {
-            $redirect = new NavigationItem('sulu_redirect.title', $settings);
+            $redirect = new NavigationItem('sulu_redirect.title');
             $redirect->setPosition(51);
             $redirect->setMainRoute(static::LIST_ROUTE);
-        }
 
-        if ($settings->hasChildren()) {
-            $rootNavigationItem->addChild($settings);
+            $navigationItemCollection->get(Admin::SETTINGS_NAVIGATION_ITEM)->addChild($redirect);
         }
-
-        return new Navigation($rootNavigationItem);
     }
 
     /**
@@ -80,7 +72,7 @@ class RedirectAdmin extends Admin
         return 'suluredirect';
     }
 
-    public function getRoutes(): array
+    public function configureRoutes(RouteCollection $routeCollection): void
     {
         $formToolbarActions = [
             'sulu_admin.save',
@@ -92,7 +84,7 @@ class RedirectAdmin extends Admin
             'sulu_admin.delete'
         ];
 
-        return [
+        $routeCollection->add(
             $this->routeBuilderFactory->createListRouteBuilder(static::LIST_ROUTE, '/redirect-routes')
                 ->setResourceKey('redirect_routes')
                 ->setListKey('redirect_routes')
@@ -102,11 +94,15 @@ class RedirectAdmin extends Admin
                 ->setEditRoute(static::EDIT_FORM_ROUTE)
                 ->enableSearching()
                 ->addToolbarActions($listToolbarActions)
-                ->getRoute(),
+        );
+
+        $routeCollection->add(
             $this->routeBuilderFactory->createResourceTabRouteBuilder(static::ADD_FORM_ROUTE, '/redirect-routes/add')
                 ->setResourceKey('redirect_routes')
                 ->setBackRoute(static::LIST_ROUTE)
-                ->getRoute(),
+        );
+
+        $routeCollection->add(
             $this->routeBuilderFactory->createFormRouteBuilder('sulu_redirects.add_form.details', '/details')
                 ->setResourceKey('redirect_routes')
                 ->setFormKey('redirect_route_details')
@@ -114,20 +110,22 @@ class RedirectAdmin extends Admin
                 ->setEditRoute(static::EDIT_FORM_ROUTE)
                 ->addToolbarActions($formToolbarActions)
                 ->setParent(static::ADD_FORM_ROUTE)
-                ->getRoute(),
-            $this->routeBuilderFactory->createResourceTabRouteBuilder(static::EDIT_FORM_ROUTE, '/redirect-routes/:id')
-                ->setResourceKey('redirect_routes')
-                ->setBackRoute(static::LIST_ROUTE)
-                ->setTitleProperty('name')
-                ->getRoute(),
+        );
+
+        $routeCollection->add($this->routeBuilderFactory->createResourceTabRouteBuilder(static::EDIT_FORM_ROUTE, '/redirect-routes/:id')
+            ->setResourceKey('redirect_routes')
+            ->setBackRoute(static::LIST_ROUTE)
+            ->setTitleProperty('name')
+        );
+
+        $routeCollection->add(
             $this->routeBuilderFactory->createFormRouteBuilder('sulu_redirects.edit_form.details', '/details')
                 ->setResourceKey('redirect_routes')
                 ->setFormKey('redirect_route_details')
                 ->setTabTitle('sulu_admin.details')
                 ->addToolbarActions($formToolbarActions)
                 ->setParent(static::EDIT_FORM_ROUTE)
-                ->getRoute(),
-        ];
+        );
     }
 
     /**
