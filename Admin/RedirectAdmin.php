@@ -60,7 +60,7 @@ class RedirectAdmin extends Admin
             $redirect->setPosition(51);
             $redirect->setMainRoute(static::LIST_ROUTE);
 
-            $navigationItemCollection->add($redirect);
+            $navigationItemCollection->get(Admin::SETTINGS_NAVIGATION_ITEM)->addChild($redirect);
         }
     }
 
