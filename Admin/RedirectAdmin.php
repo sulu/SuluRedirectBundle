@@ -16,6 +16,7 @@ use Sulu\Bundle\AdminBundle\Admin\Navigation\NavigationItemCollection;
 use Sulu\Bundle\AdminBundle\Admin\Routing\RouteBuilderFactoryInterface;
 use Sulu\Bundle\AdminBundle\Admin\Navigation\NavigationItem;
 use Sulu\Bundle\AdminBundle\Admin\Routing\RouteCollection;
+use Sulu\Bundle\AdminBundle\Admin\Routing\ToolbarAction;
 use Sulu\Component\Security\Authorization\PermissionTypes;
 use Sulu\Component\Security\Authorization\SecurityCheckerInterface;
 
@@ -75,13 +76,13 @@ class RedirectAdmin extends Admin
     public function configureRoutes(RouteCollection $routeCollection): void
     {
         $formToolbarActions = [
-            'sulu_admin.save',
-            'sulu_admin.delete',
+            new ToolbarAction('sulu_admin.save'),
+            new ToolbarAction('sulu_admin.delete'),
         ];
 
         $listToolbarActions = [
-            'sulu_admin.add',
-            'sulu_admin.delete'
+            new ToolbarAction('sulu_admin.add'),
+            new ToolbarAction('sulu_admin.delete'),
         ];
 
         $routeCollection->add(
