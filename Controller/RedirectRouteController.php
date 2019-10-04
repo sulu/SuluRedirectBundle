@@ -11,15 +11,20 @@
 
 namespace Sulu\Bundle\RedirectBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Routing\ClassResourceInterface;
-use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
+use FOS\RestBundle\View\ViewHandlerInterface;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
+use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
+use Sulu\Component\Rest\AbstractRestController;
+use Sulu\Component\Rest\DoctrineRestHelper;
 use Sulu\Component\Rest\Exception\EntityNotFoundException;
+use Sulu\Component\Rest\ListBuilder\Doctrine\DoctrineListBuilderFactoryInterface;
 use Sulu\Component\Rest\ListBuilder\FieldDescriptorInterface;
 use Sulu\Component\Rest\ListBuilder\ListRepresentation;
-use Sulu\Component\Rest\RestController;
+use Sulu\Component\Rest\ListBuilder\Metadata\FieldDescriptorFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,9 +33,65 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @RouteResource("redirect-route")
  */
-class RedirectRouteController extends RestController implements ClassResourceInterface
+class RedirectRouteController extends AbstractRestController implements ClassResourceInterface
 {
     const RESULT_KEY = 'redirect_routes';
+
+    /**
+     * @var DoctrineRestHelper
+     */
+    protected $restHelper;
+
+    /**
+     * @var DoctrineListBuilderFactoryInterface
+     */
+    protected $factory;
+
+    /**
+     * @var FieldDescriptorFactoryInterface
+     */
+    protected $fieldDescriptor;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    protected $entityManager;
+
+    /**
+     * @var RedirectRouteManagerInterface
+     */
+    protected $redirectRouteManager;
+
+    /**
+     * @var RedirectRouteRepositoryInterface
+     */
+    protected $redirectRouteRepository;
+
+    /**
+     * @var string
+     */
+    protected $tagEntityName;
+
+    public function __construct(
+        ViewHandlerInterface $viewHandler,
+        DoctrineRestHelper $restHelper,
+        DoctrineListBuilderFactoryInterface $factory,
+        FieldDescriptorFactoryInterface $fieldDescriptor,
+        EntityManagerInterface $entityManager,
+        RedirectRouteManagerInterface $redirectRouteManager,
+        RedirectRouteRepositoryInterface $redirectRouteRepository,
+        string $tagEntityName
+    )
+    {
+        parent::__construct($viewHandler);
+        $this->restHelper = $restHelper;
+        $this->factory = $factory;
+        $this->fieldDescriptor = $fieldDescriptor;
+        $this->entityManager = $entityManager;
+        $this->redirectRouteManager = $redirectRouteManager;
+        $this->redirectRouteRepository = $redirectRouteRepository;
+        $this->tagEntityName = $tagEntityName;
+    }
 
     /**
      * Returns redirect-routes.
@@ -41,17 +102,11 @@ class RedirectRouteController extends RestController implements ClassResourceInt
      */
     public function cgetAction(Request $request)
     {
-        $restHelper = $this->get('sulu_core.doctrine_rest_helper');
-        $factory = $this->get('sulu_core.doctrine_list_builder_factory');
-
-        $tagEntityName = $this->getParameter('sulu.model.redirect_route.class');
-
         /** @var FieldDescriptorInterface[] $fieldDescriptors */
-        $fieldDescriptors = $this->get('sulu_core.list_builder.field_descriptor_factory')
-            ->getFieldDescriptors('redirect_routes');
-        $listBuilder = $factory->create($tagEntityName);
+        $fieldDescriptors = $this->fieldDescriptor->getFieldDescriptors('redirect_routes');
+        $listBuilder = $this->factory->create($this->tagEntityName);
 
-        $restHelper->initializeListBuilder($listBuilder, $fieldDescriptors);
+        $this->restHelper->initializeListBuilder($listBuilder, $fieldDescriptors);
         $results = $listBuilder->execute();
 
         $list = new ListRepresentation(
@@ -78,8 +133,8 @@ class RedirectRouteController extends RestController implements ClassResourceInt
     {
         $data = $request->request->all();
 
-        $redirectRoute= $this->getRedirectRouteManager()->saveByData($data);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $redirectRoute = $this->redirectRouteManager->saveByData($data);
+        $this->entityManager->flush();
 
         return $this->handleView($this->view($redirectRoute));
     }
@@ -95,9 +150,9 @@ class RedirectRouteController extends RestController implements ClassResourceInt
      */
     public function getAction($id)
     {
-        $entity = $this->getRedirectRouteRepository()->find($id);
+        $entity = $this->redirectRouteRepository->find($id);
         if (!$entity) {
-            throw new EntityNotFoundException($this->getParameter('sulu.model.redirect_route.class'), $id);
+            throw new EntityNotFoundException($this->tagEntityName, $id);
         }
 
         return $this->handleView($this->view($entity));
@@ -116,8 +171,8 @@ class RedirectRouteController extends RestController implements ClassResourceInt
         $data = $request->request->all();
         $data['id'] = $id;
 
-        $redirectRoute = $this->getRedirectRouteManager()->saveByData($data);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $redirectRoute = $this->redirectRouteManager->saveByData($data);
+        $this->entityManager->flush();
 
         return $this->handleView($this->view($redirectRoute));
     }
@@ -133,13 +188,14 @@ class RedirectRouteController extends RestController implements ClassResourceInt
      */
     public function deleteAction($id)
     {
-        $redirectRoute = $this->getRedirectRouteRepository()->find($id);
+        /** @var RedirectRouteInterface $redirectRoute */
+        $redirectRoute = $this->redirectRouteRepository->find($id);
         if (!$redirectRoute) {
-            throw new EntityNotFoundException($this->getParameter('sulu.model.redirect_route.class'), $id);
+            throw new EntityNotFoundException($this->tagEntityName, $id);
         }
 
-        $this->getRedirectRouteManager()->delete($redirectRoute);
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $this->redirectRouteManager->delete($redirectRoute);
+        $this->entityManager->flush();
 
         return $this->handleView($this->view());
     }
@@ -153,11 +209,12 @@ class RedirectRouteController extends RestController implements ClassResourceInt
      */
     public function cdeleteAction(Request $request)
     {
-        $repository = $this->getRedirectRouteRepository();
-        $manager = $this->getRedirectRouteManager();
+        $repository = $this->redirectRouteRepository;
+        $manager = $this->redirectRouteManager;
 
         $ids = array_filter(explode(',', $request->query->get('ids', '')));
         foreach ($ids as $id) {
+            /** @var RedirectRouteInterface $redirectRoute */
             $redirectRoute = $repository->find($id);
             if (!$redirectRoute) {
                 continue;
@@ -166,28 +223,8 @@ class RedirectRouteController extends RestController implements ClassResourceInt
             $manager->delete($redirectRoute);
         }
 
-        $this->get('doctrine.orm.entity_manager')->flush();
+        $this->entityManager->flush();
 
         return $this->handleView($this->view());
-    }
-
-    /**
-     * Returns redirect-route manager.
-     *
-     * @return RedirectRouteManagerInterface
-     */
-    protected function getRedirectRouteManager()
-    {
-        return $this->get('sulu_redirect.redirect_route_manager');
-    }
-
-    /**
-     * Returns redirect-route repository.
-     *
-     * @return RedirectRouteRepositoryInterface
-     */
-    protected function getRedirectRouteRepository()
-    {
-        return $this->get('sulu.repository.redirect_route');
     }
 }
