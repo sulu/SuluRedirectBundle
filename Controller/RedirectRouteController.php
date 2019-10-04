@@ -188,7 +188,7 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
      */
     public function deleteAction($id)
     {
-        /** @var RedirectRouteInterface $redirectRoute */
+        /** @var RedirectRouteInterface|null $redirectRoute */
         $redirectRoute = $this->redirectRouteRepository->find($id);
         if (!$redirectRoute) {
             throw new EntityNotFoundException($this->tagEntityName, $id);
@@ -214,7 +214,7 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
 
         $ids = array_filter(explode(',', $request->query->get('ids', '')));
         foreach ($ids as $id) {
-            /** @var RedirectRouteInterface $redirectRoute */
+            /** @var RedirectRouteInterface|null $redirectRoute */
             $redirectRoute = $repository->find($id);
             if (!$redirectRoute) {
                 continue;
