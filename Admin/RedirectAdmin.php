@@ -65,14 +65,6 @@ class RedirectAdmin extends Admin
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getJsBundleName()
-    {
-        return 'suluredirect';
-    }
-
     public function configureViews(ViewCollection $viewCollection): void
     {
         $formToolbarActions = [
