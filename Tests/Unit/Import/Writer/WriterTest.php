@@ -39,7 +39,7 @@ class WriterTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->redirectRouteManager = $this->prophesize(RedirectRouteManagerInterface::class);
         $this->entityManager = $this->prophesize(EntityManagerInterface::class);

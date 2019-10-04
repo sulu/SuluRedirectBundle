@@ -31,7 +31,7 @@ class RedirectRouteManagerTest extends TestCase
      */
     private $manager;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->repository = $this->prophesize(RedirectRouteRepositoryInterface::class);
 

@@ -27,7 +27,7 @@ class ReaderFacadeTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->fileName = '/import.csv';
     }

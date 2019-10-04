@@ -52,7 +52,7 @@ class FileImportTest extends TestCase
      */
     private $fileName;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->reader = $this->prophesize(ReaderInterface::class);
         $this->converter = $this->prophesize(ConverterInterface::class);

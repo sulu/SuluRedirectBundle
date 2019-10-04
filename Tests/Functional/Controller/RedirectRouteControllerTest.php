@@ -27,7 +27,7 @@ class RedirectRouteControllerTest extends SuluTestCase
      */
     private $status410Data;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
