@@ -5,7 +5,7 @@
     <services>
         <!-- sulu-admin -->
         <service id="sulu_redirect.admin" class="Sulu\Bundle\RedirectBundle\Admin\RedirectAdmin" public="false">
-            <argument type="service" id="sulu_admin.route_factory"/>
+            <argument type="service" id="sulu_admin.view_builder_factory"/>
             <argument type="service" id="sulu_security.security_checker"/>
 
             <tag name="sulu.admin"/>
