@@ -3,7 +3,7 @@
 /*
  * This file is part of Sulu.
  *
- * (c) MASSIVE ART WebServices GmbH
+ * (c) Sulu GmbH
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -44,7 +44,7 @@ class ReaderFacadeTest extends TestCase
 
         $readerFacade = new ReaderFacade(
             array_map(
-                function (ObjectProphecy $converter) {
+                function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
                 $converters
@@ -66,7 +66,7 @@ class ReaderFacadeTest extends TestCase
 
         $readerFacade = new ReaderFacade(
             array_map(
-                function (ObjectProphecy $converter) {
+                function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
                 $converters
@@ -101,7 +101,7 @@ class ReaderFacadeTest extends TestCase
 
         $readerFacade = new ReaderFacade(
             array_map(
-                function (ObjectProphecy $converter) {
+                function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
                 $converters
@@ -127,7 +127,7 @@ class ReaderFacadeTest extends TestCase
 
         $readerFacade = new ReaderFacade(
             array_map(
-                function (ObjectProphecy $converter) {
+                function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
                 $converters
