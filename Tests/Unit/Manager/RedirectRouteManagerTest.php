@@ -3,7 +3,7 @@
 /*
  * This file is part of Sulu.
  *
- * (c) MASSIVE ART WebServices GmbH
+ * (c) Sulu GmbH
  *
  * This source file is subject to the MIT license that is bundled
  * with this source code in the file LICENSE.
@@ -101,7 +101,6 @@ class RedirectRouteManagerTest extends TestCase
         $redirectRoute->setTarget('/test2')->shouldBeCalled();
         $redirectRoute->setStatusCode(301)->shouldBeCalled();
         $redirectRoute->getStatusCode()->willReturn(301);
-
 
         $this->repository->findById('123-123-123')->willReturn($redirectRoute->reveal());
         $this->repository->findBySource('/test')->willReturn($otherRoute->reveal());
