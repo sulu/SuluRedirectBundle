@@ -79,7 +79,7 @@ class GoneDocumentSubscriberTest extends TestCase
      */
     private $webspace;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->document = $this->prophesize(BasePageDocument::class);
         $this->document->getUuid()->willReturn('123-123-123');

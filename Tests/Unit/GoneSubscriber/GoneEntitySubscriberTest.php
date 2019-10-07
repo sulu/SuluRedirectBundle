@@ -47,7 +47,7 @@ class GoneEntitySubscriberTest extends TestCase
      */
     private $container;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->object = $this->prophesize(RouteInterface::class);
         $this->object->getPath()->willReturn('/test/123');

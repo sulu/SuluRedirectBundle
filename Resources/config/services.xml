@@ -3,9 +3,25 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
+
+        <service id="sulu_redirect.redirect_route_controller"
+                 class="Sulu\Bundle\RedirectBundle\Controller\RedirectRouteController"
+                 public="true">
+            <argument type="service" id="fos_rest.view_handler.default"/>
+            <argument type="service" id="sulu_core.doctrine_rest_helper"/>
+            <argument type="service" id="sulu_core.doctrine_list_builder_factory"/>
+            <argument type="service" id="sulu_core.list_builder.field_descriptor_factory"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+            <argument type="service" id="sulu_redirect.redirect_route_manager"/>
+            <argument type="service" id="sulu.repository.redirect_route"/>
+            <argument>%sulu.model.redirect_route.class%</argument>
+
+            <tag name="sulu.context" context="admin"/>
+        </service>
+
         <!-- sulu-admin -->
         <service id="sulu_redirect.admin" class="Sulu\Bundle\RedirectBundle\Admin\RedirectAdmin" public="false">
-            <argument type="service" id="sulu_admin.route_factory"/>
+            <argument type="service" id="sulu_admin.view_builder_factory"/>
             <argument type="service" id="sulu_security.security_checker"/>
 
             <tag name="sulu.admin"/>
@@ -41,8 +57,8 @@
         </service>
 
         <service id="sulu_article.reindex_command" class="Sulu\Bundle\RedirectBundle\Command\ImportCommand">
-            <argument type="service" id="sulu_redirect.import" />
-            <tag name="console.command" />
+            <argument type="service" id="sulu_redirect.import"/>
+            <tag name="console.command"/>
         </service>
     </services>
 </container>

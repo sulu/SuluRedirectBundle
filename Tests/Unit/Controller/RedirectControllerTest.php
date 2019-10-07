@@ -43,7 +43,7 @@ class RedirectControllerTest extends TestCase
     /**
      * {@inheritdoc}
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->controller = new WebsiteRedirectController();
 
