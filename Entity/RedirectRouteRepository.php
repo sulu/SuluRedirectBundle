@@ -26,7 +26,10 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
      */
     public function findById($id)
     {
-        return $this->find($id);
+        /** @var RedirectRouteInterface|null $redirectRoute */
+        $redirectRoute = $this->find($id);
+
+        return $redirectRoute;
     }
 
     /**
