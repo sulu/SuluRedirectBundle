@@ -38,7 +38,6 @@
         <property
                 name="enabled"
                 searchability="yes"
-                filter-type="boolean"
                 visibility="always"
                 type="bool"
                 translation="sulu_redirect.enabled"
@@ -51,7 +50,6 @@
             name="source"
             visibility="always"
             searchability="yes"
-            filter-type="string"
             translation="sulu_redirect.source"
         >
             <field-name>source</field-name>
@@ -62,7 +60,6 @@
                 name="target"
                 visibility="always"
                 searchability="yes"
-                filter-type="string"
                 translation="sulu_redirect.target"
         >
             <field-name>target</field-name>
@@ -73,7 +70,6 @@
                 name="statusCode"
                 visibility="always"
                 searchability="yes"
-                filter-type="string"
                 translation="sulu_redirect.status-code"
         >
             <field-name>statusCode</field-name>
