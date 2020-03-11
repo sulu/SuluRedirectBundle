@@ -56,7 +56,7 @@
             <argument type="service" id="jms_serializer.unserialize_object_constructor"/>
         </service>
 
-        <service id="sulu_article.reindex_command" class="Sulu\Bundle\RedirectBundle\Command\ImportCommand">
+        <service id="sulu_redirect.import_command" class="Sulu\Bundle\RedirectBundle\Command\ImportCommand">
             <argument type="service" id="sulu_redirect.import"/>
             <tag name="console.command"/>
         </service>
