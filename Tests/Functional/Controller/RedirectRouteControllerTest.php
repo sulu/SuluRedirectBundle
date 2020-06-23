@@ -12,6 +12,7 @@
 namespace Sulu\Bundle\RedirectBundle\Tests\Functional\Controller;
 
 use Sulu\Bundle\TestBundle\Testing\SuluTestCase;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 class RedirectRouteControllerTest extends SuluTestCase
 {
@@ -27,10 +28,16 @@ class RedirectRouteControllerTest extends SuluTestCase
      */
     private $status410Data;
 
+    /**
+     * @var KernelBrowser
+     */
+    private $client;
+
     protected function setUp(): void
     {
         parent::setUp();
 
+        $this->client = $this->createAuthenticatedClient();
         $this->purgeDatabase();
 
         $this->defaultData = ['source' => '/test1', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301];
@@ -125,9 +132,8 @@ class RedirectRouteControllerTest extends SuluTestCase
         $response = $this->post($this->defaultData);
         $data = json_decode($response->getContent(), true);
 
-        $client = $this->createAuthenticatedClient();
-        $client->request('GET', self::BASE_URL);
-        $response = $client->getResponse();
+        $this->client->request('GET', self::BASE_URL);
+        $response = $this->client->getResponse();
 
         $this->assertHttpStatusCode(200, $response);
         $result = json_decode($response->getContent(), true);
@@ -141,16 +147,14 @@ class RedirectRouteControllerTest extends SuluTestCase
         $response = $this->post($this->defaultData);
         $data = json_decode($response->getContent(), true);
 
-        $client = $this->createAuthenticatedClient();
-        $client->request('DELETE', self::BASE_URL . '/' . $data['id']);
-        $this->assertHttpStatusCode(204, $client->getResponse());
+        $this->client->request('DELETE', self::BASE_URL . '/' . $data['id']);
+        $this->assertHttpStatusCode(204, $this->client->getResponse());
     }
 
     public function testDeleteNotExisting()
     {
-        $client = $this->createAuthenticatedClient();
-        $client->request('DELETE', self::BASE_URL . '/123-123-123');
-        $this->assertHttpStatusCode(404, $client->getResponse());
+        $this->client->request('DELETE', self::BASE_URL . '/123-123-123');
+        $this->assertHttpStatusCode(404, $this->client->getResponse());
     }
 
     public function testCDelete()
@@ -161,32 +165,28 @@ class RedirectRouteControllerTest extends SuluTestCase
         $response = $this->post(['source' => '/test2', 'target' => '/test3', 'enabled' => true, 'statusCode' => 301]);
         $data2 = json_decode($response->getContent(), true);
 
-        $client = $this->createAuthenticatedClient();
-        $client->request('DELETE', self::BASE_URL . '?ids=' . $data1['id'] . ',' . $data2['id']);
-        $this->assertHttpStatusCode(204, $client->getResponse());
+        $this->client->request('DELETE', self::BASE_URL . '?ids=' . $data1['id'] . ',' . $data2['id']);
+        $this->assertHttpStatusCode(204, $this->client->getResponse());
     }
 
     private function post($data)
     {
-        $client = $this->createAuthenticatedClient();
-        $client->request('POST', self::BASE_URL, $data);
+        $this->client->request('POST', self::BASE_URL, $data);
 
-        return $client->getResponse();
+        return $this->client->getResponse();
     }
 
     private function get($id)
     {
-        $client = $this->createAuthenticatedClient();
-        $client->request('GET', self::BASE_URL . '/' . $id);
+        $this->client->request('GET', self::BASE_URL . '/' . $id);
 
-        return $client->getResponse();
+        return $this->client->getResponse();
     }
 
     private function put($id, $data)
     {
-        $client = $this->createAuthenticatedClient();
-        $client->request('PUT', self::BASE_URL . '/' . $id, $data);
+        $this->client->request('PUT', self::BASE_URL . '/' . $id, $data);
 
-        return $client->getResponse();
+        return $this->client->getResponse();
     }
 }
