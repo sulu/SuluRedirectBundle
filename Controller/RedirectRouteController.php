@@ -204,7 +204,7 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
         $repository = $this->redirectRouteRepository;
         $manager = $this->redirectRouteManager;
 
-        $ids = array_filter(explode(',', $request->query->get('ids', '')));
+        $ids = array_filter(explode(',', (string) $request->query->get('ids', '')));
         foreach ($ids as $id) {
             /** @var RedirectRouteInterface|null $redirectRoute */
             $redirectRoute = $repository->find($id);
