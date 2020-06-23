@@ -5,13 +5,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
-        "sulu/sulu": "^2.0",
+        "sulu/sulu": "^2.0.9",
         "ramsey/uuid": "^3.1",
         "symfony/dependency-injection": "^4.3 || ^5.0",
         "symfony/config": "^4.3 || ^5.0",
         "symfony/console": "^4.3 || ^5.0",
         "symfony/http-foundation": "^4.3 || ^5.0",
-        "friendsofsymfony/rest-bundle": "^2.8 || ^3.0",
+        "friendsofsymfony/rest-bundle": "^2.6 || ^3.0",
         "symfony/http-kernel": "^4.3 || ^5.0",
         "doctrine/orm": "^2.5.3",
         "symfony/event-dispatcher": "^4.3 || ^5.0",
@@ -30,7 +30,6 @@
         "symfony/monolog-bundle": "^3.1",
         "jackalope/jackalope-doctrine-dbal": "^1.3",
         "handcraftedinthealps/zendsearch": "^2.0",
-        "php-ffmpeg/php-ffmpeg": "^0.13 || ^0.14",
         "symfony/framework-bundle": "^4.3 || ^5.0",
         "phpspec/prophecy": "^1.10"
     },
@@ -50,6 +49,7 @@
         }
     },
     "scripts": {
+        "lint": "@phpstan",
         "phpstan": [
             "Tests/Application/console cache:warmup --env dev",
             "vendor/bin/phpstan analyze"
@@ -57,7 +57,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-develop": "2.0-dev"
+            "dev-master": "2.0-dev"
         }
     }
 }
