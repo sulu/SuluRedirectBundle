@@ -16,11 +16,15 @@ matrix:
     - php: 7.2
       env:
         - COMPOSER_FLAGS="--prefer-lowest --prefer-dist --no-interaction"
+        - APP_DEBUG=1
+        - APP_ENV=test
     - php: 7.3
       env:
         - COMPOSER_FLAGS="--prefer-dist --no-interaction"
         - CODE_COVERAGE="--coverage-clover=coverage.clover"
         - PHPSTAN=true
+        - APP_DEBUG=1
+        - APP_ENV=test
 
 before_install:
   - if [[ -z $CODE_COVERAGE ]]; then phpenv config-rm xdebug.ini ; fi
