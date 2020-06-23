@@ -51,7 +51,7 @@
     },
     "scripts": {
         "phpstan": [
-            "Tests/Application/console cache:warmup --env test",
+            "Tests/Application/console cache:warmup --env dev",
             "vendor/bin/phpstan analyze"
         ]
     },
