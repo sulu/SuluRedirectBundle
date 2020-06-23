@@ -26,8 +26,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('sulu_redirect')
+        $treeBuilder = new TreeBuilder('sulu_redirect');
+        $treeBuilder->getRootNode()
             ->children()
                 ->arrayNode('gone_on_remove')
                     ->info('When enabled, this feature automatically creates redirects with http status code 410 when a document with route or an route entity is removed.')
@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('imports')
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('path')->defaultValue('%kernel.root_dir%/../var/uploads/redirects')->end()
+                        ->scalarNode('path')->defaultValue('%kernel.project_dir%/var/uploads/redirects')->end()
                     ->end()
                 ->end()
                 ->arrayNode('objects')

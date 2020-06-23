@@ -47,15 +47,11 @@ interface RedirectRouteRepositoryInterface extends RepositoryInterface
 
     /**
      * Persist given entity.
-     *
-     * @param RedirectRouteInterface $entity
      */
-    public function persist(RedirectRouteInterface $entity);
+    public function persist(RedirectRouteInterface $entity): void;
 
     /**
      * Remove given entity.
-     *
-     * @param RedirectRouteInterface $entity
      */
-    public function remove(RedirectRouteInterface $entity);
+    public function remove(RedirectRouteInterface $entity): void;
 }

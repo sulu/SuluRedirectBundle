@@ -40,14 +40,13 @@ class RedirectRouteImportControllerTest extends TestCase
 
     public function testImportAction()
     {
-        $importFile = $this->importPath . '/' . $this->fileName;
-
         $request = $this->prophesize(Request::class);
 
         $fileBag = $this->prophesize(FileBag::class);
         $request->reveal()->files = $fileBag->reveal();
 
         $file = new File($fileName = __DIR__ . '/import.csv');
+        $importFile = $file->getPathname();
 
         $uploadedFile = $this->getMockBuilder(UploadedFile::class)
             ->setConstructorArgs([$importFile, $this->fileName, null, null, UPLOAD_ERR_NO_FILE])
@@ -82,14 +81,13 @@ class RedirectRouteImportControllerTest extends TestCase
 
     public function testImportActionReaderNotFound()
     {
-        $importFile = $this->importPath . '/' . $this->fileName;
-
         $request = $this->prophesize(Request::class);
 
         $fileBag = $this->prophesize(FileBag::class);
         $request->reveal()->files = $fileBag->reveal();
 
         $file = new File($fileName = __DIR__ . '/import.csv');
+        $importFile = $file->getPathname();
 
         $uploadedFile = $this->getMockBuilder(UploadedFile::class)
             ->setConstructorArgs([$importFile, $this->fileName, null, null, UPLOAD_ERR_NO_FILE])
@@ -112,13 +110,13 @@ class RedirectRouteImportControllerTest extends TestCase
 
     public function testImportActionConverterNotFound()
     {
-        $importFile = $this->importPath . '/' . $this->fileName;
         $request = $this->prophesize(Request::class);
 
         $fileBag = $this->prophesize(FileBag::class);
         $request->reveal()->files = $fileBag->reveal();
 
         $file = new File($fileName = __DIR__ . '/import.csv');
+        $importFile = $file->getPathname();
 
         $uploadedFile = $this->getMockBuilder(UploadedFile::class)
             ->setConstructorArgs([$importFile, $this->fileName, null, null, UPLOAD_ERR_NO_FILE])

@@ -39,6 +39,8 @@ class ReaderFacade implements ReaderInterface
                 return $reader->read($fileName);
             }
         }
+
+        return null;
     }
 
     /**

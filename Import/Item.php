@@ -41,8 +41,6 @@ class Item
     /**
      * @param int $lineNumber
      * @param string $lineContent
-     * @param RedirectRouteInterface|null $data
-     * @param ImportException|null $exception
      */
     public function __construct($lineNumber, $lineContent, RedirectRouteInterface $data = null, ImportException $exception = null)
     {

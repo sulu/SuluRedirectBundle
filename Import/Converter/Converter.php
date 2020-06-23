@@ -33,9 +33,6 @@ class Converter implements ConverterInterface
      */
     private $repository;
 
-    /**
-     * @param RedirectRouteRepositoryInterface $repository
-     */
     public function __construct(RedirectRouteRepositoryInterface $repository)
     {
         $this->repository = $repository;

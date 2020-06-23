@@ -3,40 +3,51 @@ dist: trusty
 
 language: php
 
-services:
-  - elasticsearch
-  - mysql
-
 cache:
-  directories:
-    - "$HOME/.composer/cache"
+    directories:
+        - "$HOME/.composer/cache"
+
+env:
+    global:
+        - APP_ENV=test
+        - DATABASE_URL=mysql://root:@127.0.0.1:3306/su_redirect_test
+        - DATABASE_CHARSET=utf8mb4
+        - DATABASE_COLLATE=utf8mb4_unicode_ci
 
 matrix:
-  include:
-    - php: 7.2
-      env:
-        - COMPOSER_FLAGS="--prefer-lowest --prefer-dist --no-interaction"
-    - php: 7.3
-      env:
-        - COMPOSER_FLAGS="--prefer-dist --no-interaction"
-        - CODE_COVERAGE="--coverage-clover=coverage.clover"
-        - PHPSTAN=true
+    include:
+        - php: 7.2
+          env:
+              - COMPOSER_FLAGS="--optimize-autoloader --prefer-dist --no-interaction --prefer-lowest --prefer-stable"
+        - php: 7.4
+          env:
+              - COMPOSER_FLAGS="--optimize-autoloader --prefer-dist --no-interaction"
+              - CODE_COVERAGE=true
+              - PHPUNIT_FLAGS="--coverage-clover=coverage.clover"
+              - LINT_CODE=true
+              - PECL_INSTALL="imagick pcov"
 
 before_install:
-  - if [[ -z $CODE_COVERAGE ]]; then phpenv config-rm xdebug.ini ; fi
-  - composer self-update
+    - echo "memory_limit=-1" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+    - |
+        if [[ $PECL_INSTALL ]]; then
+            printf "\n" | pecl install $PECL_INSTALL
+        fi
+    - phpenv config-rm xdebug.ini
+    - composer self-update
 
 install:
-  - phpenv config-add Tests/travis.php.ini
-  - travis_retry composer update $COMPOSER_FLAGS
-  - composer info -i
-  - ./Tests/Application/console doctrine:database:create
-  - ./Tests/Application/console doctrine:schema:create
+    - travis_retry composer update $COMPOSER_FLAGS
+    - composer validate --strict
+    - composer info -i
+    - ./Tests/Application/console doctrine:database:create
+    - ./Tests/Application/console doctrine:schema:update --force
+    - if [[ $LINT_CODE == 'true' ]]; then ./Tests/Application/console cache:clear --env=dev ; fi
 
 script:
-  - if [[ $PHPSTAN = true ]]; then ./vendor/bin/phpstan analyze .; fi
-  - ./vendor/bin/phpunit $CODE_COVERAGE
+    - ./vendor/bin/phpunit $PHPUNIT_FLAGS
+    - if [[ $LINT_CODE == 'true' ]]; then composer lint ; fi
 
 after_script:
-  - if [[ -n $CODE_COVERAGE ]]; then wget https://scrutinizer-ci.com/ocular.phar ; fi
-  - if [[ -n $CODE_COVERAGE ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover ; fi
+    - if [[ $CODE_COVERAGE == 'true' ]]; then wget https://scrutinizer-ci.com/ocular.phar ; fi
+    - if [[ $CODE_COVERAGE == 'true' ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover ; fi

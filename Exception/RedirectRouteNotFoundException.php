@@ -11,12 +11,10 @@
 
 namespace Sulu\Bundle\RedirectBundle\Exception;
 
-use Exception;
-
 /**
  * Redirect-route not found.
  */
-class RedirectRouteNotFoundException extends Exception
+class RedirectRouteNotFoundException extends \Exception
 {
     /**
      * The id of the redirect_route, which was not found.

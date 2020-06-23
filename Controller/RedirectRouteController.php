@@ -95,8 +95,6 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
     /**
      * Returns redirect-routes.
      *
-     * @param Request $request
-     *
      * @return Response
      */
     public function cgetAction(Request $request)
@@ -123,8 +121,6 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
 
     /**
      * Create a new redirect-route.
-     *
-     * @param Request $request
      *
      * @return Response
      */
@@ -161,7 +157,6 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
      * Create a new redirect-route.
      *
      * @param string $id
-     * @param Request $request
      *
      * @return Response
      */
@@ -202,8 +197,6 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
     /**
      * Delete a list of redirect-route identified by id.
      *
-     * @param Request $request
-     *
      * @return Response
      */
     public function cdeleteAction(Request $request)
@@ -211,7 +204,7 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
         $repository = $this->redirectRouteRepository;
         $manager = $this->redirectRouteManager;
 
-        $ids = array_filter(explode(',', $request->query->get('ids', '')));
+        $ids = array_filter(explode(',', (string) $request->query->get('ids', '')));
         foreach ($ids as $id) {
             /** @var RedirectRouteInterface|null $redirectRoute */
             $redirectRoute = $repository->find($id);

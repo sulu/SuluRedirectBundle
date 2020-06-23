@@ -38,7 +38,7 @@ php bin/console doctrine:schema:update
 ```yml
 sulu_redirect:
     imports:
-        path:                     '%kernel.root_dir%/../var/uploads/redirects'
+        path:                     '%kernel.project_dir%/var/uploads/redirects'
     objects:
         redirect_route:
             model:                Sulu\Bundle\RedirectBundle\Entity\RedirectRoute

@@ -39,6 +39,8 @@ class ConverterFacade implements ConverterInterface
                 return $converter->convert($item);
             }
         }
+
+        return null;
     }
 
     /**

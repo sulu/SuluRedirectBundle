@@ -41,10 +41,6 @@ class Writer implements WriterInterface
      */
     private $batchSize = 100;
 
-    /**
-     * @param RedirectRouteManagerInterface $manager
-     * @param EntityManagerInterface $entityManager
-     */
     public function __construct(RedirectRouteManagerInterface $manager, EntityManagerInterface $entityManager)
     {
         $this->manager = $manager;
@@ -54,7 +50,7 @@ class Writer implements WriterInterface
     /**
      * {@inheritdoc}
      */
-    public function write(RedirectRouteInterface $entity)
+    public function write(RedirectRouteInterface $entity): void
     {
         $this->validate($entity);
         $this->sources[] = strtolower($entity->getSource());
@@ -69,7 +65,7 @@ class Writer implements WriterInterface
     /**
      * {@inheritdoc}
      */
-    public function finalize()
+    public function finalize(): void
     {
         $this->entityManager->flush();
     }
@@ -90,10 +86,8 @@ class Writer implements WriterInterface
 
     /**
      * Save entity by using manager.
-     *
-     * @param RedirectRouteInterface $entity
      */
-    private function save(RedirectRouteInterface $entity)
+    private function save(RedirectRouteInterface $entity): void
     {
         $this->manager->save($entity);
 
@@ -105,12 +99,10 @@ class Writer implements WriterInterface
     /**
      * Validate given redirect-route.
      *
-     * @param RedirectRouteInterface $entity
-     *
      * @throws DuplicatedSourceException
      * @throws TargetIsEmptyException
      */
-    private function validate(RedirectRouteInterface $entity)
+    private function validate(RedirectRouteInterface $entity): void
     {
         if ('' === $entity->getTarget()) {
             throw new TargetIsEmptyException($entity);

@@ -59,11 +59,6 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
     protected $environment;
 
     /**
-     * @param EntityManagerInterface $entityManager
-     * @param RedirectRouteManager $redirectRouteManager
-     * @param DocumentInspector $documentInspector
-     * @param WebspaceManagerInterface $webspaceManager
-     * @param ResourceLocatorStrategyPoolInterface $resourceLocatorStrategyPool
      * @param string $environment
      */
     public function __construct(
@@ -92,7 +87,7 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
         ];
     }
 
-    public function createRedirects(RemoveEvent $event)
+    public function createRedirects(RemoveEvent $event): void
     {
         $document = $event->getDocument();
 
@@ -161,7 +156,6 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param ResourceLocatorStrategyInterface $resourceLocatorStrategy
      * @param string $uuid
      * @param string $webspaceKey
      * @param string $locale

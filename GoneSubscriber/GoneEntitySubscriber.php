@@ -47,7 +47,7 @@ class GoneEntitySubscriber implements EventSubscriber, ContainerAwareInterface
         ];
     }
 
-    public function preRemove(LifecycleEventArgs $event)
+    public function preRemove(LifecycleEventArgs $event): void
     {
         $route = $event->getObject();
 

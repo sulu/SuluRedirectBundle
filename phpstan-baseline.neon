@@ -1,0 +1,17 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Converter\\\\ConverterFacade\\:\\:convert\\(\\) should return Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface but returns null\\.$#"
+			count: 1
+			path: Import/Converter/ConverterFacade.php
+
+		-
+			message: "#^Parameter \\#2 \\$newvalue of function ini_set expects string, true given\\.$#"
+			count: 1
+			path: Import/Reader/CsvReader.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderFacade\\:\\:read\\(\\) should return array\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderItem\\> but returns null\\.$#"
+			count: 1
+			path: Import/Reader/ReaderFacade.php
+

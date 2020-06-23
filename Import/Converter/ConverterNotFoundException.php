@@ -23,9 +23,6 @@ class ConverterNotFoundException extends ImportException
      */
     private $data;
 
-    /**
-     * @param array $data
-     */
     public function __construct(array $data)
     {
         parent::__construct(sprintf('Data %s is not supported', json_encode($data)));
