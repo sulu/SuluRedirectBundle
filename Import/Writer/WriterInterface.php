@@ -20,13 +20,11 @@ interface WriterInterface
 {
     /**
      * Write given redirect-route to destination.
-     *
-     * @param RedirectRouteInterface $entity
      */
-    public function write(RedirectRouteInterface $entity);
+    public function write(RedirectRouteInterface $entity): void;
 
     /**
      * Will be called after importing last entity..
      */
-    public function finalize();
+    public function finalize(): void;
 }

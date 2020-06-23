@@ -28,8 +28,6 @@ class ImportCommand extends Command
 
     /**
      * ImportCommand constructor.
-     *
-     * @param FileImport $import
      */
     public function __construct(FileImport $import)
     {
@@ -40,7 +38,7 @@ class ImportCommand extends Command
     /**
      * {@inheritdoc}
      */
-    public function configure()
+    public function configure(): void
     {
         $this->addArgument('fileName', InputArgument::REQUIRED)
             ->setDescription('Read a file and import content to redirect-system.')

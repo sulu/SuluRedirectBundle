@@ -20,6 +20,8 @@ class CsvReader implements ReaderInterface
 {
     /**
      * {@inheritdoc}
+     *
+     * @return iterable<int, ReaderItem>
      */
     public function read($fileName)
     {
@@ -56,9 +58,6 @@ class CsvReader implements ReaderInterface
 
     /**
      * Interpret given line.
-     *
-     * @param array $line
-     * @param array $header
      *
      * @return array
      */

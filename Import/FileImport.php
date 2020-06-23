@@ -38,11 +38,6 @@ class FileImport implements FileImportInterface
      */
     private $writer;
 
-    /**
-     * @param ReaderInterface $reader
-     * @param ConverterInterface $converter
-     * @param WriterInterface $writer
-     */
     public function __construct(ReaderInterface $reader, ConverterInterface $converter, WriterInterface $writer)
     {
         $this->reader = $reader;
@@ -52,6 +47,8 @@ class FileImport implements FileImportInterface
 
     /**
      * {@inheritdoc}
+     *
+     * @return iterable<int, Item>
      */
     public function import($fileName)
     {
@@ -78,8 +75,6 @@ class FileImport implements FileImportInterface
 
     /**
      * Import given item.
-     *
-     * @param array $item
      *
      * @return RedirectRouteInterface
      *

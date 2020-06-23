@@ -37,7 +37,6 @@ class RedirectRouteImportController
     private $importPath;
 
     /**
-     * @param FileImportInterface $import
      * @param string $importPath
      */
     public function __construct(FileImportInterface $import, $importPath)
@@ -48,8 +47,6 @@ class RedirectRouteImportController
 
     /**
      * Import file which was uploaded.
-     *
-     * @param Request $request
      *
      * @return Response
      */
@@ -77,8 +74,6 @@ class RedirectRouteImportController
 
     /**
      * Import given file and returns serializable response.
-     *
-     * @param File $file
      *
      * @return array
      */

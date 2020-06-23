@@ -27,9 +27,6 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
      */
     protected $redirectRouteRepository;
 
-    /**
-     * @param RedirectRouteRepositoryInterface $redirectRouteRepository
-     */
     public function __construct(RedirectRouteRepositoryInterface $redirectRouteRepository)
     {
         $this->redirectRouteRepository = $redirectRouteRepository;
@@ -102,7 +99,7 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
     /**
      * {@inheritdoc}
      */
-    public function delete(RedirectRouteInterface $redirectRoute)
+    public function delete(RedirectRouteInterface $redirectRoute): void
     {
         $this->redirectRouteRepository->remove($redirectRoute);
     }

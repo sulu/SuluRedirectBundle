@@ -24,9 +24,6 @@ class WebsiteRedirectController
     /**
      * Handles redirect for given redirect-route.
      *
-     * @param Request $request
-     * @param RedirectRouteInterface $redirectRoute
-     *
      * @return RedirectResponse
      */
     public function redirect(Request $request, RedirectRouteInterface $redirectRoute)

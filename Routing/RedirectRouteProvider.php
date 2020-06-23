@@ -28,9 +28,6 @@ class RedirectRouteProvider implements RouteProviderInterface
      */
     private $redirectRouteRepository;
 
-    /**
-     * @param RedirectRouteRepositoryInterface $redirectRouteRepository
-     */
     public function __construct(RedirectRouteRepositoryInterface $redirectRouteRepository)
     {
         $this->redirectRouteRepository = $redirectRouteRepository;

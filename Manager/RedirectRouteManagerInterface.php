@@ -32,15 +32,11 @@ interface RedirectRouteManagerInterface
 
     /**
      * Delete given redirect-route.
-     *
-     * @param RedirectRouteInterface $redirectRoute
      */
-    public function delete(RedirectRouteInterface $redirectRoute);
+    public function delete(RedirectRouteInterface $redirectRoute): void;
 
     /**
      * Save given redirect-route.
-     *
-     * @param RedirectRouteInterface $redirectRoute
      *
      * @return RedirectRouteInterface
      *

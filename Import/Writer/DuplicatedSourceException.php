@@ -23,9 +23,6 @@ class DuplicatedSourceException extends WriterException implements \JsonSerializ
      */
     private $entity;
 
-    /**
-     * @param RedirectRouteInterface $entity
-     */
     public function __construct(RedirectRouteInterface $entity)
     {
         parent::__construct(sprintf('Source "%s" was imported twice.', $entity->getSource()));

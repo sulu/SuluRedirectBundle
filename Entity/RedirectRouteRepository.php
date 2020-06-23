@@ -70,7 +70,7 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
     /**
      * {@inheritdoc}
      */
-    public function persist(RedirectRouteInterface $entity)
+    public function persist(RedirectRouteInterface $entity): void
     {
         $this->_em->persist($entity);
     }
@@ -78,7 +78,7 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
     /**
      * {@inheritdoc}
      */
-    public function remove(RedirectRouteInterface $entity)
+    public function remove(RedirectRouteInterface $entity): void
     {
         $this->_em->remove($entity);
     }

@@ -23,9 +23,6 @@ class TargetIsEmptyException extends WriterException implements \JsonSerializabl
      */
     private $entity;
 
-    /**
-     * @param RedirectRouteInterface $entity
-     */
     public function __construct(RedirectRouteInterface $entity)
     {
         parent::__construct(sprintf('Target for source "%s" cannot be empty.', $entity->getSource()));

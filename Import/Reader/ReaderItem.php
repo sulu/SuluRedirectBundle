@@ -38,7 +38,7 @@ class ReaderItem
      */
     private $exception;
 
-    public function __construct($lineNumber, $lineContent, array $data, ImportException $exception = null)
+    public function __construct(int $lineNumber, string $lineContent, array $data, ImportException $exception = null)
     {
         $this->lineNumber = $lineNumber;
         $this->lineContent = $lineContent;

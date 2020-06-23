@@ -95,8 +95,6 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
     /**
      * Returns redirect-routes.
      *
-     * @param Request $request
-     *
      * @return Response
      */
     public function cgetAction(Request $request)
@@ -123,8 +121,6 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
 
     /**
      * Create a new redirect-route.
-     *
-     * @param Request $request
      *
      * @return Response
      */
@@ -161,7 +157,6 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
      * Create a new redirect-route.
      *
      * @param string $id
-     * @param Request $request
      *
      * @return Response
      */
@@ -201,8 +196,6 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
 
     /**
      * Delete a list of redirect-route identified by id.
-     *
-     * @param Request $request
      *
      * @return Response
      */

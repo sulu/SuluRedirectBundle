@@ -45,9 +45,6 @@ class RedirectAdmin extends Admin
 
     /**
      * RedirectAdmin constructor.
-     *
-     * @param ViewBuilderFactoryInterface $viewBuilderFactory
-     * @param SecurityCheckerInterface $securityChecker
      */
     public function __construct(ViewBuilderFactoryInterface $viewBuilderFactory, SecurityCheckerInterface $securityChecker)
     {
