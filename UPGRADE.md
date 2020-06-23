@@ -1,6 +1,13 @@
 # UPGRADE
 
-## dev-develop (2.0.0)
+## dev-master (2.0.0)
+
+### Some interfaces changed
+
+- ConverterInterface
+- WriterInterface
+- RedirectRouteManagerInterface
+- RedirectRouteRepositoryInterface
 
 ### Rest Api changed
 
