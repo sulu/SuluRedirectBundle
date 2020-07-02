@@ -1,4 +1,5 @@
 <?php
+// change controller to dependency injection
 
 /*
  * This file is part of Sulu.
