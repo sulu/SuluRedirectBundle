@@ -24,9 +24,9 @@ class RedirectRouteNotUniqueException extends \Exception
     /**
      * @param string $source
      */
-    public function __construct($source)
+    public function __construct($source, $sourceHost)
     {
-        parent::__construct(sprintf('The source "%s" is already in use.', $source));
+        parent::__construct(sprintf('The source "%s" with sourceHost "%s" is already in use.', $source, $sourceHost));
 
         $this->source = $source;
     }

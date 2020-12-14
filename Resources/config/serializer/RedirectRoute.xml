@@ -5,6 +5,7 @@
         <property name="enabled" type="boolean"/>
         <property name="statusCode" type="integer"/>
         <property name="source" type="string"/>
+        <property name="sourceHost" type="string"/>
         <property name="target" type="string"/>
 
         <property name="creator" exclude="true"/>

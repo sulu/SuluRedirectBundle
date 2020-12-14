@@ -5,6 +5,12 @@
                data-mapper-property="source" data-validation-required="true" placeholder="/source"/>
     </div>
 
+    <div class="form-group grid-row">
+        <label for="redirect-routes-sourceHost"><%= translations.sourceHost %></label>
+        <input type="text" id="redirect-routes-sourceHost" name="sourceHost" class="form-element input-bold required"
+               data-mapper-property="sourceHost" data-validation-required="false" placeholder="www.source-host.com"/>
+    </div>
+
     <% if (data.statusCode !== 410) { %>
         <div class="form-group grid-row">
             <label for="redirect-routes-target" class="required"><%= translations.target %></label>

@@ -18,9 +18,13 @@
                 <source>sulu_redirect.disable</source>
                 <target>Deactiveer</target>
             </trans-unit>
-            <trans-unit id="3">
+            <trans-unit id="3a">
                 <source>sulu_redirect.source</source>
                 <target>Bron</target>
+            </trans-unit>
+            <trans-unit id="3b">
+                <source>sulu_redirect.source-host</source>
+                <target>Bron Host</target>
             </trans-unit>
             <trans-unit id="4">
                 <source>sulu_redirect.target</source>

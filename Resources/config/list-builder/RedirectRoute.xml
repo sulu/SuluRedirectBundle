@@ -39,6 +39,11 @@
             <orm:entity-name>%sulu.model.redirect_route.class%</orm:entity-name>
         </property>
 
+        <property name="sourceHost" display="always" list:translation="sulu_redirect.source-host">
+            <orm:field-name>sourceHost</orm:field-name>
+            <orm:entity-name>%sulu.model.redirect_route.class%</orm:entity-name>
+        </property>
+
         <property name="target" display="always" list:translation="sulu_redirect.target">
             <orm:field-name>target</orm:field-name>
             <orm:entity-name>%sulu.model.redirect_route.class%</orm:entity-name>
