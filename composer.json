@@ -12,6 +12,7 @@
         "zendframework/zendsearch": "2.*@dev",
         "symfony/monolog-bundle": "^2.8.7 || ^3.0",
         "doctrine/doctrine-bundle": "^1.4",
+        "doctrine/data-fixtures": "^1.1",
         "jackalope/jackalope-doctrine-dbal": "^1.2.5",
         "phpunit/phpunit": "^4.8 || ^5.0",
         "jms/serializer-bundle": "^1.1 || ^2.0",

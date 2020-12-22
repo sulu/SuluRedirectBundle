@@ -1,9 +1,11 @@
 # SuluRedirectBundle
 
-[![Build Status](https://travis-ci.org/sulu/SuluRedirectBundle.svg)](https://travis-ci.org/sulu/SuluRedirectBundle)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sulu/SuluRedirectBundle/badges/quality-score.png)](https://scrutinizer-ci.com/g/sulu/SuluRedirectBundle/)
-[![Code Coverage](https://scrutinizer-ci.com/g/sulu/SuluRedirectBundle/badges/coverage.png)](https://scrutinizer-ci.com/g/sulu/SuluRedirectBundle/)
-[![StyleCI](https://styleci.io/repos/84212244/shield)](https://styleci.io/repos/84212244)
+<p align="center">
+    <a href="https://github.com/sulu/SuluRedirectBundle/actions" target="_blank">
+        <img src="https://img.shields.io/github/workflow/status/sulu/SuluRedirectBundle/Test%20application/master.svg?label=github-actions" alt="GitHub actions status">
+    </a>
+</p>
+<br/>
 
 The SuluRedirectBundle adds support for managing redirects in Sulu.
 
