@@ -5,7 +5,6 @@
         <img src="https://img.shields.io/github/workflow/status/sulu/SuluRedirectBundle/Test%20application.svg?label=test-workflow" alt="Test workflow status">
     </a>
 </p>
-<br/>
 
 The SuluRedirectBundle adds support for managing redirects in Sulu.
 
