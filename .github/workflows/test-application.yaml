@@ -11,7 +11,7 @@ on:
 jobs:
     test:
         name: "Run tests with php ${{ matrix.php-version }}"
-        runs-on: ubuntu-18.04
+        runs-on: ubuntu-latest
 
         env:
             SYMFONY__DATABASE__PASSWORD: root
@@ -24,12 +24,12 @@ jobs:
                       composer-flags: '--prefer-lowest --prefer-dist --no-interaction'
                       tools: 'composer:v1'
                       env:
-                          SYMFONY__DEPRECATIONS__HELPER: disabled
+                          SYMFONY_DEPRECATIONS_HELPER: disabled
                     - php-version: '7.4'
                       composer-flags: '--prefer-dist --no-interaction'
                       tools: 'composer:v2'
                       env:
-                          SYMFONY__DEPRECATIONS__HELPER: weak
+                          SYMFONY_DEPRECATIONS_HELPER: weak
 
         services:
             mysql:
