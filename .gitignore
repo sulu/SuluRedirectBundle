@@ -22,5 +22,6 @@
 
 # tests
 Tests/Application/var/
+Tests/Application/.env.*.local
 
 \.php_cs\.cache
