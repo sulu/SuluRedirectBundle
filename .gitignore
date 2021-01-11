@@ -19,7 +19,6 @@
 # System files
 .DS_Store
 
-
 # tests
 Tests/Application/var/
 Tests/Application/*.local
