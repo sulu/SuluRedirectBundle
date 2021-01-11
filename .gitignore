@@ -1,6 +1,6 @@
 # PHPUnit
-/app/phpunit.xml
 /phpunit.xml
+.phpunit.result.cache
 
 # composer
 /composer.phar
@@ -22,6 +22,8 @@
 
 # tests
 Tests/Application/var/
-Tests/Application/.env.*.local
+Tests/Application/*.local
 
-\.php_cs\.cache
+# php-cs-fixer
+.php_cs.cache
+php-cs-fixer
