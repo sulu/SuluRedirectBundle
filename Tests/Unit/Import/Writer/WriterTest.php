@@ -15,9 +15,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
 use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\DuplicatedSourceException;
+use Sulu\Bundle\RedirectBundle\Import\Writer\TargetIsEmptyException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\Writer;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 class WriterTest extends TestCase
 {
@@ -153,6 +155,34 @@ class WriterTest extends TestCase
             ->willThrow($this->prophesize(RedirectRouteNotUniqueException::class)->reveal());
 
         $this->writer->write($entity->reveal());
+    }
+
+    public function testWriteEmptyTarget()
+    {
+        $this->setExpectedException(TargetIsEmptyException::class);
+
+        $entity = $this->prophesize(RedirectRouteInterface::class);
+        $entity->getSource()->willReturn('/source');
+        $entity->getTarget()->willReturn('');
+        $entity->getStatusCode()->willReturn(Response::HTTP_MOVED_PERMANENTLY);
+
+        $this->redirectRouteManager->save($entity->reveal())->shouldNotBeCalled();
+
+        $this->writer->write($entity->reveal());
+    }
+
+    public function testWriteEmptyTargetFor410()
+    {
+        $entity = $this->prophesize(RedirectRouteInterface::class);
+        $entity->getSource()->willReturn('/source');
+        $entity->getTarget()->willReturn('');
+        $entity->getStatusCode()->willReturn(Response::HTTP_GONE);
+
+        $this->redirectRouteManager->save($entity->reveal())->shouldBeCalled();
+
+        $this->writer->write($entity->reveal());
+
+        $this->redirectRouteManager->save($entity->reveal())->shouldBeCalled();
     }
 
     public function testFinalize()

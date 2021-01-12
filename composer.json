@@ -20,6 +20,7 @@
         "symfony-cmf/routing": "^2.1"
     },
     "require-dev": {
+        "doctrine/data-fixtures": "^1.1",
         "jangregor/phpstan-prophecy": "^0.8",
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-doctrine": "^0.12",
