@@ -1,6 +1,6 @@
 # UPGRADE
 
-## dev-master (2.0.0)
+## 2.x
 
 ### Some interfaces changed
 
