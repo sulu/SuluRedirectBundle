@@ -2,7 +2,7 @@
 
 <p align="center">
     <a href="https://github.com/sulu/SuluRedirectBundle/actions" target="_blank">
-        <img src="https://img.shields.io/github/workflow/status/sulu/SuluRedirectBundle/Test%20application/master.svg?label=github-actions" alt="GitHub actions status">
+        <img src="https://img.shields.io/github/workflow/status/sulu/SuluRedirectBundle/Test%20application.svg?label=test-workflow" alt="Test workflow status">
     </a>
 </p>
 <br/>
@@ -25,17 +25,17 @@ and code are not stable yet (pre 1.0).
 * PHP `^5.5 || ^7.0`
 * Sulu `^1.5`
 
-For detailed requirements see [composer.json](https://github.com/sulu/SuluRedirectBundle/blob/master/composer.json).
+For detailed requirements see [composer.json](https://github.com/sulu/SuluRedirectBundle/blob/0.x/composer.json).
 
 ## Documentation
 
 The the Documentation is stored in the
-[Resources/doc/](https://github.com/sulu/SuluRedirectBundle/blob/master/Resources/doc) folder.
+[Resources/doc/](https://github.com/sulu/SuluRedirectBundle/blob/0.x/Resources/doc) folder.
 
 ## Installation
 
 All the installation instructions are located in the
-[Documentation](https://github.com/sulu/SuluRedirectBundle/blob/master/Resources/doc/installation.md).
+[Documentation](https://github.com/sulu/SuluRedirectBundle/blob/0.x/Resources/doc/installation.md).
 
 ## License
 
