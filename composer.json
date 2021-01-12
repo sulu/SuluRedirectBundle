@@ -56,10 +56,5 @@
             "Tests/Application/console cache:warmup --env dev",
             "vendor/bin/phpstan analyze"
         ]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.0-dev"
-        }
     }
 }
