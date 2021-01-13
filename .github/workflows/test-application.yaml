@@ -1,84 +1,75 @@
 name: Test application
-
 on:
-    pull_request:
+    pull_request: null
     push:
         branches:
             - '[0-9]+.x'
             - '[0-9]+.[0-9]+'
-
 jobs:
     test:
-        name: "Run tests with php ${{ matrix.php-version }}"
+        name: 'Run tests with php ${{ matrix.php-version }}'
         runs-on: ubuntu-latest
-
         env:
-            DATABASE_URL: mysql://root:root@127.0.0.1/sulu_redirect_test?serverVersion=5.7
-
+            DATABASE_URL: 'mysql://root:root@127.0.0.1/sulu_redirect_test?serverVersion=5.7'
         strategy:
             fail-fast: false
             matrix:
                 include:
-                    -   php-version: '7.2'
-                        composer-flags: '--prefer-dist --no-interaction --prefer-lowest --prefer-stable'
-                        php-extensions: 'mysql, gd'
-                        tools: 'composer:v1'
-                        lint: false
-                        env:
-                            SYMFONY_DEPRECATIONS_HELPER: disabled
-                    -   php-version: '7.4'
-                        composer-flags: '--prefer-dist --no-interaction'
-                        php-extensions: 'mysql, imagick'
-                        tools: 'composer:v2'
-                        lint: true
-                        env:
-                            SYMFONY_DEPRECATIONS_HELPER: weak
-
+                    - php-version: '7.2'
+                      composer-flags: '--prefer-dist --no-interaction --prefer-lowest --prefer-stable'
+                      php-extensions: 'mysql, gd'
+                      tools: 'composer:v1'
+                      lint: false
+                      env:
+                          SYMFONY_DEPRECATIONS_HELPER: disabled
+                    - php-version: '7.4'
+                      composer-flags: '--prefer-dist --no-interaction'
+                      php-extensions: 'mysql, imagick'
+                      tools: 'composer:v2'
+                      lint: true
+                      env:
+                          SYMFONY_DEPRECATIONS_HELPER: weak
         services:
             mysql:
-                image: mysql:5.7
+                image: 'mysql:5.7'
                 env:
                     MYSQL_ROOT_PASSWORD: root
                 ports:
-                    - 3306:3306
-                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=5
-
+                    - '3306:3306'
+                options: >-
+                    --health-cmd="mysqladmin ping" --health-interval=10s
+                    --health-timeout=5s --health-retries=5
         steps:
-            -   name: Checkout project
-                uses: actions/checkout@v2
-
-            -   name: Install and configure PHP
-                uses: shivammathur/setup-php@v2
-                with:
-                    php-version: ${{ matrix.php-version }}
-                    extensions: ${{ matrix.php-extensions }}
-                    tools: ${{ matrix.tools }}
-                    coverage: none
-
-            -   name: Get composer cache directory
-                id: composer-cache-dir
-                run: echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-            -   name: Cache dependencies
-                uses: actions/cache@v2
-                with:
-                    path: ${{ steps.composer-cache-dir.outputs.dir }}
-                    key: ${{ runner.os }}-composer-${{ hashFiles('composer.json', 'composer.lock') }}
-                    restore-keys: |
-                        ${{ runner.os }}-composer-
-
-            -   name: Install dependencies
-                run: composer update ${{ matrix.composer-flags }}
-
-            -   name: Bootstrap test environment
-                run: composer bootstrap-test-environment
-                env: ${{ matrix.env }}
-
-            -   name: Lint code
-                if: ${{ matrix.lint }}
-                run: composer lint
-                env: ${{ matrix.env }}
-
-            -   name: Execute test cases
-                run: time composer test
-                env: ${{ matrix.env }}
+            - name: Checkout project
+              uses: actions/checkout@v2
+            - name: Install and configure PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '${{ matrix.php-version }}'
+                  extensions: '${{ matrix.php-extensions }}'
+                  tools: '${{ matrix.tools }}'
+                  coverage: none
+            - name: Get composer cache directory
+              id: composer-cache-dir
+              run: 'echo "::set-output name=dir::$(composer config cache-files-dir)"'
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                  path: '${{ steps.composer-cache-dir.outputs.dir }}'
+                  key: >-
+                      ${{ runner.os }}-composer-${{ hashFiles('composer.json',
+                      'composer.lock') }}
+                  restore-keys: |
+                      ${{ runner.os }}-composer-
+            - name: Install dependencies
+              run: 'composer update ${{ matrix.composer-flags }}'
+            - name: Bootstrap test environment
+              run: composer bootstrap-test-environment
+              env: '${{ matrix.env }}'
+            - name: Lint code
+              if: '${{ matrix.lint }}'
+              run: composer lint
+              env: '${{ matrix.env }}'
+            - name: Execute test cases
+              run: time composer test
+              env: '${{ matrix.env }}'
