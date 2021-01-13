@@ -1,9 +1,17 @@
 # SuluRedirectBundle
 
 <p align="center">
-    <a href="https://github.com/sulu/SuluRedirectBundle/actions" target="_blank">
-        <img src="https://img.shields.io/github/workflow/status/sulu/SuluRedirectBundle/Test%20application.svg?label=test-workflow" alt="Test workflow status">
+    <a href="https://sulu.io/" target="_blank">
+        <img width="30%" src="https://sulu.io/uploads/media/800x/00/230-Official%20Bundle%20Seal.svg?v=2-6&inline=1" alt="Official Sulu Bundle Badge">
     </a>
+</p>
+
+<p align="center">
+
+<a href="https://github.com/sulu/SuluRedirectBundle/actions" target="_blank">
+    <img src="https://img.shields.io/github/workflow/status/sulu/SuluRedirectBundle/Test%20application/master.svg?label=github-actions" alt="GitHub actions status">
+</a>
+
 </p>
 
 The SuluRedirectBundle adds support for managing redirects in Sulu.
