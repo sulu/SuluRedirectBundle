@@ -159,7 +159,7 @@ class WriterTest extends TestCase
 
     public function testWriteEmptyTarget()
     {
-        $this->setExpectedException(TargetIsEmptyException::class);
+        $this->expectException(TargetIsEmptyException::class);
 
         $entity = $this->prophesize(RedirectRouteInterface::class);
         $entity->getSource()->willReturn('/source');

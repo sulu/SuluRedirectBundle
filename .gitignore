@@ -1,6 +1,6 @@
 # PHPUnit
-/app/phpunit.xml
 /phpunit.xml
+.phpunit.result.cache
 
 # composer
 /composer.phar
@@ -19,8 +19,10 @@
 # System files
 .DS_Store
 
-
 # tests
 Tests/Application/var/
+Tests/Application/*.local
 
-\.php_cs\.cache
+# php-cs-fixer
+.php_cs.cache
+php-cs-fixer
