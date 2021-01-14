@@ -83,7 +83,7 @@ interface RedirectRouteInterface
     /**
      * Set source host.
      *
-     * @param string $sourceHost
+     * @param string $sourceHost|null
      *
      * @return $this
      */
@@ -92,7 +92,7 @@ interface RedirectRouteInterface
     /**
      * Returns source host.
      *
-     * @return string
+     * @return string|null
      */
     public function getSourceHost();
 
