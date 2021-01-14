@@ -4,8 +4,8 @@
 
 ### Database change
 
-To support multiple webspaces a host field was added to the redirect entity and
-the following database migration need to be run.
+To support multiple webspaces a sourceHost field was added to the RedirectRoute entity and
+the following database migration need to be run:
 
 ```sql
 ALTER TABLE `re_redirect_routes` ADD `sourceHost` VARCHAR(255) DEFAULT NULL;
