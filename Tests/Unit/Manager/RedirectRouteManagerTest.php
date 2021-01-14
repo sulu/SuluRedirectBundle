@@ -80,9 +80,8 @@ class RedirectRouteManagerTest extends \PHPUnit_Framework_TestCase
         $redirectRoute->getId()->willReturn('321-321-321');
         $redirectRoute->getSourceHost()->willReturn('example.com');
         $redirectRoute->getSource()->willReturn('/test');
-        $redirectRoute->getSourceHost()->willReturn(null);
 
-        $this->repository->findBySource('/test', null)->willReturn($otherRoute->reveal());
+        $this->repository->findBySource('/test', 'example.com')->willReturn($otherRoute->reveal());
 
         $this->manager->save($redirectRoute->reveal());
 
