@@ -137,7 +137,7 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
      */
     public function setSourceHost($sourceHost)
     {
-        if (!$sourceHost) {
+        if (empty($sourceHost)) {
             $sourceHost = null;
         }
 
