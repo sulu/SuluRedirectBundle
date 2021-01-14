@@ -50,7 +50,7 @@ class RedirectRouteProviderTest extends \PHPUnit_Framework_TestCase
         $uuid = '123-123-123';
 
         $this->request->getPathInfo()->willReturn($pathInfo);
-        $this->request->getHttpHost()->willReturn($host);
+        $this->request->getHost()->willReturn($host);
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getId()->willReturn($uuid);
@@ -77,7 +77,7 @@ class RedirectRouteProviderTest extends \PHPUnit_Framework_TestCase
         $uuid = '123-123-123';
 
         $this->request->getPathInfo()->willReturn(rawurlencode($pathInfo));
-        $this->request->getHttpHost()->willReturn($host);
+        $this->request->getHost()->willReturn($host);
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getId()->willReturn($uuid);
@@ -103,7 +103,7 @@ class RedirectRouteProviderTest extends \PHPUnit_Framework_TestCase
         $host = null;
 
         $this->request->getPathInfo()->willReturn($pathInfo);
-        $this->request->getHttpHost()->willReturn($host);
+        $this->request->getHost()->willReturn($host);
 
         $this->repository->findEnabledBySource($pathInfo, $host)->willReturn(null);
 
