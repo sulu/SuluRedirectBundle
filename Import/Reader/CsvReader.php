@@ -32,11 +32,12 @@ class CsvReader implements ReaderInterface
 
         $header = [Converter::SOURCE, Converter::TARGET, Converter::STATUS_CODE, Converter::ENABLED];
         foreach ($csv as $lineNumber => $line) {
-            if (1 === count($line) && '' === trim($line[0])) {
+            // ignore empty lines
+            if (empty(array_filter($line))) {
                 continue;
             }
 
-            if (0 == $lineNumber) {
+            if (0 === $lineNumber) {
                 if (false !== array_search(Converter::SOURCE, $line)) {
                     $header = $line;
                     continue;
