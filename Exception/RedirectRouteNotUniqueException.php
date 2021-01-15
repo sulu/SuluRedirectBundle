@@ -22,6 +22,11 @@ class RedirectRouteNotUniqueException extends \Exception
     private $source;
 
     /**
+     * @var string|null
+     */
+    private $sourceHost;
+
+    /**
      * @param string $source
      * @param string|null $sourceHost
      */
@@ -40,5 +45,15 @@ class RedirectRouteNotUniqueException extends \Exception
     public function getSource()
     {
         return $this->source;
+    }
+
+    /**
+     * Returns source-host which is not unique.
+     *
+     * @return string|null
+     */
+    public function getSourceHost()
+    {
+        return $this->sourceHost;
     }
 }
