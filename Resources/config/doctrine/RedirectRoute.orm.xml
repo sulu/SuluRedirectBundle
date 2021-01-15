@@ -5,7 +5,7 @@
     <mapped-superclass name="Sulu\Bundle\RedirectBundle\Entity\RedirectRoute"
             repository-class="Sulu\Bundle\RedirectBundle\Entity\RedirectRouteRepository" table="re_redirect_routes">
         <unique-constraints>
-            <unique-constraint columns="source"/>
+            <unique-constraint columns="source,sourceHost"/>
         </unique-constraints>
 
         <id name="id" type="string" length="36">
@@ -16,6 +16,7 @@
         <field name="statusCode" type="integer" column="statusCode" nullable="false"/>
 
         <field name="source" type="string" column="source" nullable="false" length="191"/>
+        <field name="sourceHost" type="string" column="sourceHost" nullable="true" length="191"/>
         <field name="target" type="string" column="target" nullable="false"/>
     </mapped-superclass>
 </doctrine-mapping>

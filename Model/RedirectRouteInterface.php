@@ -81,6 +81,22 @@ interface RedirectRouteInterface
     public function setSource($source);
 
     /**
+     * Set source host.
+     *
+     * @param string|null $sourceHost
+     *
+     * @return $this
+     */
+    public function setSourceHost($sourceHost);
+
+    /**
+     * Returns source host.
+     *
+     * @return string|null
+     */
+    public function getSourceHost();
+
+    /**
      * Returns target.
      *
      * @return string

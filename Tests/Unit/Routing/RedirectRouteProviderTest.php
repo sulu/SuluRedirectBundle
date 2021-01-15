@@ -47,14 +47,17 @@ class RedirectRouteProviderTest extends TestCase
     public function testGetRouteCollectionForRequest()
     {
         $pathInfo = '/test';
+        $host = null;
         $uuid = '123-123-123';
 
         $this->request->getPathInfo()->willReturn($pathInfo);
+        $this->request->getHost()->willReturn($host);
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getId()->willReturn($uuid);
         $redirectRoute->getSource()->willReturn($pathInfo);
-        $this->repository->findEnabledBySource($pathInfo)->willReturn($redirectRoute->reveal());
+        $redirectRoute->getSourceHost()->willReturn($host);
+        $this->repository->findEnabledBySource($pathInfo, $host)->willReturn($redirectRoute->reveal());
 
         $result = $this->routeProvider->getRouteCollectionForRequest($this->request->reveal());
         $this->assertCount(1, $result);
@@ -71,14 +74,17 @@ class RedirectRouteProviderTest extends TestCase
     public function testGetRouteCollectionForRequestEncodedPathInfo()
     {
         $pathInfo = '/käße';
+        $host = null;
         $uuid = '123-123-123';
 
         $this->request->getPathInfo()->willReturn(rawurlencode($pathInfo));
+        $this->request->getHost()->willReturn($host);
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getId()->willReturn($uuid);
         $redirectRoute->getSource()->willReturn($pathInfo);
-        $this->repository->findEnabledBySource($pathInfo)->willReturn($redirectRoute->reveal());
+        $redirectRoute->getSourceHost()->willReturn($host);
+        $this->repository->findEnabledBySource($pathInfo, $host)->willReturn($redirectRoute->reveal());
 
         $result = $this->routeProvider->getRouteCollectionForRequest($this->request->reveal());
         $this->assertCount(1, $result);
@@ -95,10 +101,12 @@ class RedirectRouteProviderTest extends TestCase
     public function testGetRouteCollectionForRequestNoRoute()
     {
         $pathInfo = '/test';
+        $host = null;
 
         $this->request->getPathInfo()->willReturn($pathInfo);
+        $this->request->getHost()->willReturn($host);
 
-        $this->repository->findEnabledBySource($pathInfo)->willReturn(null);
+        $this->repository->findEnabledBySource($pathInfo, $host)->willReturn(null);
 
         $result = $this->routeProvider->getRouteCollectionForRequest($this->request->reveal());
         $this->assertCount(0, $result);

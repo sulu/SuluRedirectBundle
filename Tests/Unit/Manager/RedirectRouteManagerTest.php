@@ -48,7 +48,7 @@ class RedirectRouteManagerTest extends TestCase
         $redirectRoute->setStatusCode(301)->shouldBeCalled();
         $redirectRoute->getStatusCode()->willReturn(301);
 
-        $this->repository->findBySource('/test')->willReturn(null);
+        $this->repository->findBySource('/test', null)->willReturn(null);
         $this->repository->createNew()->willReturn($redirectRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
@@ -65,7 +65,7 @@ class RedirectRouteManagerTest extends TestCase
         $redirectRoute->setStatusCode(410)->shouldBeCalled();
         $redirectRoute->getStatusCode()->willReturn(410);
 
-        $this->repository->findBySource('/test410')->willReturn(null);
+        $this->repository->findBySource('/test410', null)->willReturn(null);
         $this->repository->createNew()->willReturn($redirectRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
@@ -78,10 +78,11 @@ class RedirectRouteManagerTest extends TestCase
 
         $otherRoute = $this->prophesize(RedirectRouteInterface::class);
         $otherRoute->getId()->willReturn('123-123-123');
+        $otherRoute->getSourceHost()->willReturn('example.com');
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
 
-        $this->repository->findBySource('/test')->willReturn($otherRoute->reveal());
+        $this->repository->findBySource('/test', null)->willReturn($otherRoute->reveal());
         $this->repository->createNew()->willReturn($redirectRoute->reveal());
 
         $this->manager->saveByData(['source' => '/test', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301]);
@@ -103,7 +104,7 @@ class RedirectRouteManagerTest extends TestCase
         $redirectRoute->getStatusCode()->willReturn(301);
 
         $this->repository->findById('123-123-123')->willReturn($redirectRoute->reveal());
-        $this->repository->findBySource('/test')->willReturn($otherRoute->reveal());
+        $this->repository->findBySource('/test', null)->willReturn($otherRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
         $this->manager->saveByData(['source' => '/test', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301, 'id' => '123-123-123']);

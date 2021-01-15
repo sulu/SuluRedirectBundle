@@ -43,6 +43,11 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
     protected $source;
 
     /**
+     * @var string|null
+     */
+    protected $sourceHost;
+
+    /**
      * @var string
      */
     protected $target;
@@ -114,7 +119,29 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
      */
     public function setSource($source)
     {
-        $this->source = $source;
+        $this->source = '/' . ltrim($source, '/');
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSourceHost()
+    {
+        return $this->sourceHost;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setSourceHost($sourceHost)
+    {
+        if (empty($sourceHost)) {
+            $sourceHost = null;
+        }
+
+        $this->sourceHost = $sourceHost;
 
         return $this;
     }

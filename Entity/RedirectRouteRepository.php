@@ -11,7 +11,7 @@
 
 namespace Sulu\Bundle\RedirectBundle\Entity;
 
-use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\QueryBuilder;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 use Sulu\Component\Persistence\Repository\ORM\EntityRepository;
@@ -35,36 +35,22 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
     /**
      * {@inheritdoc}
      */
-    public function findEnabledBySource($source)
+    public function findEnabledBySource($source, $sourceHost = null)
     {
-        $query = $this->createQueryBuilder('redirect_route')
-            ->andWhere('redirect_route.source = :source')
-            ->andWhere('redirect_route.enabled = true')
-            ->setParameter('source', $source)
-            ->getQuery();
+        $queryBuilder = $this->createFindBySourceQueryBuilder($source, $sourceHost);
+        $queryBuilder->andWhere('redirect_route.enabled = true');
 
-        try {
-            return $query->getSingleResult();
-        } catch (NoResultException $exception) {
-            return null;
-        }
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findBySource($source)
+    public function findBySource($source, $sourceHost = null)
     {
-        $query = $this->createQueryBuilder('redirect_route')
-            ->andWhere('redirect_route.source = :source')
-            ->setParameter('source', $source)
-            ->getQuery();
+        $queryBuilder = $this->createFindBySourceQueryBuilder($source, $sourceHost);
 
-        try {
-            return $query->getSingleResult();
-        } catch (NoResultException $exception) {
-            return null;
-        }
+        return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
     /**
@@ -81,5 +67,34 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
     public function remove(RedirectRouteInterface $entity): void
     {
         $this->_em->remove($entity);
+    }
+
+    /**
+     * @param string $source
+     * @param string|null $sourceHost
+     *
+     * @return QueryBuilder
+     */
+    private function createFindBySourceQueryBuilder($source, $sourceHost = null)
+    {
+        $queryBuilder = $this->createQueryBuilder('redirect_route')
+            ->andWhere('redirect_route.source = :source')
+            ->setParameter('source', $source)
+            ->orderBy('redirect_route.sourceHost', 'DESC')
+            ->setMaxResults(1);
+
+        if (!empty($sourceHost)) {
+            $queryBuilder->andWhere(
+                $queryBuilder->expr()->orX(
+                    $queryBuilder->expr()->eq('redirect_route.sourceHost', ':sourceHost'),
+                    $queryBuilder->expr()->eq('redirect_route.sourceHost', "''"),
+                    $queryBuilder->expr()->isNull('redirect_route.sourceHost')
+                )
+            );
+
+            $queryBuilder->setParameter('sourceHost', $sourceHost);
+        }
+
+        return $queryBuilder;
     }
 }
