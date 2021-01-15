@@ -65,6 +65,12 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
         $this->_em->remove($entity);
     }
 
+    /**
+     * @param string $source
+     * @param string|null $sourceHost
+     *
+     * @return QueryBuilder
+     */
     private function createFindBySourceQueryBuilder($source, $sourceHost = null)
     {
         $queryBuilder = $this->createQueryBuilder('redirect_route')
