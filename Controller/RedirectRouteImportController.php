@@ -11,10 +11,12 @@
 
 namespace Sulu\Bundle\RedirectBundle\Controller;
 
+use Sulu\Bundle\RedirectBundle\Admin\RedirectAdmin;
 use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterNotFoundException;
 use Sulu\Bundle\RedirectBundle\Import\FileImportInterface;
 use Sulu\Bundle\RedirectBundle\Import\Item;
 use Sulu\Bundle\RedirectBundle\Import\Reader\ReaderNotFoundException;
+use Sulu\Component\Security\SecuredControllerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -24,7 +26,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * Provides API to upload importable files.
  */
-class RedirectRouteImportController
+class RedirectRouteImportController implements SecuredControllerInterface
 {
     /**
      * @var FileImportInterface
@@ -47,13 +49,29 @@ class RedirectRouteImportController
     }
 
     /**
+     * {@inheritDoc}
+     */
+    public function getSecurityContext()
+    {
+        return RedirectAdmin::SECURITY_CONTEXT;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getLocale(Request $request)
+    {
+        return $request->get('locale', null);
+    }
+
+    /**
      * Import file which was uploaded.
      *
      * @param Request $request
      *
      * @return Response
      */
-    public function importAction(Request $request)
+    public function postAction(Request $request)
     {
         if (!$request->files->has('redirectRoutes')) {
             return new JsonResponse(null, Response::HTTP_BAD_REQUEST);

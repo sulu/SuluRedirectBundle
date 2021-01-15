@@ -13,6 +13,7 @@ namespace Sulu\Bundle\RedirectBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\Routing\ClassResourceInterface;
+use Sulu\Bundle\RedirectBundle\Admin\RedirectAdmin;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
@@ -20,6 +21,7 @@ use Sulu\Component\Rest\Exception\EntityNotFoundException;
 use Sulu\Component\Rest\ListBuilder\FieldDescriptorInterface;
 use Sulu\Component\Rest\ListBuilder\ListRepresentation;
 use Sulu\Component\Rest\RestController;
+use Sulu\Component\Security\SecuredControllerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,9 +30,14 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @RouteResource("redirect-route")
  */
-class RedirectRouteController extends RestController implements ClassResourceInterface
+class RedirectRouteController extends RestController implements ClassResourceInterface, SecuredControllerInterface
 {
     const RESULT_KEY = 'redirect-routes';
+
+    public function getSecurityContext()
+    {
+        return RedirectAdmin::SECURITY_CONTEXT;
+    }
 
     /**
      * Returns columns for list.

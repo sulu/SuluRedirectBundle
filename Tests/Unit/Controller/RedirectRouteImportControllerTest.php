@@ -68,7 +68,7 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $import->import($importFile)->willReturn($items);
 
         $controller = new RedirectRouteImportController($import->reveal(), $this->importPath);
-        $response = $controller->importAction($request->reveal(), $this->importPath);
+        $response = $controller->postAction($request->reveal(), $this->importPath);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
@@ -107,7 +107,7 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $import->import($importFile)->willThrow(ReaderNotFoundException::class);
 
         $controller = new RedirectRouteImportController($import->reveal(), $this->importPath);
-        $response = $controller->importAction($request->reveal(), $this->importPath);
+        $response = $controller->postAction($request->reveal(), $this->importPath);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(400, $response->getStatusCode());
@@ -137,7 +137,7 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $import->import($importFile)->willThrow(ConverterNotFoundException::class);
 
         $controller = new RedirectRouteImportController($import->reveal(), $this->importPath);
-        $response = $controller->importAction($request->reveal(), $this->importPath);
+        $response = $controller->postAction($request->reveal(), $this->importPath);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(400, $response->getStatusCode());
@@ -156,7 +156,7 @@ class RedirectRouteImportControllerTest extends \PHPUnit_Framework_TestCase
         $import->import(Argument::any())->shouldNotBeCalled();
 
         $controller = new RedirectRouteImportController($import->reveal(), $this->importPath);
-        $response = $controller->importAction($request->reveal(), $this->importPath);
+        $response = $controller->postAction($request->reveal(), $this->importPath);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(400, $response->getStatusCode());
