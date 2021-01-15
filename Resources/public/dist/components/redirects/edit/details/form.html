@@ -7,14 +7,14 @@
 
     <div class="form-group grid-row">
         <label for="redirect-routes-sourceHost"><%= translations.sourceHost %></label>
-        <input type="text" id="redirect-routes-sourceHost" name="sourceHost" class="form-element input-bold required"
-               data-mapper-property="sourceHost" data-validation-required="false" placeholder="www.source-host.com"/>
+        <input type="text" id="redirect-routes-sourceHost" name="sourceHost" class="form-element"
+               data-mapper-property="sourceHost" data-validation-required="false" placeholder="www.example.com"/>
     </div>
 
     <% if (data.statusCode !== 410) { %>
         <div class="form-group grid-row">
             <label for="redirect-routes-target" class="required"><%= translations.target %></label>
-            <input type="text" id="redirect-routes-target" name="target" class="form-element required"
+            <input type="text" id="redirect-routes-target" name="target" class="form-element input-bold required"
                    data-mapper-property="target" data-validation-required="true" placeholder="/target"/>
         </div>
     <% } %>

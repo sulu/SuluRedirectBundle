@@ -22,7 +22,8 @@ class RedirectRouteNotUniqueException extends \Exception
     private $source;
 
     /**
-     * @param string $source|null
+     * @param string $source
+     * @param string|null $sourceHost
      */
     public function __construct($source, $sourceHost)
     {

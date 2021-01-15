@@ -159,7 +159,7 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
      */
     public function setTarget($target)
     {
-        $this->target = $target;
+        $this->target = '/' . ltrim($target, '/');
 
         return $this;
     }
