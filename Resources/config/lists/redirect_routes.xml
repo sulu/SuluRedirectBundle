@@ -57,6 +57,16 @@
         </property>
 
         <property
+            name="sourceHost"
+            visibility="always"
+            searchability="yes"
+            translation="sulu_redirect.source_host"
+        >
+            <field-name>sourceHost</field-name>
+            <entity-name>%sulu.model.redirect_route.class%</entity-name>
+        </property>
+
+        <property
                 name="target"
                 visibility="always"
                 searchability="yes"
@@ -70,7 +80,7 @@
                 name="statusCode"
                 visibility="always"
                 searchability="yes"
-                translation="sulu_redirect.status-code"
+                translation="sulu_redirect.status_code"
         >
             <field-name>statusCode</field-name>
             <entity-name>%sulu.model.redirect_route.class%</entity-name>

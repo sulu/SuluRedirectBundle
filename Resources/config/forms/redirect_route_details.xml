@@ -6,9 +6,19 @@
     <key>redirect_route_details</key>
 
     <properties>
-        <property name="statusCode" type="single_select" mandatory="true">
+        <property name="enabled" type="checkbox" colspan="2">
             <meta>
-                <title>sulu_redirect.status-code</title>
+                <title>sulu_redirect.enabled</title>
+            </meta>
+            <params>
+                <param name="type" value="toggler"/>
+                <param name="default_value" value="true"/>
+            </params>
+        </property>
+
+        <property name="statusCode" type="single_select" colspan="10" mandatory="true">
+            <meta>
+                <title>sulu_redirect.status_code</title>
             </meta>
 
             <params>
@@ -17,17 +27,17 @@
                 <param name="values" type="collection">
                     <param name="301">
                         <meta>
-                            <title>301: Moved Permanently</title>
+                            <title>sulu_redirect.status_code.301</title>
                         </meta>
                     </param>
                     <param name="302">
                         <meta>
-                            <title>302: Moved Temporarly</title>
+                            <title>sulu_redirect.status_code.302</title>
                         </meta>
                     </param>
                     <param name="410">
                         <meta>
-                            <title>410: Gone</title>
+                            <title>sulu_redirect.status_code.410</title>
                         </meta>
                     </param>
                 </param>
@@ -38,28 +48,19 @@
             <meta>
                 <title>sulu_redirect.source</title>
             </meta>
-            <params>
-                <param name="headline" value="true"/>
-            </params>
+        </property>
+
+        <property name="sourceHost" type="text_line">
+            <meta>
+                <title>sulu_redirect.source_host</title>
+                <info_text>sulu_redirect.source_host_info_text</info_text>
+            </meta>
         </property>
 
         <property name="target" type="text_line" visibleCondition="statusCode != 410">
             <meta>
                 <title>sulu_redirect.target</title>
             </meta>
-            <params>
-                <param name="headline" value="true"/>
-            </params>
-        </property>
-
-        <property name="enabled" type="checkbox">
-            <meta>
-                <title>sulu_redirect.enabled</title>
-            </meta>
-            <params>
-                <param name="type" value="toggler"/>
-                <param name="default_value" value="true"/>
-            </params>
         </property>
     </properties>
 </form>

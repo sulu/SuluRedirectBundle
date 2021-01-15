@@ -38,9 +38,10 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
     public function saveByData($data)
     {
         $source = $data['source'];
+        $sourceHost = $data['sourceHost'];
         $id = $data['id'] ?? null;
 
-        $otherRoute = $this->redirectRouteRepository->findBySource($source);
+        $otherRoute = $this->redirectRouteRepository->findBySource($source, $sourceHost);
 
         // load existing tag if id is given and create a new one otherwise
         if ($id) {
@@ -53,12 +54,17 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
             $redirectRoute->setId(Uuid::uuid4()->toString());
         }
 
-        if ($otherRoute && $otherRoute->getId() !== $redirectRoute->getId()) {
-            throw new RedirectRouteNotUniqueException($source);
+        if (
+            $otherRoute &&
+            $otherRoute->getId() !== $redirectRoute->getId() &&
+            $otherRoute->getSourceHost() === $redirectRoute->getSourceHost()
+        ) {
+            throw new RedirectRouteNotUniqueException($source, $sourceHost);
         }
 
         // update data
         $redirectRoute->setSource($data['source']);
+        $redirectRoute->setSourceHost($data['sourceHost']);
         $redirectRoute->setTarget($data['target']);
         $redirectRoute->setEnabled($data['enabled']);
         $redirectRoute->setStatusCode($data['statusCode']);
