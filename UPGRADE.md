@@ -1,4 +1,4 @@
-# Upgrading
+# UPGRADE
 
 ## 0.x
 
