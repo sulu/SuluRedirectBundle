@@ -83,7 +83,7 @@ interface RedirectRouteInterface
     /**
      * Set source host.
      *
-     * @param string $sourceHost|null
+     * @param string|null $sourceHost
      *
      * @return $this
      */
