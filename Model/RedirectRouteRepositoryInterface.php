@@ -31,7 +31,7 @@ interface RedirectRouteRepositoryInterface extends RepositoryInterface
      * Find enabled redirect-routes for given source.
      *
      * @param string $source
-     * @param string|null $host
+     * @param string|null $sourceHost
      *
      * @return RedirectRouteInterface
      */
@@ -41,10 +41,11 @@ interface RedirectRouteRepositoryInterface extends RepositoryInterface
      * Find redirect-routes for given source.
      *
      * @param string $source
+     * @param string|null $sourceHost
      *
      * @return RedirectRouteInterface
      */
-    public function findBySource($source);
+    public function findBySource($source, $sourceHost = null);
 
     /**
      * Persist given entity.
