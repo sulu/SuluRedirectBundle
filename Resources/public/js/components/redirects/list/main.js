@@ -120,7 +120,7 @@ define([
                     url: '/admin/api/redirect-routes?sortBy=created&sortOrder=desc',
                     storageName: 'redirect-routes',
                     searchInstanceName: 'redirect-routes',
-                    searchFields: ['source', 'target'],
+                    searchFields: ['source', 'sourceHost', 'target'],
                     resultKey: 'redirect-routes',
                     instanceName: 'redirect-routes',
                     actionCallback: function(id) {

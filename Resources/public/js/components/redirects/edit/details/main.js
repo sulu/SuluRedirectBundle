@@ -26,6 +26,7 @@ define([
             },
             translations: {
                 source: 'sulu_redirect.source',
+                sourceHost: 'sulu_redirect.source-host',
                 target: 'sulu_redirect.target',
                 conflict: 'sulu_redirect.errors.conflict',
             }

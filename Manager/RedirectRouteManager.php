@@ -38,14 +38,18 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
      */
     public function save(RedirectRouteInterface $redirectRoute)
     {
-        $otherRoute = $this->redirectRouteRepository->findBySource($redirectRoute->getSource());
+        $otherRoute = $this->redirectRouteRepository->findBySource($redirectRoute->getSource(), $redirectRoute->getSourceHost());
 
         if (!$redirectRoute->getId()) {
             $redirectRoute->setId(Uuid::uuid4()->toString());
         }
 
-        if ($otherRoute && $otherRoute->getId() !== $redirectRoute->getId()) {
-            throw new RedirectRouteNotUniqueException($redirectRoute->getSource());
+        if (
+            $otherRoute &&
+            $otherRoute->getId() !== $redirectRoute->getId() &&
+            $otherRoute->getSourceHost() === $redirectRoute->getSourceHost()
+        ) {
+            throw new RedirectRouteNotUniqueException($redirectRoute->getSource(), $redirectRoute->getSourceHost());
         }
 
         if (410 === $redirectRoute->getStatusCode()) {
