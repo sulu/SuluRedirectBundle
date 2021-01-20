@@ -12,6 +12,7 @@
 namespace Sulu\Bundle\RedirectBundle\Import\Reader;
 
 use SplFileObject;
+use Sulu\Bundle\RedirectBundle\Import\Converter\Converter;
 
 /**
  * Read a csv-file and stream each line as item into a callback.
@@ -29,16 +30,18 @@ class CsvReader implements ReaderInterface
         $csv->setCsvControl();
         $csv->setFlags(SplFileObject::READ_CSV);
 
-        $header = null;
+        $header = [Converter::SOURCE, Converter::TARGET, Converter::STATUS_CODE, Converter::ENABLED];
         foreach ($csv as $lineNumber => $line) {
-            if (1 === count($line) && '' === trim($line[0])) {
+            // ignore empty lines
+            if (empty(array_filter($line))) {
                 continue;
             }
 
-            if (0 == $lineNumber) {
-                $header = $line;
-
-                continue;
+            if (0 === $lineNumber) {
+                if (false !== array_search(Converter::SOURCE, $line)) {
+                    $header = $line;
+                    continue;
+                }
             }
 
             yield new ReaderItem($lineNumber, '"' . implode('","', $line) . '"', $this->interpret($line, $header));
