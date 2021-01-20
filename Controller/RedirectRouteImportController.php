@@ -50,7 +50,7 @@ class RedirectRouteImportController implements SecuredControllerInterface
     /**
      * {@inheritDoc}
      */
-    public function getSecurityContext()
+    public function getSecurityContext(): string
     {
         return RedirectAdmin::SECURITY_CONTEXT;
     }
