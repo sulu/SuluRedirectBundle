@@ -129,6 +129,9 @@ class RedirectAdmin extends Admin
                 'Settings' => [
                     self::SECURITY_CONTEXT => [
                         PermissionTypes::VIEW,
+                        PermissionTypes::ADD,
+                        PermissionTypes::EDIT,
+                        PermissionTypes::DELETE,
                     ],
                 ],
             ],

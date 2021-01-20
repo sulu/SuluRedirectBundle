@@ -36,13 +36,31 @@ class CsvReaderTest extends TestCase
         $reader = new CsvReader();
         $fileName = __DIR__ . '/import.csv';
 
-        $i = 1;
+        $i = 0;
         foreach ($reader->read($fileName) as $item) {
+            ++$i;
+
             $this->assertEquals('/source-' . $i, $item->getData()['source']);
             $this->assertEquals('/target-' . $i, $item->getData()['target']);
-
-            ++$i;
         }
+
+        $this->assertSame(4, $i);
+    }
+
+    public function testReadWithoutHeader()
+    {
+        $reader = new CsvReader();
+        $fileName = __DIR__ . '/import-without-header.csv';
+
+        $i = 0;
+        foreach ($reader->read($fileName) as $item) {
+            ++$i;
+
+            $this->assertEquals('/source-' . $i, $item->getData()['source']);
+            $this->assertEquals('/target-' . $i, $item->getData()['target']);
+        }
+
+        $this->assertSame(1, $i);
     }
 
     public function testReadDifferentRows()
@@ -65,5 +83,7 @@ class CsvReaderTest extends TestCase
 
             ++$i;
         }
+
+        $this->assertSame(3, $i);
     }
 }
