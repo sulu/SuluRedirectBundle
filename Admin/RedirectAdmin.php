@@ -67,6 +67,9 @@ class RedirectAdmin extends Admin
                 'Global' => [
                     self::SECURITY_CONTEXT => [
                         PermissionTypes::VIEW,
+                        PermissionTypes::ADD,
+                        PermissionTypes::EDIT,
+                        PermissionTypes::DELETE,
                     ],
                 ],
             ],

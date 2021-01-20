@@ -2,6 +2,19 @@
 
 ## 0.x
 
+### Import action changed
+
+To support permissions the RedirectImportController::importAction has been
+renamed to RedirectImportController::postAction.
+
+### Permission changed
+
+The permissions has been implemented in the redirect bundle run the following SQL to give your roles add, edit, delete permissions:
+
+```sql
+UPDATE `se_permissions` SET `permissions` = 127 WHERE context = `sulu.modules.redirects`;
+```
+
 ### Database change
 
 To support multiple webspaces a sourceHost field was added to the RedirectRoute entity and
