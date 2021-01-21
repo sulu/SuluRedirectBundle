@@ -70,12 +70,19 @@ class RedirectRouteImportController implements SecuredControllerInterface
      */
     public function postAction(Request $request)
     {
-        if (!$request->files->has('redirectRoutes')) {
+        if (!$request->files->has('files')) {
             return new JsonResponse(null, Response::HTTP_BAD_REQUEST);
         }
 
-        /** @var UploadedFile $uploadedFile */
-        $uploadedFile = $request->files->get('redirectRoutes');
+        /** @var UploadedFile[] $uploadedFiles */
+        $uploadedFiles = $request->files->get('files');
+
+        if (\count($uploadedFiles) < 1) {
+            return new JsonResponse(null, Response::HTTP_BAD_REQUEST);
+        }
+
+        $uploadedFile = $uploadedFiles[0];
+
         $file = $uploadedFile->move(
             $this->importPath,
             $uploadedFile->getClientOriginalName()

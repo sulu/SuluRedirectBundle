@@ -40,6 +40,7 @@
             <argument type="service" id="sulu_redirect.import"/>
             <argument type="string">%sulu_redirect.imports.path%</argument>
 
+            <tag name="controller.service_arguments"/>
             <tag name="sulu.context" context="admin"/>
         </service>
 
