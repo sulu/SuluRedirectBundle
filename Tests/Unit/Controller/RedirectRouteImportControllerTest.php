@@ -53,8 +53,8 @@ class RedirectRouteImportControllerTest extends TestCase
             ->getMock();
         $uploadedFile->method('getClientOriginalName')->willReturn($this->fileName);
         $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file);
-        $fileBag->has('files')->willReturn(true);
-        $fileBag->get('files')->willReturn([$uploadedFile]);
+        $fileBag->has('redirectRoutes')->willReturn(true);
+        $fileBag->get('redirectRoutes')->willReturn([$uploadedFile]);
 
         $items = [
             new Item(1, '', $this->prophesize(RedirectRouteInterface::class)->reveal()),
@@ -95,8 +95,8 @@ class RedirectRouteImportControllerTest extends TestCase
 
         $uploadedFile->method('getClientOriginalName')->willReturn($this->fileName);
         $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file);
-        $fileBag->has('files')->willReturn(true);
-        $fileBag->get('files')->willReturn([$uploadedFile]);
+        $fileBag->has('redirectRoutes')->willReturn(true);
+        $fileBag->get('redirectRoutes')->willReturn([$uploadedFile]);
 
         $import = $this->prophesize(FileImportInterface::class);
         $import->import($file->getRealPath())->willThrow(ReaderNotFoundException::class);
@@ -123,8 +123,8 @@ class RedirectRouteImportControllerTest extends TestCase
             ->getMock();
         $uploadedFile->method('getClientOriginalName')->willReturn($this->fileName);
         $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file);
-        $fileBag->has('files')->willReturn(true);
-        $fileBag->get('files')->willReturn([$uploadedFile]);
+        $fileBag->has('redirectRoutes')->willReturn(true);
+        $fileBag->get('redirectRoutes')->willReturn([$uploadedFile]);
 
         $import = $this->prophesize(FileImportInterface::class);
         $import->import($file->getRealPath())->willThrow(ConverterNotFoundException::class);
@@ -143,7 +143,7 @@ class RedirectRouteImportControllerTest extends TestCase
         $fileBag = $this->prophesize(FileBag::class);
         $request->reveal()->files = $fileBag->reveal();
 
-        $fileBag->has('files')->willReturn(false);
+        $fileBag->has('redirectRoutes')->willReturn(false);
 
         $import = $this->prophesize(FileImportInterface::class);
         $import->import(Argument::any())->shouldNotBeCalled();
