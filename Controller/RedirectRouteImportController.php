@@ -48,7 +48,7 @@ class RedirectRouteImportController implements SecuredControllerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getSecurityContext(): string
     {
@@ -56,7 +56,7 @@ class RedirectRouteImportController implements SecuredControllerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getLocale(Request $request)
     {
