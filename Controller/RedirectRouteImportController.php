@@ -48,7 +48,7 @@ class RedirectRouteImportController implements SecuredControllerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getSecurityContext(): string
     {
@@ -56,7 +56,7 @@ class RedirectRouteImportController implements SecuredControllerInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getLocale(Request $request)
     {
@@ -76,6 +76,7 @@ class RedirectRouteImportController implements SecuredControllerInterface
 
         /** @var UploadedFile $uploadedFile */
         $uploadedFile = $request->files->get('redirectRoutes');
+
         $file = $uploadedFile->move(
             $this->importPath,
             $uploadedFile->getClientOriginalName()
