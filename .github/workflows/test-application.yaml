@@ -7,7 +7,7 @@ on:
             - '[0-9]+.[0-9]+'
 jobs:
     test:
-        name: 'PHP ${{ matrix.php-version }} (${{ matrix.dependency-versions }})'
+        name: 'PHP ${{ matrix.php-version }} (${{ matrix.dependency-versions }}, Lint ${{ matrix.lint }})'
         runs-on: ubuntu-latest
         env:
             DATABASE_URL: 'mysql://root:root@127.0.0.1/sulu_redirect_test?serverVersion=5.7'
@@ -22,6 +22,7 @@ jobs:
                       lint: false
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: disabled
+
                     - php-version: '7.4'
                       dependency-versions: 'highest'
                       php-extensions: 'mysql, imagick'
@@ -29,6 +30,15 @@ jobs:
                       lint: true
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: weak
+
+                    - php-version: '8.0'
+                      dependency-versions: 'highest'
+                      php-extensions: 'mysql, imagick'
+                      tools: 'composer:v2'
+                      lint: false
+                      env:
+                          SYMFONY_DEPRECATIONS_HELPER: weak
+
         services:
             mysql:
                 image: 'mysql:5.7'
@@ -55,6 +65,7 @@ jobs:
               uses: ramsey/composer-install@v1
               with:
                   dependency-versions: ${{matrix.dependency-versions}}
+                  composer-options: ${{ matrix.composer-options }}
 
             - name: Bootstrap test environment
               run: composer bootstrap-test-environment
