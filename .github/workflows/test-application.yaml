@@ -35,7 +35,6 @@ jobs:
                       dependency-versions: 'highest'
                       php-extensions: 'mysql, imagick'
                       tools: 'composer:v2'
-                      composer-options: '--ignore-platform-reqs'
                       lint: false
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: weak
