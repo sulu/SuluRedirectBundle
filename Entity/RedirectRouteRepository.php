@@ -79,7 +79,7 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
     {
         $queryBuilder = $this->createQueryBuilder('redirect_route')
             ->andWhere('redirect_route.source = :source')
-            ->setParameter('source', $source)
+            ->setParameter('source', mb_strtolower('/' . ltrim($source, '/')))
             ->orderBy('redirect_route.sourceHost', 'DESC')
             ->setMaxResults(1);
 
@@ -92,7 +92,7 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
                 )
             );
 
-            $queryBuilder->setParameter('sourceHost', $sourceHost);
+            $queryBuilder->setParameter('sourceHost', mb_strtolower($sourceHost));
         }
 
         return $queryBuilder;
