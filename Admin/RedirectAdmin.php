@@ -74,10 +74,10 @@ class RedirectAdmin extends Admin
             new ToolbarAction('sulu_admin.add'),
             new ToolbarAction('sulu_admin.delete'),
             new ToolbarAction('sulu_admin.upload', [
-                'routeName' => 'sulu_redirect.import',
+                'route_name' => 'sulu_redirect.import',
                 'label' => 'sulu_redirect.import',
                 'multiple' => false,
-                'requestPropertyName' => 'redirectRoutes',
+                'request_property_name' => 'redirectRoutes',
                 'accept' => ['text/csv'],
             ]),
         ];
