@@ -8,6 +8,7 @@
   "sulu_redirect.source_host_info_text": "Use an empty source host to match all hosts.",
   "sulu_redirect.target": "Target",
   "sulu_redirect.status_code": "Status-Code",
+  "sulu_redirect.redirect_with_source_already_exist": "A redirect with the source \"%source%\" and host \"%sourceHost%\" already exists.",
   "sulu_redirect.status_code.301": "301: Moved Permanently",
   "sulu_redirect.status_code.302": "302: Moved Temporarily",
   "sulu_redirect.status_code.410": "410: Gone",

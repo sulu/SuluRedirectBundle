@@ -11,10 +11,12 @@
 
 namespace Sulu\Bundle\RedirectBundle\Exception;
 
+use Sulu\Component\Rest\Exception\TranslationErrorMessageExceptionInterface;
+
 /**
  * Redirect-route for given source already exists.
  */
-class RedirectRouteNotUniqueException extends \Exception
+class RedirectRouteNotUniqueException extends \Exception implements TranslationErrorMessageExceptionInterface
 {
     /**
      * @var string
@@ -55,5 +57,18 @@ class RedirectRouteNotUniqueException extends \Exception
     public function getSourceHost()
     {
         return $this->sourceHost;
+    }
+
+    public function getMessageTranslationKey(): string
+    {
+        return 'sulu_redirect.redirect_with_source_already_exist';
+    }
+
+    public function getMessageTranslationParameters(): array
+    {
+        return [
+            '%source%' => $this->source,
+            '%sourceHost%' => $this->sourceHost ?: '',
+        ];
     }
 }
