@@ -11,9 +11,9 @@
 
 namespace Sulu\Bundle\RedirectBundle;
 
-use Sulu\Component\Route\RouteDefaultOptionsCompilerPass;
 use Sulu\Bundle\PersistenceBundle\PersistenceBundleTrait;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
+use Sulu\Component\Route\RouteDefaultOptionsCompilerPass;
 use Sulu\Component\Symfony\CompilerPass\TaggedServiceCollectorCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

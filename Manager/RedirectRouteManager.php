@@ -54,14 +54,6 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
             $redirectRoute->setId(Uuid::uuid4()->toString());
         }
 
-        if (
-            $otherRoute &&
-            $otherRoute->getId() !== $redirectRoute->getId() &&
-            $otherRoute->getSourceHost() === $redirectRoute->getSourceHost()
-        ) {
-            throw new RedirectRouteNotUniqueException($source, $sourceHost);
-        }
-
         // update data
         $redirectRoute->setSource($data['source']);
         $redirectRoute->setSourceHost($data['sourceHost']);
@@ -71,6 +63,14 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
 
         if (410 === $redirectRoute->getStatusCode()) {
             $redirectRoute->setTarget('');
+        }
+
+        if (
+            $otherRoute &&
+            $otherRoute->getId() !== $redirectRoute->getId() &&
+            $otherRoute->getSourceHost() === $redirectRoute->getSourceHost()
+        ) {
+            throw new RedirectRouteNotUniqueException($source, $sourceHost);
         }
 
         $this->redirectRouteRepository->persist($redirectRoute);

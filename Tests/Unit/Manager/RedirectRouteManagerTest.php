@@ -84,6 +84,13 @@ class RedirectRouteManagerTest extends TestCase
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->setId(Argument::any())->shouldBeCalled();
+        $redirectRoute->setSource('/test')->shouldBeCalled();
+        $redirectRoute->setSourceHost('www.example.com')->shouldBeCalled();
+        $redirectRoute->setEnabled(true)->shouldBeCalled();
+        $redirectRoute->setTarget('/test2')->shouldBeCalled();
+        $redirectRoute->setStatusCode(301)->shouldBeCalled();
+        $redirectRoute->getStatusCode()->willReturn(301);
+
         $redirectRoute->getId()->willReturn('234-234-234');
         $redirectRoute->getSourceHost()->willReturn('www.example.com');
 
