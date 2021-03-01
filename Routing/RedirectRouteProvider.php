@@ -28,9 +28,17 @@ class RedirectRouteProvider implements RouteProviderInterface
      */
     private $redirectRouteRepository;
 
-    public function __construct(RedirectRouteRepositoryInterface $redirectRouteRepository)
-    {
+    /**
+     * @var array
+     */
+    private $defaultOptions;
+
+    public function __construct(
+        RedirectRouteRepositoryInterface $redirectRouteRepository,
+        array $defaultOptions = []
+    ) {
         $this->redirectRouteRepository = $redirectRouteRepository;
+        $this->defaultOptions = $defaultOptions;
     }
 
     /**
@@ -53,7 +61,9 @@ class RedirectRouteProvider implements RouteProviderInterface
             [
                 '_controller' => 'sulu_redirect.controller.redirect:redirect',
                 'redirectRoute' => $redirectRoute,
-            ]
+            ],
+            [],
+            $this->defaultOptions
         );
         $routeCollection->add(sprintf('sulu_redirect.%s', $redirectRoute->getId()), $route);
 

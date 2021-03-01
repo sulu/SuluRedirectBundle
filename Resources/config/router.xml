@@ -6,6 +6,7 @@
     <services>
         <service id="sulu_redirect.routing.provider" class="Sulu\Bundle\RedirectBundle\Routing\RedirectRouteProvider">
             <argument type="service" id="sulu.repository.redirect_route"/>
+            <argument type="collection" />
 
             <tag name="sulu.context" context="website"/>
         </service>

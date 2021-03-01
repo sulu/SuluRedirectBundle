@@ -11,6 +11,7 @@
 
 namespace Sulu\Bundle\RedirectBundle;
 
+use Sulu\Component\Route\RouteDefaultOptionsCompilerPass;
 use Sulu\Bundle\PersistenceBundle\PersistenceBundleTrait;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Component\Symfony\CompilerPass\TaggedServiceCollectorCompilerPass;
@@ -40,6 +41,10 @@ class SuluRedirectBundle extends Bundle
                 'sulu_redirect.import.aggregate_converter',
                 'sulu_redirect.import.converter'
             )
+        );
+
+        $container->addCompilerPass(
+            new RouteDefaultOptionsCompilerPass('sulu_redirect.routing.provider', 1)
         );
 
         $this->buildPersistence(
