@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 class RedirectRouteControllerTest extends SuluTestCase
 {
-    const BASE_URL = '/api/redirect-routes';
+    const BASE_URL = '/admin/api/redirect-routes';
 
     /**
      * @var array
