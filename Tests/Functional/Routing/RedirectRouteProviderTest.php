@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of Sulu.
+ *
+ * (c) Sulu GmbH
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Functional\Routing;
 
@@ -57,26 +65,26 @@ class RedirectRouteProviderTest extends WebsiteTestCase
         }
     }
 
-    public function routeDataProvider()
+    public function routeDataProvider(): \Generator
     {
         yield [
             '/test-301',
             '/test-301',
             301,
-            '/test2'
+            '/test2',
         ];
 
         yield [
             '/test-302',
             '/test-302',
             302,
-            '/test2'
+            '/test2',
         ];
 
         yield [
             '/test-401',
             '/test-401',
-            410
+            410,
         ];
 
         yield [
@@ -84,14 +92,14 @@ class RedirectRouteProviderTest extends WebsiteTestCase
             '/test-domain-redirect',
             301,
             '/',
-            'with-domain.com'
+            'with-domain.com',
         ];
 
         yield [
             '/test-emoticon-%F0%9F%8E%89', // browsers will encode the url and be provided this way to symfony getPathInfo
             '/test-emoticon-🎉',
             301,
-            '/'
+            '/',
         ];
     }
 }
