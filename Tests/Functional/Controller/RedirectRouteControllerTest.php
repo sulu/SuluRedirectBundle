@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 
 class RedirectRouteControllerTest extends SuluTestCase
 {
-    const BASE_URL = '/api/redirect-routes';
+    const BASE_URL = '/admin/api/redirect-routes';
 
     /**
      * @var array
@@ -73,7 +73,25 @@ class RedirectRouteControllerTest extends SuluTestCase
         $response = $this->post($this->defaultData);
         $this->assertHttpStatusCode(200, $response);
 
-        $response = $this->post($this->defaultData);
+        $response = $this->post(array_merge($this->defaultData, ['source' => '/test1']));
+        $this->assertHttpStatusCode(409, $response);
+
+        $response = $this->post(array_merge($this->defaultData, ['source' => 'test1']));
+        $this->assertHttpStatusCode(409, $response);
+
+        $response = $this->post(array_merge($this->defaultData, ['source' => '/TEST1']));
+        $this->assertHttpStatusCode(409, $response);
+
+        $response = $this->post(array_merge($this->defaultData, ['source' => 'TEST1']));
+        $this->assertHttpStatusCode(409, $response);
+    }
+
+    public function testPostWithSourceHostAlreadyExists()
+    {
+        $response = $this->post(array_merge($this->defaultData, ['source' => '/test1', 'sourceHost' => 'sulu.io']));
+        $this->assertHttpStatusCode(200, $response);
+
+        $response = $this->post(array_merge($this->defaultData, ['source' => '/test1', 'sourceHost' => 'sulu.io']));
         $this->assertHttpStatusCode(409, $response);
     }
 
@@ -105,9 +123,22 @@ class RedirectRouteControllerTest extends SuluTestCase
     public function testPutAlreadyExists()
     {
         $response = $this->post($this->defaultData);
+        $data = json_decode($response->getContent(), true);
         $this->assertHttpStatusCode(200, $response);
 
-        $response = $this->post($this->defaultData);
+        $response = $this->post(array_merge($this->defaultData, ['source' => '/test2']));
+        $this->assertHttpStatusCode(200, $response);
+
+        $response = $this->put($data['id'], array_merge($this->defaultData, ['source' => '/test2']));
+        $this->assertHttpStatusCode(409, $response);
+
+        $response = $this->put($data['id'], array_merge($this->defaultData, ['source' => 'test2']));
+        $this->assertHttpStatusCode(409, $response);
+
+        $response = $this->put($data['id'], array_merge($this->defaultData, ['source' => '/TEST2']));
+        $this->assertHttpStatusCode(409, $response);
+
+        $response = $this->put($data['id'], array_merge($this->defaultData, ['source' => 'TEST2']));
         $this->assertHttpStatusCode(409, $response);
     }
 

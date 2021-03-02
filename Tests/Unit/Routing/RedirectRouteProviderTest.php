@@ -39,7 +39,7 @@ class RedirectRouteProviderTest extends TestCase
     {
         $this->repository = $this->prophesize(RedirectRouteRepositoryInterface::class);
 
-        $this->routeProvider = new RedirectRouteProvider($this->repository->reveal());
+        $this->routeProvider = new RedirectRouteProvider($this->repository->reveal(), ['utf8' => true]);
 
         $this->request = $this->prophesize(Request::class);
     }
@@ -69,6 +69,9 @@ class RedirectRouteProviderTest extends TestCase
             ],
             $result->get('sulu_redirect.' . $uuid)->getDefaults()
         );
+
+        $this->assertArrayHasKey('utf8', $result->get('sulu_redirect.' . $uuid)->getOptions());
+        $this->assertSame(true, $result->get('sulu_redirect.' . $uuid)->getOptions()['utf8']);
     }
 
     public function testGetRouteCollectionForRequestEncodedPathInfo()

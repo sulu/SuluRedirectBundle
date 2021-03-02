@@ -28,9 +28,17 @@ class RedirectRouteProvider implements RouteProviderInterface
      */
     private $redirectRouteRepository;
 
-    public function __construct(RedirectRouteRepositoryInterface $redirectRouteRepository)
-    {
+    /**
+     * @var array
+     */
+    private $defaultOptions;
+
+    public function __construct(
+        RedirectRouteRepositoryInterface $redirectRouteRepository,
+        array $defaultOptions = []
+    ) {
         $this->redirectRouteRepository = $redirectRouteRepository;
+        $this->defaultOptions = $defaultOptions;
     }
 
     /**
@@ -39,7 +47,7 @@ class RedirectRouteProvider implements RouteProviderInterface
     public function getRouteCollectionForRequest(Request $request)
     {
         // server encodes the url and symfony does not encode it
-        // symfony decodes this data here https://github.com/symfony/symfony/blob/3.3/src/Symfony/Component/Routing/Matcher/UrlMatcher.php#L91
+        // symfony decodes this data here https://github.com/symfony/symfony/blob/v5.2.3/src/Symfony/Component/Routing/Matcher/UrlMatcher.php#L88
         $pathInfo = rawurldecode($request->getPathInfo());
         $host = $request->getHost();
 
@@ -49,11 +57,13 @@ class RedirectRouteProvider implements RouteProviderInterface
         }
 
         $route = new Route(
-            $redirectRoute->getSource(),
+            $pathInfo,
             [
                 '_controller' => 'sulu_redirect.controller.redirect:redirect',
                 'redirectRoute' => $redirectRoute,
-            ]
+            ],
+            [],
+            $this->defaultOptions
         );
         $routeCollection->add(sprintf('sulu_redirect.%s', $redirectRoute->getId()), $route);
 
