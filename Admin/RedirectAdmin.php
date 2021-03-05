@@ -73,6 +73,7 @@ class RedirectAdmin extends Admin
         $listToolbarActions = [
             new ToolbarAction('sulu_admin.add'),
             new ToolbarAction('sulu_admin.delete'),
+            new ToolbarAction('sulu_admin.export'),
             new ToolbarAction('sulu_admin.upload', [
                 'route_name' => 'sulu_redirect.import',
                 'label' => 'sulu_redirect.import',
