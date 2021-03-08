@@ -4,3 +4,10 @@ sulu_redirect.redirect_route:
     resource: sulu_redirect.redirect_route_controller
     options:
         expose: true
+
+sulu_redirect.post_redirect-route_trigger:
+    path: /redirect-routes/{id}.{_format}
+    methods: POST
+    defaults:
+        _controller: sulu_redirect.redirect_route_controller::postTriggerAction
+        _format: json

@@ -95,6 +95,36 @@ class RedirectRouteControllerTest extends SuluTestCase
         $this->assertHttpStatusCode(409, $response);
     }
 
+    public function testPostTriggerActionEnable(): void
+    {
+        $response = $this->post(array_merge($this->defaultData, ['enabled' => false]));
+        $data = json_decode($response->getContent(), true);
+
+        $this->client->request('POST', self::BASE_URL . '/' . $data['id'], [
+            'action' => 'enable',
+        ]);
+        $response = $this->client->getResponse();
+        $this->assertHttpStatusCode(200, $response);
+
+        $content = json_decode($response->getContent(), true);
+        $this->assertTrue($content['enabled']);
+    }
+
+    public function testPostTriggerActionDisable(): void
+    {
+        $response = $this->post(array_merge($this->defaultData, ['enabled' => true]));
+        $data = json_decode($response->getContent(), true);
+
+        $this->client->request('POST', self::BASE_URL . '/' . $data['id'], [
+            'action' => 'disable',
+        ]);
+        $response = $this->client->getResponse();
+        $this->assertHttpStatusCode(200, $response);
+
+        $content = json_decode($response->getContent(), true);
+        $this->assertFalse($content['enabled']);
+    }
+
     public function testGet()
     {
         $response = $this->post($this->defaultData);

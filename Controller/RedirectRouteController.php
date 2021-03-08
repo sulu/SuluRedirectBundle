@@ -13,8 +13,8 @@ namespace Sulu\Bundle\RedirectBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations\RouteResource;
-use FOS\RestBundle\Routing\ClassResourceInterface;
 use FOS\RestBundle\View\ViewHandlerInterface;
+use HandcraftedInTheAlps\RestRoutingBundle\Routing\ClassResourceInterface;
 use Sulu\Bundle\RedirectBundle\Admin\RedirectAdmin;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
@@ -22,6 +22,7 @@ use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 use Sulu\Component\Rest\AbstractRestController;
 use Sulu\Component\Rest\DoctrineRestHelper;
 use Sulu\Component\Rest\Exception\EntityNotFoundException;
+use Sulu\Component\Rest\Exception\RestException;
 use Sulu\Component\Rest\ListBuilder\Doctrine\DoctrineListBuilderFactoryInterface;
 use Sulu\Component\Rest\ListBuilder\FieldDescriptorInterface;
 use Sulu\Component\Rest\ListBuilder\ListRepresentation;
@@ -77,7 +78,7 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
     /**
      * @var string
      */
-    protected $tagEntityName;
+    protected $redirectRouteEntityName;
 
     public function __construct(
         ViewHandlerInterface $viewHandler,
@@ -87,7 +88,7 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
         EntityManagerInterface $entityManager,
         RedirectRouteManagerInterface $redirectRouteManager,
         RedirectRouteRepositoryInterface $redirectRouteRepository,
-        string $tagEntityName
+        string $redirectRouteEntityName
     ) {
         parent::__construct($viewHandler);
         $this->restHelper = $restHelper;
@@ -96,7 +97,7 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
         $this->entityManager = $entityManager;
         $this->redirectRouteManager = $redirectRouteManager;
         $this->redirectRouteRepository = $redirectRouteRepository;
-        $this->tagEntityName = $tagEntityName;
+        $this->redirectRouteEntityName = $redirectRouteEntityName;
     }
 
     /**
@@ -108,7 +109,7 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
     {
         /** @var FieldDescriptorInterface[] $fieldDescriptors */
         $fieldDescriptors = $this->fieldDescriptor->getFieldDescriptors('redirect_routes');
-        $listBuilder = $this->factory->create($this->tagEntityName);
+        $listBuilder = $this->factory->create($this->redirectRouteEntityName);
 
         $this->restHelper->initializeListBuilder($listBuilder, $fieldDescriptors);
         $results = $listBuilder->execute();
@@ -141,6 +142,42 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
         return $this->handleView($this->view($redirectRoute));
     }
 
+    public function postTriggerAction(Request $request, string $id): Response
+    {
+        $action = $request->get('action');
+
+        /** @var RedirectRouteInterface $redirectRoute */
+        $redirectRoute = $this->redirectRouteRepository->find($id);
+
+        if (null === $redirectRoute) {
+            throw new EntityNotFoundException($this->redirectRouteEntityName, $id);
+        }
+
+        try {
+            switch ($action) {
+                case 'enable':
+                    $redirectRoute->setEnabled(true);
+                    $this->entityManager->flush();
+
+                    break;
+                case 'disable':
+                    $redirectRoute->setEnabled(false);
+                    $this->entityManager->flush();
+
+                    break;
+                default:
+                    throw new RestException('Unrecognized action: ' . $action);
+            }
+
+            // prepare view
+            $view = $this->view($redirectRoute, 200);
+        } catch (RestException $exception) {
+            $view = $this->view($exception->toArray(), 400);
+        }
+
+        return $this->handleView($view);
+    }
+
     /**
      * Returns single redirect-route.
      *
@@ -154,7 +191,7 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
     {
         $entity = $this->redirectRouteRepository->find($id);
         if (!$entity) {
-            throw new EntityNotFoundException($this->tagEntityName, $id);
+            throw new EntityNotFoundException($this->redirectRouteEntityName, $id);
         }
 
         return $this->handleView($this->view($entity));
@@ -192,7 +229,7 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
         /** @var RedirectRouteInterface|null $redirectRoute */
         $redirectRoute = $this->redirectRouteRepository->find($id);
         if (!$redirectRoute) {
-            throw new EntityNotFoundException($this->tagEntityName, $id);
+            throw new EntityNotFoundException($this->redirectRouteEntityName, $id);
         }
 
         $this->redirectRouteManager->delete($redirectRoute);
