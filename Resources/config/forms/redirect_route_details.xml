@@ -6,17 +6,7 @@
     <key>redirect_route_details</key>
 
     <properties>
-        <property name="enabled" type="checkbox" colspan="2">
-            <meta>
-                <title>sulu_redirect.enabled</title>
-            </meta>
-            <params>
-                <param name="type" value="toggler"/>
-                <param name="default_value" value="true"/>
-            </params>
-        </property>
-
-        <property name="statusCode" type="single_select" colspan="10" mandatory="true">
+        <property name="statusCode" type="single_select" mandatory="true">
             <meta>
                 <title>sulu_redirect.status_code</title>
             </meta>

@@ -14,6 +14,7 @@ namespace Sulu\Bundle\RedirectBundle\Admin;
 use Sulu\Bundle\AdminBundle\Admin\Admin;
 use Sulu\Bundle\AdminBundle\Admin\Navigation\NavigationItem;
 use Sulu\Bundle\AdminBundle\Admin\Navigation\NavigationItemCollection;
+use Sulu\Bundle\AdminBundle\Admin\View\TogglerToolbarAction;
 use Sulu\Bundle\AdminBundle\Admin\View\ToolbarAction;
 use Sulu\Bundle\AdminBundle\Admin\View\ViewBuilderFactoryInterface;
 use Sulu\Bundle\AdminBundle\Admin\View\ViewCollection;
@@ -68,6 +69,12 @@ class RedirectAdmin extends Admin
         $formToolbarActions = [
             new ToolbarAction('sulu_admin.save'),
             new ToolbarAction('sulu_admin.delete'),
+            new TogglerToolbarAction(
+                'sulu_redirect.enabled',
+                'enabled',
+                'enable',
+                'disable'
+            ),
         ];
 
         $listToolbarActions = [
