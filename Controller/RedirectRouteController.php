@@ -146,7 +146,7 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
     {
         $action = $request->get('action');
 
-        /** @var RedirectRouteInterface $redirectRoute */
+        /** @var RedirectRouteInterface|null $redirectRoute */
         $redirectRoute = $this->redirectRouteRepository->find($id);
 
         if (null === $redirectRoute) {
