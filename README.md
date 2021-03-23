@@ -1,4 +1,4 @@
-# SuluRedirectBundle
+<h1 align="center">SuluRedirectBundle</h1>
 
 <p align="center">
     <a href="https://sulu.io/" target="_blank">
@@ -7,57 +7,82 @@
 </p>
 
 <p align="center">
-
-<a href="https://github.com/sulu/SuluRedirectBundle/blob/2.x/LICENSE" target="_blank">
-    <img src="https://img.shields.io/github/license/sulu/SuluRedirectBundle.svg" alt="GitHub license">
-</a>
-<a href="https://github.com/sulu/SuluRedirectBundle/actions" target="_blank">
-    <img src="https://img.shields.io/github/workflow/status/sulu/SuluRedirectBundle/Test%20application.svg?label=test-workflow" alt="Test workflow status">
-</a>
-<a href="https://github.com/sulu/sulu/releases" target="_blank">
-    <img src="https://img.shields.io/badge/sulu%20compatibility-%3E=2.0-52b6ca.svg" alt="Sulu compatibility">
-</a>
-
+    <a href="https://github.com/sulu/SuluRedirectBundle/blob/2.x/LICENSE" target="_blank">
+        <img src="https://img.shields.io/github/license/sulu/SuluRedirectBundle.svg" alt="GitHub license">
+    </a>
+    <a href="https://github.com/sulu/SuluRedirectBundle/releases" target="_blank">
+        <img src="https://img.shields.io/github/tag/sulu/SuluRedirectBundle.svg" alt="GitHub tag (latest SemVer)">
+    </a>
+    <a href="https://github.com/sulu/SuluRedirectBundle/actions" target="_blank">
+        <img src="https://img.shields.io/github/workflow/status/sulu/SuluRedirectBundle/Test%20application.svg?label=test-workflow" alt="Test workflow status">
+    </a>
+    <a href="https://github.com/sulu/sulu/releases" target="_blank">
+        <img src="https://img.shields.io/badge/sulu%20compatibility-%3E=2.0-52b6ca.svg" alt="Sulu compatibility">
+    </a>
 </p>
+<br/>
 
-The SuluRedirectBundle adds support for managing redirects in Sulu.
+The SuluRedirectBundle adds simple but powerful capabilities for managing redirects to Sulu’s administration interface
+and allows content managers to manage redirects without any knowledge of web servers.
 
-Additional features included:
+<br/>
+<p align="center">
+    <img width="80%" src="https://sulu.io/uploads/media/800x@2x/02/342-SuluRedirectBundle%20Slideshow.gif?v=1-0" alt="SuluRedirectBundle Slideshow">
+</p>
+<br/>
 
-* Content-Manager can create new redirect-routes in Sulu-Admin
-* Import redirect-routes from csv
+The SuluRedirectBundle is compatible with Sulu **starting from version 2.0**. Have a look at the `require` section in
+the [composer.json](https://github.com/sulu/SuluRedirectBundle/blob/2.x/composer.json) to find an
+**up-to-date list of the requirements** of the bundle.
 
-## Status
+## 🚀&nbsp; Installation and Documentation
 
-This repository will become version 1.0 of SuluRedirectBundle. It is under **heavy development** and currently its APIs
-and code are not stable yet (pre 1.0).
+Execute the following [composer](https://getcomposer.org/) commands to add the bundle to the dependencies of your
+project:
 
-## Requirements
+```bash
+composer require sulu/redirect-bundle
+```
 
-* Composer
-* PHP `^7.2`
-* Sulu `^2.0.0`
+Afterwards, visit the [bundle documentation](https://github.com/sulu/SuluRedirectBundle/blob/2.x/Resources/doc) to
+find out **how to set up and configure the SuluRedirectBundle** to your specific needs.
 
-For detailed requirements see [composer.json](https://github.com/sulu/SuluRedirectBundle/blob/2.x/composer.json).
+## 💡&nbsp; Features
 
-## Documentation
+### Importing redirects
 
-The the Documentation is stored in the
-[Resources/doc/](https://github.com/sulu/SuluRedirectBundle/blob/2.x/Resources/doc) folder.
+One of the great features of this bundle is the ability to import redirects from a CSV file.
+The most simplified file just contains two columns, `source` and `target`.
+Of course, all the other options like `statusCode`, `sourceHost`, and `enabled` can also be set in the import file.
 
-## Installation
+It’s also possible to override existing redirects with an import; you just have to set the same value for `source`.
 
-All the installation instructions are located in the
-[Documentation](https://github.com/sulu/SuluRedirectBundle/blob/2.x/Resources/doc/installation.md).
+### Enabling and disabling redirects
 
-## License
+Sometimes it’s necessary to prepare redirects which are not ready yet, especially if you have a large number of redirects.
+Of course there’s a solution for that — toggler in the toolbar to enable or disable redirects quickly.
+This allows you to import a large number of disabled redirects and then check them in the administration interface,
+before enabling them when needed.
 
-This bundle is under the MIT license. See the complete license [in the bundle](LICENSE)
+### Different statuses
 
-## Reporting an issue or a feature request
+The SuluRedirectBundle comes with three different statuses to be used for redirects:
 
-Issues and feature requests are tracked in the [Github issue tracker](https://github.com/Sulu/SuluRedirectBundle/issues).
+- **301** Moved permanently
+- **302** Moved temporarily
+- **410** Gone
 
-When reporting a bug, it may be a good idea to reproduce it in a basic project using the
-[Sulu Skeleton](https://github.com/sulu/skeleton) to allow developers of the bundle to reproduce the issue
-by simply cloning it and following some steps.
+Each of them is useful in different situations, but I think they are quite self explanatory.
+
+## ❤️&nbsp; Support and Contributions
+
+The Sulu content management system is a **community-driven open source project** backed by various partner companies.
+We are committed to a fully transparent development process and **highly appreciate any contributions**.
+
+In case you have questions, we are happy to welcome you in our official [Slack channel](https://sulu.io/services-and-support).
+If you found a bug or miss a specific feature, feel free to **file a new issue** with a respective title and description
+on the the [sulu/SuluRedirectBundle](https://github.com/sulu/SuluRedirectBundle) repository.
+
+## 📘&nbsp; License
+
+The Sulu content management system is released under the under terms of the [MIT License](LICENSE).

@@ -1,18 +1,22 @@
 # Installation
 
-Install bundle over composer:
+### Install bundle using composer:
 
 ```bash
 composer require sulu/redirect-bundle
 ```
 
-Add bundle to config/bundles.php:
+### Add bundle to `config/bundles.php`:
+
+**Tip**: If community flex recipes are enabled, this should be done automatically.
 
 ```php
     Sulu\Bundle\RedirectBundle\SuluRedirectBundle::class => ['all' => true],
 ```
 
-Add routing files to `config/routes/sulu_redirect_admin.yaml`:
+### Add routing files to `config/routes/sulu_redirect_admin.yaml`:
+
+**Tip**: If community flex recipes are enabled, this should be done automatically.
 
 ```yml
 sulu_redirect_api:
@@ -25,27 +29,8 @@ sulu_redirect:
     prefix: /admin/redirects
 ```
 
-## Initialize bundle
-
-Create tables
+### Create necessary database tables
 
 ```bash
 php bin/console doctrine:schema:update
 ```
-
-## Available Configuration
-
-```yml
-sulu_redirect:
-
-    # When enabled, this feature automatically creates redirects with http status code 410 when a document with route or an route entity is removed.
-    gone_on_remove:
-        enabled:              true
-    imports:
-        path:                     '%kernel.project_dir%/var/uploads/redirects'
-    objects:
-        redirect_route:
-            model:                Sulu\Bundle\RedirectBundle\Entity\RedirectRoute
-            repository:           Sulu\Bundle\RedirectBundle\Entity\RedirectRouteRepository
-```
-
