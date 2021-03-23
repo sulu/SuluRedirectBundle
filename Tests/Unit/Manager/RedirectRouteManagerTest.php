@@ -44,7 +44,7 @@ class RedirectRouteManagerTest extends TestCase
         $redirectRoute->setId(Argument::any())->shouldBeCalled();
         $redirectRoute->setSource('/test')->shouldBeCalled();
         $redirectRoute->setSourceHost(null)->shouldBeCalled();
-        $redirectRoute->setEnabled(true)->shouldBeCalled();
+        $redirectRoute->setEnabled(Argument::any())->shouldNotBeCalled();
         $redirectRoute->setTarget('/test2')->shouldBeCalled();
         $redirectRoute->setStatusCode(301)->shouldBeCalled();
         $redirectRoute->getStatusCode()->willReturn(301);
@@ -63,7 +63,7 @@ class RedirectRouteManagerTest extends TestCase
         $redirectRoute->setSource('/test410')->shouldBeCalled();
         $redirectRoute->setSourceHost(null)->shouldBeCalled();
         $redirectRoute->setId(Argument::any())->shouldBeCalled();
-        $redirectRoute->setEnabled(true)->shouldBeCalled();
+        $redirectRoute->setEnabled(Argument::any())->shouldNotBeCalled();
         $redirectRoute->setStatusCode(410)->shouldBeCalled();
         $redirectRoute->getStatusCode()->willReturn(410);
 
@@ -86,7 +86,7 @@ class RedirectRouteManagerTest extends TestCase
         $redirectRoute->setId(Argument::any())->shouldBeCalled();
         $redirectRoute->setSource('/test')->shouldBeCalled();
         $redirectRoute->setSourceHost('www.example.com')->shouldBeCalled();
-        $redirectRoute->setEnabled(true)->shouldBeCalled();
+        $redirectRoute->setEnabled(Argument::any())->shouldNotBeCalled();
         $redirectRoute->setTarget('/test2')->shouldBeCalled();
         $redirectRoute->setStatusCode(301)->shouldBeCalled();
         $redirectRoute->getStatusCode()->willReturn(301);
@@ -111,7 +111,7 @@ class RedirectRouteManagerTest extends TestCase
         $redirectRoute->getId()->willReturn('123-123-123');
         $redirectRoute->setSource('/test')->shouldBeCalled();
         $redirectRoute->setSourceHost('www.example.com')->shouldBeCalled();
-        $redirectRoute->setEnabled(true)->shouldBeCalled();
+        $redirectRoute->setEnabled(Argument::any())->shouldNotBeCalled();
         $redirectRoute->setTarget('/test2')->shouldBeCalled();
         $redirectRoute->setStatusCode(301)->shouldBeCalled();
         $redirectRoute->getStatusCode()->willReturn(301);
