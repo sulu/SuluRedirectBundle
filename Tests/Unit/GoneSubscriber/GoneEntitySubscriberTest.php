@@ -56,7 +56,7 @@ class GoneEntitySubscriberTest extends TestCase
         $this->event->getObject()->willReturn($this->object->reveal());
 
         $this->redirectRouteManager = $this->prophesize(RedirectRouteManager::class);
-        $this->redirectRouteManager->save(Argument::that(function($object) {
+        $this->redirectRouteManager->save(Argument::that(function ($object) {
             $this->assertEquals($object->getSource(), '/test/123');
 
             return true;
