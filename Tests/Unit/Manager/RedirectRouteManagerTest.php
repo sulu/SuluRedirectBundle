@@ -53,7 +53,7 @@ class RedirectRouteManagerTest extends TestCase
         $this->repository->createNew()->willReturn($redirectRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
-        $this->manager->saveByData(['source' => '/test', 'sourceHost' => null, 'target' => '/test2', 'enabled' => true, 'statusCode' => 301]);
+        $this->manager->saveByData(['source' => '/test', 'sourceHost' => null, 'target' => '/test2', 'statusCode' => 301]);
     }
 
     public function testSave410()
@@ -71,7 +71,7 @@ class RedirectRouteManagerTest extends TestCase
         $this->repository->createNew()->willReturn($redirectRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
-        $this->manager->saveByData(['source' => '/test410', 'sourceHost' => null, 'target' => '', 'enabled' => true, 'statusCode' => 410]);
+        $this->manager->saveByData(['source' => '/test410', 'sourceHost' => null, 'target' => '', 'statusCode' => 410]);
     }
 
     public function testSaveAlreadyExists()
@@ -97,7 +97,7 @@ class RedirectRouteManagerTest extends TestCase
         $this->repository->findBySource('/test', 'www.example.com')->willReturn($otherRoute->reveal());
         $this->repository->createNew()->willReturn($redirectRoute->reveal());
 
-        $this->manager->saveByData(['source' => '/test', 'sourceHost' => 'www.example.com', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301]);
+        $this->manager->saveByData(['source' => '/test', 'sourceHost' => 'www.example.com', 'target' => '/test2', 'statusCode' => 301]);
 
         $this->repository->persist($redirectRoute->reveal())->shouldNotBeCalled();
     }
@@ -120,7 +120,7 @@ class RedirectRouteManagerTest extends TestCase
         $this->repository->findBySource('/test', 'www.example.com')->willReturn($otherRoute->reveal());
         $this->repository->persist($redirectRoute->reveal())->shouldBeCalled();
 
-        $this->manager->saveByData(['source' => '/test', 'sourceHost' => 'www.example.com', 'target' => '/test2', 'enabled' => true, 'statusCode' => 301, 'id' => '123-123-123']);
+        $this->manager->saveByData(['source' => '/test', 'sourceHost' => 'www.example.com', 'target' => '/test2', 'statusCode' => 301, 'id' => '123-123-123']);
     }
 
     public function testDelete()
