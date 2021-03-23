@@ -58,7 +58,6 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
         $redirectRoute->setSource($data['source']);
         $redirectRoute->setSourceHost($data['sourceHost']);
         $redirectRoute->setTarget($data['target']);
-        $redirectRoute->setEnabled($data['enabled']);
         $redirectRoute->setStatusCode($data['statusCode']);
 
         if (410 === $redirectRoute->getStatusCode()) {

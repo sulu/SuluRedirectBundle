@@ -40,8 +40,8 @@ class RedirectRouteControllerTest extends SuluTestCase
         $this->client = $this->createAuthenticatedClient();
         $this->purgeDatabase();
 
-        $this->defaultData = ['source' => '/test1', 'sourceHost' => null, 'target' => '/test2', 'enabled' => true, 'statusCode' => 301];
-        $this->status410Data = ['source' => '/test410', 'sourceHost' => null, 'enabled' => true, 'statusCode' => 410, 'target' => null];
+        $this->defaultData = ['source' => '/test1', 'sourceHost' => null, 'target' => '/test2', 'statusCode' => 301];
+        $this->status410Data = ['source' => '/test410', 'sourceHost' => null, 'statusCode' => 410, 'target' => null];
     }
 
     public function testPost()
@@ -177,7 +177,7 @@ class RedirectRouteControllerTest extends SuluTestCase
         $response = $this->post($this->defaultData);
         $data = json_decode($response->getContent(), true);
 
-        $newData = ['source' => '/test3', 'sourceHost' => null, 'target' => '/test4', 'enabled' => false, 'statusCode' => 302];
+        $newData = ['source' => '/test3', 'sourceHost' => null, 'target' => '/test4', 'statusCode' => 302];
         $response = $this->put($data['id'], $newData);
 
         $this->assertHttpStatusCode(200, $response);
@@ -223,7 +223,7 @@ class RedirectRouteControllerTest extends SuluTestCase
         $response = $this->post($this->defaultData);
         $data1 = json_decode($response->getContent(), true);
 
-        $response = $this->post(['source' => '/test2', 'sourceHost' => null, 'target' => '/test3', 'enabled' => true, 'statusCode' => 301]);
+        $response = $this->post(['source' => '/test2', 'sourceHost' => null, 'target' => '/test3', 'statusCode' => 301]);
         $data2 = json_decode($response->getContent(), true);
 
         $this->client->request('DELETE', self::BASE_URL . '?ids=' . $data1['id'] . ',' . $data2['id']);
