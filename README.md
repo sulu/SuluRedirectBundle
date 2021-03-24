@@ -76,7 +76,7 @@ Those status codes are explained in detail [here](https://developer.mozilla.org/
 
 ### Automatic `Gone` redirects
 
-This bundle also adds the possibility to automatically create redirects with status `410 Gone`, if a page or a entity with a route has been removed. This is very useful, because now search engines know, that that page has been deleted.
+This bundle also adds the possibility to automatically create redirects with status `410 Gone`, if a page or a entity with a route has been removed. This is very useful, because now search engines know, that this page has been deleted.
 
 
 ## ❤️&nbsp; Support and Contributions
