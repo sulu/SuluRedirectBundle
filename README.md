@@ -72,6 +72,8 @@ The SuluRedirectBundle comes with three different statuses to be used for redire
 - **302** Moved temporarily
 - **410** Gone
 
+Those status codes are explained in detail [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status).
+
 ### Automatic `Gone` redirects
 
 This bundle also adds the possibility to automatically create redirects with status `410 Gone`, if a page or a entity with a route has been removed. This is very useful, because now search engines know, that that page has been deleted.
