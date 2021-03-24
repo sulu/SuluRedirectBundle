@@ -44,7 +44,7 @@ project:
 composer require sulu/redirect-bundle
 ```
 
-Afterwards, visit the [bundle documentation](https://github.com/sulu/SuluRedirectBundle/blob/2.x/Resources/doc) to
+Afterwards, visit the [bundle documentation](https://github.com/sulu/SuluRedirectBundle/blob/2.x/Resources/doc/README.md) to
 find out **how to set up and configure the SuluRedirectBundle** to your specific needs.
 
 ## 💡&nbsp; Features
