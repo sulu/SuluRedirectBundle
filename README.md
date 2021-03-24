@@ -72,7 +72,6 @@ The SuluRedirectBundle comes with three different statuses to be used for redire
 - **302** Moved temporarily
 - **410** Gone
 
-Each of them is useful in different situations, but I think they are quite self explanatory.
 
 ## ❤️&nbsp; Support and Contributions
 
