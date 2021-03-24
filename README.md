@@ -85,4 +85,4 @@ on the the [sulu/SuluRedirectBundle](https://github.com/sulu/SuluRedirectBundle)
 
 ## 📘&nbsp; License
 
-The Sulu content management system is released under the under terms of the [MIT License](LICENSE).
+The Sulu content management system is released under the terms of the [MIT License](LICENSE).
