@@ -21,3 +21,7 @@ sulu_redirect:
             model: Sulu\Bundle\RedirectBundle\Entity\RedirectRoute
             repository: Sulu\Bundle\RedirectBundle\Entity\RedirectRouteRepository
 ```
+
+Make sure that the user roles for redirects are set in Sulu for relevant users roles, otherwise the item is not visible in the navigation and the usrs are not able manage the redirects. 
+
+![image](https://user-images.githubusercontent.com/1311487/115698291-c01b3e00-a364-11eb-9895-35f10426b47d.png)
