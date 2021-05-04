@@ -1,0 +1,23 @@
+{
+  "sulu_redirect.title": "Redirections",
+  "sulu_redirect.enabled": "Activé",
+  "sulu_redirect.enable": "Activer",
+  "sulu_redirect.disable": "Désactiver",
+  "sulu_redirect.source": "Source",
+  "sulu_redirect.source_host": "Hôte source",
+  "sulu_redirect.source_host_info_text": "Utiliser une hôte source vide pour correspondre à toutes les hôtes.",
+  "sulu_redirect.target": "Cible",
+  "sulu_redirect.status_code": "Code état",
+  "sulu_redirect.redirect_with_source_already_exist": "Une redirection avec la source \"%source%\" et l'hôte \"%sourceHost%\" existe déjà.",
+  "sulu_redirect.status_code.301": "301: Moved Permanently",
+  "sulu_redirect.status_code.302": "302: Moved Temporarily",
+  "sulu_redirect.status_code.410": "410: Gone",
+  "sulu_redirect.import": "Importer",
+  "sulu_redirect.import.title": "Import terminé",
+  "sulu_redirect.import.total": "Total",
+  "sulu_redirect.import.exceptions": "Erreur",
+  "sulu_redirect.exceptions.duplicated": "La ligne {lineNumber} du fichier \"{fileName}\" contient une source déjà importée \"{source}\".",
+  "sulu_redirect.import.success": "{total} redirections ont bien été importées.",
+  "sulu_redirect.errors.conflict": "La source spécifiée a déjà été utilisée.",
+  "sulu_redirect.exceptions.target_empty": "La ligne {lineNumber} du fichier \"{fileName}\" contient une cible vide pour la source \"{source}\"."
+}
