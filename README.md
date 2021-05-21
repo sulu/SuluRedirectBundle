@@ -80,7 +80,9 @@ This bundle also adds the possibility to automatically create redirects with sta
 
 ### Route Priorities
 
-The redirect router is the last one which is called, so a redirect will only take into account when no other route for the same url exist. This make the redirect bundle save to be used also by unexperienced users as nobody can accidentally crash the application by a false imported or created redirect. This also means that when you create a redirect for an exist page you need to unpublish the page that the redirect will take into account. The great thing here is you can create the redirect before unpublishing a page and use for example the [SuluAutomationBundle](https://github.com/sulu/SuluAutomationBundle) to unpublish a page at a specific time and after unpblishing automatically the redirect will be done.
+Redirects created via this bundle will only be used if no other route matches the given URL. This ensures that accidentally created or imported redirects do not affect existing pages. If a redirect matches the URL of an existing page, the redirect will only be effective after the page was unpublished. 
+
+In combination with the [SuluAutomationBundle](https://github.com/sulu/SuluAutomationBundle), this behaviour makes it possible to precautionarily create a redirect for the URL of an existing page that will be unpublished at a specified time in the future by the SuluAutomationBundle.
 
 ## ❤️&nbsp; Support and Contributions
 
