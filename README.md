@@ -78,6 +78,11 @@ Those status codes are explained in detail [here](https://developer.mozilla.org/
 
 This bundle also adds the possibility to automatically create redirects with status `410 Gone`, if a page or a entity with a route has been removed. This is very useful, because now search engines know, that this page has been deleted.
 
+### Route Priorities
+
+Redirects created via this bundle will only be used if no other route matches the given URL. This ensures that accidentally created or imported redirects do not affect existing pages. If a redirect matches the URL of an existing page, the redirect will only be effective after the page was unpublished. 
+
+In combination with the [SuluAutomationBundle](https://github.com/sulu/SuluAutomationBundle), this behaviour makes it possible to precautionarily create a redirect for the URL of an existing page that will be unpublished at a specified time in the future by the SuluAutomationBundle.
 
 ## ❤️&nbsp; Support and Contributions
 
