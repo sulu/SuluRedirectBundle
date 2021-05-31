@@ -7,7 +7,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/sulu/SuluRedirectBundle/blob/2.x/LICENSE" target="_blank">
+    <a href="LICENSE" target="_blank">
         <img src="https://img.shields.io/github/license/sulu/SuluRedirectBundle.svg" alt="GitHub license">
     </a>
     <a href="https://github.com/sulu/SuluRedirectBundle/releases" target="_blank">
@@ -32,7 +32,7 @@ and allows content managers to manage redirects without any knowledge of web ser
 <br/>
 
 The SuluRedirectBundle is compatible with Sulu **starting from version 2.0**. Have a look at the `require` section in
-the [composer.json](https://github.com/sulu/SuluRedirectBundle/blob/2.x/composer.json) to find an
+the [composer.json](composer.json) to find an
 **up-to-date list of the requirements** of the bundle.
 
 ## 🚀&nbsp; Installation and Documentation
@@ -44,7 +44,7 @@ project:
 composer require sulu/redirect-bundle
 ```
 
-Afterwards, visit the [bundle documentation](https://github.com/sulu/SuluRedirectBundle/blob/2.x/Resources/doc/README.md) to
+Afterwards, visit the [bundle documentation](Resources/doc/README.md) to
 find out **how to set up and configure the SuluRedirectBundle** to your specific needs.
 
 ## 💡&nbsp; Features
