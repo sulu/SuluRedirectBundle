@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Converter;
+namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Entity;
 
 use PHPUnit\Framework\TestCase;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
