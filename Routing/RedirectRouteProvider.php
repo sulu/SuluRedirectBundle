@@ -59,7 +59,7 @@ class RedirectRouteProvider implements RouteProviderInterface
         $route = new Route(
             $pathInfo,
             [
-                '_controller' => 'sulu_redirect.controller.redirect:redirect',
+                '_controller' => 'sulu_redirect.controller.redirect::redirect',
                 'redirectRoute' => $redirectRoute,
             ],
             [],

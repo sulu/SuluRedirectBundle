@@ -64,7 +64,7 @@ class RedirectRouteProviderTest extends TestCase
 
         $this->assertEquals(
             [
-                '_controller' => 'sulu_redirect.controller.redirect:redirect',
+                '_controller' => 'sulu_redirect.controller.redirect::redirect',
                 'redirectRoute' => $redirectRoute->reveal(),
             ],
             $result->get('sulu_redirect.' . $uuid)->getDefaults()
@@ -94,7 +94,7 @@ class RedirectRouteProviderTest extends TestCase
 
         $this->assertEquals(
             [
-                '_controller' => 'sulu_redirect.controller.redirect:redirect',
+                '_controller' => 'sulu_redirect.controller.redirect::redirect',
                 'redirectRoute' => $redirectRoute->reveal(),
             ],
             $result->get('sulu_redirect.' . $uuid)->getDefaults()
