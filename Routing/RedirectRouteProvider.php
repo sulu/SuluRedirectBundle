@@ -44,7 +44,7 @@ class RedirectRouteProvider implements RouteProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteCollectionForRequest(Request $request)
+    public function getRouteCollectionForRequest(Request $request): RouteCollection
     {
         // server encodes the url and symfony does not encode it
         // symfony decodes this data here https://github.com/symfony/symfony/blob/v5.2.3/src/Symfony/Component/Routing/Matcher/UrlMatcher.php#L88
@@ -73,7 +73,7 @@ class RedirectRouteProvider implements RouteProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteByName($name)
+    public function getRouteByName($name): Route
     {
         throw new RouteNotFoundException('RedirectRouteProvider does not support getRouteByName.');
     }
@@ -81,7 +81,7 @@ class RedirectRouteProvider implements RouteProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getRoutesByNames($names)
+    public function getRoutesByNames($names = null): iterable
     {
         return [];
     }

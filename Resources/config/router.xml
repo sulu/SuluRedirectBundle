@@ -37,7 +37,7 @@
             <argument type="service" id="router.request_context"/>
             <argument type="service" id="sulu_redirect.routing.nested_matcher"/>
             <argument type="service" id="sulu_redirect.routing.generator"/>
-            <argument>null</argument>
+            <argument></argument>
             <argument type="service" id="event_dispatcher" on-invalid="ignore"/>
             <argument type="service" id="sulu_redirect.routing.provider"/>
 
