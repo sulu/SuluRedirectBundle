@@ -46,10 +46,9 @@ class RedirectRouteImportControllerTest extends TestCase
         $request->reveal()->files = $fileBag->reveal();
 
         $file = new File($fileName = __DIR__ . '/import.csv');
-        $importFile = $file->getPathname();
 
         $uploadedFile = $this->getMockBuilder(UploadedFile::class)
-            ->setConstructorArgs([$importFile, $this->fileName, null, null, UPLOAD_ERR_NO_FILE])
+            ->disableOriginalConstructor()
             ->getMock();
         $uploadedFile->method('getClientOriginalName')->willReturn($this->fileName);
         $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file);
@@ -87,10 +86,9 @@ class RedirectRouteImportControllerTest extends TestCase
         $request->reveal()->files = $fileBag->reveal();
 
         $file = new File($fileName = __DIR__ . '/import.csv');
-        $importFile = $file->getPathname();
 
         $uploadedFile = $this->getMockBuilder(UploadedFile::class)
-            ->setConstructorArgs([$importFile, $this->fileName, null, null, UPLOAD_ERR_NO_FILE])
+            ->disableOriginalConstructor()
             ->getMock();
 
         $uploadedFile->method('getClientOriginalName')->willReturn($this->fileName);
@@ -116,10 +114,9 @@ class RedirectRouteImportControllerTest extends TestCase
         $request->reveal()->files = $fileBag->reveal();
 
         $file = new File($fileName = __DIR__ . '/import.csv');
-        $importFile = $file->getPathname();
 
         $uploadedFile = $this->getMockBuilder(UploadedFile::class)
-            ->setConstructorArgs([$importFile, $this->fileName, null, null, UPLOAD_ERR_NO_FILE])
+            ->disableOriginalConstructor()
             ->getMock();
         $uploadedFile->method('getClientOriginalName')->willReturn($this->fileName);
         $uploadedFile->method('move')->with($this->importPath, $this->fileName)->willReturn($file);
