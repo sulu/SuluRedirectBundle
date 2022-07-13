@@ -2,9 +2,6 @@ framework:
     router:
         utf8: true
 
-swiftmailer:
-    disable_delivery:  true
-
 doctrine:
     orm:
         mappings:
