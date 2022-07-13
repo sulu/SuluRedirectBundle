@@ -20,13 +20,13 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  */
 class Converter implements ConverterInterface
 {
-    const SOURCE = 'source';
+    public const SOURCE = 'source';
 
-    const TARGET = 'target';
+    public const TARGET = 'target';
 
-    const STATUS_CODE = 'statusCode';
+    public const STATUS_CODE = 'statusCode';
 
-    const ENABLED = 'enabled';
+    public const ENABLED = 'enabled';
 
     /**
      * @var RedirectRouteRepositoryInterface

@@ -38,7 +38,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class RedirectRouteController extends AbstractRestController implements ClassResourceInterface, SecuredControllerInterface
 {
-    const RESULT_KEY = 'redirect_routes';
+    public const RESULT_KEY = 'redirect_routes';
 
     public function getSecurityContext(): string
     {

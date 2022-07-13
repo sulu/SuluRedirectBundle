@@ -26,13 +26,13 @@ use Sulu\Component\Security\Authorization\SecurityCheckerInterface;
  */
 class RedirectAdmin extends Admin
 {
-    const SECURITY_CONTEXT = 'sulu.modules.redirects';
+    public const SECURITY_CONTEXT = 'sulu.modules.redirects';
 
-    const LIST_VIEW = 'sulu_redirect.list';
+    public const LIST_VIEW = 'sulu_redirect.list';
 
-    const ADD_FORM_VIEW = 'sulu_redirect.add_form';
+    public const ADD_FORM_VIEW = 'sulu_redirect.add_form';
 
-    const EDIT_FORM_VIEW = 'sulu_redirect.edit_form';
+    public const EDIT_FORM_VIEW = 'sulu_redirect.edit_form';
 
     /**
      * @var ViewBuilderFactoryInterface

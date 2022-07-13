@@ -20,7 +20,6 @@ use Sulu\Bundle\RedirectBundle\Import\ImportException;
 use Sulu\Bundle\RedirectBundle\Import\Item;
 use Sulu\Bundle\RedirectBundle\Import\Reader\ReaderNotFoundException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\FileBag;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -141,10 +140,7 @@ class RedirectRouteImportControllerTest extends TestCase
         $tempFilePath = \tempnam(\sys_get_temp_dir(), 'sulu_redirect_uploaded_');
 
         if (!$tempFilePath) {
-            throw new \RuntimeException(\sprintf(
-                'Could not create temporary image in "%s".',
-                __CLASS__
-            ));
+            throw new \RuntimeException(\sprintf('Could not create temporary image in "%s".', __CLASS__));
         }
 
         \file_put_contents($tempFilePath, \file_get_contents($filePath));
