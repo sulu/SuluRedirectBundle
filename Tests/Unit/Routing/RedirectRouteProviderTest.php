@@ -30,18 +30,11 @@ class RedirectRouteProviderTest extends TestCase
      */
     private $routeProvider;
 
-    /**
-     * @var Request
-     */
-    private $request;
-
     protected function setUp(): void
     {
         $this->repository = $this->prophesize(RedirectRouteRepositoryInterface::class);
 
         $this->routeProvider = new RedirectRouteProvider($this->repository->reveal(), ['utf8' => true]);
-
-        $this->request = $this->prophesize(Request::class);
     }
 
     public function testGetRouteCollectionForRequest()
@@ -50,21 +43,20 @@ class RedirectRouteProviderTest extends TestCase
         $host = null;
         $uuid = '123-123-123';
 
-        $this->request->getPathInfo()->willReturn($pathInfo);
-        $this->request->getHost()->willReturn($host);
+        $request = Request::create('/test');
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getId()->willReturn($uuid);
         $redirectRoute->getSource()->willReturn($pathInfo);
         $redirectRoute->getSourceHost()->willReturn($host);
-        $this->repository->findEnabledBySource($pathInfo, $host)->willReturn($redirectRoute->reveal());
+        $this->repository->findEnabledBySource($pathInfo, 'localhost')->willReturn($redirectRoute->reveal());
 
-        $result = $this->routeProvider->getRouteCollectionForRequest($this->request->reveal());
+        $result = $this->routeProvider->getRouteCollectionForRequest($request);
         $this->assertCount(1, $result);
 
         $this->assertEquals(
             [
-                '_controller' => 'sulu_redirect.controller.redirect:redirect',
+                '_controller' => 'sulu_redirect.controller.redirect::redirect',
                 'redirectRoute' => $redirectRoute->reveal(),
             ],
             $result->get('sulu_redirect.' . $uuid)->getDefaults()
@@ -80,21 +72,20 @@ class RedirectRouteProviderTest extends TestCase
         $host = null;
         $uuid = '123-123-123';
 
-        $this->request->getPathInfo()->willReturn(rawurlencode($pathInfo));
-        $this->request->getHost()->willReturn($host);
+        $request = Request::create('/käße');
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getId()->willReturn($uuid);
         $redirectRoute->getSource()->willReturn($pathInfo);
         $redirectRoute->getSourceHost()->willReturn($host);
-        $this->repository->findEnabledBySource($pathInfo, $host)->willReturn($redirectRoute->reveal());
+        $this->repository->findEnabledBySource($pathInfo, 'localhost')->willReturn($redirectRoute->reveal());
 
-        $result = $this->routeProvider->getRouteCollectionForRequest($this->request->reveal());
+        $result = $this->routeProvider->getRouteCollectionForRequest($request);
         $this->assertCount(1, $result);
 
         $this->assertEquals(
             [
-                '_controller' => 'sulu_redirect.controller.redirect:redirect',
+                '_controller' => 'sulu_redirect.controller.redirect::redirect',
                 'redirectRoute' => $redirectRoute->reveal(),
             ],
             $result->get('sulu_redirect.' . $uuid)->getDefaults()
@@ -104,14 +95,12 @@ class RedirectRouteProviderTest extends TestCase
     public function testGetRouteCollectionForRequestNoRoute()
     {
         $pathInfo = '/test';
-        $host = null;
 
-        $this->request->getPathInfo()->willReturn($pathInfo);
-        $this->request->getHost()->willReturn($host);
+        $request = Request::create('/test');
 
-        $this->repository->findEnabledBySource($pathInfo, $host)->willReturn(null);
+        $this->repository->findEnabledBySource($pathInfo, 'localhost')->willReturn(null);
 
-        $result = $this->routeProvider->getRouteCollectionForRequest($this->request->reveal());
+        $result = $this->routeProvider->getRouteCollectionForRequest($request);
         $this->assertCount(0, $result);
     }
 }

@@ -6,8 +6,8 @@ on:
             - '[0-9]+.x'
             - '[0-9]+.[0-9]+'
 jobs:
-    test:
-        name: 'PHP ${{ matrix.php-version }} (${{ matrix.dependency-versions }}, Lint ${{ matrix.lint }})'
+    php:
+        name: 'PHP ${{ matrix.php-version }} (${{ matrix.dependency-versions }})'
         runs-on: ubuntu-latest
         env:
             DATABASE_URL: 'mysql://root:root@127.0.0.1/sulu_redirect_test?serverVersion=5.7'
@@ -19,7 +19,6 @@ jobs:
                       dependency-versions: 'lowest'
                       php-extensions: 'mysql, gd'
                       tools: 'composer:v1'
-                      lint: false
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: disabled
 
@@ -27,7 +26,6 @@ jobs:
                       dependency-versions: 'highest'
                       php-extensions: 'mysql, imagick'
                       tools: 'composer:v2'
-                      lint: true
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: weak
 
@@ -35,7 +33,13 @@ jobs:
                       dependency-versions: 'highest'
                       php-extensions: 'mysql, imagick'
                       tools: 'composer:v2'
-                      lint: false
+                      env:
+                          SYMFONY_DEPRECATIONS_HELPER: weak
+
+                    - php-version: '8.1'
+                      dependency-versions: 'highest'
+                      php-extensions: 'mysql, imagick'
+                      tools: 'composer:v2'
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: weak
 
@@ -65,7 +69,6 @@ jobs:
               uses: ramsey/composer-install@v1
               with:
                   dependency-versions: ${{matrix.dependency-versions}}
-                  composer-options: ${{ matrix.composer-options }}
 
             - name: Bootstrap test environment
               run: composer bootstrap-test-environment
@@ -79,3 +82,29 @@ jobs:
             - name: Execute test cases
               run: time composer test
               env: '${{ matrix.env }}'
+
+    php-lint:
+        name: 'PHP Lint'
+        runs-on: ubuntu-latest
+        env:
+            DATABASE_URL: 'mysql://root:root@127.0.0.1/sulu_redirect_test?serverVersion=5.7'
+
+        steps:
+            - name: Checkout project
+              uses: actions/checkout@v2
+
+            - name: Install and configure PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.1'
+                  extensions: 'mysql, imagick'
+                  tools: 'composer:v2'
+                  coverage: none
+
+            - name: Install composer dependencies
+              uses: ramsey/composer-install@v1
+              with:
+                  dependency-versions: highest
+
+            - name: Lint code
+              run: composer lint

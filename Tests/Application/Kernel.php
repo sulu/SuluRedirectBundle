@@ -23,7 +23,7 @@ class Kernel extends SuluTestKernel
     /**
      * {@inheritdoc}
      */
-    public function registerBundles()
+    public function registerBundles(): iterable
     {
         return array_merge(parent::registerBundles(), [new SuluRedirectBundle()]);
     }
@@ -38,7 +38,7 @@ class Kernel extends SuluTestKernel
         $loader->load(__DIR__ . '/config/config_' . $this->getContext() . '.yml');
     }
 
-    protected function getKernelParameters()
+    protected function getKernelParameters(): array
     {
         $parameters = parent::getKernelParameters();
 

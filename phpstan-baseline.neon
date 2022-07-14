@@ -1,17 +1,997 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Parameter \\#3 \\$route of class Sulu\\\\Component\\\\Rest\\\\ListBuilder\\\\ListRepresentation constructor expects string, mixed given\\.$#"
+			count: 1
+			path: Controller/RedirectRouteController.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Controller\\\\RedirectRouteImportController\\:\\:getLocale\\(\\) should return string\\|null but returns mixed\\.$#"
+			count: 1
+			path: Controller/RedirectRouteImportController.php
+
+		-
+			message: "#^Class Sulu\\\\Bundle\\\\RedirectBundle\\\\Entity\\\\RedirectRouteRepository extends generic class Sulu\\\\Component\\\\Persistence\\\\Repository\\\\ORM\\\\EntityRepository but does not specify its types\\: T$#"
+			count: 1
+			path: Entity/RedirectRouteRepository.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Entity\\\\RedirectRouteRepository\\:\\:findBySource\\(\\) should return Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\|null but returns mixed\\.$#"
+			count: 1
+			path: Entity/RedirectRouteRepository.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Entity\\\\RedirectRouteRepository\\:\\:findEnabledBySource\\(\\) should return Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\|null but returns mixed\\.$#"
+			count: 1
+			path: Entity/RedirectRouteRepository.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Exception\\\\RedirectRouteNotUniqueException\\:\\:\\$sourceHost is never written, only read\\.$#"
+			count: 1
+			path: Exception/RedirectRouteNotUniqueException.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:setId\\(\\)\\.$#"
+			count: 1
+			path: Import/Converter/Converter.php
+
+		-
 			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Converter\\\\ConverterFacade\\:\\:convert\\(\\) should return Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface but returns null\\.$#"
 			count: 1
 			path: Import/Converter/ConverterFacade.php
 
 		-
-			message: "#^Parameter \\#2 \\$newvalue of function ini_set expects string, true given\\.$#"
-			count: 1
-			path: Import/Reader/CsvReader.php
-
-		-
 			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderFacade\\:\\:read\\(\\) should return array\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderItem\\> but returns null\\.$#"
 			count: 1
 			path: Import/Reader/ReaderFacade.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:getId\\(\\)\\.$#"
+			count: 1
+			path: Manager/RedirectRouteManager.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:getSourceHost\\(\\)\\.$#"
+			count: 1
+			path: Manager/RedirectRouteManager.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:getStatusCode\\(\\)\\.$#"
+			count: 1
+			path: Manager/RedirectRouteManager.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:setId\\(\\)\\.$#"
+			count: 1
+			path: Manager/RedirectRouteManager.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:setSource\\(\\)\\.$#"
+			count: 1
+			path: Manager/RedirectRouteManager.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:setSourceHost\\(\\)\\.$#"
+			count: 1
+			path: Manager/RedirectRouteManager.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:setStatusCode\\(\\)\\.$#"
+			count: 1
+			path: Manager/RedirectRouteManager.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:setTarget\\(\\)\\.$#"
+			count: 2
+			path: Manager/RedirectRouteManager.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\:\\:saveByData\\(\\) should return Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface but returns object\\.$#"
+			count: 1
+			path: Manager/RedirectRouteManager.php
+
+		-
+			message: "#^Parameter \\#1 \\$entity of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface\\:\\:persist\\(\\) expects Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface, object given\\.$#"
+			count: 1
+			path: Manager/RedirectRouteManager.php
+
+		-
+			message: "#^Interface Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface extends generic interface Sulu\\\\Component\\\\Persistence\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
+			count: 1
+			path: Model/RedirectRouteRepositoryInterface.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Routing\\\\RedirectRouteProvider\\:\\:getRouteByName\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: Routing/RedirectRouteProvider.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Application\\\\Kernel\\:\\:registerContainerConfiguration\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Application/Kernel.php
+
+		-
+			message: "#^Parameter \\#1 \\$path of function dirname expects string, string\\|false given\\.$#"
+			count: 1
+			path: Tests/Application/Kernel.php
+
+		-
+			message: "#^Parameter \\#1 \\.\\.\\.\\$arrays of function array_merge expects array, iterable\\<Symfony\\\\Component\\\\HttpKernel\\\\Bundle\\\\BundleInterface\\> given\\.$#"
+			count: 1
+			path: Tests/Application/Kernel.php
+
+		-
+			message: "#^Call to static method enable\\(\\) on an unknown class Symfony\\\\Component\\\\Debug\\\\Debug\\.$#"
+			count: 1
+			path: Tests/Application/bin/console.php
+
+		-
+			message: "#^Parameter \\#1 \\$environment of class Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Application\\\\Kernel constructor expects string, mixed given\\.$#"
+			count: 1
+			path: Tests/Application/bin/console.php
+
+		-
+			message: "#^Variable \\$suluContext might not be defined\\.$#"
+			count: 1
+			path: Tests/Application/bin/console.php
+
+		-
+			message: "#^Cannot access offset '_embedded' on mixed\\.$#"
+			count: 2
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'enabled' on mixed\\.$#"
+			count: 2
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'id' on mixed\\.$#"
+			count: 14
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'redirect_routes' on mixed\\.$#"
+			count: 2
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'source'\\|'sourceHost'\\|'statusCode'\\|'target' on mixed\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Cannot access offset \\(int\\|string\\) on mixed\\.$#"
+			count: 3
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Cannot access offset 0 on mixed\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:get\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:get\\(\\) has parameter \\$id with no type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:post\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:post\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:put\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:put\\(\\) has parameter \\$data with no type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:put\\(\\) has parameter \\$id with no type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:testCDelete\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:testCGet\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:testDelete\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:testDeleteNotExisting\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:testGet\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:testPost\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:testPost410\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:testPostAlreadyExists\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:testPostWithSourceHostAlreadyExists\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:testPut\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:testPutAlreadyExists\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Controller\\\\RedirectRouteControllerTest\\:\\:testPutSameData\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 3
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$haystack of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertCount\\(\\) expects Countable\\|iterable, mixed given\\.$#"
+			count: 1
+			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
+
+		-
+			message: "#^Cannot call method getSource\\(\\) on Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\|null\\.$#"
+			count: 1
+			path: Tests/Functional/Import/FileImportTest.php
+
+		-
+			message: "#^Method Functional\\\\Import\\\\FileImportTest\\:\\:testImport\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Import/FileImportTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Import\\\\Reader\\\\CsvReaderTest\\:\\:testRead\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Import/Reader/CsvReaderTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Import\\\\Reader\\\\CsvReaderTest\\:\\:testReadDifferentRows\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Import/Reader/CsvReaderTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Import\\\\Reader\\\\CsvReaderTest\\:\\:testReadWithoutHeader\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Import/Reader/CsvReaderTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Import\\\\Reader\\\\CsvReaderTest\\:\\:testSupports\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Import/Reader/CsvReaderTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Import\\\\Reader\\\\CsvReaderTest\\:\\:testSupportsUnsupportedFileExtension\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Import/Reader/CsvReaderTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Functional\\\\Routing\\\\RedirectRouteProviderTest\\:\\:testRoute\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Functional/Routing/RedirectRouteProviderTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$target of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Entity\\\\RedirectRoute\\:\\:setTarget\\(\\) expects string, string\\|null given\\.$#"
+			count: 1
+			path: Tests/Functional/Routing/RedirectRouteProviderTest.php
+
+		-
+			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:reveal\\(\\)\\.$#"
+			count: 4
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Request\\:\\:reveal\\(\\)\\.$#"
+			count: 4
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on array\\.$#"
+			count: 4
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on int\\.$#"
+			count: 4
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on string\\.$#"
+			count: 4
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:testRedirect\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:testRedirectExternal\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:testRedirectExternalWithQuery\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:testRedirectWithQuery\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:\\$queryBag \\(Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\>\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:\\$redirectRoute \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\>\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:\\$request \\(Symfony\\\\Component\\\\HttpFoundation\\\\Request\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Symfony\\\\Component\\\\HttpFoundation\\\\Request\\>\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Property Symfony\\\\Component\\\\HttpFoundation\\\\Request\\:\\:\\$query \\(Symfony\\\\Component\\\\HttpFoundation\\\\InputBag\\<string\\>\\) does not accept Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'exceptions' on mixed\\.$#"
+			count: 2
+			path: Tests/Unit/Controller/RedirectRouteImportControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'lineNumber' on mixed\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectRouteImportControllerTest.php
+
+		-
+			message: "#^Cannot access offset 'total' on mixed\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectRouteImportControllerTest.php
+
+		-
+			message: "#^Cannot access offset 0 on mixed\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectRouteImportControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Controller\\\\RedirectRouteImportController\\:\\:postAction\\(\\) invoked with 2 parameters, 1 required\\.$#"
+			count: 3
+			path: Tests/Unit/Controller/RedirectRouteImportControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectRouteImportControllerTest\\:\\:testImportAction\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectRouteImportControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectRouteImportControllerTest\\:\\:testImportActionConverterNotFound\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectRouteImportControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectRouteImportControllerTest\\:\\:testImportActionNoFile\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectRouteImportControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectRouteImportControllerTest\\:\\:testImportActionReaderNotFound\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectRouteImportControllerTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$json of function json_decode expects string, string\\|false given\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectRouteImportControllerTest.php
+
+		-
+			message: "#^Parameter \\#2 \\$haystack of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertCount\\(\\) expects Countable\\|iterable, mixed given\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectRouteImportControllerTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectRouteImportControllerTest\\:\\:\\$fileName is never read, only written\\.$#"
+			count: 1
+			path: Tests/Unit/Controller/RedirectRouteImportControllerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Entity\\\\RedirectRouteTest\\:\\:testEnabled\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Entity/RedirectRouteTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Entity\\\\RedirectRouteTest\\:\\:testId\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Entity/RedirectRouteTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Entity\\\\RedirectRouteTest\\:\\:testSource\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Entity/RedirectRouteTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Entity\\\\RedirectRouteTest\\:\\:testSourceHost\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Entity/RedirectRouteTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Entity\\\\RedirectRouteTest\\:\\:testStatusCode\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Entity/RedirectRouteTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Entity\\\\RedirectRouteTest\\:\\:testTarget\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Entity/RedirectRouteTest.php
+
+		-
+			message: "#^You should use assertFalse\\(\\) instead of assertSame\\(\\) when expecting \"false\"$#"
+			count: 1
+			path: Tests/Unit/Entity/RedirectRouteTest.php
+
+		-
+			message: "#^You should use assertNull\\(\\) instead of assertSame\\(null, \\$actual\\)\\.$#"
+			count: 1
+			path: Tests/Unit/Entity/RedirectRouteTest.php
+
+		-
+			message: "#^You should use assertTrue\\(\\) instead of assertSame\\(\\) when expecting \"true\"$#"
+			count: 1
+			path: Tests/Unit/Entity/RedirectRouteTest.php
+
+		-
+			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:shouldBeCalledTimes\\(\\)\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:shouldNotBeCalled\\(\\)\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Call to an undefined method Sulu\\\\Component\\\\DocumentManager\\\\Event\\\\RemoveEvent\\:\\:reveal\\(\\)\\.$#"
+			count: 2
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:willReturn\\(\\)\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Cannot call method shouldBeCalled\\(\\) on void\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Cannot call method shouldNotBeCalled\\(\\) on void\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\:\\:saveByData\\(\\) invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:testCreateRedirects\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:testCreateRedirectsWithWrongDocument\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\:\\:saveByData\\(\\) expects array, Prophecy\\\\Argument\\\\Token\\\\AnyValueToken given\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$document \\(Sulu\\\\Bundle\\\\PageBundle\\\\Document\\\\BasePageDocument\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\PageBundle\\\\Document\\\\BasePageDocument\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$documentInspector \\(Sulu\\\\Bundle\\\\DocumentManagerBundle\\\\Bridge\\\\DocumentInspector\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\DocumentManagerBundle\\\\Bridge\\\\DocumentInspector\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$entityManager \\(Doctrine\\\\ORM\\\\EntityManager\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Doctrine\\\\ORM\\\\EntityManager\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$redirectRouteManager \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$removeEvent \\(Sulu\\\\Component\\\\DocumentManager\\\\Event\\\\RemoveEvent\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Component\\\\DocumentManager\\\\Event\\\\RemoveEvent\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$resourceLocatorStrategy \\(Sulu\\\\Component\\\\Content\\\\Types\\\\ResourceLocator\\\\Strategy\\\\ResourceLocatorStrategyInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Component\\\\Content\\\\Types\\\\ResourceLocator\\\\Strategy\\\\ResourceLocatorStrategyInterface\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$resourceLocatorStrategyPool \\(Sulu\\\\Component\\\\Content\\\\Types\\\\ResourceLocator\\\\Strategy\\\\ResourceLocatorStrategyPool\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Component\\\\Content\\\\Types\\\\ResourceLocator\\\\Strategy\\\\ResourceLocatorStrategyPool\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$webspace \\(Sulu\\\\Component\\\\Webspace\\\\Webspace\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Component\\\\Webspace\\\\Webspace\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$webspaceManager \\(Sulu\\\\Component\\\\Webspace\\\\Manager\\\\WebspaceManager\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Component\\\\Webspace\\\\Manager\\\\WebspaceManager\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Result of method Doctrine\\\\ORM\\\\EntityManager\\:\\:flush\\(\\) \\(void\\) is used\\.$#"
+			count: 2
+			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
+
+		-
+			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\Event\\\\LifecycleEventArgs\\:\\:reveal\\(\\)\\.$#"
+			count: 2
+			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
+
+		-
+			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:shouldNotBeCalled\\(\\)\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\:\\:save\\(\\) invoked with 0 parameters, 1 required\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneEntitySubscriberTest\\:\\:testPreRemove\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneEntitySubscriberTest\\:\\:testPreRemoveWithWrongObject\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneEntitySubscriberTest\\:\\:\\$container \\(Symfony\\\\Component\\\\DependencyInjection\\\\ContainerInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Symfony\\\\Component\\\\DependencyInjection\\\\ContainerInterface\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneEntitySubscriberTest\\:\\:\\$event \\(Doctrine\\\\ORM\\\\Event\\\\LifecycleEventArgs\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Doctrine\\\\ORM\\\\Event\\\\LifecycleEventArgs\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneEntitySubscriberTest\\:\\:\\$object \\(Sulu\\\\Bundle\\\\RouteBundle\\\\Model\\\\RouteInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RouteBundle\\\\Model\\\\RouteInterface\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneEntitySubscriberTest\\:\\:\\$redirectRouteManager \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\>\\.$#"
+			count: 1
+			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNull\\(\\) with Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface will always evaluate to false\\.$#"
+			count: 2
+			path: Tests/Unit/Import/Converter/ConverterFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Converter\\\\ConverterFacadeTest\\:\\:testConvert\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Converter/ConverterFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Converter\\\\ConverterFacadeTest\\:\\:testConvertNoConverter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Converter/ConverterFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Converter\\\\ConverterFacadeTest\\:\\:testConvertNotSupported\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Converter/ConverterFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Converter\\\\ConverterFacadeTest\\:\\:testSupports\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Converter/ConverterFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Converter\\\\ConverterFacadeTest\\:\\:testSupportsNoConverter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Converter/ConverterFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Converter\\\\ConverterFacadeTest\\:\\:testSupportsNoSupportedConverter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Converter/ConverterFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Converter\\\\ConverterTest\\:\\:testConvertCreateNew\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Converter/ConverterTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Converter\\\\ConverterTest\\:\\:testConvertNullValues\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Converter/ConverterTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Converter\\\\ConverterTest\\:\\:testConvertUpdate\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Converter/ConverterTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Converter\\\\ConverterTest\\:\\:testSupports\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Converter/ConverterTest.php
+
+		-
+			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:willReturn\\(\\)\\.$#"
+			count: 2
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Cannot call method shouldBeCalled\\(\\) on void\\.$#"
+			count: 4
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Cannot call method shouldNotBeCalled\\(\\) on void\\.$#"
+			count: 1
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on array\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderItem\\>\\.$#"
+			count: 3
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on bool\\.$#"
+			count: 7
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\FileImportTest\\:\\:testImport\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\FileImportTest\\:\\:testImportExceptionItem\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\FileImportTest\\:\\:testImportNoReaderSupports\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\FileImportTest\\:\\:testImportNoSupportedConverter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$entity of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Writer\\\\WriterInterface\\:\\:write\\(\\) expects Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface, Prophecy\\\\Argument\\\\Token\\\\AnyValueToken given\\.$#"
+			count: 1
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$entity of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Writer\\\\WriterInterface\\:\\:write\\(\\) expects Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface, Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\> given\\.$#"
+			count: 2
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\FileImportTest\\:\\:\\$converter \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Converter\\\\ConverterInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Converter\\\\ConverterInterface\\>\\.$#"
+			count: 1
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\FileImportTest\\:\\:\\$reader \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderInterface\\>\\.$#"
+			count: 1
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\FileImportTest\\:\\:\\$writer \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Writer\\\\WriterInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Writer\\\\WriterInterface\\>\\.$#"
+			count: 1
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Result of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Writer\\\\WriterInterface\\:\\:finalize\\(\\) \\(void\\) is used\\.$#"
+			count: 2
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Result of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Writer\\\\WriterInterface\\:\\:write\\(\\) \\(void\\) is used\\.$#"
+			count: 3
+			path: Tests/Unit/Import/FileImportTest.php
+
+		-
+			message: "#^Call to method PHPUnit\\\\Framework\\\\Assert\\:\\:assertNull\\(\\) with array\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderItem\\> will always evaluate to false\\.$#"
+			count: 2
+			path: Tests/Unit/Import/Reader/ReaderFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Reader\\\\ReaderFacadeTest\\:\\:testConvertNoConverter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Reader/ReaderFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Reader\\\\ReaderFacadeTest\\:\\:testConvertNotSupported\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Reader/ReaderFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Reader\\\\ReaderFacadeTest\\:\\:testRead\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Reader/ReaderFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Reader\\\\ReaderFacadeTest\\:\\:testSupports\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Reader/ReaderFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Reader\\\\ReaderFacadeTest\\:\\:testSupportsNoConverter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Reader/ReaderFacadeTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Reader\\\\ReaderFacadeTest\\:\\:testSupportsNoSupportedConverter\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Reader/ReaderFacadeTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$fileName of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderFacade\\:\\:read\\(\\) expects string, array\\<string, string\\> given\\.$#"
+			count: 2
+			path: Tests/Unit/Import/Reader/ReaderFacadeTest.php
+
+		-
+			message: "#^Parameter \\#1 \\$fileName of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderFacade\\:\\:supports\\(\\) expects string, array\\<string, string\\> given\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Reader/ReaderFacadeTest.php
+
+		-
+			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:shouldBeCalled\\(\\)\\.$#"
+			count: 11
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:shouldNotBeCalled\\(\\)\\.$#"
+			count: 3
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Cannot call method shouldBeCalled\\(\\) on void\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Cannot call method shouldBeCalledTimes\\(\\) on void\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Cannot call method shouldNotBeCalled\\(\\) on void\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:testFinalize\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:testWrite\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:testWriteAlreadyExisting\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:testWriteDuplicated\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:testWriteDuplicatedCaseInSensitive\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:testWriteEmptyTarget\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:testWriteEmptyTargetFor410\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:testWriteSmallBatchSize\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:\\$entityManager \\(Doctrine\\\\ORM\\\\EntityManagerInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Doctrine\\\\ORM\\\\EntityManagerInterface\\>\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:\\$redirectRouteManager \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManagerInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManagerInterface\\>\\.$#"
+			count: 1
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Result of method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:flush\\(\\) \\(void\\) is used\\.$#"
+			count: 3
+			path: Tests/Unit/Import/Writer/WriterTest.php
+
+		-
+			message: "#^Call to an undefined method object\\:\\:willReturn\\(\\)\\.$#"
+			count: 3
+			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
+
+		-
+			message: "#^Cannot call method shouldBeCalled\\(\\) on void\\.$#"
+			count: 4
+			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
+
+		-
+			message: "#^Cannot call method shouldNotBeCalled\\(\\) on void\\.$#"
+			count: 1
+			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\|null\\.$#"
+			count: 5
+			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Manager\\\\RedirectRouteManagerTest\\:\\:testDelete\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Manager\\\\RedirectRouteManagerTest\\:\\:testSave\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Manager\\\\RedirectRouteManagerTest\\:\\:testSave410\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Manager\\\\RedirectRouteManagerTest\\:\\:testSaveAlreadyExists\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Manager\\\\RedirectRouteManagerTest\\:\\:testSaveSameEntity\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Manager\\\\RedirectRouteManagerTest\\:\\:\\$repository \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface\\>\\.$#"
+			count: 1
+			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
+
+		-
+			message: "#^Result of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface\\:\\:persist\\(\\) \\(void\\) is used\\.$#"
+			count: 4
+			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
+
+		-
+			message: "#^Result of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface\\:\\:remove\\(\\) \\(void\\) is used\\.$#"
+			count: 1
+			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
+
+		-
+			message: "#^Cannot call method getDefaults\\(\\) on Symfony\\\\Component\\\\Routing\\\\Route\\|null\\.$#"
+			count: 2
+			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+
+		-
+			message: "#^Cannot call method getOptions\\(\\) on Symfony\\\\Component\\\\Routing\\\\Route\\|null\\.$#"
+			count: 2
+			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+
+		-
+			message: "#^Cannot call method willReturn\\(\\) on Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\|null\\.$#"
+			count: 3
+			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Routing\\\\RedirectRouteProviderTest\\:\\:testGetRouteCollectionForRequest\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Routing\\\\RedirectRouteProviderTest\\:\\:testGetRouteCollectionForRequestEncodedPathInfo\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+
+		-
+			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Routing\\\\RedirectRouteProviderTest\\:\\:testGetRouteCollectionForRequestNoRoute\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+
+		-
+			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Routing\\\\RedirectRouteProviderTest\\:\\:\\$repository \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface\\>\\.$#"
+			count: 1
+			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+
+		-
+			message: "#^You should use assertTrue\\(\\) instead of assertSame\\(\\) when expecting \"true\"$#"
+			count: 1
+			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
 
