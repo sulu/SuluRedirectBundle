@@ -119,7 +119,7 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
      */
     public function setSource($source)
     {
-        $this->source = mb_strtolower('/' . ltrim($source, '/'));
+        $this->source = '/' . ltrim($source, '/');
 
         return $this;
     }
@@ -137,7 +137,7 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
      */
     public function setSourceHost($sourceHost)
     {
-        $this->sourceHost = empty($sourceHost) ? null : mb_strtolower($sourceHost);
+        $this->sourceHost = empty($sourceHost) ? null : $sourceHost;
 
         return $this;
     }
@@ -155,7 +155,7 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
      */
     public function setTarget($target)
     {
-        $this->target = mb_strtolower($target);
+        $this->target = $target;
 
         return $this;
     }
