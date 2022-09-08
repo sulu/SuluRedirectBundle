@@ -78,6 +78,6 @@ class RedirectRouteTest extends TestCase
         $this->assertSame('target-url', $route->getTarget());
 
         $this->assertSame($route, $route->setTarget('UPPERCASE-TARGET'));
-        $this->assertSame('uppercase-target', $route->getTarget());
+        $this->assertSame('UPPERCASE-TARGET', $route->getTarget());
     }
 }
