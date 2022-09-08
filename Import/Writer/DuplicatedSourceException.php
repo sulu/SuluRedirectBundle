@@ -30,9 +30,7 @@ class DuplicatedSourceException extends WriterException implements \JsonSerializ
         $this->entity = $entity;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

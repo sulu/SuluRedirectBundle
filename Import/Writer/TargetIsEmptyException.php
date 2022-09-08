@@ -30,9 +30,7 @@ class TargetIsEmptyException extends WriterException implements \JsonSerializabl
         $this->entity = $entity;
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return [

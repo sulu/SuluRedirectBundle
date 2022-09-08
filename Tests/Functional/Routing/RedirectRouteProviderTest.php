@@ -37,7 +37,7 @@ class RedirectRouteProviderTest extends WebsiteTestCase
         string $requestUrl,
         string $source,
         int $statusCode,
-        ?string $target = null,
+        string $target = '',
         ?string $sourceHost = null
     ) {
         // setup models

@@ -316,11 +316,6 @@ parameters:
 			path: Tests/Functional/Routing/RedirectRouteProviderTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$target of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Entity\\\\RedirectRoute\\:\\:setTarget\\(\\) expects string, string\\|null given\\.$#"
-			count: 1
-			path: Tests/Functional/Routing/RedirectRouteProviderTest.php
-
-		-
 			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:reveal\\(\\)\\.$#"
 			count: 4
 			path: Tests/Unit/Controller/RedirectControllerTest.php

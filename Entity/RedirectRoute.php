@@ -155,7 +155,7 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
      */
     public function setTarget($target)
     {
-        $this->target = mb_strtolower($target);
+        $this->target = $target;
 
         return $this;
     }
