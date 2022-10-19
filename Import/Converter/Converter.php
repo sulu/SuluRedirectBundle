@@ -53,7 +53,7 @@ class Converter implements ConverterInterface
             $entity->setId(Uuid::uuid4()->toString());
         }
 
-        foreach ([self::SOURCE, self::SOURCE_HOST, self::TARGET, self::STATUS_CODE, self::ENABLED] as $field) {
+        foreach ([self::SOURCE, self::TARGET, self::STATUS_CODE, self::ENABLED, self::SOURCE_HOST] as $field) {
             if (!array_key_exists($field, $item) || null === $item[$field]) {
                 continue;
             }

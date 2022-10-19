@@ -1,4 +1,5 @@
-source,target,statusCode,enabled
-/source-1,/target-1,302,1
-/source-2,/target-2,302
-/source-3,/target-3
+source,target,statusCode,enabled,sourceHost
+/source-1,/target-1,302,1,example.com
+/source-2,/target-2,302,1
+/source-3,/target-3,302
+/source-4,/target-4
