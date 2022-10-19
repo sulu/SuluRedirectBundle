@@ -66,9 +66,10 @@ class CsvReaderTest extends TestCase
     public function testReadDifferentRows()
     {
         $expected = [
-            ['source' => '/source-1', 'target' => '/target-1', 'statusCode' => 302, 'enabled' => 1],
-            ['source' => '/source-2', 'target' => '/target-2', 'statusCode' => 302, 'enabled' => null],
-            ['source' => '/source-3', 'target' => '/target-3', 'statusCode' => null, 'enabled' => null],
+            ['source' => '/source-1', 'target' => '/target-1', 'statusCode' => 302, 'enabled' => 1, 'sourceHost' => 'example.com'],
+            ['source' => '/source-2', 'target' => '/target-2', 'statusCode' => 302, 'enabled' => 1, 'sourceHost' => null],
+            ['source' => '/source-3', 'target' => '/target-3', 'statusCode' => 302, 'enabled' => null, 'sourceHost' => null],
+            ['source' => '/source-4', 'target' => '/target-4', 'statusCode' => null, 'enabled' => null, 'sourceHost' => null],
         ];
 
         $reader = new CsvReader();
@@ -80,10 +81,11 @@ class CsvReaderTest extends TestCase
             $this->assertEquals($expected[$i]['target'], $item->getData()['target']);
             $this->assertEquals($expected[$i]['statusCode'], $item->getData()['statusCode']);
             $this->assertEquals($expected[$i]['enabled'], $item->getData()['enabled']);
+            $this->assertEquals($expected[$i]['sourceHost'], $item->getData()['sourceHost']);
 
             ++$i;
         }
 
-        $this->assertSame(3, $i);
+        $this->assertSame(4, $i);
     }
 }

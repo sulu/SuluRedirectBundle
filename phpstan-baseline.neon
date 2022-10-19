@@ -106,11 +106,6 @@ parameters:
 			path: Routing/RedirectRouteProvider.php
 
 		-
-			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Application\\\\Kernel\\:\\:registerContainerConfiguration\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: Tests/Application/Kernel.php
-
-		-
 			message: "#^Parameter \\#1 \\$path of function dirname expects string, string\\|false given\\.$#"
 			count: 1
 			path: Tests/Application/Kernel.php

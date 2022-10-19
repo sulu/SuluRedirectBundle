@@ -32,7 +32,7 @@ class CsvReader implements ReaderInterface
         $csv->setCsvControl();
         $csv->setFlags(SplFileObject::READ_CSV);
 
-        $header = [Converter::SOURCE, Converter::TARGET, Converter::STATUS_CODE, Converter::ENABLED];
+        $header = [Converter::SOURCE, Converter::TARGET, Converter::STATUS_CODE, Converter::ENABLED, Converter::SOURCE_HOST];
         /** @var string[] $line */
         foreach ($csv as $lineNumber => $line) {
             // ignore empty lines
