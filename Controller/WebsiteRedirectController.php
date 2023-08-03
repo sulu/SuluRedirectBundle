@@ -34,8 +34,12 @@ class WebsiteRedirectController
 
         $queryString = http_build_query($request->query->all());
 
+        $requestFormat = $request->getRequestFormat(null);
+        $formatSuffix = $requestFormat ? ('.' . $requestFormat) : '';
+
         $url = [
             $redirectRoute->getTarget(),
+            $formatSuffix,
             false === strpos($redirectRoute->getTarget(), '?') ? '?' : '&',
             $queryString,
         ];
