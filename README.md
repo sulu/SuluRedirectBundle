@@ -14,7 +14,7 @@
         <img src="https://img.shields.io/github/tag/sulu/SuluRedirectBundle.svg" alt="GitHub tag (latest SemVer)">
     </a>
     <a href="https://github.com/sulu/SuluRedirectBundle/actions" target="_blank">
-        <img src="https://img.shields.io/github/workflow/status/sulu/SuluRedirectBundle/Test%20application.svg?label=test-workflow" alt="Test workflow status">
+        <img src="https://img.shields.io/github/actions/workflow/status/sulu/SuluRedirectBundle/test-application.yaml?branch=2.1" alt="Test workflow status">
     </a>
     <a href="https://github.com/sulu/sulu/releases" target="_blank">
         <img src="https://img.shields.io/badge/sulu%20compatibility-%3E=2.0-52b6ca.svg" alt="Sulu compatibility">
