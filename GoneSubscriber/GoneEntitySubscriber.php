@@ -17,7 +17,6 @@ use Doctrine\ORM\Events;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
-use Sulu\Bundle\RouteBundle\Entity\RouteRepositoryInterface;
 use Sulu\Bundle\RouteBundle\Model\RouteInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerAwareTrait;
@@ -28,14 +27,6 @@ use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 class GoneEntitySubscriber implements EventSubscriber, ContainerAwareInterface
 {
     use ContainerAwareTrait;
-
-    /**
-     * @return RouteRepositoryInterface
-     */
-    public function getRouteRepository()
-    {
-        return $this->container->get('sulu.repository.route');
-    }
 
     /**
      * {@inheritdoc}
@@ -51,7 +42,8 @@ class GoneEntitySubscriber implements EventSubscriber, ContainerAwareInterface
     {
         $route = $event->getObject();
 
-        if (!$route instanceof RouteInterface) {
+        $routeManager = $this->getRedirectRouteManager();
+        if (!$route instanceof RouteInterface || null === $routeManager) {
             return;
         }
 
@@ -61,17 +53,21 @@ class GoneEntitySubscriber implements EventSubscriber, ContainerAwareInterface
         $redirectRoute->setSource($route->getPath());
 
         try {
-            $this->getRedirectRouteManager()->save($redirectRoute);
+            $routeManager->save($redirectRoute);
         } catch (RedirectRouteNotUniqueException $exception) {
             // do nothing when there already exists a redirect route
         }
     }
 
     /**
-     * @return RedirectRouteManager
+     * @return RedirectRouteManager|null
      */
     private function getRedirectRouteManager()
     {
+        if (null === $this->container) {
+            return null;
+        }
+
         return $this->container->get('sulu_redirect.redirect_route_manager');
     }
 }

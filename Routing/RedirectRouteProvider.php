@@ -49,10 +49,11 @@ class RedirectRouteProvider implements RouteProviderInterface
         // server encodes the url and symfony does not encode it
         // symfony decodes this data here https://github.com/symfony/symfony/blob/v5.2.3/src/Symfony/Component/Routing/Matcher/UrlMatcher.php#L88
         $pathInfo = rawurldecode($request->getPathInfo());
+        $path = \str_replace('.' . $request->getRequestFormat(), '', $pathInfo);
         $host = $request->getHost();
 
         $routeCollection = new RouteCollection();
-        if (!$redirectRoute = $this->redirectRouteRepository->findEnabledBySource($pathInfo, $host)) {
+        if (!$redirectRoute = $this->redirectRouteRepository->findEnabledBySource($path, $host)) {
             return $routeCollection;
         }
 
