@@ -13,6 +13,7 @@ namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Writer;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\DuplicatedSourceException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\TargetIsEmptyException;
@@ -24,12 +25,12 @@ use Symfony\Component\HttpFoundation\Response;
 class WriterTest extends TestCase
 {
     /**
-     * @var RedirectRouteManagerInterface
+     * @var ObjectProphecy<RedirectRouteManagerInterface>
      */
     private $redirectRouteManager;
 
     /**
-     * @var EntityManagerInterface
+     * @var ObjectProphecy<EntityManagerInterface>
      */
     private $entityManager;
 

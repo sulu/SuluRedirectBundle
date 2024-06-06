@@ -13,6 +13,7 @@ namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\RedirectBundle\Import\Converter\Converter;
 use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterInterface;
 use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterNotFoundException;
@@ -28,17 +29,17 @@ use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 class FileImportTest extends TestCase
 {
     /**
-     * @var ReaderInterface
+     * @var ObjectProphecy<ReaderInterface>
      */
     private $reader;
 
     /**
-     * @var ConverterInterface
+     * @var ObjectProphecy<ConverterInterface>
      */
     private $converter;
 
     /**
-     * @var WriterInterface
+     * @var ObjectProphecy<WriterInterface>
      */
     private $writer;
 

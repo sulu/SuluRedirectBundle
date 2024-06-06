@@ -17,9 +17,7 @@
 
         <service id="sulu_redirect.subscriber.entity"
                  class="Sulu\Bundle\RedirectBundle\GoneSubscriber\GoneEntitySubscriber">
-            <call method="setContainer">
-                <argument type="service" id="service_container"/>
-            </call>
+            <argument type="service" id="sulu_redirect.redirect_route_manager"/>
 
             <tag name="doctrine.event_subscriber"/>
         </service>

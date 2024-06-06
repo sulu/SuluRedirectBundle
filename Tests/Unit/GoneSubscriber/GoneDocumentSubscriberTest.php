@@ -14,6 +14,7 @@ namespace Sulu\Bundle\RedirectBundle\Tests\Unit\GoneSubscriber;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\DocumentManagerBundle\Bridge\DocumentInspector;
 use Sulu\Bundle\PageBundle\Document\BasePageDocument;
 use Sulu\Bundle\RedirectBundle\GoneSubscriber\GoneDocumentSubscriber;
@@ -35,47 +36,47 @@ class GoneDocumentSubscriberTest extends TestCase
     private $goneDocumentSubscriber;
 
     /**
-     * @var EntityManager
+     * @var ObjectProphecy<EntityManager>
      */
     private $entityManager;
 
     /**
-     * @var RedirectRouteManager
+     * @var ObjectProphecy<RedirectRouteManager>
      */
     private $redirectRouteManager;
 
     /**
-     * @var DocumentInspector
+     * @var ObjectProphecy<DocumentInspector>
      */
     private $documentInspector;
 
     /**
-     * @var WebspaceManager
+     * @var ObjectProphecy<WebspaceManager>
      */
     private $webspaceManager;
 
     /**
-     * @var ResourceLocatorStrategyPool
+     * @var ObjectProphecy<ResourceLocatorStrategyPool>
      */
     private $resourceLocatorStrategyPool;
 
     /**
-     * @var RemoveEvent
+     * @var ObjectProphecy<RemoveEvent>
      */
     private $removeEvent;
 
     /**
-     * @var BasePageDocument
+     * @var ObjectProphecy<BasePageDocument>
      */
     private $document;
 
     /**
-     * @var ResourceLocatorStrategyInterface
+     * @var ObjectProphecy<ResourceLocatorStrategyInterface>
      */
     private $resourceLocatorStrategy;
 
     /**
-     * @var Webspace
+     * @var ObjectProphecy<Webspace>
      */
     private $webspace;
 

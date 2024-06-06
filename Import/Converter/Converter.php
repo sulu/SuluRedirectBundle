@@ -12,6 +12,7 @@
 namespace Sulu\Bundle\RedirectBundle\Import\Converter;
 
 use Ramsey\Uuid\Uuid;
+use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -49,6 +50,7 @@ class Converter implements ConverterInterface
 
         $entity = $this->repository->findBySource($item[self::SOURCE]);
         if (!$entity) {
+            /** @var RedirectRouteInterface $entity */
             $entity = $this->repository->createNew();
             $entity->setId(Uuid::uuid4()->toString());
         }

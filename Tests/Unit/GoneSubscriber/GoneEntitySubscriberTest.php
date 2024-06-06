@@ -14,6 +14,7 @@ namespace Sulu\Bundle\RedirectBundle\Tests\Unit\GoneSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Bundle\RedirectBundle\GoneSubscriber\GoneEntitySubscriber;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
@@ -28,24 +29,19 @@ class GoneEntitySubscriberTest extends TestCase
     private $goneEntitySubscriber;
 
     /**
-     * @var LifecycleEventArgs
+     * @var ObjectProphecy<LifecycleEventArgs>
      */
     private $event;
 
     /**
-     * @var RouteInterface
+     * @var ObjectProphecy<RouteInterface>
      */
     private $object;
 
     /**
-     * @var RedirectRouteManager
+     * @var ObjectProphecy<RedirectRouteManager>
      */
     private $redirectRouteManager;
-
-    /**
-     * @var ContainerInterface
-     */
-    private $container;
 
     protected function setUp(): void
     {
@@ -62,11 +58,7 @@ class GoneEntitySubscriberTest extends TestCase
             return true;
         }))->shouldBeCalledTimes(1);
 
-        $this->container = $this->prophesize(ContainerInterface::class);
-        $this->container->get('sulu_redirect.redirect_route_manager')->willReturn($this->redirectRouteManager->reveal());
-
-        $this->goneEntitySubscriber = new GoneEntitySubscriber();
-        $this->goneEntitySubscriber->setContainer($this->container->reveal());
+        $this->goneEntitySubscriber = new GoneEntitySubscriber($this->redirectRouteManager->reveal());
     }
 
     public function testPreRemoveWithWrongObject()

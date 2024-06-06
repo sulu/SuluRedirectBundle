@@ -25,6 +25,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * This gone subscriber listens for removed pages.
+ *
+ * @internal this is a internal listener which should not be used directly
  */
 class GoneDocumentSubscriber implements EventSubscriberInterface
 {
