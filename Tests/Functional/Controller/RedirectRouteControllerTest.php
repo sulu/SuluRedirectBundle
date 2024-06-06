@@ -19,12 +19,22 @@ class RedirectRouteControllerTest extends SuluTestCase
     public const BASE_URL = '/admin/api/redirect-routes';
 
     /**
-     * @var array
+     * @var array{
+     *      source: string,
+     *      sourceHost: string|null,
+     *      target: string|null,
+     *      statusCode: int,
+     *  }
      */
     private $defaultData;
 
     /**
-     * @var array
+     * @var array{
+     *      source: string,
+     *      sourceHost: string|null,
+     *      target: string|null,
+     *      statusCode: int,
+     *  }
      */
     private $status410Data;
 
@@ -41,7 +51,7 @@ class RedirectRouteControllerTest extends SuluTestCase
         $this->purgeDatabase();
 
         $this->defaultData = ['source' => '/test1', 'sourceHost' => null, 'target' => '/test2', 'statusCode' => 301];
-        $this->status410Data = ['source' => '/test410', 'sourceHost' => null, 'statusCode' => 410, 'target' => null];
+        $this->status410Data = ['source' => '/test410', 'sourceHost' => null, 'target' => null, 'statusCode' => 410];
     }
 
     public function testPost()
@@ -49,6 +59,7 @@ class RedirectRouteControllerTest extends SuluTestCase
         $response = $this->post($this->defaultData);
 
         $this->assertHttpStatusCode(200, $response);
+        /** @var array<string, mixed> $result */
         $result = json_decode($response->getContent(), true);
 
         foreach ($this->defaultData as $key => $value) {
@@ -61,6 +72,7 @@ class RedirectRouteControllerTest extends SuluTestCase
         $response = $this->post($this->status410Data);
 
         $this->assertHttpStatusCode(200, $response);
+        /** @var array<string, mixed> $result */
         $result = json_decode($response->getContent(), true);
 
         foreach ($this->status410Data as $key => $value) {
@@ -98,6 +110,7 @@ class RedirectRouteControllerTest extends SuluTestCase
     public function testPostTriggerActionEnable(): void
     {
         $response = $this->post(array_merge($this->defaultData, ['enabled' => false]));
+        /** @var array<string, mixed> $data */
         $data = json_decode($response->getContent(), true);
 
         $this->client->request('POST', self::BASE_URL . '/' . $data['id'], [
@@ -106,6 +119,7 @@ class RedirectRouteControllerTest extends SuluTestCase
         $response = $this->client->getResponse();
         $this->assertHttpStatusCode(200, $response);
 
+        /** @var array<string, mixed> $content */
         $content = json_decode($response->getContent(), true);
         $this->assertTrue($content['enabled']);
     }
@@ -113,7 +127,10 @@ class RedirectRouteControllerTest extends SuluTestCase
     public function testPostTriggerActionDisable(): void
     {
         $response = $this->post(array_merge($this->defaultData, ['enabled' => true]));
+        /** @var array<string, mixed> $data */
         $data = json_decode($response->getContent(), true);
+
+        $this->assertArrayHasKey('id', $data);
 
         $this->client->request('POST', self::BASE_URL . '/' . $data['id'], [
             'action' => 'disable',
@@ -121,6 +138,7 @@ class RedirectRouteControllerTest extends SuluTestCase
         $response = $this->client->getResponse();
         $this->assertHttpStatusCode(200, $response);
 
+        /** @var array<string, mixed> $content */
         $content = json_decode($response->getContent(), true);
         $this->assertFalse($content['enabled']);
     }
@@ -128,11 +146,13 @@ class RedirectRouteControllerTest extends SuluTestCase
     public function testGet()
     {
         $response = $this->post($this->defaultData);
+        /** @var array<string, mixed> $data */
         $data = json_decode($response->getContent(), true);
 
         $response = $this->get($data['id']);
 
         $this->assertHttpStatusCode(200, $response);
+        /** @var array<string, mixed> $result */
         $result = json_decode($response->getContent(), true);
 
         foreach ($this->defaultData as $key => $value) {
@@ -143,8 +163,10 @@ class RedirectRouteControllerTest extends SuluTestCase
     public function testPutSameData()
     {
         $response = $this->post($this->defaultData);
+        /** @var array<string, mixed> $data */
         $data = json_decode($response->getContent(), true);
         $this->assertHttpStatusCode(200, $response);
+        $this->assertArrayHasKey('id', $data);
 
         $response = $this->put($data['id'], $this->defaultData);
         $this->assertHttpStatusCode(200, $response);
@@ -153,11 +175,13 @@ class RedirectRouteControllerTest extends SuluTestCase
     public function testPutAlreadyExists()
     {
         $response = $this->post($this->defaultData);
+        /** @var array<string, mixed> $data */
         $data = json_decode($response->getContent(), true);
         $this->assertHttpStatusCode(200, $response);
 
         $response = $this->post(array_merge($this->defaultData, ['source' => '/test2']));
         $this->assertHttpStatusCode(200, $response);
+        $this->assertArrayHasKey('id', $data);
 
         $response = $this->put($data['id'], array_merge($this->defaultData, ['source' => '/test2']));
         $this->assertHttpStatusCode(409, $response);

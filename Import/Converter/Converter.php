@@ -45,7 +45,9 @@ class Converter implements ConverterInterface
     {
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        $entity = $this->repository->findBySource($item[self::SOURCE]);
+        /** @var string $source */
+        $source = $item[self::SOURCE];
+        $entity = $this->repository->findBySource($source);
         if (!$entity) {
             /** @var RedirectRouteInterface $entity */
             $entity = $this->repository->createNew();

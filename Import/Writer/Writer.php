@@ -33,7 +33,7 @@ class Writer implements WriterInterface
     private $entityManager;
 
     /**
-     * @var array
+     * @var string[]
      */
     private $sources = [];
 

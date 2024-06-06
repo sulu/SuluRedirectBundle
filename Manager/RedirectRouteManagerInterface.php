@@ -22,7 +22,13 @@ interface RedirectRouteManagerInterface
     /**
      * Save given redirect-route.
      *
-     * @param array $data The data of the tag to save
+     * @param array{
+     *     source: string,
+     *     sourceHost: string|null,
+     *     target: string|null,
+     *     statusCode: int,
+     *     id?: int|string,
+     * } $data The data of the tag to save
      *
      * @return RedirectRouteInterface
      *

@@ -36,7 +36,7 @@ class GoneEntitySubscriber implements EventSubscriber, ContainerAwareInterface
     private $redirectRouteManager;
 
     public function __construct(
-        RedirectRouteManagerInterface $redirectRouteManager,
+        RedirectRouteManagerInterface $redirectRouteManager
     ) {
         $this->redirectRouteManager = $redirectRouteManager;
     }

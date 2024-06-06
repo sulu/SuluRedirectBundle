@@ -32,6 +32,9 @@ class Kernel extends SuluTestKernel
         $loader->load(__DIR__ . '/config/config_' . $this->getContext() . '.yml');
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function getKernelParameters(): array
     {
         $parameters = parent::getKernelParameters();

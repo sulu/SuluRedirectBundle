@@ -112,7 +112,7 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     protected function getUrls(BasePageDocument $document)
     {
@@ -165,7 +165,7 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
      * @param string $webspaceKey
      * @param string $locale
      *
-     * @return array
+     * @return string[]
      */
     protected function getHistoryUrls(
         ResourceLocatorStrategyInterface $resourceLocatorStrategy,

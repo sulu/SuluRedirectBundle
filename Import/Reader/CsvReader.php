@@ -56,7 +56,10 @@ class CsvReader implements ReaderInterface
     /**
      * Interpret given line.
      *
-     * @return array
+     * @param array<string|int, string> $line
+     * @param array<string|int, string> $header
+     *
+     * @return array<string|int, string|null>
      */
     private function interpret(array $line, array $header)
     {

@@ -29,10 +29,13 @@ class RedirectRouteProvider implements RouteProviderInterface
     private $redirectRouteRepository;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $defaultOptions;
 
+    /**
+     * @param array<string, mixed> $defaultOptions
+     */
     public function __construct(
         RedirectRouteRepositoryInterface $redirectRouteRepository,
         array $defaultOptions = []

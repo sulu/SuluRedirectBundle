@@ -20,4 +20,3 @@ parameters:
         constant_hassers: false
     doctrine:
         objectManagerLoader: Tests/phpstan/object-manager.php
-    checkMissingIterableValueType: false

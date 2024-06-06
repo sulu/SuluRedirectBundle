@@ -74,6 +74,8 @@ class FileImport implements FileImportInterface
     /**
      * Import given item.
      *
+     * @param array<string, mixed> $item
+     *
      * @return RedirectRouteInterface
      *
      * @throws \Exception
