@@ -46,8 +46,6 @@ class FileImport implements FileImportInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return iterable<int, Item>
      */
     public function import($fileName)

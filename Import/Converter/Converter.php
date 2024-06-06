@@ -41,9 +41,6 @@ class Converter implements ConverterInterface
         $this->repository = $repository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function convert(array $item)
     {
         $accessor = PropertyAccess::createPropertyAccessor();
@@ -66,9 +63,6 @@ class Converter implements ConverterInterface
         return $entity;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $item)
     {
         $keys = array_keys($item);

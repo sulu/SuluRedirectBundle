@@ -48,9 +48,6 @@ class Writer implements WriterInterface
         $this->entityManager = $entityManager;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function write(RedirectRouteInterface $entity): void
     {
         $this->validate($entity);
@@ -63,9 +60,6 @@ class Writer implements WriterInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function finalize(): void
     {
         $this->entityManager->flush();

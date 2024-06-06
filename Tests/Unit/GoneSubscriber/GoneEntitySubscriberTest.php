@@ -19,7 +19,6 @@ use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Bundle\RedirectBundle\GoneSubscriber\GoneEntitySubscriber;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
 use Sulu\Bundle\RouteBundle\Model\RouteInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class GoneEntitySubscriberTest extends TestCase
 {

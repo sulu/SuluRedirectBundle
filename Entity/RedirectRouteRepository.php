@@ -21,9 +21,6 @@ use Sulu\Component\Persistence\Repository\ORM\EntityRepository;
  */
 class RedirectRouteRepository extends EntityRepository implements RedirectRouteRepositoryInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function findById($id)
     {
         /** @var RedirectRouteInterface|null $redirectRoute */
@@ -32,9 +29,6 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
         return $redirectRoute;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findEnabledBySource($source, $sourceHost = null)
     {
         $queryBuilder = $this->createFindBySourceQueryBuilder($source, $sourceHost);
@@ -43,9 +37,6 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function findBySource($source, $sourceHost = null)
     {
         $queryBuilder = $this->createFindBySourceQueryBuilder($source, $sourceHost);
@@ -53,17 +44,11 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
         return $queryBuilder->getQuery()->getOneOrNullResult();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function persist(RedirectRouteInterface $entity): void
     {
         $this->_em->persist($entity);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function remove(RedirectRouteInterface $entity): void
     {
         $this->_em->remove($entity);

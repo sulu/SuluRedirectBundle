@@ -52,17 +52,11 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
      */
     protected $target;
 
-    /**
-     * {@inheritdoc}
-     */
     public function getId()
     {
         return $this->id;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setId($id)
     {
         $this->id = $id;
@@ -70,17 +64,11 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function isEnabled()
     {
         return $this->enabled;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
@@ -88,17 +76,11 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getStatusCode()
     {
         return $this->statusCode;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setStatusCode($statusCode)
     {
         $this->statusCode = $statusCode;
@@ -106,17 +88,11 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSource()
     {
         return $this->source;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSource($source)
     {
         $this->source = mb_strtolower('/' . ltrim($source, '/'));
@@ -124,17 +100,11 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSourceHost()
     {
         return $this->sourceHost;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setSourceHost($sourceHost)
     {
         $this->sourceHost = empty($sourceHost) ? null : mb_strtolower($sourceHost);
@@ -142,17 +112,11 @@ class RedirectRoute implements RedirectRouteInterface, AuditableInterface
         return $this;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getTarget()
     {
         return $this->target;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setTarget($target)
     {
         $this->target = $target;

@@ -39,9 +39,6 @@ class WriterTest extends TestCase
      */
     private $writer;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         $this->redirectRouteManager = $this->prophesize(RedirectRouteManagerInterface::class);

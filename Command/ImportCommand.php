@@ -35,9 +35,6 @@ class ImportCommand extends Command
         $this->import = $import;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(): void
     {
         $this->addArgument('fileName', InputArgument::REQUIRED)
@@ -49,9 +46,6 @@ EOT
             );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function execute(InputInterface $input, OutputInterface $output)
     {
         $progressBar = new ProgressBar($output);

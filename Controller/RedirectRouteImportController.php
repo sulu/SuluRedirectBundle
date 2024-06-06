@@ -47,17 +47,11 @@ class RedirectRouteImportController implements SecuredControllerInterface
         $this->importPath = $importPath;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSecurityContext(): string
     {
         return RedirectAdmin::SECURITY_CONTEXT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocale(Request $request)
     {
         return $request->get('locale', null);

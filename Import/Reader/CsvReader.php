@@ -11,7 +11,6 @@
 
 namespace Sulu\Bundle\RedirectBundle\Import\Reader;
 
-use SplFileObject;
 use Sulu\Bundle\RedirectBundle\Import\Converter\Converter;
 
 /**
@@ -20,17 +19,15 @@ use Sulu\Bundle\RedirectBundle\Import\Converter\Converter;
 class CsvReader implements ReaderInterface
 {
     /**
-     * {@inheritdoc}
-     *
      * @return iterable<int, ReaderItem>
      */
     public function read($fileName)
     {
         ini_set('auto_detect_line_endings', true); // For mac's office excel csv
 
-        $csv = new SplFileObject($fileName);
+        $csv = new \SplFileObject($fileName);
         $csv->setCsvControl();
-        $csv->setFlags(SplFileObject::READ_CSV);
+        $csv->setFlags(\SplFileObject::READ_CSV);
 
         $header = [Converter::SOURCE, Converter::TARGET, Converter::STATUS_CODE, Converter::ENABLED, Converter::SOURCE_HOST];
         /** @var string[] $line */
@@ -51,9 +48,6 @@ class CsvReader implements ReaderInterface
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($fileName)
     {
         return 'csv' === pathinfo($fileName, PATHINFO_EXTENSION);

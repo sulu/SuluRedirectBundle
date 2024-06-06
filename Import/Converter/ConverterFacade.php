@@ -29,9 +29,6 @@ class ConverterFacade implements ConverterInterface
         $this->converters = $converters;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function convert(array $item)
     {
         foreach ($this->converters as $converter) {
@@ -43,9 +40,6 @@ class ConverterFacade implements ConverterInterface
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports(array $item)
     {
         foreach ($this->converters as $converter) {

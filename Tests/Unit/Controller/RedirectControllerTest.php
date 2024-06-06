@@ -40,9 +40,6 @@ class RedirectControllerTest extends TestCase
      */
     private $redirectRoute;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         $this->controller = new WebsiteRedirectController();

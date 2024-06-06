@@ -79,9 +79,6 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
         $this->environment = $environment;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
         return [
