@@ -13,6 +13,7 @@
         "symfony/http-foundation": "^4.3 || ^5.0 || ^6.0",
         "handcraftedinthealps/rest-routing-bundle": "^1.0",
         "friendsofsymfony/rest-bundle": "^2.8 || ^3.0",
+        "jms/serializer-bundle": "^3.0 || ^4.0 || ^5.0",
         "symfony/http-kernel": "^4.3 || ^5.0 || ^6.0",
         "doctrine/orm": "^2.5.3",
         "symfony/event-dispatcher": "^4.3 || ^5.0 || ^6.0",
