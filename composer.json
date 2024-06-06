@@ -92,5 +92,10 @@
             "Tests/Application/bin/adminconsole doctrine:schema:validate --skip-sync",
             "Tests/Application/bin/adminconsole doctrine:ensure-production-settings --env prod"
         ]
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
     }
 }
