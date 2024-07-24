@@ -14,6 +14,7 @@ parameters:
     excludePaths:
         - %currentWorkingDirectory%/vendor/*
         - %currentWorkingDirectory%/Tests/Application/var/*
+        - %currentWorkingDirectory%/Tests/prophecy-trait-bc-layer.php
     symfony:
         container_xml_path: %currentWorkingDirectory%/Tests/Application/var/cache/admin/dev/Sulu_Bundle_RedirectBundle_Tests_Application_KernelDevDebugContainer.xml
         console_application_loader: Tests/phpstan/console-application.php

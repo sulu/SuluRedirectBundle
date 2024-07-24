@@ -14,6 +14,7 @@ namespace Sulu\Bundle\RedirectBundle\Tests\Unit\GoneSubscriber;
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\DocumentManagerBundle\Bridge\DocumentInspector;
 use Sulu\Bundle\PageBundle\Document\BasePageDocument;
@@ -30,6 +31,8 @@ use Sulu\Component\Webspace\Webspace;
 
 class GoneDocumentSubscriberTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var GoneDocumentSubscriber
      */

@@ -13,6 +13,7 @@ namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Manager;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
@@ -22,6 +23,8 @@ use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 
 class RedirectRouteManagerTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var ObjectProphecy<RedirectRouteRepositoryInterface>
      */
