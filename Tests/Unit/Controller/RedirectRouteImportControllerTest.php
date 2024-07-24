@@ -107,7 +107,7 @@ class RedirectRouteImportControllerTest extends TestCase
         $import->import(Argument::any())->willThrow(ConverterNotFoundException::class);
 
         $controller = new RedirectRouteImportController($import->reveal(), $this->importPath);
-        $response = $controller->postAction($request->reveal(), $this->importPath);
+        $response = $controller->postAction($request, $this->importPath);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(400, $response->getStatusCode());
@@ -122,7 +122,7 @@ class RedirectRouteImportControllerTest extends TestCase
         $import->import(Argument::any())->shouldNotBeCalled();
 
         $controller = new RedirectRouteImportController($import->reveal(), $this->importPath);
-        $response = $controller->postAction($request->reveal(), $this->importPath);
+        $response = $controller->postAction($request, $this->importPath);
 
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(400, $response->getStatusCode());
