@@ -12,6 +12,7 @@
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Converter;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterFacade;
 use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterInterface;
@@ -19,6 +20,8 @@ use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 
 class ConverterFacadeTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testSupports()
     {
         $data = ['title' => 'Test-Title'];

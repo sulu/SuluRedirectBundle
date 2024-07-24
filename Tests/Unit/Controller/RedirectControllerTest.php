@@ -12,6 +12,7 @@
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Controller;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Sulu\Bundle\RedirectBundle\Controller\WebsiteRedirectController;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,6 +20,8 @@ use Symfony\Component\HttpFoundation\Request;
 
 class RedirectControllerTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var WebsiteRedirectController
      */

@@ -13,6 +13,7 @@ namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Writer;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\DuplicatedSourceException;
@@ -24,6 +25,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class WriterTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var ObjectProphecy<RedirectRouteManagerInterface>
      */

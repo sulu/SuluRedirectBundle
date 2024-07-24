@@ -13,12 +13,15 @@ namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Converter;
 
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Sulu\Bundle\RedirectBundle\Import\Converter\Converter;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 
 class ConverterTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testSupports()
     {
         $repository = $this->prophesize(RedirectRouteRepositoryInterface::class);
