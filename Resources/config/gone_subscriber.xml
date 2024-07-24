@@ -19,7 +19,7 @@
                  class="Sulu\Bundle\RedirectBundle\GoneSubscriber\GoneEntitySubscriber">
             <argument type="service" id="sulu_redirect.redirect_route_manager"/>
 
-            <tag name="doctrine.event_subscriber"/>
+            <tag name="doctrine.event_listener" event="preRemove"/>
         </service>
     </services>
 </container>

@@ -46,7 +46,7 @@ EOT
             );
     }
 
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
         $progressBar = new ProgressBar($output);
         $progressBar->setFormat(' %current% [%bar%] %elapsed:6s% %memory:6s%');

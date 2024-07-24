@@ -321,16 +321,6 @@ parameters:
 			path: Tests/Unit/Controller/RedirectControllerTest.php
 
 		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Request\\:\\:reveal\\(\\)\\.$#"
-			count: 4
-			path: Tests/Unit/Controller/RedirectControllerTest.php
-
-		-
-			message: "#^Cannot call method willReturn\\(\\) on array\\.$#"
-			count: 4
-			path: Tests/Unit/Controller/RedirectControllerTest.php
-
-		-
 			message: "#^Cannot call method willReturn\\(\\) on int\\.$#"
 			count: 4
 			path: Tests/Unit/Controller/RedirectControllerTest.php
@@ -361,22 +351,7 @@ parameters:
 			path: Tests/Unit/Controller/RedirectControllerTest.php
 
 		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:\\$queryBag \\(Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/RedirectControllerTest.php
-
-		-
 			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:\\$redirectRoute \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/RedirectControllerTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:\\$request \\(Symfony\\\\Component\\\\HttpFoundation\\\\Request\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Symfony\\\\Component\\\\HttpFoundation\\\\Request\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/RedirectControllerTest.php
-
-		-
-			message: "#^Property Symfony\\\\Component\\\\HttpFoundation\\\\Request\\:\\:\\$query \\(Symfony\\\\Component\\\\HttpFoundation\\\\InputBag\\<string\\>\\) does not accept Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\.$#"
 			count: 1
 			path: Tests/Unit/Controller/RedirectControllerTest.php
 
