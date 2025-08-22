@@ -1,0 +1,37 @@
+<?php
+
+namespace Sulu\Bundle\RedirectBundle\DependencyInjection;
+
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+class RouteDefaultOptionsCompilerPass implements CompilerPassInterface
+{
+    /**
+     * @param string $targetService
+     * @param int $targetDefaultOptionsArgument
+     */
+    public function __construct(private $targetService, private $targetDefaultOptionsArgument)
+    {
+    }
+
+    public function process(ContainerBuilder $container): void
+    {
+        if (!$container->hasDefinition('routing.loader')) {
+            return;
+        }
+
+        if (!$container->hasDefinition('sulu_custom_urls.routing.provider')) {
+            return;
+        }
+
+        // copy default route options which are set by the symfony FrameworkExtension based on the config:
+        // https://github.com/symfony/symfony/pull/31900
+        $routeDefaultOptions = $container->getDefinition('routing.loader')->getArgument(1);
+
+        $container->getDefinition($this->targetService)->replaceArgument(
+            $this->targetDefaultOptionsArgument,
+            $routeDefaultOptions,
+        );
+    }
+}

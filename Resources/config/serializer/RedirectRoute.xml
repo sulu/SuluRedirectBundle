@@ -9,8 +9,8 @@
         <property name="target" type="string"/>
 
         <property name="creator" exclude="true"/>
-        <property name="created" type="DateTime"/>
+        <property name="created" type="DateTimeImmutable"/>
         <property name="changer" exclude="true"/>
-        <property name="changed" type="DateTime"/>
+        <property name="changed" type="DateTimeImmutable"/>
     </class>
 </serializer>

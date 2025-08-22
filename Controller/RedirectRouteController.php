@@ -23,10 +23,12 @@ use Sulu\Component\Rest\AbstractRestController;
 use Sulu\Component\Rest\DoctrineRestHelper;
 use Sulu\Component\Rest\Exception\EntityNotFoundException;
 use Sulu\Component\Rest\Exception\RestException;
+use Sulu\Component\Rest\ListBuilder\CollectionRepresentation;
 use Sulu\Component\Rest\ListBuilder\Doctrine\DoctrineListBuilderFactoryInterface;
 use Sulu\Component\Rest\ListBuilder\FieldDescriptorInterface;
 use Sulu\Component\Rest\ListBuilder\ListRepresentation;
 use Sulu\Component\Rest\ListBuilder\Metadata\FieldDescriptorFactoryInterface;
+use Sulu\Component\Rest\ListBuilder\PaginatedRepresentation;
 use Sulu\Component\Security\SecuredControllerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -117,14 +119,12 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
         $this->restHelper->initializeListBuilder($listBuilder, $fieldDescriptors);
         $results = $listBuilder->execute();
 
-        $list = new ListRepresentation(
+        $list = new PaginatedRepresentation(
             $results,
             self::RESULT_KEY,
-            $request->attributes->get('_route'),
-            $request->query->all(),
             $listBuilder->getCurrentPage(),
             $listBuilder->getLimit(),
-            $listBuilder->count()
+            $listBuilder->count(),
         );
 
         return $this->handleView($this->view($list));
