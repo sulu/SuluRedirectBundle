@@ -20,12 +20,11 @@ composer require sulu/redirect-bundle
 
 ```yml
 sulu_redirect_api:
-    type: rest
-    resource: "@SuluRedirectBundle/Resources/config/routing_api.yml"
+    resource: "@SuluRedirectBundle/Resources/config/routing_api.yaml"
     prefix: /admin/api
 
 sulu_redirect:
-    resource: "@SuluRedirectBundle/Resources/config/routing.yml"
+    resource: "@SuluRedirectBundle/Resources/config/routing.yaml"
     prefix: /admin/redirects
 ```
 
