@@ -46,8 +46,6 @@ class FileImport implements FileImportInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return iterable<int, Item>
      */
     public function import($fileName)
@@ -75,6 +73,8 @@ class FileImport implements FileImportInterface
 
     /**
      * Import given item.
+     *
+     * @param array<string, mixed> $item
      *
      * @return RedirectRouteInterface
      *

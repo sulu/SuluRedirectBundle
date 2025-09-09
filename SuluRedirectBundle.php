@@ -25,9 +25,6 @@ class SuluRedirectBundle extends Bundle
 {
     use PersistenceBundleTrait;
 
-    /**
-     * {@inheritdoc}
-     */
     public function build(ContainerBuilder $container): void
     {
         $container->addCompilerPass(
@@ -49,7 +46,7 @@ class SuluRedirectBundle extends Bundle
 
         $this->buildPersistence(
             [
-               RedirectRoute::class => 'sulu.model.redirect_route.class',
+                RedirectRoute::class => 'sulu.model.redirect_route.class',
             ],
             $container
         );

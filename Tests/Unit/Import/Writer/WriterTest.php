@@ -13,6 +13,8 @@ namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Writer;
 
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\DuplicatedSourceException;
 use Sulu\Bundle\RedirectBundle\Import\Writer\TargetIsEmptyException;
@@ -23,13 +25,15 @@ use Symfony\Component\HttpFoundation\Response;
 
 class WriterTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
-     * @var RedirectRouteManagerInterface
+     * @var ObjectProphecy<RedirectRouteManagerInterface>
      */
     private $redirectRouteManager;
 
     /**
-     * @var EntityManagerInterface
+     * @var ObjectProphecy<EntityManagerInterface>
      */
     private $entityManager;
 
@@ -38,9 +42,6 @@ class WriterTest extends TestCase
      */
     private $writer;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         $this->redirectRouteManager = $this->prophesize(RedirectRouteManagerInterface::class);
@@ -57,7 +58,7 @@ class WriterTest extends TestCase
             $this->prophesize(RedirectRouteInterface::class),
         ];
 
-        for ($i = 0; $i < count($entities); ++$i) {
+        for ($i = 0; $i < \count($entities); ++$i) {
             $entities[$i]->getSource()->willReturn('/source-' . $i);
             $entities[$i]->getTarget()->willReturn('/target-' . $i);
         }
@@ -83,7 +84,7 @@ class WriterTest extends TestCase
             $this->prophesize(RedirectRouteInterface::class),
         ];
 
-        for ($i = 0; $i < count($entities); ++$i) {
+        for ($i = 0; $i < \count($entities); ++$i) {
             $entities[$i]->getSource()->willReturn('/source-' . $i);
             $entities[$i]->getTarget()->willReturn('/target-' . $i);
         }
@@ -108,7 +109,7 @@ class WriterTest extends TestCase
             $this->prophesize(RedirectRouteInterface::class),
         ];
 
-        for ($i = 0; $i < count($entities); ++$i) {
+        for ($i = 0; $i < \count($entities); ++$i) {
             $entities[$i]->getSource()->willReturn('/source');
             $entities[$i]->getTarget()->willReturn('/target');
         }

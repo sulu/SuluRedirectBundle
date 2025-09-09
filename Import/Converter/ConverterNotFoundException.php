@@ -19,13 +19,16 @@ use Sulu\Bundle\RedirectBundle\Import\ImportException;
 class ConverterNotFoundException extends ImportException
 {
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $data;
 
+    /**
+     * @param array<string, mixed> $data
+     */
     public function __construct(array $data)
     {
-        parent::__construct(sprintf('Data %s is not supported', json_encode($data)));
+        parent::__construct(\sprintf('Data %s is not supported', \json_encode($data)));
 
         $this->data = $data;
     }
@@ -33,7 +36,7 @@ class ConverterNotFoundException extends ImportException
     /**
      * Returns data.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getData()
     {

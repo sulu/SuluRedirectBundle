@@ -12,46 +12,30 @@
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Controller;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Sulu\Bundle\RedirectBundle\Controller\WebsiteRedirectController;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
-use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 class RedirectControllerTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var WebsiteRedirectController
      */
     private $controller;
 
     /**
-     * @var Request
-     */
-    private $request;
-
-    /**
-     * @var ParameterBag
-     */
-    private $queryBag;
-
-    /**
      * @var RedirectRouteInterface
      */
     private $redirectRoute;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         $this->controller = new WebsiteRedirectController();
-
-        $this->request = $this->prophesize(Request::class);
-        $this->queryBag = $this->prophesize(ParameterBag::class);
         $this->redirectRoute = $this->prophesize(RedirectRouteInterface::class);
-
-        $this->request->reveal()->query = $this->queryBag->reveal();
     }
 
     public function testRedirect()
@@ -59,12 +43,12 @@ class RedirectControllerTest extends TestCase
         $target = '/test';
         $statusCode = 301;
 
-        $this->queryBag->all()->willReturn([]);
+        $request = Request::create('http://captain-sulu.io/');
 
         $this->redirectRoute->getTarget()->willReturn($target);
         $this->redirectRoute->getStatusCode()->willReturn($statusCode);
 
-        $response = $this->controller->redirect($this->request->reveal(), $this->redirectRoute->reveal());
+        $response = $this->controller->redirect($request, $this->redirectRoute->reveal());
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals($target, $response->getTargetUrl());
@@ -77,16 +61,18 @@ class RedirectControllerTest extends TestCase
         $statusCode = 301;
         $query = ['test' => 1, 'my-parameter' => 'awesome sulu'];
 
-        $this->queryBag->all()->willReturn($query);
+        $request = Request::create('http://captain-sulu.io/');
+        $request->query->set('test', $query['test']);
+        $request->query->set('my-parameter', $query['my-parameter']);
 
         $this->redirectRoute->getTarget()->willReturn($target);
         $this->redirectRoute->getStatusCode()->willReturn($statusCode);
 
-        $response = $this->controller->redirect($this->request->reveal(), $this->redirectRoute->reveal());
+        $response = $this->controller->redirect($request, $this->redirectRoute->reveal());
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(
-            $target . '?' . http_build_query($query),
+            $target . '?' . \http_build_query($query),
             $response->getTargetUrl()
         );
         $this->assertEquals($statusCode, $response->getStatusCode());
@@ -97,12 +83,12 @@ class RedirectControllerTest extends TestCase
         $target = 'http://captain-sulu.io/test';
         $statusCode = 301;
 
-        $this->queryBag->all()->willReturn([]);
+        $request = Request::create('http://captain-sulu.io/');
 
         $this->redirectRoute->getTarget()->willReturn($target);
         $this->redirectRoute->getStatusCode()->willReturn($statusCode);
 
-        $response = $this->controller->redirect($this->request->reveal(), $this->redirectRoute->reveal());
+        $response = $this->controller->redirect($request, $this->redirectRoute->reveal());
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(
@@ -118,16 +104,18 @@ class RedirectControllerTest extends TestCase
         $statusCode = 301;
         $query = ['test' => 1, 'my-parameter' => 'awesome sulu'];
 
-        $this->queryBag->all()->willReturn($query);
+        $request = Request::create('http://captain-sulu.io/');
+        $request->query->set('test', $query['test']);
+        $request->query->set('my-parameter', $query['my-parameter']);
 
         $this->redirectRoute->getTarget()->willReturn($target);
         $this->redirectRoute->getStatusCode()->willReturn($statusCode);
 
-        $response = $this->controller->redirect($this->request->reveal(), $this->redirectRoute->reveal());
+        $response = $this->controller->redirect($request, $this->redirectRoute->reveal());
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(
-            $target . '&' . http_build_query($query),
+            $target . '&' . \http_build_query($query),
             $response->getTargetUrl()
         );
         $this->assertEquals($statusCode, $response->getStatusCode());

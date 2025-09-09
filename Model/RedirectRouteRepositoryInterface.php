@@ -21,7 +21,7 @@ interface RedirectRouteRepositoryInterface extends RepositoryInterface
     /**
      * Find redirect-routes for given id.
      *
-     * @param string $id
+     * @param string|int $id
      *
      * @return RedirectRouteInterface|null
      */

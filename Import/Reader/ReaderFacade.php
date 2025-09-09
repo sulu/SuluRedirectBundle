@@ -29,9 +29,6 @@ class ReaderFacade implements ReaderInterface
         $this->readers = $readers;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function read($fileName)
     {
         foreach ($this->readers as $reader) {
@@ -43,9 +40,6 @@ class ReaderFacade implements ReaderInterface
         return null;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function supports($fileName)
     {
         foreach ($this->readers as $reader) {

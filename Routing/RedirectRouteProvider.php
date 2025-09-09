@@ -29,10 +29,13 @@ class RedirectRouteProvider implements RouteProviderInterface
     private $redirectRouteRepository;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $defaultOptions;
 
+    /**
+     * @param array<string, mixed> $defaultOptions
+     */
     public function __construct(
         RedirectRouteRepositoryInterface $redirectRouteRepository,
         array $defaultOptions = []
@@ -41,18 +44,16 @@ class RedirectRouteProvider implements RouteProviderInterface
         $this->defaultOptions = $defaultOptions;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteCollectionForRequest(Request $request): RouteCollection
     {
         // server encodes the url and symfony does not encode it
         // symfony decodes this data here https://github.com/symfony/symfony/blob/v5.2.3/src/Symfony/Component/Routing/Matcher/UrlMatcher.php#L88
-        $pathInfo = rawurldecode($request->getPathInfo());
+        $pathInfo = \rawurldecode($request->getPathInfo());
+        $path = \str_replace('.' . $request->getRequestFormat(), '', $pathInfo);
         $host = $request->getHost();
 
         $routeCollection = new RouteCollection();
-        if (!$redirectRoute = $this->redirectRouteRepository->findEnabledBySource($pathInfo, $host)) {
+        if (!$redirectRoute = $this->redirectRouteRepository->findEnabledBySource($path, $host)) {
             return $routeCollection;
         }
 
@@ -65,22 +66,16 @@ class RedirectRouteProvider implements RouteProviderInterface
             [],
             $this->defaultOptions
         );
-        $routeCollection->add(sprintf('sulu_redirect.%s', $redirectRoute->getId()), $route);
+        $routeCollection->add(\sprintf('sulu_redirect.%s', $redirectRoute->getId()), $route);
 
         return $routeCollection;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRouteByName($name): Route
     {
         throw new RouteNotFoundException('RedirectRouteProvider does not support getRouteByName.');
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getRoutesByNames($names = null): iterable
     {
         return [];

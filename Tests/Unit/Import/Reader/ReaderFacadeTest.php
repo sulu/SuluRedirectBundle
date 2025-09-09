@@ -12,6 +12,7 @@
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Reader;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\RedirectBundle\Import\Converter\Converter;
 use Sulu\Bundle\RedirectBundle\Import\Reader\ReaderFacade;
@@ -19,14 +20,13 @@ use Sulu\Bundle\RedirectBundle\Import\Reader\ReaderInterface;
 
 class ReaderFacadeTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var string
      */
     private $fileName;
 
-    /**
-     * {@inheritdoc}
-     */
     protected function setUp(): void
     {
         $this->fileName = '/import.csv';
@@ -43,7 +43,7 @@ class ReaderFacadeTest extends TestCase
         $converters[1]->supports($this->fileName)->willReturn(true);
 
         $readerFacade = new ReaderFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
@@ -65,7 +65,7 @@ class ReaderFacadeTest extends TestCase
         $converters[1]->supports($this->fileName)->willReturn(false);
 
         $readerFacade = new ReaderFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
@@ -100,7 +100,7 @@ class ReaderFacadeTest extends TestCase
         $converters[1]->read($this->fileName)->willReturn($data)->shouldBeCalled();
 
         $readerFacade = new ReaderFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
@@ -126,7 +126,7 @@ class ReaderFacadeTest extends TestCase
         $converters[1]->read($data)->shouldNotBeCalled();
 
         $readerFacade = new ReaderFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },

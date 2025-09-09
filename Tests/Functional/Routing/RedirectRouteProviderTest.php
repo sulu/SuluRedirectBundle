@@ -38,6 +38,7 @@ class RedirectRouteProviderTest extends WebsiteTestCase
         string $source,
         int $statusCode,
         string $target = '',
+        string $targetUrl = '',
         ?string $sourceHost = null
     ) {
         // setup models
@@ -61,7 +62,7 @@ class RedirectRouteProviderTest extends WebsiteTestCase
 
         if ($target) {
             $this->assertInstanceOf(RedirectResponse::class, $response);
-            $this->assertSame($target, $response->getTargetUrl());
+            $this->assertSame($targetUrl, $response->getTargetUrl());
         }
     }
 
@@ -72,12 +73,14 @@ class RedirectRouteProviderTest extends WebsiteTestCase
             '/test-301',
             301,
             '/test2',
+            '/test2',
         ];
 
         yield [
             '/test-302',
             '/test-302',
             302,
+            '/test2',
             '/test2',
         ];
 
@@ -92,6 +95,7 @@ class RedirectRouteProviderTest extends WebsiteTestCase
             '/test-domain-redirect',
             301,
             '/',
+            '/',
             'with-domain.com',
         ];
 
@@ -100,6 +104,15 @@ class RedirectRouteProviderTest extends WebsiteTestCase
             '/test-emoticon-🎉',
             301,
             '/',
+            '/',
+        ];
+
+        yield [
+            '/source.json', // browsers will encode the url and be provided this way to symfony getPathInfo
+            '/source',
+            301,
+            '/target',
+            '/target.json',
         ];
     }
 }

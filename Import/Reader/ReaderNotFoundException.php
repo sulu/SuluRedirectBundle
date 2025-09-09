@@ -28,7 +28,7 @@ class ReaderNotFoundException extends ImportException
      */
     public function __construct($fileName)
     {
-        parent::__construct(sprintf('File "%s" is not supported', $fileName));
+        parent::__construct(\sprintf('File "%s" is not supported', $fileName));
 
         $this->fileName = $fileName;
     }

@@ -29,7 +29,7 @@ class ReaderItem
     private $lineContent;
 
     /**
-     * @var array
+     * @var array<string, mixed>
      */
     private $data;
 
@@ -38,7 +38,10 @@ class ReaderItem
      */
     private $exception;
 
-    public function __construct(int $lineNumber, string $lineContent, array $data, ImportException $exception = null)
+    /**
+     * @param array<string, mixed> $data
+     */
+    public function __construct(int $lineNumber, string $lineContent, array $data, ?ImportException $exception = null)
     {
         $this->lineNumber = $lineNumber;
         $this->lineContent = $lineContent;
@@ -69,7 +72,7 @@ class ReaderItem
     /**
      * Returns item.
      *
-     * @return array
+     * @return array<string, mixed>
      */
     public function getData()
     {

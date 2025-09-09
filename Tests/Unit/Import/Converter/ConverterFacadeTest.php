@@ -12,6 +12,7 @@
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\Import\Converter;
 
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterFacade;
 use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterInterface;
@@ -19,6 +20,8 @@ use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 
 class ConverterFacadeTest extends TestCase
 {
+    use ProphecyTrait;
+
     public function testSupports()
     {
         $data = ['title' => 'Test-Title'];
@@ -32,7 +35,7 @@ class ConverterFacadeTest extends TestCase
         $converters[1]->supports($data)->willReturn(true);
 
         $converterFacade = new ConverterFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
@@ -56,7 +59,7 @@ class ConverterFacadeTest extends TestCase
         $converters[1]->supports($data)->willReturn(false);
 
         $converterFacade = new ConverterFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
@@ -93,7 +96,7 @@ class ConverterFacadeTest extends TestCase
             ->shouldBeCalled();
 
         $converterFacade = new ConverterFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
@@ -119,7 +122,7 @@ class ConverterFacadeTest extends TestCase
         $converters[1]->convert($data)->shouldNotBeCalled();
 
         $converterFacade = new ConverterFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },

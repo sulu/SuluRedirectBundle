@@ -11,40 +11,28 @@
 
 namespace Sulu\Bundle\RedirectBundle\GoneSubscriber;
 
-use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use Doctrine\ORM\Events;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
-use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManager;
-use Sulu\Bundle\RouteBundle\Entity\RouteRepositoryInterface;
+use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
 use Sulu\Bundle\RouteBundle\Model\RouteInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareInterface;
-use Symfony\Component\DependencyInjection\ContainerAwareTrait;
 
 /**
  * This gone subscriber listens for removed route entities.
+ *
+ * @internal this is a internal listener which should not be used directly
  */
-class GoneEntitySubscriber implements EventSubscriber, ContainerAwareInterface
+class GoneEntitySubscriber
 {
-    use ContainerAwareTrait;
-
     /**
-     * @return RouteRepositoryInterface
+     * @var RedirectRouteManagerInterface
      */
-    public function getRouteRepository()
-    {
-        return $this->container->get('sulu.repository.route');
-    }
+    private $redirectRouteManager;
 
-    /**
-     * {@inheritdoc}
-     */
-    public function getSubscribedEvents()
-    {
-        return [
-            Events::preRemove,
-        ];
+    public function __construct(
+        RedirectRouteManagerInterface $redirectRouteManager
+    ) {
+        $this->redirectRouteManager = $redirectRouteManager;
     }
 
     public function preRemove(LifecycleEventArgs $event): void
@@ -61,17 +49,9 @@ class GoneEntitySubscriber implements EventSubscriber, ContainerAwareInterface
         $redirectRoute->setSource($route->getPath());
 
         try {
-            $this->getRedirectRouteManager()->save($redirectRoute);
+            $this->redirectRouteManager->save($redirectRoute);
         } catch (RedirectRouteNotUniqueException $exception) {
             // do nothing when there already exists a redirect route
         }
-    }
-
-    /**
-     * @return RedirectRouteManager
-     */
-    private function getRedirectRouteManager()
-    {
-        return $this->container->get('sulu_redirect.redirect_route_manager');
     }
 }

@@ -42,7 +42,7 @@ class Item
      * @param int $lineNumber
      * @param string $lineContent
      */
-    public function __construct($lineNumber, $lineContent, RedirectRouteInterface $data = null, ImportException $exception = null)
+    public function __construct($lineNumber, $lineContent, ?RedirectRouteInterface $data = null, ?ImportException $exception = null)
     {
         $this->lineNumber = $lineNumber;
         $this->lineContent = $lineContent;

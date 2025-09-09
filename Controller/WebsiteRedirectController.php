@@ -32,15 +32,19 @@ class WebsiteRedirectController
             throw new HttpException(410);
         }
 
-        $queryString = http_build_query($request->query->all());
+        $queryString = \http_build_query($request->query->all());
+
+        $requestFormat = $request->getRequestFormat(null);
+        $formatSuffix = $requestFormat ? ('.' . $requestFormat) : '';
 
         $url = [
             $redirectRoute->getTarget(),
-            false === strpos($redirectRoute->getTarget(), '?') ? '?' : '&',
+            $formatSuffix,
+            false === \strpos($redirectRoute->getTarget(), '?') ? '?' : '&',
             $queryString,
         ];
 
-        $url = trim(implode($url), '&? ');
+        $url = \trim(\implode($url), '&? ');
 
         return new RedirectResponse($url, $redirectRoute->getStatusCode());
     }

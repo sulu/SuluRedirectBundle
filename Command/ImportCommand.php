@@ -35,9 +35,6 @@ class ImportCommand extends Command
         $this->import = $import;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function configure(): void
     {
         $this->addArgument('fileName', InputArgument::REQUIRED)
@@ -49,15 +46,12 @@ EOT
             );
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
         $progressBar = new ProgressBar($output);
         $progressBar->setFormat(' %current% [%bar%] %elapsed:6s% %memory:6s%');
 
-        $output->writeln(sprintf('Import of file "%s" will be started:', basename($input->getArgument('fileName'))));
+        $output->writeln(\sprintf('Import of file "%s" will be started:', \basename($input->getArgument('fileName'))));
 
         $errors = [];
         foreach ($this->import->import($input->getArgument('fileName')) as $item) {
@@ -70,7 +64,7 @@ EOT
 
         $progressBar->finish();
 
-        if (0 === count($errors)) {
+        if (0 === \count($errors)) {
             return 0;
         }
 
@@ -82,7 +76,7 @@ EOT
             $exception = $error->getException();
 
             $output->writeln(
-                sprintf(
+                \sprintf(
                     ' * Line %s: "%s"',
                     $error->getLineNumber(),
                     $exception ? $exception->getMessage() : ''

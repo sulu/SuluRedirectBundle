@@ -1,6 +1,16 @@
 parameters:
 	ignoreErrors:
 		-
+			message: "#^Parameter \\#1 \\$data of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManagerInterface\\:\\:saveByData\\(\\) expects array\\{source\\: string, sourceHost\\: string\\|null, target\\: string\\|null, statusCode\\: int, id\\?\\: int\\|string\\}, array\\<string, array\\|bool\\|float\\|int\\|string\\> given\\.$#"
+			count: 1
+			path: Controller/RedirectRouteController.php
+
+		-
+			message: "#^Parameter \\#1 \\$data of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManagerInterface\\:\\:saveByData\\(\\) expects array\\{source\\: string, sourceHost\\: string\\|null, target\\: string\\|null, statusCode\\: int, id\\?\\: int\\|string\\}, non\\-empty\\-array\\<string, array\\|bool\\|float\\|int\\|string\\> given\\.$#"
+			count: 1
+			path: Controller/RedirectRouteController.php
+
+		-
 			message: "#^Parameter \\#3 \\$route of class Sulu\\\\Component\\\\Rest\\\\ListBuilder\\\\ListRepresentation constructor expects string, mixed given\\.$#"
 			count: 1
 			path: Controller/RedirectRouteController.php
@@ -31,14 +41,14 @@ parameters:
 			path: Exception/RedirectRouteNotUniqueException.php
 
 		-
-			message: "#^Call to an undefined method object\\:\\:setId\\(\\)\\.$#"
-			count: 1
-			path: Import/Converter/Converter.php
-
-		-
 			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Converter\\\\ConverterFacade\\:\\:convert\\(\\) should return Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface but returns null\\.$#"
 			count: 1
 			path: Import/Converter/ConverterFacade.php
+
+		-
+			message: "#^Parameter \\#3 \\$data of class Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderItem constructor expects array\\<string, mixed\\>, array\\<int\\|string, string\\|null\\> given\\.$#"
+			count: 1
+			path: Import/Reader/CsvReader.php
 
 		-
 			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderFacade\\:\\:read\\(\\) should return array\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderItem\\> but returns null\\.$#"
@@ -96,6 +106,11 @@ parameters:
 			path: Manager/RedirectRouteManager.php
 
 		-
+			message: "#^Parameter \\#1 \\$id of class Sulu\\\\Bundle\\\\RedirectBundle\\\\Exception\\\\RedirectRouteNotFoundException constructor expects int, int\\<min, \\-1\\>\\|int\\<1, max\\>\\|string given\\.$#"
+			count: 1
+			path: Manager/RedirectRouteManager.php
+
+		-
 			message: "#^Interface Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface extends generic interface Sulu\\\\Component\\\\Persistence\\\\Repository\\\\RepositoryInterface but does not specify its types\\: T$#"
 			count: 1
 			path: Model/RedirectRouteRepositoryInterface.php
@@ -136,13 +151,8 @@ parameters:
 			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
 
 		-
-			message: "#^Cannot access offset 'enabled' on mixed\\.$#"
-			count: 2
-			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
-
-		-
 			message: "#^Cannot access offset 'id' on mixed\\.$#"
-			count: 14
+			count: 6
 			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
 
 		-
@@ -153,11 +163,6 @@ parameters:
 		-
 			message: "#^Cannot access offset 'source'\\|'sourceHost'\\|'statusCode'\\|'target' on mixed\\.$#"
 			count: 1
-			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
-
-		-
-			message: "#^Cannot access offset \\(int\\|string\\) on mixed\\.$#"
-			count: 3
 			path: Tests/Functional/Controller/RedirectRouteControllerTest.php
 
 		-
@@ -316,16 +321,6 @@ parameters:
 			path: Tests/Unit/Controller/RedirectControllerTest.php
 
 		-
-			message: "#^Call to an undefined method Symfony\\\\Component\\\\HttpFoundation\\\\Request\\:\\:reveal\\(\\)\\.$#"
-			count: 4
-			path: Tests/Unit/Controller/RedirectControllerTest.php
-
-		-
-			message: "#^Cannot call method willReturn\\(\\) on array\\.$#"
-			count: 4
-			path: Tests/Unit/Controller/RedirectControllerTest.php
-
-		-
 			message: "#^Cannot call method willReturn\\(\\) on int\\.$#"
 			count: 4
 			path: Tests/Unit/Controller/RedirectControllerTest.php
@@ -356,22 +351,7 @@ parameters:
 			path: Tests/Unit/Controller/RedirectControllerTest.php
 
 		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:\\$queryBag \\(Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/RedirectControllerTest.php
-
-		-
 			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:\\$redirectRoute \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/RedirectControllerTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Controller\\\\RedirectControllerTest\\:\\:\\$request \\(Symfony\\\\Component\\\\HttpFoundation\\\\Request\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Symfony\\\\Component\\\\HttpFoundation\\\\Request\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Controller/RedirectControllerTest.php
-
-		-
-			message: "#^Property Symfony\\\\Component\\\\HttpFoundation\\\\Request\\:\\:\\$query \\(Symfony\\\\Component\\\\HttpFoundation\\\\InputBag\\<string\\>\\) does not accept Symfony\\\\Component\\\\HttpFoundation\\\\ParameterBag\\.$#"
 			count: 1
 			path: Tests/Unit/Controller/RedirectControllerTest.php
 
@@ -481,41 +461,6 @@ parameters:
 			path: Tests/Unit/Entity/RedirectRouteTest.php
 
 		-
-			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:shouldBeCalledTimes\\(\\)\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:shouldNotBeCalled\\(\\)\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Call to an undefined method Sulu\\\\Component\\\\DocumentManager\\\\Event\\\\RemoveEvent\\:\\:reveal\\(\\)\\.$#"
-			count: 2
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Call to an undefined method object\\:\\:willReturn\\(\\)\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Cannot call method shouldBeCalled\\(\\) on void\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Cannot call method shouldNotBeCalled\\(\\) on void\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\:\\:saveByData\\(\\) invoked with 0 parameters, 1 required\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
 			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:testCreateRedirects\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
@@ -526,102 +471,12 @@ parameters:
 			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
 
 		-
-			message: "#^Parameter \\#1 \\$data of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\:\\:saveByData\\(\\) expects array, Prophecy\\\\Argument\\\\Token\\\\AnyValueToken given\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$document \\(Sulu\\\\Bundle\\\\PageBundle\\\\Document\\\\BasePageDocument\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\PageBundle\\\\Document\\\\BasePageDocument\\>\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$documentInspector \\(Sulu\\\\Bundle\\\\DocumentManagerBundle\\\\Bridge\\\\DocumentInspector\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\DocumentManagerBundle\\\\Bridge\\\\DocumentInspector\\>\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$entityManager \\(Doctrine\\\\ORM\\\\EntityManager\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Doctrine\\\\ORM\\\\EntityManager\\>\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$redirectRouteManager \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\>\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$removeEvent \\(Sulu\\\\Component\\\\DocumentManager\\\\Event\\\\RemoveEvent\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Component\\\\DocumentManager\\\\Event\\\\RemoveEvent\\>\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$resourceLocatorStrategy \\(Sulu\\\\Component\\\\Content\\\\Types\\\\ResourceLocator\\\\Strategy\\\\ResourceLocatorStrategyInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Component\\\\Content\\\\Types\\\\ResourceLocator\\\\Strategy\\\\ResourceLocatorStrategyInterface\\>\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$resourceLocatorStrategyPool \\(Sulu\\\\Component\\\\Content\\\\Types\\\\ResourceLocator\\\\Strategy\\\\ResourceLocatorStrategyPool\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Component\\\\Content\\\\Types\\\\ResourceLocator\\\\Strategy\\\\ResourceLocatorStrategyPool\\>\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$webspace \\(Sulu\\\\Component\\\\Webspace\\\\Webspace\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Component\\\\Webspace\\\\Webspace\\>\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneDocumentSubscriberTest\\:\\:\\$webspaceManager \\(Sulu\\\\Component\\\\Webspace\\\\Manager\\\\WebspaceManager\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Component\\\\Webspace\\\\Manager\\\\WebspaceManager\\>\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Result of method Doctrine\\\\ORM\\\\EntityManager\\:\\:flush\\(\\) \\(void\\) is used\\.$#"
-			count: 2
-			path: Tests/Unit/GoneSubscriber/GoneDocumentSubscriberTest.php
-
-		-
-			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\Event\\\\LifecycleEventArgs\\:\\:reveal\\(\\)\\.$#"
-			count: 2
-			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
-
-		-
-			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:shouldNotBeCalled\\(\\)\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
-
-		-
-			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\:\\:save\\(\\) invoked with 0 parameters, 1 required\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
-
-		-
 			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneEntitySubscriberTest\\:\\:testPreRemove\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
 
 		-
 			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneEntitySubscriberTest\\:\\:testPreRemoveWithWrongObject\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneEntitySubscriberTest\\:\\:\\$container \\(Symfony\\\\Component\\\\DependencyInjection\\\\ContainerInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Symfony\\\\Component\\\\DependencyInjection\\\\ContainerInterface\\>\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneEntitySubscriberTest\\:\\:\\$event \\(Doctrine\\\\ORM\\\\Event\\\\LifecycleEventArgs\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Doctrine\\\\ORM\\\\Event\\\\LifecycleEventArgs\\>\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneEntitySubscriberTest\\:\\:\\$object \\(Sulu\\\\Bundle\\\\RouteBundle\\\\Model\\\\RouteInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RouteBundle\\\\Model\\\\RouteInterface\\>\\.$#"
-			count: 1
-			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\GoneSubscriber\\\\GoneEntitySubscriberTest\\:\\:\\$redirectRouteManager \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManager\\>\\.$#"
 			count: 1
 			path: Tests/Unit/GoneSubscriber/GoneEntitySubscriberTest.php
 
@@ -681,31 +536,6 @@ parameters:
 			path: Tests/Unit/Import/Converter/ConverterTest.php
 
 		-
-			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:willReturn\\(\\)\\.$#"
-			count: 2
-			path: Tests/Unit/Import/FileImportTest.php
-
-		-
-			message: "#^Cannot call method shouldBeCalled\\(\\) on void\\.$#"
-			count: 4
-			path: Tests/Unit/Import/FileImportTest.php
-
-		-
-			message: "#^Cannot call method shouldNotBeCalled\\(\\) on void\\.$#"
-			count: 1
-			path: Tests/Unit/Import/FileImportTest.php
-
-		-
-			message: "#^Cannot call method willReturn\\(\\) on array\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderItem\\>\\.$#"
-			count: 3
-			path: Tests/Unit/Import/FileImportTest.php
-
-		-
-			message: "#^Cannot call method willReturn\\(\\) on bool\\.$#"
-			count: 7
-			path: Tests/Unit/Import/FileImportTest.php
-
-		-
 			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\FileImportTest\\:\\:testImport\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: Tests/Unit/Import/FileImportTest.php
@@ -723,41 +553,6 @@ parameters:
 		-
 			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\FileImportTest\\:\\:testImportNoSupportedConverter\\(\\) has no return type specified\\.$#"
 			count: 1
-			path: Tests/Unit/Import/FileImportTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$entity of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Writer\\\\WriterInterface\\:\\:write\\(\\) expects Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface, Prophecy\\\\Argument\\\\Token\\\\AnyValueToken given\\.$#"
-			count: 1
-			path: Tests/Unit/Import/FileImportTest.php
-
-		-
-			message: "#^Parameter \\#1 \\$entity of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Writer\\\\WriterInterface\\:\\:write\\(\\) expects Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface, Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\> given\\.$#"
-			count: 2
-			path: Tests/Unit/Import/FileImportTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\FileImportTest\\:\\:\\$converter \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Converter\\\\ConverterInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Converter\\\\ConverterInterface\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Import/FileImportTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\FileImportTest\\:\\:\\$reader \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Reader\\\\ReaderInterface\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Import/FileImportTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\FileImportTest\\:\\:\\$writer \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Writer\\\\WriterInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Writer\\\\WriterInterface\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Import/FileImportTest.php
-
-		-
-			message: "#^Result of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Writer\\\\WriterInterface\\:\\:finalize\\(\\) \\(void\\) is used\\.$#"
-			count: 2
-			path: Tests/Unit/Import/FileImportTest.php
-
-		-
-			message: "#^Result of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Import\\\\Writer\\\\WriterInterface\\:\\:write\\(\\) \\(void\\) is used\\.$#"
-			count: 3
 			path: Tests/Unit/Import/FileImportTest.php
 
 		-
@@ -806,31 +601,6 @@ parameters:
 			path: Tests/Unit/Import/Reader/ReaderFacadeTest.php
 
 		-
-			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:shouldBeCalled\\(\\)\\.$#"
-			count: 11
-			path: Tests/Unit/Import/Writer/WriterTest.php
-
-		-
-			message: "#^Call to an undefined method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\:\\:shouldNotBeCalled\\(\\)\\.$#"
-			count: 3
-			path: Tests/Unit/Import/Writer/WriterTest.php
-
-		-
-			message: "#^Cannot call method shouldBeCalled\\(\\) on void\\.$#"
-			count: 1
-			path: Tests/Unit/Import/Writer/WriterTest.php
-
-		-
-			message: "#^Cannot call method shouldBeCalledTimes\\(\\) on void\\.$#"
-			count: 1
-			path: Tests/Unit/Import/Writer/WriterTest.php
-
-		-
-			message: "#^Cannot call method shouldNotBeCalled\\(\\) on void\\.$#"
-			count: 1
-			path: Tests/Unit/Import/Writer/WriterTest.php
-
-		-
 			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:testFinalize\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: Tests/Unit/Import/Writer/WriterTest.php
@@ -871,41 +641,6 @@ parameters:
 			path: Tests/Unit/Import/Writer/WriterTest.php
 
 		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:\\$entityManager \\(Doctrine\\\\ORM\\\\EntityManagerInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Doctrine\\\\ORM\\\\EntityManagerInterface\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Import/Writer/WriterTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Import\\\\Writer\\\\WriterTest\\:\\:\\$redirectRouteManager \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManagerInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Manager\\\\RedirectRouteManagerInterface\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Import/Writer/WriterTest.php
-
-		-
-			message: "#^Result of method Doctrine\\\\Persistence\\\\ObjectManager\\:\\:flush\\(\\) \\(void\\) is used\\.$#"
-			count: 3
-			path: Tests/Unit/Import/Writer/WriterTest.php
-
-		-
-			message: "#^Call to an undefined method object\\:\\:willReturn\\(\\)\\.$#"
-			count: 3
-			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
-
-		-
-			message: "#^Cannot call method shouldBeCalled\\(\\) on void\\.$#"
-			count: 4
-			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
-
-		-
-			message: "#^Cannot call method shouldNotBeCalled\\(\\) on void\\.$#"
-			count: 1
-			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
-
-		-
-			message: "#^Cannot call method willReturn\\(\\) on Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\|null\\.$#"
-			count: 5
-			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
-
-		-
 			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Manager\\\\RedirectRouteManagerTest\\:\\:testDelete\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
@@ -927,21 +662,6 @@ parameters:
 
 		-
 			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Manager\\\\RedirectRouteManagerTest\\:\\:testSaveSameEntity\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
-
-		-
-			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Tests\\\\Unit\\\\Manager\\\\RedirectRouteManagerTest\\:\\:\\$repository \\(Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface\\) does not accept Prophecy\\\\Prophecy\\\\ObjectProphecy\\<Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface\\>\\.$#"
-			count: 1
-			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
-
-		-
-			message: "#^Result of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface\\:\\:persist\\(\\) \\(void\\) is used\\.$#"
-			count: 4
-			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
-
-		-
-			message: "#^Result of method Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteRepositoryInterface\\:\\:remove\\(\\) \\(void\\) is used\\.$#"
 			count: 1
 			path: Tests/Unit/Manager/RedirectRouteManagerTest.php
 

@@ -21,12 +21,14 @@ interface ConverterInterface
     /**
      * Convert given raw-item to redirect-route.
      *
+     * @param array<string, mixed> $item
+     *
      * @return RedirectRouteInterface
      */
     public function convert(array $item);
 
     /**
-     * Returns true if the item is supported.
+     * @param array<string, mixed> $item
      *
      * @return bool
      */

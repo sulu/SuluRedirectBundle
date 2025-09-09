@@ -14,6 +14,7 @@ namespace Sulu\Bundle\RedirectBundle\Controller;
 use Sulu\Bundle\RedirectBundle\Admin\RedirectAdmin;
 use Sulu\Bundle\RedirectBundle\Import\Converter\ConverterNotFoundException;
 use Sulu\Bundle\RedirectBundle\Import\FileImportInterface;
+use Sulu\Bundle\RedirectBundle\Import\ImportException;
 use Sulu\Bundle\RedirectBundle\Import\Item;
 use Sulu\Bundle\RedirectBundle\Import\Reader\ReaderNotFoundException;
 use Sulu\Component\Security\SecuredControllerInterface;
@@ -47,17 +48,11 @@ class RedirectRouteImportController implements SecuredControllerInterface
         $this->importPath = $importPath;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSecurityContext(): string
     {
         return RedirectAdmin::SECURITY_CONTEXT;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getLocale(Request $request)
     {
         return $request->get('locale', null);
@@ -94,7 +89,15 @@ class RedirectRouteImportController implements SecuredControllerInterface
     /**
      * Import given file and returns serializable response.
      *
-     * @return array
+     * @return array{
+     *     fileName: string,
+     *     total: int,
+     *     exceptions: array<array{
+     *         exception: null|ImportException,
+     *         lineNumber: int,
+     *         lineContent: string,
+     *     }>,
+     * }
      */
     private function importFile(File $file)
     {

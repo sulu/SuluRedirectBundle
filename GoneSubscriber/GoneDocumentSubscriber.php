@@ -25,6 +25,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * This gone subscriber listens for removed pages.
+ *
+ * @internal this is a internal listener which should not be used directly
  */
 class GoneDocumentSubscriber implements EventSubscriberInterface
 {
@@ -77,9 +79,6 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
         $this->environment = $environment;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function getSubscribedEvents()
     {
         return [
@@ -113,7 +112,7 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     protected function getUrls(BasePageDocument $document)
     {
@@ -130,11 +129,11 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
         $localizedUrls = $this->documentInspector->getLocalizedUrlsForPage($document);
 
         foreach ($webspace->getAllLocalizations() as $localization) {
-            if (!array_key_exists($localization->getLocale(), $localizedUrls)) {
+            if (!\array_key_exists($localization->getLocale(), $localizedUrls)) {
                 continue;
             }
 
-            $urls = array_merge(
+            $urls = \array_merge(
                 $this->webspaceManager->findUrlsByResourceLocator(
                     $localizedUrls[$localization->getLocale()],
                     $this->environment,
@@ -143,7 +142,7 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
                 $urls
             );
 
-            $urls = array_merge(
+            $urls = \array_merge(
                 $this->getHistoryUrls(
                     $resourceLocatorStrategy,
                     $document->getUuid(),
@@ -155,10 +154,10 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
         }
 
         foreach ($urls as &$url) {
-            $url = parse_url($url, PHP_URL_PATH);
+            $url = \parse_url($url, \PHP_URL_PATH);
         }
 
-        return array_unique($urls);
+        return \array_unique($urls);
     }
 
     /**
@@ -166,7 +165,7 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
      * @param string $webspaceKey
      * @param string $locale
      *
-     * @return array
+     * @return string[]
      */
     protected function getHistoryUrls(
         ResourceLocatorStrategyInterface $resourceLocatorStrategy,
@@ -176,7 +175,7 @@ class GoneDocumentSubscriber implements EventSubscriberInterface
     ) {
         $historyUrls = [];
         foreach ($resourceLocatorStrategy->loadHistoryByContentUuid($uuid, $webspaceKey, $locale) as $history) {
-            $historyUrls = array_merge(
+            $historyUrls = \array_merge(
                 $this->webspaceManager->findUrlsByResourceLocator(
                     $history->getResourceLocator(),
                     $this->environment,

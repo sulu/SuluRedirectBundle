@@ -134,9 +134,6 @@ class RedirectAdmin extends Admin
         );
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getSecurityContexts()
     {
         return [

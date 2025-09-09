@@ -20,24 +20,21 @@ use Symfony\Component\Config\Loader\LoaderInterface;
  */
 class Kernel extends SuluTestKernel
 {
-    /**
-     * {@inheritdoc}
-     */
     public function registerBundles(): iterable
     {
-        return array_merge(parent::registerBundles(), [new SuluRedirectBundle()]);
+        return \array_merge(parent::registerBundles(), [new SuluRedirectBundle()]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         parent::registerContainerConfiguration($loader);
 
         $loader->load(__DIR__ . '/config/config_' . $this->getContext() . '.yml');
     }
 
+    /**
+     * @return array<string, mixed>
+     */
     protected function getKernelParameters(): array
     {
         $parameters = parent::getKernelParameters();

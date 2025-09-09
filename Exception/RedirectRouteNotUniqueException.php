@@ -34,7 +34,7 @@ class RedirectRouteNotUniqueException extends \Exception implements TranslationE
      */
     public function __construct($source, $sourceHost = null)
     {
-        parent::__construct(sprintf('The source "%s" with sourceHost "%s" is already in use.', $source, $sourceHost));
+        parent::__construct(\sprintf('The source "%s" with sourceHost "%s" is already in use.', $source, $sourceHost));
 
         $this->source = $source;
     }

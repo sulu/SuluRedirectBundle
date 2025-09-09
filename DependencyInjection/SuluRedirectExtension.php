@@ -28,9 +28,6 @@ class SuluRedirectExtension extends Extension implements PrependExtensionInterfa
 {
     use PersistenceExtensionTrait;
 
-    /**
-     * {@inheritdoc}
-     */
     public function prepend(ContainerBuilder $container): void
     {
         if ($container->hasExtension('jms_serializer')) {
@@ -91,9 +88,6 @@ class SuluRedirectExtension extends Extension implements PrependExtensionInterfa
         }
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container): void
     {
         $configuration = new Configuration();

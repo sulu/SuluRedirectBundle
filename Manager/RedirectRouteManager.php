@@ -32,9 +32,6 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
         $this->redirectRouteRepository = $redirectRouteRepository;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function saveByData($data)
     {
         $source = $data['source'];
@@ -57,7 +54,7 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
         // update data
         $redirectRoute->setSource($data['source']);
         $redirectRoute->setSourceHost($data['sourceHost']);
-        $redirectRoute->setTarget($data['target']);
+        $redirectRoute->setTarget((string) $data['target']);
         $redirectRoute->setStatusCode($data['statusCode']);
 
         if (410 === $redirectRoute->getStatusCode()) {
@@ -65,9 +62,9 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
         }
 
         if (
-            $otherRoute &&
-            $otherRoute->getId() !== $redirectRoute->getId() &&
-            $otherRoute->getSourceHost() === $redirectRoute->getSourceHost()
+            $otherRoute
+            && $otherRoute->getId() !== $redirectRoute->getId()
+            && $otherRoute->getSourceHost() === $redirectRoute->getSourceHost()
         ) {
             throw new RedirectRouteNotUniqueException($source, $sourceHost);
         }
@@ -77,9 +74,6 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
         return $redirectRoute;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function save(RedirectRouteInterface $redirectRoute)
     {
         $otherRoute = $this->redirectRouteRepository->findBySource($redirectRoute->getSource(), $redirectRoute->getSourceHost());
@@ -89,9 +83,9 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
         }
 
         if (
-            $otherRoute &&
-            $otherRoute->getId() !== $redirectRoute->getId() &&
-            $otherRoute->getSourceHost() === $redirectRoute->getSourceHost()
+            $otherRoute
+            && $otherRoute->getId() !== $redirectRoute->getId()
+            && $otherRoute->getSourceHost() === $redirectRoute->getSourceHost()
         ) {
             throw new RedirectRouteNotUniqueException($redirectRoute->getSource(), $redirectRoute->getSourceHost());
         }
@@ -105,9 +99,6 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
         return $redirectRoute;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function delete(RedirectRouteInterface $redirectRoute): void
     {
         $this->redirectRouteRepository->remove($redirectRoute);
