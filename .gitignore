@@ -26,3 +26,4 @@ Tests/Application/*.local
 # php-cs-fixer
 .php_cs.cache
 php-cs-fixer
+/.php-cs-fixer.cache

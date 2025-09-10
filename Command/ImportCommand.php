@@ -51,7 +51,7 @@ EOT
         $progressBar = new ProgressBar($output);
         $progressBar->setFormat(' %current% [%bar%] %elapsed:6s% %memory:6s%');
 
-        $output->writeln(sprintf('Import of file "%s" will be started:', basename($input->getArgument('fileName'))));
+        $output->writeln(\sprintf('Import of file "%s" will be started:', \basename($input->getArgument('fileName'))));
 
         $errors = [];
         foreach ($this->import->import($input->getArgument('fileName')) as $item) {
@@ -64,7 +64,7 @@ EOT
 
         $progressBar->finish();
 
-        if (0 === count($errors)) {
+        if (0 === \count($errors)) {
             return 0;
         }
 
@@ -76,7 +76,7 @@ EOT
             $exception = $error->getException();
 
             $output->writeln(
-                sprintf(
+                \sprintf(
                     ' * Line %s: "%s"',
                     $error->getLineNumber(),
                     $exception ? $exception->getMessage() : ''

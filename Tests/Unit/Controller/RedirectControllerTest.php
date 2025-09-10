@@ -72,7 +72,7 @@ class RedirectControllerTest extends TestCase
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(
-            $target . '?' . http_build_query($query),
+            $target . '?' . \http_build_query($query),
             $response->getTargetUrl()
         );
         $this->assertEquals($statusCode, $response->getStatusCode());
@@ -115,7 +115,7 @@ class RedirectControllerTest extends TestCase
 
         $this->assertInstanceOf(RedirectResponse::class, $response);
         $this->assertEquals(
-            $target . '&' . http_build_query($query),
+            $target . '&' . \http_build_query($query),
             $response->getTargetUrl()
         );
         $this->assertEquals($statusCode, $response->getStatusCode());

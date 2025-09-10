@@ -58,7 +58,7 @@ class WriterTest extends TestCase
             $this->prophesize(RedirectRouteInterface::class),
         ];
 
-        for ($i = 0; $i < count($entities); ++$i) {
+        for ($i = 0; $i < \count($entities); ++$i) {
             $entities[$i]->getSource()->willReturn('/source-' . $i);
             $entities[$i]->getTarget()->willReturn('/target-' . $i);
         }
@@ -84,7 +84,7 @@ class WriterTest extends TestCase
             $this->prophesize(RedirectRouteInterface::class),
         ];
 
-        for ($i = 0; $i < count($entities); ++$i) {
+        for ($i = 0; $i < \count($entities); ++$i) {
             $entities[$i]->getSource()->willReturn('/source-' . $i);
             $entities[$i]->getTarget()->willReturn('/target-' . $i);
         }
@@ -109,7 +109,7 @@ class WriterTest extends TestCase
             $this->prophesize(RedirectRouteInterface::class),
         ];
 
-        for ($i = 0; $i < count($entities); ++$i) {
+        for ($i = 0; $i < \count($entities); ++$i) {
             $entities[$i]->getSource()->willReturn('/source');
             $entities[$i]->getTarget()->willReturn('/target');
         }

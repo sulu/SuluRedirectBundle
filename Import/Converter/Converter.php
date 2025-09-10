@@ -55,7 +55,7 @@ class Converter implements ConverterInterface
         }
 
         foreach ([self::SOURCE, self::TARGET, self::STATUS_CODE, self::ENABLED, self::SOURCE_HOST] as $field) {
-            if (!array_key_exists($field, $item) || null === $item[$field]) {
+            if (!\array_key_exists($field, $item) || null === $item[$field]) {
                 continue;
             }
 
@@ -67,8 +67,8 @@ class Converter implements ConverterInterface
 
     public function supports(array $item)
     {
-        $keys = array_keys($item);
-        if (!in_array(self::SOURCE, $keys) || !in_array(self::TARGET, $keys)) {
+        $keys = \array_keys($item);
+        if (!\in_array(self::SOURCE, $keys) || !\in_array(self::TARGET, $keys)) {
             return false;
         }
 

@@ -26,16 +26,6 @@ parameters:
 			path: Entity/RedirectRouteRepository.php
 
 		-
-			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Entity\\\\RedirectRouteRepository\\:\\:findBySource\\(\\) should return Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\|null but returns mixed\\.$#"
-			count: 1
-			path: Entity/RedirectRouteRepository.php
-
-		-
-			message: "#^Method Sulu\\\\Bundle\\\\RedirectBundle\\\\Entity\\\\RedirectRouteRepository\\:\\:findEnabledBySource\\(\\) should return Sulu\\\\Bundle\\\\RedirectBundle\\\\Model\\\\RedirectRouteInterface\\|null but returns mixed\\.$#"
-			count: 1
-			path: Entity/RedirectRouteRepository.php
-
-		-
 			message: "#^Property Sulu\\\\Bundle\\\\RedirectBundle\\\\Exception\\\\RedirectRouteNotUniqueException\\:\\:\\$sourceHost is never written, only read\\.$#"
 			count: 1
 			path: Exception/RedirectRouteNotUniqueException.php

@@ -22,7 +22,7 @@ class Kernel extends SuluTestKernel
 {
     public function registerBundles(): iterable
     {
-        return array_merge(parent::registerBundles(), [new SuluRedirectBundle()]);
+        return \array_merge(parent::registerBundles(), [new SuluRedirectBundle()]);
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader): void

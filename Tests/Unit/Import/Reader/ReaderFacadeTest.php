@@ -43,7 +43,7 @@ class ReaderFacadeTest extends TestCase
         $converters[1]->supports($this->fileName)->willReturn(true);
 
         $readerFacade = new ReaderFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
@@ -65,7 +65,7 @@ class ReaderFacadeTest extends TestCase
         $converters[1]->supports($this->fileName)->willReturn(false);
 
         $readerFacade = new ReaderFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
@@ -100,7 +100,7 @@ class ReaderFacadeTest extends TestCase
         $converters[1]->read($this->fileName)->willReturn($data)->shouldBeCalled();
 
         $readerFacade = new ReaderFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
@@ -126,7 +126,7 @@ class ReaderFacadeTest extends TestCase
         $converters[1]->read($data)->shouldNotBeCalled();
 
         $readerFacade = new ReaderFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },

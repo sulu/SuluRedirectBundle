@@ -48,7 +48,7 @@ class RedirectRouteProvider implements RouteProviderInterface
     {
         // server encodes the url and symfony does not encode it
         // symfony decodes this data here https://github.com/symfony/symfony/blob/v5.2.3/src/Symfony/Component/Routing/Matcher/UrlMatcher.php#L88
-        $pathInfo = rawurldecode($request->getPathInfo());
+        $pathInfo = \rawurldecode($request->getPathInfo());
         $path = \str_replace('.' . $request->getRequestFormat(), '', $pathInfo);
         $host = $request->getHost();
 
@@ -66,7 +66,7 @@ class RedirectRouteProvider implements RouteProviderInterface
             [],
             $this->defaultOptions
         );
-        $routeCollection->add(sprintf('sulu_redirect.%s', $redirectRoute->getId()), $route);
+        $routeCollection->add(\sprintf('sulu_redirect.%s', $redirectRoute->getId()), $route);
 
         return $routeCollection;
     }
