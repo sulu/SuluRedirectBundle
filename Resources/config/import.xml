@@ -5,7 +5,7 @@
     <services>
         <service id="sulu_redirect.import.aggregate_reader"
                  class="Sulu\Bundle\RedirectBundle\Import\Reader\ReaderFacade">
-            <argument type="collection"/>
+            <argument type="tagged_iterator" tag="sulu_redirect.import.reader"/>
         </service>
 
         <service id="sulu_redirect.import.csv_reader" class="Sulu\Bundle\RedirectBundle\Import\Reader\CsvReader">
@@ -14,7 +14,7 @@
 
         <service id="sulu_redirect.import.aggregate_converter"
                  class="Sulu\Bundle\RedirectBundle\Import\Converter\ConverterFacade">
-            <argument type="collection"/>
+            <argument type="tagged_iterator" tag="sulu_redirect.import.converter"/>
         </service>
 
         <service id="sulu_redirect.import.converter" class="Sulu\Bundle\RedirectBundle\Import\Converter\Converter">

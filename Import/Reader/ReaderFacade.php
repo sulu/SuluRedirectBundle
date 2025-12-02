@@ -17,16 +17,10 @@ namespace Sulu\Bundle\RedirectBundle\Import\Reader;
 class ReaderFacade implements ReaderInterface
 {
     /**
-     * @var ReaderInterface[]
+     * @param iterable<ReaderInterface> $readers
      */
-    private $readers;
-
-    /**
-     * @param ReaderInterface[] $readers
-     */
-    public function __construct(array $readers = [])
+    public function __construct(private iterable $readers = [])
     {
-        $this->readers = $readers;
     }
 
     public function read($fileName)
