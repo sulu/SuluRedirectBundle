@@ -76,10 +76,13 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
     protected $redirectRouteRepository;
 
     /**
-     * @var string
+     * @var class-string
      */
     protected $redirectRouteEntityName;
 
+    /**
+     * @param class-string $redirectRouteEntityName
+     */
     public function __construct(
         ViewHandlerInterface $viewHandler,
         DoctrineRestHelper $restHelper,
