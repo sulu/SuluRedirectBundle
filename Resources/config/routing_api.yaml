@@ -1,0 +1,48 @@
+sulu_redirect.get_redirect-routes:
+    path: '/redirect-routes.{_format}'
+    options: { expose: true }
+    methods: GET
+    controller: 'sulu_redirect.redirect_route_controller::cgetAction'
+    format: json
+    requirements: { _format: json|csv }
+sulu_redirect.post_redirect-route:
+    path: '/redirect-routes.{_format}'
+    options: { expose: true }
+    methods: POST
+    controller: 'sulu_redirect.redirect_route_controller::postAction'
+    format: json
+    requirements: { _format: json|csv }
+sulu_redirect.get_redirect-route:
+    path: '/redirect-routes/{id}.{_format}'
+    options: { expose: true }
+    methods: GET
+    controller: 'sulu_redirect.redirect_route_controller::getAction'
+    format: json
+    requirements: { _format: json|csv }
+sulu_redirect.put_redirect-route:
+    path: '/redirect-routes/{id}.{_format}'
+    options: { expose: true }
+    methods: PUT
+    controller: 'sulu_redirect.redirect_route_controller::putAction'
+    format: json
+    requirements: { _format: json|csv }
+sulu_redirect.delete_redirect-route:
+    path: '/redirect-routes/{id}.{_format}'
+    options: { expose: true }
+    methods: DELETE
+    controller: 'sulu_redirect.redirect_route_controller::deleteAction'
+    format: json
+    requirements: { _format: json|csv }
+sulu_redirect.delete_redirect-routes:
+    path: '/redirect-routes.{_format}'
+    options: { expose: true }
+    methods: DELETE
+    controller: 'sulu_redirect.redirect_route_controller::cdeleteAction'
+    format: json
+    requirements: { _format: json|csv }
+sulu_redirect.post_redirect-route_trigger:
+    path: '/redirect-routes/{id}.{_format}'
+    methods: POST
+    controller: 'sulu_redirect.redirect_route_controller::postTriggerAction'
+    format: json
+    requirements: { _format: json|csv }

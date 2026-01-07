@@ -1,5 +1,29 @@
 # UPGRADE
 
+## 2.2.0
+
+## Deprecate usage of fos rest routing
+
+We are no longer considering the [fos rest routing](https://github.com/handcraftedinthealps/RestRoutingBundle) as a best practice.
+All bundles should use the Symfony routing system instead.
+
+Inside your `config/routes/sulu_redirect_admin.yaml` you can remove the fos rest routing configuration.
+First, remove all instances of `type: rest` and also replace `.yml` with `.yaml`:
+
+```diff
+# config/routes/sulu_redirect_admin.yaml`
+ sulu_redirect_api:
+-    type: rest
+-    resource: "@SuluRedirectBundle/Resources/config/routing_api.yml"
++    resource: "@SuluRedirectBundle/Resources/config/routing_api.yaml"
+     prefix: /admin/api
+ 
+ sulu_redirect:
+-    resource: "@SuluRedirectBundle/Resources/config/routing.yml"
++    resource: "@SuluRedirectBundle/Resources/config/routing.yaml"
+     prefix: /admin/redirects
+```
+
 ## 2.0.0
 
 ### Permission changed

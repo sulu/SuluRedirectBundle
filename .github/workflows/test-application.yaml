@@ -15,29 +15,8 @@ jobs:
             fail-fast: false
             matrix:
                 include:
-                    - php-version: '7.2'
+                    - php-version: '8.2'
                       dependency-versions: 'lowest'
-                      php-extensions: 'mysql, gd'
-                      tools: 'composer:v2'
-                      env:
-                          SYMFONY_DEPRECATIONS_HELPER: disabled
-
-                    - php-version: '7.4'
-                      dependency-versions: 'highest'
-                      php-extensions: 'mysql, imagick'
-                      tools: 'composer:v2'
-                      env:
-                          SYMFONY_DEPRECATIONS_HELPER: weak
-
-                    - php-version: '8.0'
-                      dependency-versions: 'highest'
-                      php-extensions: 'mysql, imagick'
-                      tools: 'composer:v2'
-                      env:
-                          SYMFONY_DEPRECATIONS_HELPER: weak
-
-                    - php-version: '8.1'
-                      dependency-versions: 'highest'
                       php-extensions: 'mysql, imagick'
                       tools: 'composer:v2'
                       env:
@@ -58,6 +37,14 @@ jobs:
                           SYMFONY_DEPRECATIONS_HELPER: weak
 
                     - php-version: '8.4'
+                      dependency-versions: 'highest'
+                      php-extensions: 'mysql, imagick'
+                      tools: 'composer:v2'
+                      composer-options: '--ignore-platform-reqs'
+                      env:
+                          SYMFONY_DEPRECATIONS_HELPER: weak
+
+                    - php-version: '8.5'
                       dependency-versions: 'highest'
                       php-extensions: 'mysql, imagick'
                       tools: 'composer:v2'

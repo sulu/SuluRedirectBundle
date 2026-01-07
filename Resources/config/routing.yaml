@@ -1,0 +1,5 @@
+sulu_redirect.import:
+    path: /import
+    controller: sulu_redirect.controller.import::postAction
+    options:
+        expose: true
