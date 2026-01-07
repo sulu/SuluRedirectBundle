@@ -44,6 +44,14 @@ jobs:
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: weak
 
+                    - php-version: '8.5'
+                      dependency-versions: 'highest'
+                      php-extensions: 'mysql, imagick'
+                      tools: 'composer:v2'
+                      composer-options: '--ignore-platform-reqs'
+                      env:
+                          SYMFONY_DEPRECATIONS_HELPER: weak
+
         services:
             mysql:
                 image: 'mysql:5.7'
