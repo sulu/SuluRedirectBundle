@@ -35,7 +35,7 @@ class ConverterFacadeTest extends TestCase
         $converters[1]->supports($data)->willReturn(true);
 
         $converterFacade = new ConverterFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
@@ -59,7 +59,7 @@ class ConverterFacadeTest extends TestCase
         $converters[1]->supports($data)->willReturn(false);
 
         $converterFacade = new ConverterFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
@@ -96,7 +96,7 @@ class ConverterFacadeTest extends TestCase
             ->shouldBeCalled();
 
         $converterFacade = new ConverterFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },
@@ -122,7 +122,7 @@ class ConverterFacadeTest extends TestCase
         $converters[1]->convert($data)->shouldNotBeCalled();
 
         $converterFacade = new ConverterFacade(
-            array_map(
+            \array_map(
                 function(ObjectProphecy $converter) {
                     return $converter->reveal();
                 },

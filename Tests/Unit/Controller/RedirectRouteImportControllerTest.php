@@ -64,7 +64,7 @@ class RedirectRouteImportControllerTest extends TestCase
         $this->assertInstanceOf(JsonResponse::class, $response);
         $this->assertEquals(200, $response->getStatusCode());
 
-        $data = json_decode($response->getContent(), true);
+        $data = \json_decode($response->getContent(), true);
 
         $this->assertEquals(3, $data['total']);
         $this->assertCount(1, $data['exceptions']);
