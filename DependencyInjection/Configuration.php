@@ -24,7 +24,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('sulu_redirect');
-        $treeBuilder->getRootNode() // @phpstan-ignore-line
+        $treeBuilder->getRootNode()
             ->children()
                 ->arrayNode('gone_on_remove')
                     ->info('When enabled, this feature automatically creates redirects with http status code 410 when a document with route or an route entity is removed.')

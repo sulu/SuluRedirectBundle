@@ -30,9 +30,7 @@ class RedirectRouteProviderTest extends WebsiteTestCase
         static::purgeDatabase();
     }
 
-    /**
-     * @dataProvider routeDataProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('routeDataProvider')]
     public function testRoute(
         string $requestUrl,
         string $source,
@@ -66,7 +64,7 @@ class RedirectRouteProviderTest extends WebsiteTestCase
         }
     }
 
-    public function routeDataProvider(): \Generator
+    public static function routeDataProvider(): \Generator
     {
         yield [
             '/test-301',

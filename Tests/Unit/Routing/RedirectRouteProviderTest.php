@@ -75,7 +75,8 @@ class RedirectRouteProviderTest extends TestCase
         $host = null;
         $uuid = '123-123-123';
 
-        $request = Request::create('/käße');
+        // Browsers URL-encode non-ASCII characters: /käße -> /k%C3%A4%C3%9Fe
+        $request = Request::create('/k%C3%A4%C3%9Fe');
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getId()->willReturn($uuid);

@@ -71,7 +71,7 @@ class RedirectRouteProvider implements RouteProviderInterface
         return $routeCollection;
     }
 
-    public function getRouteByName($name): Route
+    public function getRouteByName(string $name): Route
     {
         throw new RouteNotFoundException('RedirectRouteProvider does not support getRouteByName.');
     }

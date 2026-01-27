@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of Sulu.
+ *
+ * (c) Sulu GmbH
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
+
 namespace Sulu\Bundle\RedirectBundle\DependencyInjection;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -21,7 +30,7 @@ class RouteDefaultOptionsCompilerPass implements CompilerPassInterface
             return;
         }
 
-        if (!$container->hasDefinition('sulu_custom_urls.routing.provider')) {
+        if (!$container->hasDefinition($this->targetService)) {
             return;
         }
 

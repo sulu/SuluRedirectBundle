@@ -95,9 +95,9 @@ class GoneEntitySubscriberTest extends TestCase
 
         $entityManager = $this->prophesize(EntityManagerInterface::class);
         $entityManager->getRepository(RedirectRoute::class)->willReturn($redirectRepository->reveal());
-        $entityManager->persist(Argument::that(function (RedirectRoute $redirectRoute) {
-            return $redirectRoute->getSource() === '/test-page'
-                && $redirectRoute->getStatusCode() === 410
+        $entityManager->persist(Argument::that(function(RedirectRoute $redirectRoute) {
+            return '/test-page' === $redirectRoute->getSource()
+                && 410 === $redirectRoute->getStatusCode()
                 && $redirectRoute->isEnabled();
         }))->shouldBeCalledTimes(1);
         $entityManager->flush()->shouldBeCalledTimes(1);

@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Functional\Import;
+namespace Sulu\Bundle\RedirectBundle\Tests\Functional\Import;
 
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 use Sulu\Bundle\TestBundle\Testing\SuluTestCase;

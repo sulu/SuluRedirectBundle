@@ -35,11 +35,6 @@ class GoneEntitySubscriber implements ResetInterface
     private array $removedContentRichEntityIds = [];
 
     /**
-     * @var array<class-string, string|null>
-     */
-    private array $resourceFieldNameCache = [];
-
-    /**
      * Flag to prevent infinite recursion when calling flush() in postFlush.
      */
     private bool $isProcessing = false;
@@ -102,7 +97,6 @@ class GoneEntitySubscriber implements ResetInterface
     public function reset(): void
     {
         $this->removedContentRichEntityIds = [];
-        $this->resourceFieldNameCache = [];
         $this->isProcessing = false;
     }
 

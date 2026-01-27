@@ -16,7 +16,7 @@ use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 
 class RedirectRouteTest extends TestCase
 {
-    public function testId()
+    public function testId(): void
     {
         $route = new RedirectRoute();
 
@@ -24,16 +24,16 @@ class RedirectRouteTest extends TestCase
         $this->assertSame('123-123-123-123', $route->getId());
     }
 
-    public function testEnabled()
+    public function testEnabled(): void
     {
         $route = new RedirectRoute();
 
-        $this->assertSame(true, $route->isEnabled());
+        $this->assertTrue($route->isEnabled());
         $this->assertSame($route, $route->setEnabled(false));
-        $this->assertSame(false, $route->isEnabled());
+        $this->assertFalse($route->isEnabled());
     }
 
-    public function testStatusCode()
+    public function testStatusCode(): void
     {
         $route = new RedirectRoute();
 
@@ -42,7 +42,7 @@ class RedirectRouteTest extends TestCase
         $this->assertSame(410, $route->getStatusCode());
     }
 
-    public function testSource()
+    public function testSource(): void
     {
         $route = new RedirectRoute();
 
@@ -56,12 +56,12 @@ class RedirectRouteTest extends TestCase
         $this->assertSame('/uppercase-source', $route->getSource());
     }
 
-    public function testSourceHost()
+    public function testSourceHost(): void
     {
         $route = new RedirectRoute();
 
         $this->assertSame($route, $route->setSourceHost(null));
-        $this->assertSame(null, $route->getSourceHost());
+        $this->assertNull($route->getSourceHost());
 
         $this->assertSame($route, $route->setSourceHost('sulu.io'));
         $this->assertSame('sulu.io', $route->getSourceHost());
@@ -70,7 +70,7 @@ class RedirectRouteTest extends TestCase
         $this->assertSame('sulu.io', $route->getSourceHost());
     }
 
-    public function testTarget()
+    public function testTarget(): void
     {
         $route = new RedirectRoute();
 
