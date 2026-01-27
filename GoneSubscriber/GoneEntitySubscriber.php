@@ -13,13 +13,14 @@ declare(strict_types=1);
 
 namespace Sulu\Bundle\RedirectBundle\GoneSubscriber;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Doctrine\Persistence\Event\OnClearEventArgs;
-use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Content\Domain\Model\ContentRichEntityInterface;
 use Sulu\Content\Domain\Model\RoutableInterface;
 use Sulu\Route\Domain\Repository\RouteRepositoryInterface;
+use Symfony\Component\Uid\Uuid;
 use Symfony\Contracts\Service\ResetInterface;
 
 /**
@@ -33,11 +34,6 @@ class GoneEntitySubscriber implements ResetInterface
      * @var array<array{resourceKey: string, resourceId: string}>
      */
     private array $removedContentRichEntityIds = [];
-
-    /**
-     * Flag to prevent infinite recursion when calling flush() in postFlush.
-     */
-    private bool $isProcessing = false;
 
     public function __construct(
         private RouteRepositoryInterface $routeRepository
@@ -70,26 +66,21 @@ class GoneEntitySubscriber implements ResetInterface
 
     public function postFlush(PostFlushEventArgs $args): void
     {
-        if ($this->isProcessing || 0 === \count($this->removedContentRichEntityIds)) {
+        if (0 === \count($this->removedContentRichEntityIds)) {
             return;
         }
 
-        $this->isProcessing = true;
-
         try {
-            $objectManager = $args->getObjectManager();
+            $connection = $args->getObjectManager()->getConnection();
             $groupedByResourceKey = [];
             foreach ($this->removedContentRichEntityIds as $entityInfo) {
                 $groupedByResourceKey[$entityInfo['resourceKey']][] = $entityInfo['resourceId'];
             }
 
             foreach ($groupedByResourceKey as $resourceKey => $resourceIds) {
-                $this->createRedirectsForRoutes($objectManager, $resourceKey, $resourceIds);
+                $this->createRedirectsForRoutes($connection, $resourceKey, $resourceIds);
             }
-
-            $objectManager->flush();
         } finally {
-            $this->isProcessing = false;
             $this->reset();
         }
     }
@@ -97,13 +88,12 @@ class GoneEntitySubscriber implements ResetInterface
     public function reset(): void
     {
         $this->removedContentRichEntityIds = [];
-        $this->isProcessing = false;
     }
 
     /**
      * @param string[] $resourceIds
      */
-    private function createRedirectsForRoutes(\Doctrine\ORM\EntityManagerInterface $objectManager, string $resourceKey, array $resourceIds): void
+    private function createRedirectsForRoutes(Connection $connection, string $resourceKey, array $resourceIds): void
     {
         if (0 === \count($resourceIds)) {
             return;
@@ -120,22 +110,29 @@ class GoneEntitySubscriber implements ResetInterface
                     continue;
                 }
 
-                $redirectRoute = new RedirectRoute();
-                $redirectRoute->setId(\Ramsey\Uuid\Uuid::uuid4()->toString());
-                $redirectRoute->setEnabled(true);
-                $redirectRoute->setStatusCode(410);
-                $redirectRoute->setSource($route->getSlug());
-                $redirectRoute->setTarget('');
+                $source = \mb_strtolower('/' . \ltrim($route->getSlug(), '/'));
 
-                // Check for duplicate before persisting
-                $existing = $objectManager->getRepository(RedirectRoute::class)->findOneBy([
-                    'source' => $redirectRoute->getSource(),
-                    'sourceHost' => $redirectRoute->getSourceHost(),
-                ]);
+                $existing = $connection->fetchOne(
+                    'SELECT id FROM re_redirect_routes WHERE source = :source AND sourceHost IS NULL',
+                    ['source' => $source]
+                );
 
-                if (!$existing) {
-                    $objectManager->persist($redirectRoute);
+                if (false !== $existing) {
+                    continue;
                 }
+
+                $now = new \DateTimeImmutable();
+
+                $connection->insert('re_redirect_routes', [
+                    'id' => Uuid::v7()->toRfc4122(),
+                    'enabled' => true,
+                    'statusCode' => 410,
+                    'source' => $source,
+                    'sourceHost' => null,
+                    'target' => '',
+                    'created' => $now->format('Y-m-d H:i:s'),
+                    'changed' => $now->format('Y-m-d H:i:s'),
+                ]);
             }
         }
     }

@@ -13,15 +13,14 @@ declare(strict_types=1);
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Unit\GoneSubscriber;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Event\PostFlushEventArgs;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
-use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Bundle\RedirectBundle\GoneSubscriber\GoneEntitySubscriber;
 use Sulu\Page\Domain\Model\Page;
 use Sulu\Route\Domain\Model\Route;
@@ -66,7 +65,6 @@ class GoneEntitySubscriberTest extends TestCase
 
         $this->goneEntitySubscriber->preRemove($event->reveal());
 
-        // Assert that no exceptions were thrown and the entity was collected
         $this->assertTrue(true);
     }
 
@@ -90,17 +88,54 @@ class GoneEntitySubscriberTest extends TestCase
             'resourceId' => $page->getId(),
         ])->willReturn([$route1->reveal(), $route2->reveal()]);
 
-        $redirectRepository = $this->prophesize(EntityRepository::class);
-        $redirectRepository->findOneBy(Argument::any())->willReturn(null);
+        $connection = $this->prophesize(Connection::class);
+        $connection->fetchOne(
+            'SELECT id FROM re_redirect_routes WHERE source = :source AND sourceHost IS NULL',
+            ['source' => '/test-page']
+        )->willReturn(false);
+        $connection->insert('re_redirect_routes', Argument::that(function(array $data) {
+            return '/test-page' === $data['source']
+                && 410 === $data['statusCode']
+                && true === $data['enabled']
+                && '' === $data['target']
+                && null === $data['sourceHost'];
+        }))->shouldBeCalledTimes(1);
 
         $entityManager = $this->prophesize(EntityManagerInterface::class);
-        $entityManager->getRepository(RedirectRoute::class)->willReturn($redirectRepository->reveal());
-        $entityManager->persist(Argument::that(function(RedirectRoute $redirectRoute) {
-            return '/test-page' === $redirectRoute->getSource()
-                && 410 === $redirectRoute->getStatusCode()
-                && $redirectRoute->isEnabled();
-        }))->shouldBeCalledTimes(1);
-        $entityManager->flush()->shouldBeCalledTimes(1);
+        $entityManager->getConnection()->willReturn($connection->reveal());
+
+        $this->goneEntitySubscriber->preRemove($preRemoveEvent->reveal());
+
+        $postFlushEvent = $this->prophesize(PostFlushEventArgs::class);
+        $postFlushEvent->getObjectManager()->willReturn($entityManager->reveal());
+        $this->goneEntitySubscriber->postFlush($postFlushEvent->reveal());
+    }
+
+    public function testPostFlushSkipsDuplicates(): void
+    {
+        $page = new Page();
+
+        $preRemoveEvent = $this->prophesize(LifecycleEventArgs::class);
+        $preRemoveEvent->getObject()->willReturn($page);
+
+        $route = $this->prophesize(Route::class);
+        $route->getSlug()->willReturn('/existing-page');
+        $route->isHistory()->willReturn(false);
+
+        $this->routeRepository->findBy([
+            'resourceKey' => 'pages',
+            'resourceId' => $page->getId(),
+        ])->willReturn([$route->reveal()]);
+
+        $connection = $this->prophesize(Connection::class);
+        $connection->fetchOne(
+            'SELECT id FROM re_redirect_routes WHERE source = :source AND sourceHost IS NULL',
+            ['source' => '/existing-page']
+        )->willReturn('some-existing-id');
+        $connection->insert(Argument::cetera())->shouldNotBeCalled();
+
+        $entityManager = $this->prophesize(EntityManagerInterface::class);
+        $entityManager->getConnection()->willReturn($connection->reveal());
 
         $this->goneEntitySubscriber->preRemove($preRemoveEvent->reveal());
 
@@ -112,7 +147,7 @@ class GoneEntitySubscriberTest extends TestCase
     public function testPostFlushWithNoRemovedEntities(): void
     {
         $entityManager = $this->prophesize(EntityManagerInterface::class);
-        $entityManager->flush()->shouldNotBeCalled();
+        $entityManager->getConnection()->shouldNotBeCalled();
 
         $event = $this->prophesize(PostFlushEventArgs::class);
         $event->getObjectManager()->willReturn($entityManager->reveal());
@@ -133,7 +168,7 @@ class GoneEntitySubscriberTest extends TestCase
         $this->goneEntitySubscriber->reset();
 
         $entityManager = $this->prophesize(EntityManagerInterface::class);
-        $entityManager->flush()->shouldNotBeCalled();
+        $entityManager->getConnection()->shouldNotBeCalled();
 
         $postFlushEvent = $this->prophesize(PostFlushEventArgs::class);
         $postFlushEvent->getObjectManager()->willReturn($entityManager->reveal());

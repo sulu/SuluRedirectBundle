@@ -7,7 +7,7 @@
         "php": "^8.2 || ^8.3 || ^8.4 || ^8.5",
         "sulu/sulu": "^3.0 || ^3.0@alpha || ^3.0@dev",
         "handcraftedinthealps/rest-routing-bundle": "^1.0",
-        "ramsey/uuid": "^3.1 || ^4.0",
+        "symfony/uid": "^6.4 || ^7.1",
         "symfony/dependency-injection": "^6.4 || ^7.1",
         "symfony/config": "^6.4 || ^7.1",
         "symfony/console": "^6.4 || ^7.1",
@@ -34,6 +34,7 @@
         "symfony/dotenv": "^6.4 || ^7.1",
         "symfony/monolog-bundle": "^3.7",
         "symfony/framework-bundle": "^6.4 || ^7.1",
+        "cmsig/seal-memory-adapter": "^0.12",
         "phpspec/prophecy": "^1.18",
         "phpspec/prophecy-phpunit": "^2.0"
     },

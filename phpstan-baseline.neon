@@ -49,18 +49,6 @@ parameters:
 			path: Admin/RedirectAdmin.php
 
 		-
-			message: '#^Parameter \#1 \$fileName of method Sulu\\Bundle\\RedirectBundle\\Import\\FileImport\:\:import\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: Command/ImportCommand.php
-
-		-
-			message: '#^Parameter \#1 \$path of function basename expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: Command/ImportCommand.php
-
-		-
 			message: '#^Binary operation "\." between ''Unrecognized action…'' and mixed results in an error\.$#'
 			identifier: binaryOp.invalid
 			count: 1
@@ -497,48 +485,6 @@ parameters:
 			identifier: argument.type
 			count: 2
 			path: Tests/Functional/GoneSubscriber/GoneEntitySubscriberTest.php
-
-		-
-			message: '#^Property Sulu\\Bundle\\RedirectBundle\\Tests\\Functional\\GoneSubscriber\\GoneEntitySubscriberTest\:\:\$routeRepository \(Sulu\\Route\\Domain\\Repository\\RouteRepositoryInterface\) does not accept object\.$#'
-			identifier: assign.propertyType
-			count: 1
-			path: Tests/Functional/GoneSubscriber/GoneEntitySubscriberTest.php
-
-		-
-			message: '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\.$#'
-			identifier: foreach.nonIterable
-			count: 1
-			path: Tests/Functional/Import/FileImportTest.php
-
-		-
-			message: '#^Call to an undefined method object\:\:import\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: Tests/Functional/Import/FileImportTest.php
-
-		-
-			message: '#^Cannot call method getData\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: Tests/Functional/Import/FileImportTest.php
-
-		-
-			message: '#^Cannot call method getSource\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: Tests/Functional/Import/FileImportTest.php
-
-		-
-			message: '#^Method Sulu\\Bundle\\RedirectBundle\\Tests\\Functional\\Import\\FileImportTest\:\:testImport\(\) has no return type specified\.$#'
-			identifier: missingType.return
-			count: 1
-			path: Tests/Functional/Import/FileImportTest.php
-
-		-
-			message: '#^Parameter \#1 \$source of method Sulu\\Bundle\\RedirectBundle\\Model\\RedirectRouteRepositoryInterface\:\:findBySource\(\) expects string, mixed given\.$#'
-			identifier: argument.type
-			count: 1
-			path: Tests/Functional/Import/FileImportTest.php
 
 		-
 			message: '#^Method Sulu\\Bundle\\RedirectBundle\\Tests\\Functional\\Import\\Reader\\CsvReaderTest\:\:testRead\(\) has no return type specified\.$#'
@@ -1001,12 +947,6 @@ parameters:
 			identifier: argument.type
 			count: 1
 			path: Tests/phpstan/console-application.php
-
-		-
-			message: '#^Call to an undefined method object\:\:getManager\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: Tests/phpstan/object-manager.php
 
 		-
 			message: '#^Parameter \#1 \$environment of class Sulu\\Bundle\\RedirectBundle\\Tests\\Application\\Kernel constructor expects string, mixed given\.$#'

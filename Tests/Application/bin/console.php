@@ -37,6 +37,7 @@ if ($debug) {
     }
 }
 
+$suluContext = $suluContext ?? Kernel::CONTEXT_ADMIN;
 $kernel = new Kernel($env, $debug, $suluContext);
 $application = new Application($kernel);
 $application->run($input);
