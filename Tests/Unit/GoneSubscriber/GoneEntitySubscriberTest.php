@@ -77,10 +77,12 @@ class GoneEntitySubscriberTest extends TestCase
 
         $route1 = $this->prophesize(Route::class);
         $route1->getSlug()->willReturn('/test-page');
+        $route1->getLocale()->willReturn('en');
         $route1->isHistory()->willReturn(false);
 
         $route2 = $this->prophesize(Route::class);
         $route2->getSlug()->willReturn('/old-test-page');
+        $route2->getLocale()->willReturn('en');
         $route2->isHistory()->willReturn(true);
 
         $this->routeRepository->findBy([
@@ -91,10 +93,10 @@ class GoneEntitySubscriberTest extends TestCase
         $connection = $this->prophesize(Connection::class);
         $connection->fetchOne(
             'SELECT id FROM re_redirect_routes WHERE source = :source AND sourceHost IS NULL',
-            ['source' => '/test-page']
+            ['source' => '/en/test-page']
         )->willReturn(false);
         $connection->insert('re_redirect_routes', Argument::that(function(array $data) {
-            return '/test-page' === $data['source']
+            return '/en/test-page' === $data['source']
                 && 410 === $data['statusCode']
                 && true === $data['enabled']
                 && '' === $data['target']
@@ -120,6 +122,7 @@ class GoneEntitySubscriberTest extends TestCase
 
         $route = $this->prophesize(Route::class);
         $route->getSlug()->willReturn('/existing-page');
+        $route->getLocale()->willReturn('en');
         $route->isHistory()->willReturn(false);
 
         $this->routeRepository->findBy([
@@ -130,7 +133,7 @@ class GoneEntitySubscriberTest extends TestCase
         $connection = $this->prophesize(Connection::class);
         $connection->fetchOne(
             'SELECT id FROM re_redirect_routes WHERE source = :source AND sourceHost IS NULL',
-            ['source' => '/existing-page']
+            ['source' => '/en/existing-page']
         )->willReturn('some-existing-id');
         $connection->insert(Argument::cetera())->shouldNotBeCalled();
 

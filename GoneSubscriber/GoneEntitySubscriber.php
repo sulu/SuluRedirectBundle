@@ -110,7 +110,9 @@ class GoneEntitySubscriber implements ResetInterface
                     continue;
                 }
 
-                $source = \mb_strtolower('/' . \ltrim($route->getSlug(), '/'));
+                $slug = '/' . \ltrim($route->getSlug(), '/');
+                $locale = $route->getLocale();
+                $source = \mb_strtolower('/' . $locale . $slug);
 
                 $existing = $connection->fetchOne(
                     'SELECT id FROM re_redirect_routes WHERE source = :source AND sourceHost IS NULL',

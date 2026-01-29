@@ -61,7 +61,9 @@ class GoneEntitySubscriberTest extends SuluTestCase
             'resourceId' => $pageId,
         ]);
         $this->assertCount(1, $routes);
-        $routeSlug = $routes[0]->getSlug();
+        $route = $routes[0];
+        $this->assertInstanceOf(Route::class, $route);
+        $routeSlug = $route->getSlug();
 
         // Delete the page
         $page = $this->entityManager->find(Page::class, $pageId);
@@ -78,7 +80,8 @@ class GoneEntitySubscriberTest extends SuluTestCase
 
         // Verify 410 redirect was created
         $redirectRepository = $this->entityManager->getRepository(RedirectRoute::class);
-        $redirects = $redirectRepository->findBy(['source' => $routeSlug]);
+        $expectedSource = '/en' . $routeSlug;
+        $redirects = $redirectRepository->findBy(['source' => $expectedSource]);
         $this->assertCount(1, $redirects);
         $this->assertSame(410, $redirects[0]->getStatusCode());
         $this->assertTrue($redirects[0]->isEnabled());
@@ -119,6 +122,6 @@ class GoneEntitySubscriberTest extends SuluTestCase
         $redirectRepository = $this->entityManager->getRepository(RedirectRoute::class);
         $allRedirects = $redirectRepository->findAll();
         $this->assertCount(1, $allRedirects);
-        $this->assertSame('/current-page', $allRedirects[0]->getSource());
+        $this->assertSame('/en/current-page', $allRedirects[0]->getSource());
     }
 }

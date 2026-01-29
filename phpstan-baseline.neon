@@ -475,12 +475,6 @@ parameters:
 			path: Tests/Functional/GoneSubscriber/GoneEntitySubscriberTest.php
 
 		-
-			message: '#^Cannot call method getSlug\(\) on mixed\.$#'
-			identifier: method.nonObject
-			count: 1
-			path: Tests/Functional/GoneSubscriber/GoneEntitySubscriberTest.php
-
-		-
 			message: '#^Parameter \#1 \$object of method Doctrine\\Persistence\\ObjectManager\:\:remove\(\) expects object, Sulu\\Page\\Domain\\Model\\Page\|null given\.$#'
 			identifier: argument.type
 			count: 2
