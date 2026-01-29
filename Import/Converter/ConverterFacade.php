@@ -17,16 +17,10 @@ namespace Sulu\Bundle\RedirectBundle\Import\Converter;
 class ConverterFacade implements ConverterInterface
 {
     /**
-     * @var ConverterInterface[]
+     * @param iterable<ConverterInterface> $converters
      */
-    private $converters;
-
-    /**
-     * @param ConverterInterface[] $converters
-     */
-    public function __construct(array $converters = [])
+    public function __construct(private iterable $converters = [])
     {
-        $this->converters = $converters;
     }
 
     public function convert(array $item)

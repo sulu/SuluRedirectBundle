@@ -11,11 +11,11 @@
 
 namespace Sulu\Bundle\RedirectBundle\Manager;
 
-use Ramsey\Uuid\Uuid;
 use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotFoundException;
 use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * Implementation of redirect-route manager.
@@ -48,7 +48,7 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
             }
         } else {
             $redirectRoute = $this->redirectRouteRepository->createNew();
-            $redirectRoute->setId(Uuid::uuid4()->toString());
+            $redirectRoute->setId(Uuid::v7()->toRfc4122());
         }
 
         // update data
@@ -79,7 +79,7 @@ class RedirectRouteManager implements RedirectRouteManagerInterface
         $otherRoute = $this->redirectRouteRepository->findBySource($redirectRoute->getSource(), $redirectRoute->getSourceHost());
 
         if (!$redirectRoute->getId()) {
-            $redirectRoute->setId(Uuid::uuid4()->toString());
+            $redirectRoute->setId(Uuid::v7()->toRfc4122());
         }
 
         if (

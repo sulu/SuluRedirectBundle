@@ -11,11 +11,11 @@
 
 namespace Sulu\Bundle\RedirectBundle\Tests\Functional\Routing;
 
-use Ramsey\Uuid\Uuid;
 use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
 use Sulu\Bundle\TestBundle\Testing\WebsiteTestCase;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\Uid\Uuid;
 
 class RedirectRouteProviderTest extends WebsiteTestCase
 {
@@ -30,9 +30,7 @@ class RedirectRouteProviderTest extends WebsiteTestCase
         static::purgeDatabase();
     }
 
-    /**
-     * @dataProvider routeDataProvider
-     */
+    #[\PHPUnit\Framework\Attributes\DataProvider('routeDataProvider')]
     public function testRoute(
         string $requestUrl,
         string $source,
@@ -43,7 +41,7 @@ class RedirectRouteProviderTest extends WebsiteTestCase
     ) {
         // setup models
         $redirectRoute = new RedirectRoute();
-        $redirectRoute->setId(Uuid::uuid4()->toString());
+        $redirectRoute->setId(Uuid::v7()->toRfc4122());
         $redirectRoute->setSource($source);
         $redirectRoute->setSourceHost($sourceHost);
         $redirectRoute->setStatusCode($statusCode);
@@ -66,7 +64,7 @@ class RedirectRouteProviderTest extends WebsiteTestCase
         }
     }
 
-    public function routeDataProvider(): \Generator
+    public static function routeDataProvider(): \Generator
     {
         yield [
             '/test-301',

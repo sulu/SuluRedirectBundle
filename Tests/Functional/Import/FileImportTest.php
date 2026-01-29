@@ -9,14 +9,14 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Functional\Import;
+namespace Sulu\Bundle\RedirectBundle\Tests\Functional\Import;
 
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 use Sulu\Bundle\TestBundle\Testing\SuluTestCase;
 
 class FileImportTest extends SuluTestCase
 {
-    public function testImport()
+    public function testImport(): void
     {
         $this->purgeDatabase();
 
@@ -24,15 +24,19 @@ class FileImportTest extends SuluTestCase
         $repository = $this->getContainer()->get('sulu.repository.redirect_route');
 
         $fileName = __DIR__ . '/Reader/import.csv';
+        /** @var \Sulu\Bundle\RedirectBundle\Import\FileImport $import */
         $import = $this->getContainer()->get('sulu_redirect.import');
 
         $sources = [];
         foreach ($import->import($fileName) as $item) {
-            $sources[] = $item->getData()->getSource();
+            $data = $item->getData();
+            $this->assertNotNull($data);
+            $sources[] = $data->getSource();
         }
 
         foreach ($sources as $source) {
-            $this->assertNotNull($repository->findBySource($source));
+            $redirectRoute = $repository->findBySource($source);
+            $this->assertNotNull($redirectRoute);
         }
     }
 }

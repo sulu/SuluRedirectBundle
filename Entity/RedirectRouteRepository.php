@@ -46,12 +46,12 @@ class RedirectRouteRepository extends EntityRepository implements RedirectRouteR
 
     public function persist(RedirectRouteInterface $entity): void
     {
-        $this->_em->persist($entity);
+        $this->getEntityManager()->persist($entity);
     }
 
     public function remove(RedirectRouteInterface $entity): void
     {
-        $this->_em->remove($entity);
+        $this->getEntityManager()->remove($entity);
     }
 
     /**

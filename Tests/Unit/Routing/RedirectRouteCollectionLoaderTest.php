@@ -15,11 +15,11 @@ use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
-use Sulu\Bundle\RedirectBundle\Routing\RedirectRouteProvider;
-use Symfony\Cmf\Component\Routing\RouteProviderInterface;
+use Sulu\Bundle\RedirectBundle\Routing\RedirectRouteCollectionLoader;
+use Sulu\Route\Application\Routing\Matcher\RouteCollectionForRequestLoaderInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class RedirectRouteProviderTest extends TestCase
+class RedirectRouteCollectionLoaderTest extends TestCase
 {
     use ProphecyTrait;
 
@@ -29,15 +29,15 @@ class RedirectRouteProviderTest extends TestCase
     private $repository;
 
     /**
-     * @var RouteProviderInterface
+     * @var RouteCollectionForRequestLoaderInterface
      */
-    private $routeProvider;
+    private $loader;
 
     protected function setUp(): void
     {
         $this->repository = $this->prophesize(RedirectRouteRepositoryInterface::class);
 
-        $this->routeProvider = new RedirectRouteProvider($this->repository->reveal(), ['utf8' => true]);
+        $this->loader = new RedirectRouteCollectionLoader($this->repository->reveal());
     }
 
     public function testGetRouteCollectionForRequest()
@@ -54,7 +54,7 @@ class RedirectRouteProviderTest extends TestCase
         $redirectRoute->getSourceHost()->willReturn($host);
         $this->repository->findEnabledBySource($pathInfo, 'localhost')->willReturn($redirectRoute->reveal());
 
-        $result = $this->routeProvider->getRouteCollectionForRequest($request);
+        $result = $this->loader->getRouteCollectionForRequest($request);
         $this->assertCount(1, $result);
 
         $this->assertEquals(
@@ -75,7 +75,8 @@ class RedirectRouteProviderTest extends TestCase
         $host = null;
         $uuid = '123-123-123';
 
-        $request = Request::create('/käße');
+        // Browsers URL-encode non-ASCII characters: /käße -> /k%C3%A4%C3%9Fe
+        $request = Request::create('/k%C3%A4%C3%9Fe');
 
         $redirectRoute = $this->prophesize(RedirectRouteInterface::class);
         $redirectRoute->getId()->willReturn($uuid);
@@ -83,7 +84,7 @@ class RedirectRouteProviderTest extends TestCase
         $redirectRoute->getSourceHost()->willReturn($host);
         $this->repository->findEnabledBySource($pathInfo, 'localhost')->willReturn($redirectRoute->reveal());
 
-        $result = $this->routeProvider->getRouteCollectionForRequest($request);
+        $result = $this->loader->getRouteCollectionForRequest($request);
         $this->assertCount(1, $result);
 
         $this->assertEquals(
@@ -103,7 +104,7 @@ class RedirectRouteProviderTest extends TestCase
 
         $this->repository->findEnabledBySource($pathInfo, 'localhost')->willReturn(null);
 
-        $result = $this->routeProvider->getRouteCollectionForRequest($request);
+        $result = $this->loader->getRouteCollectionForRequest($request);
         $this->assertCount(0, $result);
     }
 }

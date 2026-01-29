@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of Sulu.
  *
@@ -11,47 +13,129 @@
 
 namespace Sulu\Bundle\RedirectBundle\GoneSubscriber;
 
-use Doctrine\ORM\Event\LifecycleEventArgs;
-use Sulu\Bundle\RedirectBundle\Entity\RedirectRoute;
-use Sulu\Bundle\RedirectBundle\Exception\RedirectRouteNotUniqueException;
-use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
-use Sulu\Bundle\RouteBundle\Model\RouteInterface;
+use Doctrine\DBAL\Connection;
+use Doctrine\ORM\Event\PostFlushEventArgs;
+use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Doctrine\Persistence\Event\OnClearEventArgs;
+use Sulu\Content\Domain\Model\ContentRichEntityInterface;
+use Sulu\Content\Domain\Model\RoutableInterface;
+use Sulu\Route\Domain\Repository\RouteRepositoryInterface;
+use Symfony\Component\Uid\Uuid;
+use Symfony\Contracts\Service\ResetInterface;
 
 /**
- * This gone subscriber listens for removed route entities.
+ * This gone subscriber listens for removed routable entities and creates 410 redirects.
  *
  * @internal this is a internal listener which should not be used directly
  */
-class GoneEntitySubscriber
+class GoneEntitySubscriber implements ResetInterface
 {
     /**
-     * @var RedirectRouteManagerInterface
+     * @var array<array{resourceKey: string, resourceId: string}>
      */
-    private $redirectRouteManager;
+    private array $removedContentRichEntityIds = [];
 
     public function __construct(
-        RedirectRouteManagerInterface $redirectRouteManager
+        private RouteRepositoryInterface $routeRepository
     ) {
-        $this->redirectRouteManager = $redirectRouteManager;
     }
 
-    public function preRemove(LifecycleEventArgs $event): void
+    public function preRemove(LifecycleEventArgs $args): void
     {
-        $route = $event->getObject();
+        $object = $args->getObject();
 
-        if (!$route instanceof RouteInterface) {
+        if (!$object instanceof ContentRichEntityInterface) {
             return;
         }
 
-        $redirectRoute = new RedirectRoute();
-        $redirectRoute->setEnabled(true);
-        $redirectRoute->setStatusCode(410);
-        $redirectRoute->setSource($route->getPath());
+        $dimensionContentClass = $object->createDimensionContent()::class;
+        if (!\is_subclass_of($dimensionContentClass, RoutableInterface::class)) {
+            return;
+        }
+
+        $this->removedContentRichEntityIds[] = [
+            'resourceKey' => $dimensionContentClass::getResourceKey(),
+            'resourceId' => (string) $object->getId(),
+        ];
+    }
+
+    public function onClear(OnClearEventArgs $args): void
+    {
+        $this->reset();
+    }
+
+    public function postFlush(PostFlushEventArgs $args): void
+    {
+        if (0 === \count($this->removedContentRichEntityIds)) {
+            return;
+        }
 
         try {
-            $this->redirectRouteManager->save($redirectRoute);
-        } catch (RedirectRouteNotUniqueException $exception) {
-            // do nothing when there already exists a redirect route
+            $connection = $args->getObjectManager()->getConnection();
+            $groupedByResourceKey = [];
+            foreach ($this->removedContentRichEntityIds as $entityInfo) {
+                $groupedByResourceKey[$entityInfo['resourceKey']][] = $entityInfo['resourceId'];
+            }
+
+            foreach ($groupedByResourceKey as $resourceKey => $resourceIds) {
+                $this->createRedirectsForRoutes($connection, $resourceKey, $resourceIds);
+            }
+        } finally {
+            $this->reset();
+        }
+    }
+
+    public function reset(): void
+    {
+        $this->removedContentRichEntityIds = [];
+    }
+
+    /**
+     * @param string[] $resourceIds
+     */
+    private function createRedirectsForRoutes(Connection $connection, string $resourceKey, array $resourceIds): void
+    {
+        if (0 === \count($resourceIds)) {
+            return;
+        }
+
+        foreach ($resourceIds as $resourceId) {
+            $routes = $this->routeRepository->findBy([
+                'resourceKey' => $resourceKey,
+                'resourceId' => $resourceId,
+            ]);
+
+            foreach ($routes as $route) {
+                if ($route->isHistory()) {
+                    continue;
+                }
+
+                $slug = '/' . \ltrim($route->getSlug(), '/');
+                $locale = $route->getLocale();
+                $source = \mb_strtolower('/' . $locale . $slug);
+
+                $existing = $connection->fetchOne(
+                    'SELECT id FROM re_redirect_routes WHERE source = :source AND sourceHost IS NULL',
+                    ['source' => $source]
+                );
+
+                if (false !== $existing) {
+                    continue;
+                }
+
+                $now = new \DateTimeImmutable();
+
+                $connection->insert('re_redirect_routes', [
+                    'id' => Uuid::v7()->toRfc4122(),
+                    'enabled' => true,
+                    'statusCode' => 410,
+                    'source' => $source,
+                    'sourceHost' => null,
+                    'target' => '',
+                    'created' => $now->format('Y-m-d H:i:s'),
+                    'changed' => $now->format('Y-m-d H:i:s'),
+                ]);
+            }
         }
     }
 }

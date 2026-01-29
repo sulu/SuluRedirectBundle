@@ -4,44 +4,11 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sulu_redirect.routing.provider" class="Sulu\Bundle\RedirectBundle\Routing\RedirectRouteProvider">
+        <service id="sulu_redirect.routing.loader"
+                 class="Sulu\Bundle\RedirectBundle\Routing\RedirectRouteCollectionLoader">
             <argument type="service" id="sulu.repository.redirect_route"/>
-            <argument type="collection" />
 
-            <tag name="sulu.context" context="website"/>
-        </service>
-
-        <service id="sulu_redirect.routing.generator" class="Symfony\Cmf\Component\Routing\ProviderBasedGenerator">
-            <argument type="service" id="sulu_redirect.routing.provider"/>
-
-            <tag name="sulu.context" context="website"/>
-        </service>
-
-        <service id="sulu_redirect.routing.final_matcher"
-                 class="Symfony\Cmf\Component\Routing\NestedMatcher\UrlMatcher">
-            <argument type="service" id="cmf_routing.matcher.dummy_collection"/>
-            <argument type="service" id="cmf_routing.matcher.dummy_context"/>
-
-            <tag name="sulu.context" context="website"/>
-        </service>
-
-        <service id="sulu_redirect.routing.nested_matcher"
-                 class="Symfony\Cmf\Component\Routing\NestedMatcher\NestedMatcher">
-            <argument type="service" id="sulu_redirect.routing.provider"/>
-            <argument type="service" id="sulu_redirect.routing.final_matcher"/>
-
-            <tag name="sulu.context" context="website"/>
-        </service>
-
-        <service id="sulu_redirect.routing.router" class="Symfony\Cmf\Bundle\RoutingBundle\Routing\DynamicRouter">
-            <argument type="service" id="router.request_context"/>
-            <argument type="service" id="sulu_redirect.routing.nested_matcher"/>
-            <argument type="service" id="sulu_redirect.routing.generator"/>
-            <argument></argument>
-            <argument type="service" id="event_dispatcher" on-invalid="ignore"/>
-            <argument type="service" id="sulu_redirect.routing.provider"/>
-
-            <tag name="router" priority="10"/>
+            <tag name="sulu_route.route_collection_for_request_loader" priority="5"/>
             <tag name="sulu.context" context="website"/>
         </service>
 

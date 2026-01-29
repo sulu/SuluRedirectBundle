@@ -3,3 +3,13 @@ imports:
 
 framework:
     router: { resource: '%kernel.project_dir%/config/routing_website.yml' }
+    secret: 'test-secret'
+
+security:
+    providers:
+        users:
+            memory:
+                users: []
+    firewalls:
+        main:
+            lazy: true

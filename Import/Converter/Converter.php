@@ -11,10 +11,10 @@
 
 namespace Sulu\Bundle\RedirectBundle\Import\Converter;
 
-use Ramsey\Uuid\Uuid;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteRepositoryInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\Uid\Uuid;
 
 /**
  * Converts simple array to route-repository entity.
@@ -51,7 +51,7 @@ class Converter implements ConverterInterface
         if (!$entity) {
             /** @var RedirectRouteInterface $entity */
             $entity = $this->repository->createNew();
-            $entity->setId(Uuid::uuid4()->toString());
+            $entity->setId(Uuid::v7()->toRfc4122());
         }
 
         foreach ([self::SOURCE, self::TARGET, self::STATUS_CODE, self::ENABLED, self::SOURCE_HOST] as $field) {
