@@ -886,49 +886,49 @@ parameters:
 			message: '#^Cannot call method getDefaults\(\) on Symfony\\Component\\Routing\\Route\|null\.$#'
 			identifier: method.nonObject
 			count: 2
-			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+			path: Tests/Unit/Routing/RedirectRouteCollectionLoaderTest.php
 
 		-
 			message: '#^Cannot call method getOptions\(\) on Symfony\\Component\\Routing\\Route\|null\.$#'
 			identifier: method.nonObject
 			count: 2
-			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+			path: Tests/Unit/Routing/RedirectRouteCollectionLoaderTest.php
 
 		-
 			message: '#^Cannot call method willReturn\(\) on Sulu\\Bundle\\RedirectBundle\\Model\\RedirectRouteInterface\|null\.$#'
 			identifier: method.nonObject
 			count: 3
-			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+			path: Tests/Unit/Routing/RedirectRouteCollectionLoaderTest.php
 
 		-
-			message: '#^Method Sulu\\Bundle\\RedirectBundle\\Tests\\Unit\\Routing\\RedirectRouteProviderTest\:\:testGetRouteCollectionForRequest\(\) has no return type specified\.$#'
+			message: '#^Method Sulu\\Bundle\\RedirectBundle\\Tests\\Unit\\Routing\\RedirectRouteCollectionLoaderTest\:\:testGetRouteCollectionForRequest\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
-			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+			path: Tests/Unit/Routing/RedirectRouteCollectionLoaderTest.php
 
 		-
-			message: '#^Method Sulu\\Bundle\\RedirectBundle\\Tests\\Unit\\Routing\\RedirectRouteProviderTest\:\:testGetRouteCollectionForRequestEncodedPathInfo\(\) has no return type specified\.$#'
+			message: '#^Method Sulu\\Bundle\\RedirectBundle\\Tests\\Unit\\Routing\\RedirectRouteCollectionLoaderTest\:\:testGetRouteCollectionForRequestEncodedPathInfo\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
-			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+			path: Tests/Unit/Routing/RedirectRouteCollectionLoaderTest.php
 
 		-
-			message: '#^Method Sulu\\Bundle\\RedirectBundle\\Tests\\Unit\\Routing\\RedirectRouteProviderTest\:\:testGetRouteCollectionForRequestNoRoute\(\) has no return type specified\.$#'
+			message: '#^Method Sulu\\Bundle\\RedirectBundle\\Tests\\Unit\\Routing\\RedirectRouteCollectionLoaderTest\:\:testGetRouteCollectionForRequestNoRoute\(\) has no return type specified\.$#'
 			identifier: missingType.return
 			count: 1
-			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+			path: Tests/Unit/Routing/RedirectRouteCollectionLoaderTest.php
 
 		-
-			message: '#^Property Sulu\\Bundle\\RedirectBundle\\Tests\\Unit\\Routing\\RedirectRouteProviderTest\:\:\$repository \(Sulu\\Bundle\\RedirectBundle\\Model\\RedirectRouteRepositoryInterface\) does not accept Prophecy\\Prophecy\\ObjectProphecy\<Sulu\\Bundle\\RedirectBundle\\Model\\RedirectRouteRepositoryInterface\>\.$#'
+			message: '#^Property Sulu\\Bundle\\RedirectBundle\\Tests\\Unit\\Routing\\RedirectRouteCollectionLoaderTest\:\:\$repository \(Sulu\\Bundle\\RedirectBundle\\Model\\RedirectRouteRepositoryInterface\) does not accept Prophecy\\Prophecy\\ObjectProphecy\<Sulu\\Bundle\\RedirectBundle\\Model\\RedirectRouteRepositoryInterface\>\.$#'
 			identifier: assign.propertyType
 			count: 1
-			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+			path: Tests/Unit/Routing/RedirectRouteCollectionLoaderTest.php
 
 		-
 			message: '#^You should use assertTrue\(\) instead of assertSame\(\) when expecting "true"$#'
 			identifier: phpunit.assertTrue
 			count: 1
-			path: Tests/Unit/Routing/RedirectRouteProviderTest.php
+			path: Tests/Unit/Routing/RedirectRouteCollectionLoaderTest.php
 
 		-
 			message: '#^Parameter \#1 \$environment of class Sulu\\Bundle\\RedirectBundle\\Tests\\Application\\Kernel constructor expects string, mixed given\.$#'
