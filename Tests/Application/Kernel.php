@@ -22,7 +22,14 @@ class Kernel extends SuluTestKernel
 {
     public function registerBundles(): iterable
     {
-        return \array_merge(parent::registerBundles(), [new SuluRedirectBundle()]);
+        $bundles = \iterator_to_array(parent::registerBundles());
+        $bundles[] = new SuluRedirectBundle();
+
+        if (self::CONTEXT_WEBSITE === $this->getContext()) {
+            $bundles[] = new \Symfony\Bundle\SecurityBundle\SecurityBundle();
+        }
+
+        return $bundles;
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader): void

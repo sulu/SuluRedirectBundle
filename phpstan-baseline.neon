@@ -229,12 +229,6 @@ parameters:
 			path: Tests/Application/Kernel.php
 
 		-
-			message: '#^Parameter \#1 \.\.\.\$arrays of function array_merge expects array, iterable\<Symfony\\Component\\HttpKernel\\Bundle\\BundleInterface\> given\.$#'
-			identifier: argument.type
-			count: 1
-			path: Tests/Application/Kernel.php
-
-		-
 			message: '#^Call to static method enable\(\) on an unknown class Symfony\\Component\\Debug\\Debug\.$#'
 			identifier: class.notFound
 			count: 1
