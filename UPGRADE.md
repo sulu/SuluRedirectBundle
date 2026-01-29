@@ -1,5 +1,29 @@
 # UPGRADE
 
+## 3.0.0
+
+### Sulu 3.0 compatibility
+
+This version adds support for Sulu 3.0. The bundle now requires:
+
+- PHP 8.2 or higher
+- Sulu 3.0 or higher
+- Symfony 6.4 or 7.1 or higher
+- Doctrine ORM 2.17.3 or 3.3 or higher
+
+### UUID package replacement
+
+The `ramsey/uuid` package has been replaced with `symfony/uid`. If you were using the UUID functionality directly in your code, update your imports:
+
+```diff
+-use Ramsey\Uuid\Uuid;
++use Symfony\Component\Uid\Uuid;
+```
+
+### Routing changes
+
+The routing implementation has been refactored from `RedirectRouteProvider` to `RedirectRouteCollectionLoader` to improve compatibility with Symfony's routing system.
+
 ## 2.2.0
 
 ## Deprecate usage of fos rest routing
