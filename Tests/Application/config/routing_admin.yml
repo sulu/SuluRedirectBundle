@@ -3,5 +3,5 @@ sulu_redirect_api:
     prefix: /admin/api
 
 sulu_redirect:
-    resource: "@SuluRedirectBundle/Resources/config/routing.yml"
+    resource: "@SuluRedirectBundle/Resources/config/routing.yaml"
     prefix: /admin/redirects

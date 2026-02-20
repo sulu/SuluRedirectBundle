@@ -24,6 +24,20 @@ The `ramsey/uuid` package has been replaced with `symfony/uid`. If you were usin
 
 The routing implementation has been refactored from `RedirectRouteProvider` to `RedirectRouteCollectionLoader` to improve compatibility with Symfony's routing system.
 
+### Removing the rest routing
+
+The Rest Routing bundle has been removed. If you still need it require it in your project like this:
+
+```
+composer require "handcraftedinthealps/rest-routing-bundle"
+```
+
+This also includes the old routing files:
+```
+/Resources/config/routing_api.yml -> /Resources/config/routing_api.yaml
+/Resources/config/routing.yml -> /Resources/config/routing.yaml
+```
+
 ## 2.2.0
 
 ## Deprecate usage of fos rest routing
