@@ -121,8 +121,8 @@ class RedirectRouteController extends AbstractRestController implements ClassRes
             $results,
             self::RESULT_KEY,
             $listBuilder->getCurrentPage(),
-            $listBuilder->getLimit(),
-            $listBuilder->count(),
+            (int) $listBuilder->getLimit(),
+            (int) $listBuilder->count(),
         );
 
         return $this->handleView($this->view($list));

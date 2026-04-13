@@ -67,12 +67,6 @@ parameters:
 			path: Controller/RedirectRouteController.php
 
 		-
-			message: '#^Parameter \#4 \$limit of class Sulu\\Component\\Rest\\ListBuilder\\PaginatedRepresentation constructor expects int, int\|null given\.$#'
-			identifier: argument.type
-			count: 1
-			path: Controller/RedirectRouteController.php
-
-		-
 			message: '#^Method Sulu\\Bundle\\RedirectBundle\\Controller\\RedirectRouteImportController\:\:getLocale\(\) should return string\|null but returns mixed\.$#'
 			identifier: return.type
 			count: 1
