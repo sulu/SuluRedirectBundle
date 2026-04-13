@@ -12,9 +12,7 @@
 namespace Sulu\Bundle\RedirectBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
-use FOS\RestBundle\Controller\Annotations\RouteResource;
 use FOS\RestBundle\View\ViewHandlerInterface;
-use HandcraftedInTheAlps\RestRoutingBundle\Routing\ClassResourceInterface;
 use Sulu\Bundle\RedirectBundle\Admin\RedirectAdmin;
 use Sulu\Bundle\RedirectBundle\Manager\RedirectRouteManagerInterface;
 use Sulu\Bundle\RedirectBundle\Model\RedirectRouteInterface;
@@ -33,10 +31,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Provides API for redirect-routes.
- *
- * @RouteResource("redirect-route")
  */
-class RedirectRouteController extends AbstractRestController implements ClassResourceInterface, SecuredControllerInterface
+class RedirectRouteController extends AbstractRestController implements SecuredControllerInterface
 {
     public const RESULT_KEY = 'redirect_routes';
 
