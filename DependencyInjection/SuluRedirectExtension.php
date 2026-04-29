@@ -30,6 +30,24 @@ class SuluRedirectExtension extends Extension implements PrependExtensionInterfa
 
     public function prepend(ContainerBuilder $container): void
     {
+        if ($container->hasExtension('doctrine')) {
+            $container->prependExtensionConfig(
+                'doctrine',
+                [
+                    'orm' => [
+                        'mappings' => [
+                            'RedirectBundle' => [
+                                'type' => 'xml',
+                                'dir' => __DIR__ . '/../Resources/config/doctrine',
+                                'prefix' => 'Sulu\Bundle\RedirectBundle\Entity',
+                                'alias' => 'RedirectBundle',
+                            ],
+                        ],
+                    ],
+                ]
+            );
+        }
+
         if ($container->hasExtension('jms_serializer')) {
             $container->prependExtensionConfig(
                 'jms_serializer',
