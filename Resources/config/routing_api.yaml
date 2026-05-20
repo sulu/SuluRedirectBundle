@@ -1,48 +1,79 @@
 sulu_redirect.get_redirect-routes:
     path: '/redirect-routes.{_format}'
-    options: { expose: true }
-    methods: GET
     controller: 'sulu_redirect.redirect_route_controller::cgetAction'
+    methods: GET
     format: json
-    requirements: { _format: json|csv }
+    requirements:
+        _format: json|csv
+    options:
+        expose: true
+
 sulu_redirect.post_redirect-route:
     path: '/redirect-routes.{_format}'
-    options: { expose: true }
-    methods: POST
     controller: 'sulu_redirect.redirect_route_controller::postAction'
+    methods: POST
     format: json
-    requirements: { _format: json|csv }
+    requirements:
+        _format: json|csv
+    options:
+        expose: true
+
 sulu_redirect.get_redirect-route:
     path: '/redirect-routes/{id}.{_format}'
-    options: { expose: true }
-    methods: GET
     controller: 'sulu_redirect.redirect_route_controller::getAction'
+    methods: GET
     format: json
-    requirements: { _format: json|csv }
+    requirements:
+        _format: json|csv
+    options:
+        expose: true
+
 sulu_redirect.put_redirect-route:
     path: '/redirect-routes/{id}.{_format}'
-    options: { expose: true }
-    methods: PUT
     controller: 'sulu_redirect.redirect_route_controller::putAction'
+    methods: PUT
     format: json
-    requirements: { _format: json|csv }
+    requirements:
+        _format: json|csv
+    options:
+        expose: true
+
 sulu_redirect.delete_redirect-route:
     path: '/redirect-routes/{id}.{_format}'
-    options: { expose: true }
-    methods: DELETE
     controller: 'sulu_redirect.redirect_route_controller::deleteAction'
+    methods: DELETE
     format: json
-    requirements: { _format: json|csv }
+    requirements:
+        _format: json|csv
+    options:
+        expose: true
+
 sulu_redirect.delete_redirect-routes:
     path: '/redirect-routes.{_format}'
-    options: { expose: true }
-    methods: DELETE
     controller: 'sulu_redirect.redirect_route_controller::cdeleteAction'
+    methods: DELETE
     format: json
-    requirements: { _format: json|csv }
+    requirements:
+        _format: json|csv
+    options:
+        expose: true
+
 sulu_redirect.post_redirect-route_trigger:
     path: '/redirect-routes/{id}.{_format}'
-    methods: POST
     controller: 'sulu_redirect.redirect_route_controller::postTriggerAction'
+    methods: POST
     format: json
-    requirements: { _format: json|csv }
+    requirements:
+        _format: json|csv
+    options:
+        expose: true
+
+sulu_redirect.import:
+    path: /redirect-routes/import.{_format}
+    controller: 'sulu_redirect.controller.import::postAction'
+    methods: POST
+    format: json
+    requirements:
+        _format: json|csv
+    options:
+        expose: true
