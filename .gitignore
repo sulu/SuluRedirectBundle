@@ -22,6 +22,7 @@
 # tests
 Tests/Application/var/
 Tests/Application/*.local
+.phpunit.cache/
 
 # php-cs-fixer
 .php_cs.cache
