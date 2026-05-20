@@ -67,3 +67,13 @@ sulu_redirect.post_redirect-route_trigger:
         _format: json|csv
     options:
         expose: true
+
+sulu_redirect.import:
+    path: /redirect-routes/import.{_format}
+    controller: 'sulu_redirect.controller.import::postAction'
+    methods: POST
+    format: json
+    requirements:
+        _format: json|csv
+    options:
+        expose: true
