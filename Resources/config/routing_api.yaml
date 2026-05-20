@@ -58,9 +58,9 @@ sulu_redirect.delete_redirect-routes:
     options:
         expose: true
 
-sulu_redirect.post_redirect-route_trigger:
-    path: '/redirect-routes/{id}.{_format}'
-    controller: 'sulu_redirect.redirect_route_controller::postTriggerAction'
+sulu_redirect.import:
+    path: /redirect-routes/import.{_format}
+    controller: 'sulu_redirect.controller.import::postAction'
     methods: POST
     format: json
     requirements:
@@ -68,9 +68,9 @@ sulu_redirect.post_redirect-route_trigger:
     options:
         expose: true
 
-sulu_redirect.import:
-    path: /redirect-routes/import.{_format}
-    controller: 'sulu_redirect.controller.import::postAction'
+sulu_redirect.post_redirect-route_trigger:
+    path: '/redirect-routes/{id}.{_format}'
+    controller: 'sulu_redirect.redirect_route_controller::postTriggerAction'
     methods: POST
     format: json
     requirements:
