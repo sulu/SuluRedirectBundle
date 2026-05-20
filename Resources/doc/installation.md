@@ -22,10 +22,6 @@ composer require sulu/redirect-bundle
 sulu_redirect_api:
     resource: "@SuluRedirectBundle/Resources/config/routing_api.yaml"
     prefix: /admin/api
-
-sulu_redirect:
-    resource: "@SuluRedirectBundle/Resources/config/routing.yaml"
-    prefix: /admin/redirects
 ```
 
 ### Create necessary database tables
