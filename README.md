@@ -31,7 +31,7 @@ and allows content managers to manage redirects without any knowledge of web ser
 </p>
 <br/>
 
-The SuluRedirectBundle is compatible with Sulu **starting from version 3.0**. Have a look at the `require` section in
+The SuluRedirectBundle is compatible with Sulu **starting from version 2.0**. Have a look at the `require` section in
 the [composer.json](composer.json) to find an
 **up-to-date list of the requirements** of the bundle.
 
