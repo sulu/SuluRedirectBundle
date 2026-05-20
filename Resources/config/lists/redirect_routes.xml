@@ -39,11 +39,11 @@
                 name="enabled"
                 searchability="yes"
                 visibility="always"
-                type="bool"
                 translation="sulu_redirect.enabled"
         >
             <field-name>enabled</field-name>
             <entity-name>%sulu.model.redirect_route.class%</entity-name>
+            <transformer type="bool"/>
         </property>
 
         <property
@@ -101,16 +101,6 @@
             </field>
         </concatenation-property>
 
-        <property
-            name="changed"
-            visibility="no"
-            type="datetime"
-            translation="sulu_admin.changed"
-        >
-            <field-name>changed</field-name>
-            <entity-name>%sulu.model.tag.class%</entity-name>
-        </property>
-
         <concatenation-property name="creator" translation="sulu_admin.creator" visibility="no">
             <field>
                 <field-name>firstName</field-name>
@@ -130,20 +120,20 @@
             name="created"
             visibility="yes"
             translation="sulu_admin.created"
-            type="datetime"
         >
             <field-name>created</field-name>
             <entity-name>%sulu.model.redirect_route.class%</entity-name>
+            <transformer type="datetime"/>
         </property>
 
         <property
                 name="changed"
                 visibility="yes"
                 translation="sulu_admin.changed"
-                type="datetime"
         >
             <field-name>changed</field-name>
             <entity-name>%sulu.model.redirect_route.class%</entity-name>
+            <transformer type="datetime"/>
         </property>
     </properties>
 </list>

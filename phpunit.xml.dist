@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<phpunit colors="true" bootstrap="Tests/test-bootstrap.php">
+<phpunit colors="true" bootstrap="Tests/test-bootstrap.php" cacheDirectory=".phpunit.cache">
     <testsuites>
         <testsuite name="Sulu Redirect Bundle">
             <directory>./Tests</directory>
         </testsuite>
     </testsuites>
 
-    <filter>
-        <whitelist addUncoveredFilesFromWhitelist="true">
-            <directory>.</directory>
-            <exclude>
-                <directory>Resources/</directory>
-                <directory>Tests/</directory>
-                <directory>vendor/</directory>
-            </exclude>
-        </whitelist>
-    </filter>
-
     <php>
         <env name="APP_ENV" value="test"/>
         <env name="KERNEL_CLASS" value="Sulu\Bundle\RedirectBundle\Tests\Application\Kernel"/>
         <env name="SYMFONY_DEPRECATIONS_HELPER" value="weak"/>
     </php>
+
+    <source>
+        <include>
+            <directory>.</directory>
+        </include>
+        <exclude>
+            <directory>Resources/</directory>
+            <directory>Tests/</directory>
+            <directory>vendor/</directory>
+        </exclude>
+    </source>
 </phpunit>

@@ -17,7 +17,7 @@
         <img src="https://img.shields.io/github/actions/workflow/status/sulu/SuluRedirectBundle/test-application.yaml" alt="Test workflow status">
     </a>
     <a href="https://github.com/sulu/sulu/releases" target="_blank">
-        <img src="https://img.shields.io/badge/sulu%20compatibility-%3E=2.0-52b6ca.svg" alt="Sulu compatibility">
+        <img src="https://img.shields.io/badge/sulu%20compatibility-%5E3.0-52b6ca.svg" alt="Sulu compatibility">
     </a>
 </p>
 <br/>
@@ -31,7 +31,7 @@ and allows content managers to manage redirects without any knowledge of web ser
 </p>
 <br/>
 
-The SuluRedirectBundle is compatible with Sulu **starting from version 2.0**. Have a look at the `require` section in
+The SuluRedirectBundle is compatible with Sulu **starting from version 3.0**. Have a look at the `require` section in
 the [composer.json](composer.json) to find an
 **up-to-date list of the requirements** of the bundle.
 
