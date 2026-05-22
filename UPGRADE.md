@@ -34,8 +34,8 @@ composer require "handcraftedinthealps/rest-routing-bundle"
 
 This also includes the old routing files:
 ```
-/Resources/config/routing_api.yml -> can be removed
-/Resources/config/routing.yml -> /Resources/config/routing.yaml
+/Resources/config/routing.yml -> can be removed
+/Resources/config/routing_api.yml -> /Resources/config/routing_api.yaml
 ```
 
 The route `/admin/redirects/import` named `sulu_redirect.import` was moved to `/admin/api/redirect-routes/import` to only have a single routing file now for the bundle.
