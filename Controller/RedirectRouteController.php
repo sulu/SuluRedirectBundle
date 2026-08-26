@@ -141,7 +141,7 @@ class RedirectRouteController extends AbstractRestController implements SecuredC
 
     public function postTriggerAction(Request $request, string $id): Response
     {
-        $action = $request->get('action');
+        $action = $request->request->get('action');
 
         /** @var RedirectRouteInterface|null $redirectRoute */
         $redirectRoute = $this->redirectRouteRepository->find($id);

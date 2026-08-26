@@ -114,13 +114,13 @@ class SuluRedirectExtension extends Extension implements PrependExtensionInterfa
         $container->setParameter('sulu_redirect.imports.path', $config['imports']['path']);
         $this->configurePersistence($config['objects'], $container);
 
-        $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
-        $loader->load('services.xml');
-        $loader->load('router.xml');
-        $loader->load('import.xml');
+        $loader = new Loader\PhpFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader->load('services.php');
+        $loader->load('router.php');
+        $loader->load('import.php');
 
         if ($config['gone_on_remove']['enabled']) {
-            $loader->load('gone_subscriber.xml');
+            $loader->load('gone_subscriber.php');
         }
     }
 }
