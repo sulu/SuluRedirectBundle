@@ -1,0 +1,20 @@
+services:
+  database:
+    image: mysql/mysql-server:8.0 # arm and x86/x64 compatible mysql image
+    command: [ "--max_connections=1000", "--character-set-server=utf8mb4", "--collation-server=utf8mb4_general_ci" ]
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 'ChangeMe'
+      MYSQL_DATABASE: 'sulu_redirect_test'
+      MYSQL_ROOT_HOST: '%'
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-uroot", "-pChangeMe" ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    volumes:
+      - sulu-redirect-mysql80-data:/var/lib/mysql
+
+volumes:
+  sulu-redirect-mysql80-data:

@@ -7,64 +7,76 @@ on:
             - '[0-9]+.[0-9]+'
 jobs:
     php:
-        name: 'PHP ${{ matrix.php-version }} (${{ matrix.dependency-versions }})'
+        name: 'PHP ${{ matrix.php-version }} (${{ matrix.database }}, ${{ matrix.dependency-versions }})'
         runs-on: ubuntu-latest
-        env:
-            DATABASE_URL: 'mysql://root:root@127.0.0.1/sulu_redirect_test?serverVersion=5.7'
         strategy:
             fail-fast: false
             matrix:
                 include:
                     - php-version: '8.2'
+                      database: 'mysql-57'
                       dependency-versions: 'lowest'
                       php-extensions: 'mysql, imagick'
                       tools: 'composer:v2'
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: weak
+                          DATABASE_URL: 'mysql://root:ChangeMe@127.0.0.1:3306/sulu_redirect_test?serverVersion=5.7'
 
                     - php-version: '8.2'
+                      database: 'mysql-57'
                       dependency-versions: 'highest'
                       php-extensions: 'mysql, imagick'
                       tools: 'composer:v2'
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: weak
+                          DATABASE_URL: 'mysql://root:ChangeMe@127.0.0.1:3306/sulu_redirect_test?serverVersion=5.7'
 
                     - php-version: '8.3'
+                      database: 'mysql-57'
                       dependency-versions: 'highest'
                       php-extensions: 'mysql, imagick'
                       tools: 'composer:v2'
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: weak
+                          DATABASE_URL: 'mysql://root:ChangeMe@127.0.0.1:3306/sulu_redirect_test?serverVersion=5.7'
+
+                    - php-version: '8.3'
+                      database: 'postgres-14'
+                      dependency-versions: 'highest'
+                      php-extensions: 'pgsql, imagick'
+                      tools: 'composer:v2'
+                      env:
+                          SYMFONY_DEPRECATIONS_HELPER: weak
+                          DATABASE_URL: 'postgres://symfony:ChangeMe@127.0.0.1:5432/sulu_redirect_test?serverVersion=14'
+                          DATABASE_CHARSET: UTF8
+                          DATABASE_COLLATE:
 
                     - php-version: '8.4'
+                      database: 'mysql-80'
                       dependency-versions: 'highest'
                       php-extensions: 'mysql, imagick'
                       tools: 'composer:v2'
                       composer-options: '--ignore-platform-reqs'
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: weak
+                          DATABASE_URL: 'mysql://root:ChangeMe@127.0.0.1:3306/sulu_redirect_test?serverVersion=8.0'
 
                     - php-version: '8.5'
+                      database: 'mysql-84'
                       dependency-versions: 'highest'
                       php-extensions: 'mysql, imagick'
                       tools: 'composer:v2'
                       composer-options: '--ignore-platform-reqs'
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: weak
+                          DATABASE_URL: 'mysql://root:ChangeMe@127.0.0.1:3306/sulu_redirect_test?serverVersion=8.4'
 
-        services:
-            mysql:
-                image: 'mysql:5.7'
-                env:
-                    MYSQL_ROOT_PASSWORD: root
-                ports:
-                    - '3306:3306'
-                options: >-
-                    --health-cmd="mysqladmin ping" --health-interval=10s
-                    --health-timeout=5s --health-retries=5
         steps:
             - name: Checkout project
               uses: actions/checkout@v4
+
+            - name: Start Database
+              run: docker compose -f Tests/docker/docker-compose.${{ matrix.database }}.yml up --wait
 
             - name: Install and configure PHP
               uses: shivammathur/setup-php@v2

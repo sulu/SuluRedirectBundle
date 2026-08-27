@@ -37,7 +37,6 @@
 
         <property
                 name="enabled"
-                searchability="yes"
                 visibility="always"
                 type="bool"
                 translation="sulu_redirect.enabled"
