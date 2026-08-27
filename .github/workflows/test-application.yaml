@@ -52,24 +52,24 @@ jobs:
                           DATABASE_COLLATE:
 
                     - php-version: '8.4'
-                      database: 'mysql-57'
+                      database: 'mysql-80'
                       dependency-versions: 'highest'
                       php-extensions: 'mysql, imagick'
                       tools: 'composer:v2'
                       composer-options: '--ignore-platform-reqs'
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: weak
-                          DATABASE_URL: 'mysql://root:ChangeMe@127.0.0.1:3306/sulu_redirect_test?serverVersion=5.7'
+                          DATABASE_URL: 'mysql://root:ChangeMe@127.0.0.1:3306/sulu_redirect_test?serverVersion=8.0'
 
                     - php-version: '8.5'
-                      database: 'mysql-57'
+                      database: 'mysql-84'
                       dependency-versions: 'highest'
                       php-extensions: 'mysql, imagick'
                       tools: 'composer:v2'
                       composer-options: '--ignore-platform-reqs'
                       env:
                           SYMFONY_DEPRECATIONS_HELPER: weak
-                          DATABASE_URL: 'mysql://root:ChangeMe@127.0.0.1:3306/sulu_redirect_test?serverVersion=5.7'
+                          DATABASE_URL: 'mysql://root:ChangeMe@127.0.0.1:3306/sulu_redirect_test?serverVersion=8.4'
 
         steps:
             - name: Checkout project
