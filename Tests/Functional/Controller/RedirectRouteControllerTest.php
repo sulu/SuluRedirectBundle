@@ -115,7 +115,7 @@ class RedirectRouteControllerTest extends SuluTestCase
 
         $this->client->request(
             'POST',
-            self::BASE_URL . '/' . $data['id'] . '?' . http_build_query(['action' => 'enable']),
+            self::BASE_URL . '/' . $data['id'] . '?' . \http_build_query(['action' => 'enable']),
         );
         $response = $this->client->getResponse();
         $this->assertHttpStatusCode(200, $response);
@@ -135,7 +135,7 @@ class RedirectRouteControllerTest extends SuluTestCase
 
         $this->client->request(
             'POST',
-            self::BASE_URL . '/' . $data['id'] . '?' . http_build_query(['action' => 'disable']),
+            self::BASE_URL . '/' . $data['id'] . '?' . \http_build_query(['action' => 'disable']),
         );
         $response = $this->client->getResponse();
         $this->assertHttpStatusCode(200, $response);
