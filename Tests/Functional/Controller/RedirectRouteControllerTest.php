@@ -113,9 +113,10 @@ class RedirectRouteControllerTest extends SuluTestCase
         /** @var array<string, mixed> $data */
         $data = \json_decode($response->getContent(), true);
 
-        $this->client->request('POST', self::BASE_URL . '/' . $data['id'], [
-            'action' => 'enable',
-        ]);
+        $this->client->request(
+            'POST',
+            self::BASE_URL . '/' . $data['id'] . '?' . \http_build_query(['action' => 'enable']),
+        );
         $response = $this->client->getResponse();
         $this->assertHttpStatusCode(200, $response);
 
@@ -132,9 +133,10 @@ class RedirectRouteControllerTest extends SuluTestCase
 
         $this->assertArrayHasKey('id', $data);
 
-        $this->client->request('POST', self::BASE_URL . '/' . $data['id'], [
-            'action' => 'disable',
-        ]);
+        $this->client->request(
+            'POST',
+            self::BASE_URL . '/' . $data['id'] . '?' . \http_build_query(['action' => 'disable']),
+        );
         $response = $this->client->getResponse();
         $this->assertHttpStatusCode(200, $response);
 
